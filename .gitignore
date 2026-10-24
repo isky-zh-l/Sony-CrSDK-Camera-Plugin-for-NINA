@@ -1,0 +1,25 @@
+# External SDK/host and all generated local files
+/deps/
+/artifacts/
+**/bin/
+**/obj/
+**/build/
+**/build-*/
+**/artifacts/
+**/.packages/
+**/.dotnet-home/
+.vs/
+.vscode/
+*.user
+*.suo
+*.dll
+*.lib
+*.exe
+*.pdb
+*.obj
+*.arw
+*.ARW
+*.fits
+*.xisf
+*.zip
+*.log

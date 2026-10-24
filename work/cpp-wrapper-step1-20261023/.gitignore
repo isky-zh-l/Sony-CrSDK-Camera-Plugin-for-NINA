@@ -1,0 +1,13 @@
+/build/
+/logs/
+*.dll
+*.lib
+*.obj
+*.pdb
+
+/build-*/
+*.exe
+*.ARW
+*.arw
+*.MP4
+*.mp4

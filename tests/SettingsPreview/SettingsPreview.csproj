@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <PlatformTarget>x64</PlatformTarget>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <NinaApp Condition="'$(NinaApp)' == ''">$(NINA_APP)</NinaApp>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../../work/nina-plugin/src/SonyA7V.Camera/JpegPreview.cs" Link="JpegPreview.cs" />
+    <Compile Include="../../work/nina-plugin/src/SonyA7V.Camera/PluginSettings.cs" Link="PluginSettings.cs" />
+    <Reference Include="$(NinaApp)/NINA.Core.dll" />
+  </ItemGroup>
+</Project>

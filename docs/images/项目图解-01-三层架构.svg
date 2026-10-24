@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="820" viewBox="0 0 1440 820">
+<rect width="1440" height="820" fill="#10181f"/>
+<style>text{font-family:Microsoft YaHei,Segoe UI,sans-serif;fill:#edf3f7}.title{font-size:40px;font-weight:700}.sub{font-size:23px;fill:#aebfcd}.card{fill:#182630;stroke:#bca36b;stroke-width:2}.label{font-size:28px;font-weight:700;fill:#e5c989}.body{font-size:23px}.small{font-size:21px;fill:#aebfcd}</style>
+<text x="70" y="100" class="title">三层协作，把 Sony 相机接入 N.I.N.A.</text>
+<text x="70" y="150" class="sub">插件源码分层维护；Sony SDK 由用户自行下载。</text>
+<rect x="70" y="260" width="400" height="310" rx="22" class="card"/>
+<text x="98" y="318" class="label">N.I.N.A. 适配层</text>
+<text x="98" y="380" class="body">响应拍摄序列与预览请求</text>
+<text x="98" y="423" class="body">衔接图像处理和保存</text>
+<text x="98" y="466" class="body">随 N.I.N.A. 接口适配</text>
+<path d="M480 415h26m-10-9 10 9-10 9" fill="none" stroke="#e5c989" stroke-width="3"/>
+<rect x="520" y="260" width="400" height="310" rx="22" class="card"/>
+<text x="548" y="318" class="label">通用 C# 调用层</text>
+<text x="548" y="380" class="body">将原生调用封装为异步操作</text>
+<text x="548" y="423" class="body">统一排队、等待和取消</text>
+<text x="548" y="466" class="body">可供独立测试程序使用</text>
+<path d="M930 415h26m-10-9 10 9-10 9" fill="none" stroke="#e5c989" stroke-width="3"/>
+<rect x="970" y="260" width="400" height="310" rx="22" class="card"/>
+<text x="998" y="318" class="label">C++ 包装层</text>
+<text x="998" y="380" class="body">通过 C 接口连接 Sony SDK</text>
+<text x="998" y="423" class="body">枚举、控制相机和接收文件</text>
+<text x="998" y="466" class="body">Sony SDK → 实体相机</text>
+<text x="70" y="674" class="sub">当前实机验证：Sony A7 V（ILCE-7M5）；其他机型尚未验证。</text>
+<text x="70" y="755" class="small">Sony CrSDK Camera Plugin for N.I.N.A.  ·  isky</text>
+</svg>

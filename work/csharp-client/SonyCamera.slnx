@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="src/SonyCamera.Client/SonyCamera.Client.csproj" />
+  <Project Path="src/SonyCamera.Desktop/SonyCamera.Desktop.csproj" />
+  <Project Path="tests/SonyCamera.Acceptance/SonyCamera.Acceptance.csproj" />
+  <Project Path="tests/SonyCamera.Features/SonyCamera.Features.csproj" />
+</Solution>

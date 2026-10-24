@@ -1,0 +1,415 @@
+{
+  "files": [
+    {
+      "sha256": "111A87C4DC3C9B8681481AEC580D122423547F097EBB949B44F286A7747832F7",
+      "path": "internal\\dcraw_defs.h"
+    },
+    {
+      "sha256": "BDF7F4436979F84F11FABC048C9E037ADC31BA4EB5E43B0854CAE42566E6CD46",
+      "path": "internal\\dcraw_fileio_defs.h"
+    },
+    {
+      "sha256": "252B22F03DA4C086580153B4B9A76E3FDC31D61EE9059A2348C281022611F413",
+      "path": "internal\\defines.h"
+    },
+    {
+      "sha256": "73D9AF47A7E5A7EC1CEF6789D3924076ABC4F12E88F1D4325E0C829A55479071",
+      "path": "internal\\dmp_include.h"
+    },
+    {
+      "sha256": "C808F10B24B7016376B8F6771D668803F76BF9A0F2FC11B2018DA5EA47CB1DF3",
+      "path": "internal\\libraw_cameraids.h"
+    },
+    {
+      "sha256": "D55F9749F10FEFAC15102CF7D29477BD61BCBAC8DF4F241AC6240D2886810D06",
+      "path": "internal\\libraw_checked_buffer.h"
+    },
+    {
+      "sha256": "A44523EA082A535C73A84B6F6F4C3CD47FD69018A04863D89C47C6A9F1B20DCB",
+      "path": "internal\\libraw_cxx_defs.h"
+    },
+    {
+      "sha256": "DAD73542F14560470DC26E792ECB055EA062840AA826037DFADF5837786F4AD7",
+      "path": "internal\\libraw_internal_funcs.h"
+    },
+    {
+      "sha256": "4380C6312E0FB0FAF6149197B65EDA8A9F9BF6C09392A7B8BB6447FF2663A7B5",
+      "path": "internal\\losslessjpeg.h"
+    },
+    {
+      "sha256": "7F36890D30D2BA1CACCF00F3EB5984303A101539B901CA603C8F3B11A82E5319",
+      "path": "internal\\var_defines.h"
+    },
+    {
+      "sha256": "DD78C16DD739B1D2FD01650153811D4D503B9D3E0AE3D5E4BA527298E6FB192D",
+      "path": "internal\\x3f_tools.h"
+    },
+    {
+      "sha256": "E070165E315EE222114A2483D55563228CF4298C902E419F73B16CB4A75A9650",
+      "path": "libraw\\libraw_alloc.h"
+    },
+    {
+      "sha256": "77F83993BA6FE3EC67BABA0F8C9D10D333AA0C1E3463CD1E861C4477AEDED8A2",
+      "path": "libraw\\libraw_const.h"
+    },
+    {
+      "sha256": "382A77B9D9F3C595EE4248BBE81F44A0A548C22BF9F2BCCFDBC64CE95A3D2DFD",
+      "path": "libraw\\libraw_datastream.h"
+    },
+    {
+      "sha256": "50A814B8F5D8308D57D31AA616F239215042F3D4BEFEA50C9A8AF983F4BF9C27",
+      "path": "libraw\\libraw_internal.h"
+    },
+    {
+      "sha256": "294F6D0C904D017D4B047FD30890E16DBD4A6B7665911B5AA1B99DF7BDE0AA20",
+      "path": "libraw\\libraw_types.h"
+    },
+    {
+      "sha256": "378630C468AA1EFCD158D74DA7233144399AAF9E0AB9298E654FB6F2968B1A43",
+      "path": "libraw\\libraw_version.h"
+    },
+    {
+      "sha256": "48B3048304F42266DDB5BB5068F69427C249D574F80D8423387906D44BCAE27D",
+      "path": "libraw\\libraw.h"
+    },
+    {
+      "sha256": "3E316CB053225CA023D75B044C0A7613A76E6037942A1358793FE78AA891D17D",
+      "path": "Makefile.msvc"
+    },
+    {
+      "sha256": "EBAAC5D26A497092A24C0479B615250A4A74097807BCFD27B2591DF147FA172F",
+      "path": "src\\decoders\\canon_600.cpp"
+    },
+    {
+      "sha256": "53DC4A6950EABE0E9D197BFE3E118BDF1386CA5EB43C8B3BA2A66C166DFBAD87",
+      "path": "src\\decoders\\crx.cpp"
+    },
+    {
+      "sha256": "E17E3FAAC2E9D5DE0D1C3155B5FE37165010A09EAB9A80F63523A391237D1658",
+      "path": "src\\decoders\\decoders_dcraw.cpp"
+    },
+    {
+      "sha256": "CE0AF83648B31B06DE2D536CCFA9E96B61A56D5D56AC4C5EE875FE5B304ED2F4",
+      "path": "src\\decoders\\decoders_libraw_dcrdefs.cpp"
+    },
+    {
+      "sha256": "6563FF7B2FCFE451A29E8FF6606DA5F957953B5443A3881E41192CD35F35E2B2",
+      "path": "src\\decoders\\decoders_libraw.cpp"
+    },
+    {
+      "sha256": "468F71CCC16E861AAB734D5D1F4965C70A25990C56D86807AF5386EBBC9048DD",
+      "path": "src\\decoders\\dng.cpp"
+    },
+    {
+      "sha256": "DB7E17BA960BE72F16AC3FA2751398ADDC3A966757DDD1F685A73230380073B2",
+      "path": "src\\decoders\\fp_dng.cpp"
+    },
+    {
+      "sha256": "70155663033A535573403D2202D712FCDDB7407AF31300C956B95D4E2A0886AD",
+      "path": "src\\decoders\\fuji_compressed.cpp"
+    },
+    {
+      "sha256": "54D6528A5C6CF938862FABB506DACF5785A2E6B86404C7908573CB07C15DE79E",
+      "path": "src\\decoders\\generic.cpp"
+    },
+    {
+      "sha256": "F819457938A761344D07BF6520248F382013F490AA466FCA03474DE6D8E4FA3C",
+      "path": "src\\decoders\\kodak_decoders.cpp"
+    },
+    {
+      "sha256": "589692BB16137640E24F2C6A340F9455D174E1B10FD0D90FD735989F27C98AD2",
+      "path": "src\\decoders\\load_mfbacks.cpp"
+    },
+    {
+      "sha256": "9D9587DF3D7AE603261B67D658D3DC2805FB83C006C68984940446F478E50CED",
+      "path": "src\\decoders\\olympus14.cpp"
+    },
+    {
+      "sha256": "36D03A03139354F75D7C14C520B8EA436281DEE6528075383710BEEBE715F5B9",
+      "path": "src\\decoders\\pana8.cpp"
+    },
+    {
+      "sha256": "DA85BAD70142DC1F5BB7803F65F7D1C7388037D3CAC417980AE4EFE4954D523E",
+      "path": "src\\decoders\\smal.cpp"
+    },
+    {
+      "sha256": "E7DC103273A6680E95EC5F423AC745635B20DA9E38C1F49DC18BCA1F60DE5946",
+      "path": "src\\decoders\\sony_arw6.cpp"
+    },
+    {
+      "sha256": "35E5077E11699AC26266258E5FC13AD9C09F416DB66E8FAD53F43D8103F310C3",
+      "path": "src\\decoders\\sonycc.cpp"
+    },
+    {
+      "sha256": "B9382B99FE8082E0711F8AD105D01E17877121AD5C43188BEC3F820CBBAB38F6",
+      "path": "src\\decoders\\unpack_thumb.cpp"
+    },
+    {
+      "sha256": "6A462FDEC8C2961790F2077AF3016C314AC00CE3CABE33F1EA33A051C8D9F97C",
+      "path": "src\\decoders\\unpack.cpp"
+    },
+    {
+      "sha256": "9B33EAFCE1B6E84C83BB191F80EE35BF7C80258FE5C6700C3F2E37C3B14853AC",
+      "path": "src\\decompressors\\losslessjpeg.cpp"
+    },
+    {
+      "sha256": "234EC195D9AEA3353792397A9D4563997B552926100069021260BFA473F10F05",
+      "path": "src\\demosaic\\aahd_demosaic.cpp"
+    },
+    {
+      "sha256": "5445B43A06543F2117CC3A0123E14C7B136CDC7FD92DC64D9AF63671A66A6688",
+      "path": "src\\demosaic\\ahd_demosaic.cpp"
+    },
+    {
+      "sha256": "E02A3626C5794C40221BDE1BE4BD55EE0CAD15C860013319969F0CBEC682410F",
+      "path": "src\\demosaic\\dcb_demosaic.cpp"
+    },
+    {
+      "sha256": "6203338D108919868EE8AD4D514712DBC3E438D150B608A7D6859A32A2A7F45C",
+      "path": "src\\demosaic\\dht_demosaic.cpp"
+    },
+    {
+      "sha256": "F1743F8CC1E14FBA6309F6B1939D6D60E8E976AD7D546E38F2C5DFEC2A6D9B48",
+      "path": "src\\demosaic\\misc_demosaic.cpp"
+    },
+    {
+      "sha256": "1F2146059C548AF46FC08D18763752E8AFE4277346DF2BB58423992ADD7FB84C",
+      "path": "src\\demosaic\\xtrans_demosaic.cpp"
+    },
+    {
+      "sha256": "0BFF3A8FE78B341557FDB4395A3462CF93F5EFF8CEA33348F909E8F15942018B",
+      "path": "src\\integration\\dngsdk_glue.cpp"
+    },
+    {
+      "sha256": "505264B9905F0F4D9918FE4CF68BB430EFB06E8BB154D2D7B6869D82298FCF80",
+      "path": "src\\integration\\rawspeed_glue.cpp"
+    },
+    {
+      "sha256": "93227DA95765CD08FEB2DB0E14B10C86EB73DA9222C9355C1B0A145C1494B8D0",
+      "path": "src\\libraw_c_api.cpp"
+    },
+    {
+      "sha256": "C8DFB6BA879EE6A2DF869F4804D550A6746BB3D9BA8361241549F957786787FF",
+      "path": "src\\libraw_datastream.cpp"
+    },
+    {
+      "sha256": "24963D7F98C7FC5FD9DD67E50BE651A95E5779A6E92E53EAD766BCD1AF78B6F0",
+      "path": "src\\metadata\\adobepano.cpp"
+    },
+    {
+      "sha256": "B0E3BB6CE4CA66278AEFA9FA1320533780B1D51F3DABDA3D4607D2C85B356C40",
+      "path": "src\\metadata\\canon.cpp"
+    },
+    {
+      "sha256": "7954E8B598DB3DAB9F7C44ACE9E4CC0C7DABF250A0271D7C0464408A4C548828",
+      "path": "src\\metadata\\ciff.cpp"
+    },
+    {
+      "sha256": "3A6688C29A5E65D9C524C6680645DCAD287342781AB53D58270C1F2E725015EE",
+      "path": "src\\metadata\\cr3_parser.cpp"
+    },
+    {
+      "sha256": "700EF8FBCBEE6C2BE439A371DD7AAC83FFC50ECACBFADA4066C5073335899712",
+      "path": "src\\metadata\\epson.cpp"
+    },
+    {
+      "sha256": "A751DCB863EB3564C39B0C080DC23DB43089F42014496BC106412CD4E4CEC401",
+      "path": "src\\metadata\\exif_gps.cpp"
+    },
+    {
+      "sha256": "CC7C90036716625975C25D18D9A43C02F12F91274D22C7CD76F034A94641FC74",
+      "path": "src\\metadata\\fuji.cpp"
+    },
+    {
+      "sha256": "F735F808E5EEED69D2387C43C7DDDD56D0C7BACC2444594BDCD89D18186EED58",
+      "path": "src\\metadata\\hasselblad_model.cpp"
+    },
+    {
+      "sha256": "8197F97FB91E84676FD76926C5E4BDFE66A1C0BD259CF7909DBC0AB92586082D",
+      "path": "src\\metadata\\identify_tools.cpp"
+    },
+    {
+      "sha256": "B567A246AEFB53249C5AF413C61C259249CB3B4E13ADBF1B41469A5434F151D9",
+      "path": "src\\metadata\\identify.cpp"
+    },
+    {
+      "sha256": "0FFB2AC3514ABBF2009153052682F4B9303F9F79993A284727ECDE6FE2384328",
+      "path": "src\\metadata\\kodak.cpp"
+    },
+    {
+      "sha256": "EA325EC9EDC0CC0F825299ACB41A6F3BBEC7E98343BFD18DD30BEBFD4D4D9260",
+      "path": "src\\metadata\\leica.cpp"
+    },
+    {
+      "sha256": "A8815454596D5B5404E5924B95A91BFB6AD3463492DA9FABB43E97D00138E6E0",
+      "path": "src\\metadata\\makernotes.cpp"
+    },
+    {
+      "sha256": "A034A409201C87A37031647D29360214752FCD4C662B65BEDF2515068E9AE469",
+      "path": "src\\metadata\\mediumformat.cpp"
+    },
+    {
+      "sha256": "B0E2DA67138E7AC841E143F154E090DC47CE539BE1F178B116096594508FACD8",
+      "path": "src\\metadata\\minolta.cpp"
+    },
+    {
+      "sha256": "2C6E88799EB4D437C1F064D8E4150D0CFB7B440A3E23001E75725EFFC4E050B9",
+      "path": "src\\metadata\\misc_parsers.cpp"
+    },
+    {
+      "sha256": "7F5B4C7EE5952AD0072AA3123D389CE0DC30EA3A074F8BC0CEF0592BFE4D99E2",
+      "path": "src\\metadata\\nikon.cpp"
+    },
+    {
+      "sha256": "51070FB5D5333BFE659C67854A2717F681B32E5AB83F7B153AC70B7D1E6E80F1",
+      "path": "src\\metadata\\normalize_model.cpp"
+    },
+    {
+      "sha256": "584CBD7A3347F6235C31CBBC912457AE271256975F0CC2DBF34DFF6BAFE86BF9",
+      "path": "src\\metadata\\olympus.cpp"
+    },
+    {
+      "sha256": "1B7D58E696AB416AB669E5A7A32ECDF5096774C3C1D5B583D5EDF5B71B659EA8",
+      "path": "src\\metadata\\p1.cpp"
+    },
+    {
+      "sha256": "70F3D2F3A9B918EB912BCF2E4C00C14350885C3D54D9A300524B879CC4C62AF2",
+      "path": "src\\metadata\\pentax.cpp"
+    },
+    {
+      "sha256": "0D858A3D60347D1B4BF394AF9C714D4DBC2FB5C0A57B5B64DE374F4D8EFEA002",
+      "path": "src\\metadata\\samsung.cpp"
+    },
+    {
+      "sha256": "8D67D74CD1DB46B1C7FA157D18C956B7D07EC433F022DB7296F07DBE3FB60FE3",
+      "path": "src\\metadata\\sony.cpp"
+    },
+    {
+      "sha256": "5AA9720434CE4C116493316957526A933DCFB064484864399293729B58203D26",
+      "path": "src\\metadata\\tiff.cpp"
+    },
+    {
+      "sha256": "5A6E0E52ECB187D56E6E83AC62BD08112E3B6DA24D023C1E1CE293519CD7B49D",
+      "path": "src\\postprocessing\\aspect_ratio.cpp"
+    },
+    {
+      "sha256": "6B50457C0267D3BEDA5155F661F05F6AD72E6E1F1D2C9013651AA068CE6DB365",
+      "path": "src\\postprocessing\\dcraw_process.cpp"
+    },
+    {
+      "sha256": "8555FD3F58F1936F6497175EB663CC1EC252F13091A0958D8E82116E7CEA50C6",
+      "path": "src\\postprocessing\\mem_image.cpp"
+    },
+    {
+      "sha256": "35E12FFF82F6B60C55553B9E29B94C8BE27143E13CA447AEE306F2D3F1D00013",
+      "path": "src\\postprocessing\\postprocessing_aux.cpp"
+    },
+    {
+      "sha256": "BF52E61EFD827FA243B36F9EC39787C07882EE6AFE677AB3B0F3476A6CB36219",
+      "path": "src\\postprocessing\\postprocessing_ph.cpp"
+    },
+    {
+      "sha256": "335761C5D3CE3C6150E09E7114DD9669323112C792651A7D70B34586BF4876EA",
+      "path": "src\\postprocessing\\postprocessing_utils_dcrdefs.cpp"
+    },
+    {
+      "sha256": "E8F9E4EBA7C473EB19AB271BD149E6110FEF0EB55A601E9A2DB6466A20675EBF",
+      "path": "src\\postprocessing\\postprocessing_utils.cpp"
+    },
+    {
+      "sha256": "F7E96DFE6D04EBB52BFDE566CC5E313C3C20B2B868011B641474698AC7E757DC",
+      "path": "src\\preprocessing\\ext_preprocess.cpp"
+    },
+    {
+      "sha256": "FD5935603F3CC68BB7CA72162F95DAC3C899F9BE6BC95EDDC766816903199D24",
+      "path": "src\\preprocessing\\preprocessing_ph.cpp"
+    },
+    {
+      "sha256": "24B5268F66FA8684ABA8456E71FEF3F25FFD2A8826CA9A633006BF1E5465B35F",
+      "path": "src\\preprocessing\\raw2image.cpp"
+    },
+    {
+      "sha256": "DFB40396A6654FD45ADEE4410AE4B75DEF7278B5B3187413BB8C6F7079A82239",
+      "path": "src\\preprocessing\\subtract_black.cpp"
+    },
+    {
+      "sha256": "31D9D2D201B8ED430B219B21AD20E6FB5D59AFEFB6A47A60DF105C41EAB8E3B9",
+      "path": "src\\tables\\cameralist.cpp"
+    },
+    {
+      "sha256": "CAD6B9A6661400E70DE73FE0C0F9EAE501ED58D98C8ECAD7AFAE54275798609B",
+      "path": "src\\tables\\colorconst.cpp"
+    },
+    {
+      "sha256": "8CCBA3F142C377BC45DB9F560E1E5D5B241DB912C57AAF33F146269A45A91503",
+      "path": "src\\tables\\colordata.cpp"
+    },
+    {
+      "sha256": "172D53844B49DF0875F84C1283A285C05414341A8528E8D49966A0C81ADDC0F6",
+      "path": "src\\tables\\wblists.cpp"
+    },
+    {
+      "sha256": "298A82B1D71C84BA1F1D061F888BE6CA7C162A43985483232152B5E152AB47E2",
+      "path": "src\\utils\\curves.cpp"
+    },
+    {
+      "sha256": "21557A31FAE03074C3F3094145F0C887F990A5CC376AD36D20A12C26B70F917C",
+      "path": "src\\utils\\decoder_info.cpp"
+    },
+    {
+      "sha256": "F245E420F1C901C547428507F9C4517D787E1F5FBCE489BC0A9D46949F433AF9",
+      "path": "src\\utils\\init_close_utils.cpp"
+    },
+    {
+      "sha256": "E34C79DF55C70E3ACE4BDBFA55D18238F2F7393C00F56D9DBFAB843AC9D87788",
+      "path": "src\\utils\\open.cpp"
+    },
+    {
+      "sha256": "1A581A0F1F7A43FBC0A397A2591D79B342552F955D61C3C3B0B826117BB962DD",
+      "path": "src\\utils\\phaseone_processing.cpp"
+    },
+    {
+      "sha256": "F11992E950B50BC759D3A695B839B19F76998031D85F13A173CD88B7C2BC8687",
+      "path": "src\\utils\\read_utils.cpp"
+    },
+    {
+      "sha256": "57BA0B151C81E1277F6B505D82518366043E4150E584BD04A469D923FA714596",
+      "path": "src\\utils\\thumb_utils.cpp"
+    },
+    {
+      "sha256": "61D3FDA9D20A8263BBB5B9B09A41C0C37D2729763CF4B1742FA63A784651CE73",
+      "path": "src\\utils\\utils_dcraw.cpp"
+    },
+    {
+      "sha256": "A3D6FBCE952D0C61B262252544D238CF8E6304FBE2B7B6FD5998BC7FC7B37B32",
+      "path": "src\\utils\\utils_libraw.cpp"
+    },
+    {
+      "sha256": "B4052E42EA8444FDE9EC99EB6A21576521354CFF25F1220003836495FA314C76",
+      "path": "src\\write\\apply_profile.cpp"
+    },
+    {
+      "sha256": "1A9D9FFB771B920AE04256A42AB44A866FB0ABC41FF649E6AAC8DF9883AD6B81",
+      "path": "src\\write\\file_write.cpp"
+    },
+    {
+      "sha256": "830A24B827E7913F522F43B34162164FA30C392D1450EA17B985AEFCBA181F4C",
+      "path": "src\\write\\tiff_writer.cpp"
+    },
+    {
+      "sha256": "E4F8D4CD75379A3AF3827D2794A03773AFFFA27A7356BBE0CDB841E753CB10DC",
+      "path": "src\\write\\write_ph.cpp"
+    },
+    {
+      "sha256": "FF05E7616CFC72A75B557507B243B04F895591819A0DC967F1CE4B8D15BC3503",
+      "path": "src\\x3f\\x3f_parse_process.cpp"
+    },
+    {
+      "sha256": "CCB45D5E3ECBAD0C4FB625B235A873F2F7A25D77364DBAF69E510329C3F0C1F6",
+      "path": "src\\x3f\\x3f_utils_patched.cpp"
+    }
+  ],
+  "commit": "2caab57e269cc7fce17c3189e4d4d7e3e5861875",
+  "archiveSha256": "6474D0469756CEF431E976F45680F921E8D3C0DCC0EAB2207281A4F0819C2A61",
+  "baselineDllSha256": "9AE6EF4555C4A1E2FE3959B1E56A72F60532F2F6A47807C5DD9FF870A92BEEB4"
+}

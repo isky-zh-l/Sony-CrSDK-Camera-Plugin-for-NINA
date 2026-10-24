@@ -1,0 +1,13 @@
+bin/
+obj/
+.packages/
+.dotnet-home/
+artifacts/
+**/native/
+*.user
+*.ARW
+*.arw
+*.dll
+*.lib
+*.pgm
+*.tiff

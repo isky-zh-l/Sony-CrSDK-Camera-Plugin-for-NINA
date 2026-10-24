@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "sdkVersion": "2.02.00",
+  "sdkFiles": [
+    {
+      "role": "core",
+      "path": "Cr_Core.dll",
+      "sha256": "42A0CBDA57C27FA0125892C3176DBFB00C197FD711E6CDAD1B47768CF50D62C2"
+    },
+    {
+      "role": "monitor",
+      "path": "monitor_protocol.dll",
+      "sha256": "175D39F279793D2F191C00036C50397B6071823023A849CF236D206B8CE07007"
+    },
+    {
+      "role": "monitorPf",
+      "path": "monitor_protocol_pf.dll",
+      "sha256": "AB5FC3AE62F7F1228A61AE8B8579AF11B0F4E47C52CF14AFD4DCFBBEFB6136B8"
+    },
+    {
+      "role": "usbAdapter",
+      "path": "CrAdapter/Cr_PTP_USB.dll",
+      "sha256": "8FAE06F696290EE3F33FC2802756326548D0B27617275B70EB47DC2AC39FE812"
+    },
+    {
+      "role": "ipAdapter",
+      "path": "CrAdapter/Cr_PTP_IP.dll",
+      "sha256": "B3708F6C89E1FA8DC71C44E5B774CA2C54781D4E657237E9E5EE605147738921"
+    },
+    {
+      "role": "libusb",
+      "path": "CrAdapter/libusb-1.0.dll",
+      "sha256": "4E2ACD45486B9196E8850CA1BBBC71C424A0A7AEFF3D3F28C4B5CC660616C885"
+    },
+    {
+      "role": "libssh",
+      "path": "CrAdapter/libssh2.dll",
+      "sha256": "A7D4DA4605A6C9EAC5B2272707C9B2B5F60E995676D602EF9DE6A238868441C0"
+    }
+  ]
+}
