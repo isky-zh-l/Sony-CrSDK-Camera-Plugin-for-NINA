@@ -5,9 +5,9 @@
     <PlatformTarget>x64</PlatformTarget>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Version>0.4.1-rc.2</Version>
-    <FileVersion>0.4.1.2</FileVersion>
-    <AssemblyVersion>0.4.1.2</AssemblyVersion>
+    <Version>0.4.1.3</Version>
+    <FileVersion>0.4.1.3</FileVersion>
+    <AssemblyVersion>0.4.1.3</AssemblyVersion>
     <AssemblyTitle>Sony CrSDK Camera Plugin for N.I.N.A.</AssemblyTitle>
     <Company>isky</Company>
     <Description>N.I.N.A. camera driver for Sony ILCE-7M5 through the Sony Camera Remote SDK.</Description>
@@ -26,6 +26,7 @@
     <Reference Include="$(ClientRoot)\src\SonyCamera.Client\bin\Release\net8.0\SonyCamera.Client.dll"><Private>true</Private></Reference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\..\..\assets\icon.png" Link="icon.png" CopyToOutputDirectory="PreserveNewest" />
     <None Include="..\..\..\..\config\settings.json" Link="settings.json" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
   <Target Name="CheckHost" BeforeTargets="ResolveReferences">
@@ -33,3 +34,4 @@
     <Error Condition="!Exists('$(ClientRoot)\src\SonyCamera.Client\bin\Release\net8.0\SonyCamera.Client.dll')" Text="Build the managed client (work/csharp-client/build.ps1) before the plugin." />
   </Target>
 </Project>
+

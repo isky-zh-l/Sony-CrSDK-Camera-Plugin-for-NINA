@@ -1,5 +1,7 @@
 # Sony CrSDK Camera Plugin for N.I.N.A.
 
+<img src="assets/icon.png" alt="Sony CrSDK Camera Plugin 图标" width="180" />
+
 **让 新型 Sony 相机接入 N.I.N.A.**
 
 基于 Sony Camera Remote SDK 开发、运行于 Windows 的 N.I.N.A. 相机插件，提供相机连接、曝光控制、完整 ARW 文件接收与 LiveView，并将图像交给 N.I.N.A. 现有的处理及保存流程。
@@ -151,3 +153,4 @@ Sony SDK 更新主要由第一模块适配，N.I.N.A. 接口更新主要由第�
 感谢 N.I.N.A.、LibRaw、Sony Camera Remote SDK，以及愿意参与测试与反馈的用户。
 
 如果项目对你有帮助，欢迎 Star 关注后续更新；可复现的问题报告、测试记录和代码贡献同样受到欢迎。
+

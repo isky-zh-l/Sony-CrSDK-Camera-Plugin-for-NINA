@@ -7,6 +7,8 @@ using NINA.Image.Interfaces;
 using NINA.Profile.Interfaces;
 using NINA.WPF.Base.Interfaces.Mediator;
 using NINA.Plugin;
+using NINA.Plugin.ManifestDefinition;
+using System.IO;
 using NINA.Plugin.Interfaces;
 using NINA.WPF.Base.Interfaces.ViewModel;
 
@@ -17,8 +19,22 @@ namespace SonyA7V.Camera;
 /// AssemblyMetadata), which is how NINA 3.2's PluginBase resolves IPluginManifest.
 /// </summary>
 [Export(typeof(IPluginManifest))]
-public sealed class SonyA7VPlugin : PluginBase
+public sealed class SonyA7VPlugin : PluginBase, IPluginManifest
 {
+    // Installed plugin cards use a local image so they work without GitHub access.
+    // Reimplement the interface property because PluginBase.Descriptions is not virtual.
+    public new IPluginDescription Descriptions {
+        get {
+            var description = base.Descriptions;
+            var icon = Path.Combine(Path.GetDirectoryName(GetType().Assembly.Location)!, "icon.png");
+            return new PluginDescription {
+                ShortDescription = description.ShortDescription,
+                LongDescription = description.LongDescription,
+                FeaturedImageURL = File.Exists(icon) ? new Uri(icon).AbsoluteUri : description.FeaturedImageURL
+            };
+        }
+    }
+
     private readonly IImageDataFactory factory;
     private readonly IImagingMediator imaging;
     private readonly IImageSaveMediator saving;
@@ -66,3 +82,4 @@ public sealed class SonyA7VEquipmentProvider : IEquipmentProvider<ICamera>, IEqu
         return new List<ICamera> { camera };
     }
 }
+

@@ -1,3 +1,9 @@
+## 0.4.1.3
+
+- Show the selected project icon in the GitHub README.
+- Install icon.png and use its local URI for the NINA installed-plugin card, including offline use.
+- Camera capture and decoding behavior are unchanged.
+
 # Changes
 
 ## 0.4.1-rc.2 (assembly 0.4.1.2)
@@ -22,3 +28,4 @@
 - Include default settings.json in camera build output.
 - Prepare a source-only repository, explicit external SDK layout, unified build, private local deployment and source export scripts.
 - Hardware regression pending; previously tested 0.4.0 binaries remain in the private archive.
+

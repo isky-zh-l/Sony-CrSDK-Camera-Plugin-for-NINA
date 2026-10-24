@@ -1,4 +1,4 @@
-﻿param(
+param(
  [string]$SonySdkRoot,
  [string]$NinaApp,
  [string]$PluginDirectory=(Join-Path $env:LOCALAPPDATA 'NINA\Plugins\3.0.0\SonyA7V.Camera'),
@@ -67,7 +67,7 @@ $stage=Join-Path $session 'prepared'
 New-Item -ItemType Directory -Path $stage -Force|Out-Null
 $preparedPlugin=Join-Path $stage 'plugin'
 New-Item -ItemType Directory -Path (Join-Path $preparedPlugin 'native') -Force|Out-Null
-foreach($name in @('SonyA7V.Camera.dll','SonyCamera.Client.dll','settings.json')){Copy-Item -LiteralPath (Get-PackagePath $name) -Destination $preparedPlugin}
+foreach($name in @('SonyA7V.Camera.dll','SonyCamera.Client.dll','settings.json','icon.png')){Copy-Item -LiteralPath (Get-PackagePath $name) -Destination $preparedPlugin}
 foreach($name in @('sony_wrapper.dll','SonyArw6.dll','libraw.dll','identity.json')){Copy-Item -LiteralPath (Get-PackagePath ('native\'+$name)) -Destination (Join-Path $preparedPlugin 'native')}
 foreach($entry in $sdkLock.sdkFiles){
  if(!$entry.path.StartsWith('CrAdapter/')){Copy-Item -LiteralPath (Join-Path $sdkRuntime $entry.path) -Destination (Join-Path $preparedPlugin 'native')}
@@ -111,3 +111,4 @@ Write-Output "安装完成：$PluginDirectory"
 Write-Output "备份与卸载记录：$receipt"
 Write-Output '可以打开 NINA，选择 Sony A7 V。默认不另存 ARW 副本；请在 NINA 开启保存并选 FITS/XISF。'
 Write-Output '本脚本未启动 NINA、初始化 SDK、操作相机或修改驱动。'
+
