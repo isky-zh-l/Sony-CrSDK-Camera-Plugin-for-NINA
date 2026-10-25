@@ -1,0 +1,323 @@
+{
+  "schemaVersion": 1,
+  "purpose": "External CC0 real-RAW decoder regression; no camera transport/exposure acceptance",
+  "catalogs": [
+    "https://rawdb.dnglab.org/api/sets/Sony/ILCE-7M5",
+    "https://rawdb.dnglab.org/api/sets/Sony/ILCE-7RM6"
+  ],
+  "samples": [
+    {
+      "model": "ILCE-7M5",
+      "file": "ILCE-7M5/arw6/ILCE-7M5_ISO_100_14bits_APSC_ARW6.ARW",
+      "bytes": 12103680,
+      "sha256": "8315af2a9889709f4c836dbaadc23d226847e5a0630fda212a9f896d5fe0569f",
+      "license": "CC0-1.0",
+      "source": "https://rawdb.dnglab.org/api/download/Sony/ILCE-7M5/arw6/ILCE-7M5_ISO_100_14bits_APSC_ARW6.ARW",
+      "expectedPixelSha256": "f5a437ccd6be6a23856350f888e0b84c3a6dc188dbd665b06e443f64cb068340",
+      "expectedGeometry": {
+        "width": 4640,
+        "height": 3088,
+        "left": 0,
+        "top": 0,
+        "cfa": "RGGB"
+      },
+      "geometryEvidence": "reviewed existing LibRaw active-plane regression; preserves historical A7M5 full-frame geometry rather than imposing JPEG crop"
+    },
+    {
+      "model": "ILCE-7M5",
+      "file": "ILCE-7M5/arw6/ILCE-7M5_ISO_100_14bits_APSC_ARW6_HQ.ARW",
+      "bytes": 11481088,
+      "sha256": "c16cae99d26a2f8ad183d31a23823310a994aa058d55cfe56e4f82ba56865f57",
+      "license": "CC0-1.0",
+      "source": "https://rawdb.dnglab.org/api/download/Sony/ILCE-7M5/arw6/ILCE-7M5_ISO_100_14bits_APSC_ARW6_HQ.ARW",
+      "expectedPixelSha256": "cf827ab85b037562b10e9fd4bb6fefb85c3a2a4c795afc88875a55918325c287",
+      "expectedGeometry": {
+        "width": 4640,
+        "height": 3088,
+        "left": 0,
+        "top": 0,
+        "cfa": "RGGB"
+      },
+      "geometryEvidence": "reviewed existing LibRaw active-plane regression; preserves historical A7M5 full-frame geometry rather than imposing JPEG crop"
+    },
+    {
+      "model": "ILCE-7M5",
+      "file": "ILCE-7M5/arw6/ILCE-7M5_ISO_100_14bits_ARW6.ARW",
+      "bytes": 23314432,
+      "sha256": "46d73475dfd8f96fd7e2f4d4a721a36cbbaba3d6ea95a4851809cd9d252b2a80",
+      "license": "CC0-1.0",
+      "source": "https://rawdb.dnglab.org/api/download/Sony/ILCE-7M5/arw6/ILCE-7M5_ISO_100_14bits_ARW6.ARW",
+      "expectedPixelSha256": "b54512fa6f1353db614ea1f06c906c0b3077824af6a19b9728e4554bc14d699c",
+      "expectedGeometry": {
+        "width": 7028,
+        "height": 4688,
+        "left": 0,
+        "top": 0,
+        "cfa": "RGGB"
+      },
+      "geometryEvidence": "reviewed existing LibRaw active-plane regression; preserves historical A7M5 full-frame geometry rather than imposing JPEG crop"
+    },
+    {
+      "model": "ILCE-7M5",
+      "file": "ILCE-7M5/arw6/ILCE-7M5_ISO_100_14bits_ARW6_HQ.ARW",
+      "bytes": 23232512,
+      "sha256": "4e3a99cbcf2a348decaf3ca68c5de22b7a05eaa590f4e9184735c1f9c45213a7",
+      "license": "CC0-1.0",
+      "source": "https://rawdb.dnglab.org/api/download/Sony/ILCE-7M5/arw6/ILCE-7M5_ISO_100_14bits_ARW6_HQ.ARW",
+      "expectedPixelSha256": "d9e3f2b3b25f271618490d6dfbd206a709997de448cb24ad263f5fe2a21443b8",
+      "expectedGeometry": {
+        "width": 7028,
+        "height": 4688,
+        "left": 0,
+        "top": 0,
+        "cfa": "RGGB"
+      },
+      "geometryEvidence": "reviewed existing LibRaw active-plane regression; preserves historical A7M5 full-frame geometry rather than imposing JPEG crop"
+    },
+    {
+      "model": "ILCE-7M5",
+      "file": "ILCE-7M5/raw_modes/ILCE-7M5_ISO_100_14bits_APSC_Lossless Compressed RAW.ARW",
+      "bytes": 22233088,
+      "sha256": "51ad709cba01a5f05e3c723b779f6b5fda8fa7b378494dbb40b4d3d3aa5494a4",
+      "license": "CC0-1.0",
+      "source": "https://rawdb.dnglab.org/api/download/Sony/ILCE-7M5/raw_modes/ILCE-7M5_ISO_100_14bits_APSC_Lossless%20Compressed%20RAW.ARW",
+      "expectedPixelSha256": "39e451bf4b17ca93c6201b0f8adc5e02b008b49068d1ba60fdf09fcac7aba730",
+      "expectedGeometry": {
+        "width": 4624,
+        "height": 3080,
+        "left": 0,
+        "top": 0,
+        "cfa": "RGGB"
+      },
+      "geometryEvidence": "reviewed existing LibRaw active-plane regression; preserves historical A7M5 full-frame geometry rather than imposing JPEG crop"
+    },
+    {
+      "model": "ILCE-7M5",
+      "file": "ILCE-7M5/raw_modes/ILCE-7M5_ISO_100_14bits_Lossless Compressed RAW.ARW",
+      "bytes": 44195840,
+      "sha256": "8c35cd1ab0ca36b487ae50ae5e0333a8e967122700fce5678e1e5b97561896a4",
+      "license": "CC0-1.0",
+      "source": "https://rawdb.dnglab.org/api/download/Sony/ILCE-7M5/raw_modes/ILCE-7M5_ISO_100_14bits_Lossless%20Compressed%20RAW.ARW",
+      "expectedPixelSha256": "6a890276471319169b1a883507586e7df9cb67ffddc865d3561357c2d3250fff",
+      "expectedGeometry": {
+        "width": 7028,
+        "height": 4688,
+        "left": 0,
+        "top": 0,
+        "cfa": "RGGB"
+      },
+      "geometryEvidence": "reviewed existing LibRaw active-plane regression; preserves historical A7M5 full-frame geometry rather than imposing JPEG crop"
+    },
+    {
+      "model": "ILCE-7RM6",
+      "file": "ILCE-7RM6/arw6/ILCE-7RM6_APSC_land_RAW-C-HD.ARW",
+      "bytes": 29720576,
+      "sha256": "b60a7e752d2a8102ccbe6eebcfdbf533c6b0f2545739090873e9e8eb32cc0637",
+      "license": "CC0-1.0",
+      "source": "https://rawdb.dnglab.org/api/download/Sony/ILCE-7RM6/arw6/ILCE-7RM6_APSC_land_RAW-C-HD.ARW",
+      "expectedGeometry": {
+        "width": 6528,
+        "height": 4352,
+        "left": 16,
+        "top": 10,
+        "cfa": "RGGB"
+      },
+      "geometryEvidence": "camera TIFF DefaultCrop origin/size, independently read by NINA mirror ExifTool; RGGB from fixed LibRaw and public camera definition",
+      "expectedPixelSha256": "25a9bc1f63acc19e4de3a65b9cc494ae5c6ed1bbfd9a2e2f7235f8492aa3bf14"
+    },
+    {
+      "model": "ILCE-7RM6",
+      "file": "ILCE-7RM6/arw6/ILCE-7RM6_APSC_land_RAW-C.ARW",
+      "bytes": 30900224,
+      "sha256": "1c803304e63ec508b2b5f9d59d4a7e30ed279315b35fa4c5d75f959bed62198b",
+      "license": "CC0-1.0",
+      "source": "https://rawdb.dnglab.org/api/download/Sony/ILCE-7RM6/arw6/ILCE-7RM6_APSC_land_RAW-C.ARW",
+      "expectedGeometry": {
+        "width": 6528,
+        "height": 4352,
+        "left": 16,
+        "top": 10,
+        "cfa": "RGGB"
+      },
+      "geometryEvidence": "camera TIFF DefaultCrop origin/size, independently read by NINA mirror ExifTool; RGGB from fixed LibRaw and public camera definition",
+      "expectedPixelSha256": "163f64fea564cccf680d2f570a5b2cd0218864b5eb3e70ad554a199faab9a51f"
+    },
+    {
+      "model": "ILCE-7RM6",
+      "file": "ILCE-7RM6/arw6/ILCE-7RM6_APSC_port_RAW-C-HD.ARW",
+      "bytes": 28758016,
+      "sha256": "0b6d782571e86868670f613de9fa1f1364623b24fbfd21b704b2c516d7a1c1cb",
+      "license": "CC0-1.0",
+      "source": "https://rawdb.dnglab.org/api/download/Sony/ILCE-7RM6/arw6/ILCE-7RM6_APSC_port_RAW-C-HD.ARW",
+      "expectedGeometry": {
+        "width": 6528,
+        "height": 4352,
+        "left": 16,
+        "top": 10,
+        "cfa": "RGGB"
+      },
+      "geometryEvidence": "camera TIFF DefaultCrop origin/size, independently read by NINA mirror ExifTool; RGGB from fixed LibRaw and public camera definition",
+      "expectedPixelSha256": "892c70e17e8f3c8c1abcaf3ee41f64ece6f9f13debe34baeb7076474a52dd4aa"
+    },
+    {
+      "model": "ILCE-7RM6",
+      "file": "ILCE-7RM6/arw6/ILCE-7RM6_APSC_port_RAW-C.ARW",
+      "bytes": 29044736,
+      "sha256": "c41674a485ffcf6d873e20e545ae62936192d94e95be3d53548e93bc543ecfd4",
+      "license": "CC0-1.0",
+      "source": "https://rawdb.dnglab.org/api/download/Sony/ILCE-7RM6/arw6/ILCE-7RM6_APSC_port_RAW-C.ARW",
+      "expectedGeometry": {
+        "width": 6528,
+        "height": 4352,
+        "left": 16,
+        "top": 10,
+        "cfa": "RGGB"
+      },
+      "geometryEvidence": "camera TIFF DefaultCrop origin/size, independently read by NINA mirror ExifTool; RGGB from fixed LibRaw and public camera definition",
+      "expectedPixelSha256": "9238fb3489f632f103ce175a621e925528b71774e07c88861c68506c6e18ee3a"
+    },
+    {
+      "model": "ILCE-7RM6",
+      "file": "ILCE-7RM6/arw6/ILCE-7RM6_FF_land_RAW-C-HD.ARW",
+      "bytes": 63451136,
+      "sha256": "559fa26501d7813e56afecde2aea3d9965a99228162b194752d986193abb172c",
+      "license": "CC0-1.0",
+      "source": "https://rawdb.dnglab.org/api/download/Sony/ILCE-7RM6/arw6/ILCE-7RM6_FF_land_RAW-C-HD.ARW",
+      "expectedGeometry": {
+        "width": 9984,
+        "height": 6656,
+        "left": 12,
+        "top": 8,
+        "cfa": "RGGB"
+      },
+      "geometryEvidence": "camera TIFF DefaultCrop origin/size, independently read by NINA mirror ExifTool; RGGB from fixed LibRaw and public camera definition",
+      "expectedPixelSha256": "5ebdc61d2d4d257ae0410a1e1275a5300d0da9ed3c44a8bce92d720cd665aac8"
+    },
+    {
+      "model": "ILCE-7RM6",
+      "file": "ILCE-7RM6/arw6/ILCE-7RM6_FF_land_RAW-C.ARW",
+      "bytes": 63844352,
+      "sha256": "d900d6cbe838be864269ad54de4a33fcac7eb3a3d4f91009739f770b8f85a23b",
+      "license": "CC0-1.0",
+      "source": "https://rawdb.dnglab.org/api/download/Sony/ILCE-7RM6/arw6/ILCE-7RM6_FF_land_RAW-C.ARW",
+      "expectedGeometry": {
+        "width": 9984,
+        "height": 6656,
+        "left": 12,
+        "top": 8,
+        "cfa": "RGGB"
+      },
+      "geometryEvidence": "camera TIFF DefaultCrop origin/size, independently read by NINA mirror ExifTool; RGGB from fixed LibRaw and public camera definition",
+      "expectedPixelSha256": "518cbd68712f9126ef0260f79fe5ec61b25bdee91f004cfd6e691637ec0fd802"
+    },
+    {
+      "model": "ILCE-7RM6",
+      "file": "ILCE-7RM6/arw6/ILCE-7RM6_FF_port_RAW-C-HD.ARW",
+      "bytes": 62640128,
+      "sha256": "81c709633cb8f6340e612c3f53bb6ec6b0cccfe5b713c67efb1e977ece9e266d",
+      "license": "CC0-1.0",
+      "source": "https://rawdb.dnglab.org/api/download/Sony/ILCE-7RM6/arw6/ILCE-7RM6_FF_port_RAW-C-HD.ARW",
+      "expectedGeometry": {
+        "width": 9984,
+        "height": 6656,
+        "left": 12,
+        "top": 8,
+        "cfa": "RGGB"
+      },
+      "geometryEvidence": "camera TIFF DefaultCrop origin/size, independently read by NINA mirror ExifTool; RGGB from fixed LibRaw and public camera definition",
+      "expectedPixelSha256": "bc7b05f3d7e66edb564965f90e6b55a758773a52b5de7062a86c09b7e1d493f4"
+    },
+    {
+      "model": "ILCE-7RM6",
+      "file": "ILCE-7RM6/arw6/ILCE-7RM6_FF_port_RAW-C.ARW",
+      "bytes": 63168512,
+      "sha256": "f4448485629c3f82ff1955fd046404350e9a1f09b346038574b89c074d7c50fd",
+      "license": "CC0-1.0",
+      "source": "https://rawdb.dnglab.org/api/download/Sony/ILCE-7RM6/arw6/ILCE-7RM6_FF_port_RAW-C.ARW",
+      "expectedGeometry": {
+        "width": 9984,
+        "height": 6656,
+        "left": 12,
+        "top": 8,
+        "cfa": "RGGB"
+      },
+      "geometryEvidence": "camera TIFF DefaultCrop origin/size, independently read by NINA mirror ExifTool; RGGB from fixed LibRaw and public camera definition",
+      "expectedPixelSha256": "932239de743784a5d9ca9e8b391f0c4a30ef7f0521f44b4144101e5c0dc1f4ba"
+    },
+    {
+      "model": "ILCE-7RM6",
+      "file": "ILCE-7RM6/raw_modes/ILCE-7RM6_APSC_land_RAW.ARW",
+      "bytes": 44167168,
+      "sha256": "7aaf0b3941509d7364a6f03844783155ebc912d246d1c456e5cdb4693ec09fbc",
+      "license": "CC0-1.0",
+      "source": "https://rawdb.dnglab.org/api/download/Sony/ILCE-7RM6/raw_modes/ILCE-7RM6_APSC_land_RAW.ARW",
+      "expectedGeometry": {
+        "width": 6528,
+        "height": 4352,
+        "left": 16,
+        "top": 10,
+        "cfa": "RGGB"
+      },
+      "geometryEvidence": "camera TIFF DefaultCrop origin/size, independently read by NINA mirror ExifTool; RGGB from fixed LibRaw and public camera definition",
+      "expectedPixelSha256": "fd55bfd7864b101f2b406c60d6700fb8972799d1126278fff04410a741958b25"
+    },
+    {
+      "model": "ILCE-7RM6",
+      "file": "ILCE-7RM6/raw_modes/ILCE-7RM6_APSC_port_RAW.ARW",
+      "bytes": 43692032,
+      "sha256": "0f011933ee96525a39710daa50b59d39702b4ec5934fa0206742e2128c55f366",
+      "license": "CC0-1.0",
+      "source": "https://rawdb.dnglab.org/api/download/Sony/ILCE-7RM6/raw_modes/ILCE-7RM6_APSC_port_RAW.ARW",
+      "expectedGeometry": {
+        "width": 6528,
+        "height": 4352,
+        "left": 16,
+        "top": 10,
+        "cfa": "RGGB"
+      },
+      "geometryEvidence": "camera TIFF DefaultCrop origin/size, independently read by NINA mirror ExifTool; RGGB from fixed LibRaw and public camera definition",
+      "expectedPixelSha256": "53bd4dc2b81acf368e73df9c4620d38a206f6c9ca80f6d2d44f84471ad64a4d6"
+    },
+    {
+      "model": "ILCE-7RM6",
+      "file": "ILCE-7RM6/raw_modes/ILCE-7RM6_FF_land_RAW.ARW",
+      "bytes": 100851712,
+      "sha256": "5cb3c870bc961cf6b079d56c860d0cdf11acd1afd04e5fb8dbe041bcfd2d6201",
+      "license": "CC0-1.0",
+      "source": "https://rawdb.dnglab.org/api/download/Sony/ILCE-7RM6/raw_modes/ILCE-7RM6_FF_land_RAW.ARW",
+      "expectedGeometry": {
+        "width": 9984,
+        "height": 6656,
+        "left": 12,
+        "top": 8,
+        "cfa": "RGGB"
+      },
+      "geometryEvidence": "camera TIFF DefaultCrop origin/size, independently read by NINA mirror ExifTool; RGGB from fixed LibRaw and public camera definition",
+      "expectedPixelSha256": "9edfc15e47da5b22d402fd22beed7f88c0a99e3640ccf8407037d454912f62a6"
+    },
+    {
+      "model": "ILCE-7RM6",
+      "file": "ILCE-7RM6/raw_modes/ILCE-7RM6_FF_port_RAW.ARW",
+      "bytes": 100884480,
+      "sha256": "b1a4026aa6adbaa27973b8b3426d8b4aa0c1cae1845cf5102359327d3b069691",
+      "license": "CC0-1.0",
+      "source": "https://rawdb.dnglab.org/api/download/Sony/ILCE-7RM6/raw_modes/ILCE-7RM6_FF_port_RAW.ARW",
+      "expectedGeometry": {
+        "width": 9984,
+        "height": 6656,
+        "left": 12,
+        "top": 8,
+        "cfa": "RGGB"
+      },
+      "geometryEvidence": "camera TIFF DefaultCrop origin/size, independently read by NINA mirror ExifTool; RGGB from fixed LibRaw and public camera definition",
+      "expectedPixelSha256": "5320b9cff6d972235d381985685c647722caeac4fd5d97a47eaad684b5cf4483"
+    }
+  ],
+  "fingerprintProvenance": {
+    "meaning": "Regression fingerprints of unaltered uint16 active Bayer planes; not an independent decoder oracle or hardware acceptance",
+    "librawVersion": "0.22.0-Release",
+    "librawSourceLockSha256": "d48b366e8b56b06c52dab75aa1f0d8b7d51b77135b7a29c74b6bce298a3f4ff3",
+    "bridgeSha256": "cb9c7edc65e6932c89bd35107937ab56afb2b837d3927cac0eafa920d32105a2",
+    "tiffGuardSha256": "fdf4674ead0d4ce95ee8ce9ed8052ca393b26ee34420fdcc5f9b0c4006cba4b4"
+  }
+}

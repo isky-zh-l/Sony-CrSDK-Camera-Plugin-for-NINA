@@ -1,5 +1,6 @@
-﻿param([string]$BuildDirectory=(Join-Path (Split-Path $PSScriptRoot -Parent) 'build-features'),[string]$OutputDirectory=(Join-Path $env:TEMP ('sony-native-features-'+[guid]::NewGuid().ToString('N'))))
+param([string]$BuildDirectory=(Join-Path (Split-Path $PSScriptRoot -Parent) 'build-features'),[string]$OutputDirectory=(Join-Path $env:TEMP ('sony-native-features-'+[guid]::NewGuid().ToString('N'))))
 $ErrorActionPreference='Stop'
+$OutputDirectory=[IO.Path]::GetFullPath($OutputDirectory)
 $exe=Join-Path $BuildDirectory 'fake\wrapper_features_test.exe'
 if(!(Test-Path -LiteralPath $exe)){throw 'Build the feature test target first. Only the isolated fake directory is used.'}
 New-Item -ItemType Directory -Path $OutputDirectory -Force|Out-Null

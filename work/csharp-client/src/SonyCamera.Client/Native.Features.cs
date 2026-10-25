@@ -13,6 +13,7 @@ internal static unsafe partial class Native {
     [DllImport(Dll,CallingConvention=CallingConvention.Cdecl,ExactSpelling=true)] internal static extern int sw_live_view_set(uint enabled,ref Error e);
     [DllImport(Dll,CallingConvention=CallingConvention.Cdecl,ExactSpelling=true)] internal static extern int sw_live_view_read(byte* buffer,uint capacity,ref Frame p,ref Error e);
     [DllImport(Dll,CallingConvention=CallingConvention.Cdecl,ExactSpelling=true)] internal static extern int sw_movie_set(uint recording,uint timeout,ref Error e);
+    [DllImport(Dll,CallingConvention=CallingConvention.Cdecl,ExactSpelling=true)] internal static extern int sw_get_astro_target(uint setting,out uint property,out long value,ref Error e);
     [DllImport(Dll,CallingConvention=CallingConvention.Cdecl,ExactSpelling=true)] internal static extern int sw_focus_pulse(int speed,uint hold,ref Error e);
     [DllImport(Dll,CallingConvention=CallingConvention.Cdecl,ExactSpelling=true)] internal static extern int sw_get_folders(Folder* folders,uint capacity,out uint count,ref Error e);
     [DllImport(Dll,CallingConvention=CallingConvention.Cdecl,ExactSpelling=true)] internal static extern int sw_get_contents(ulong session,uint folder,Content* contents,uint capacity,out uint count,ref Error e);

@@ -185,7 +185,7 @@
     "id": 27,
     "name": "FocusMagnifier",
     "sdkProperty": "Focus_Magnifier_Setting",
-    "writeAllowed": true,
+    "writeAllowed": false,
     "officialA7V": "✔"
   },
   {
@@ -313,5 +313,19 @@
     "sdkProperty": "Movie_RecordingMedia",
     "writeAllowed": true,
     "officialA7V": "✔"
+  },
+  {
+    "id": 46,
+    "name": "FocusDrivingStatus",
+    "sdkProperty": "FocusDrivingStatus",
+    "writeAllowed": false,
+    "officialA7V": "supported; mode/lens dependent"
+  },
+  {
+    "id": 47,
+    "name": "StillStorageDestination",
+    "sdkProperty": "StillImageStoreDestination",
+    "writeAllowed": true,
+    "officialA7V": "supported; mode/lens dependent"
   }
 ]

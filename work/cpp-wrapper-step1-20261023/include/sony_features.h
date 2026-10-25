@@ -55,6 +55,8 @@ enum SwPropertyId {
     SW_PROP_FOCUSINDICATOR=43,
     SW_PROP_APSCMODE=44,
     SW_PROP_MOVIERECORDINGMEDIA=45,
+    SW_PROP_FOCUSDRIVINGSTATUS=46,
+    SW_PROP_STILLSTORAGEDESTINATION=47,
 };
 enum SwConnectionMode { SW_MODE_REMOTE=0, SW_MODE_CONTENTS=1 };
 #pragma pack(push,8)
@@ -90,6 +92,10 @@ SW_API int32_t SW_CALL sw_live_view_read(uint8_t* buffer,uint32_t capacity,SwFra
 SW_API int32_t SW_CALL sw_movie_set(uint32_t recording,uint32_t timeout_ms,SwError* e);
 /* Bounded relative focus pulse; speed is exact signed lens candidate. ALWAYS sends stop, even on failed start.
    1..2000 ms; this blocks owner until stopped. Lens position is not calibrated physical distance. */
+/* Semantic astronomy choices: 1 long-exposure NR off, 2 high-ISO NR off,
+   3 SteadyShot off, 4 manual lens focus, 5 full-size lossless RAW (exact available token).
+   Returns project property ID and SDK candidate token, never writes. Requires remote connection. */
+SW_API int32_t SW_CALL sw_get_astro_target(uint32_t setting,uint32_t* property,int64_t* value,SwError* e);
 SW_API int32_t SW_CALL sw_focus_pulse(int32_t speed,uint32_t hold_ms,SwError* e);
 SW_API int32_t SW_CALL sw_get_folders(SwFolderInfo* items,uint32_t capacity,uint32_t* count,SwError* e);
 SW_API int32_t SW_CALL sw_get_contents(uint64_t session,uint32_t folder,SwContentInfo* items,uint32_t capacity,uint32_t* count,SwError* e);

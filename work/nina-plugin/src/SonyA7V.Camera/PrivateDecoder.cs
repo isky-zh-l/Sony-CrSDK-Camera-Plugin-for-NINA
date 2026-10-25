@@ -1,4 +1,4 @@
-﻿using System.IO;
+using System.IO;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Text;
@@ -52,7 +52,8 @@ public sealed class PrivateDecoder {
             if(rc!=0) throw new InvalidDataException($"RAW unpack failed ({rc}): {error}");
             token.ThrowIfCancellationRequested();
             if(info.Abi!=1 || info.Errors!=0) throw new InvalidDataException("Invalid decoder ABI or RAW error");
-            var pixels=new ushort[checked((int)(info.Width*info.Height))];
+            CameraGeometry.FromRaw(info); // validate before any allocation, including checked wide multiplication
+            var pixels=new ushort[checked((int)((ulong)info.Width*info.Height))];
             if(copy(frame,pixels,(ulong)pixels.LongLength)!=0) throw new InvalidDataException("RAW pixel copy failed");
             token.ThrowIfCancellationRequested();
             return (pixels,info);

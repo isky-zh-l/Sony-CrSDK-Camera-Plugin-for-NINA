@@ -149,6 +149,18 @@ struct PropertyList {
         if(rc) { fault=true; return result(e,SW_SDK,stage,rc,"ReleaseDeviceProperties failed; session quarantined"); }
         return SW_OK;
     }
+    // Absence is different from an advertised-but-unreadable property or a transient SDK error.
+    int32_t load_optional(CrInt32u code,bool& present,SwError* e,uint32_t stage) {
+        present=false;
+        auto rc=load(code,e,stage);
+        if(rc==SW_OK) {present=true;return SW_OK;}
+        if((rc==SW_UNSUPPORTED && !list && count==0) ||
+           (rc==SW_SDK && e->sony_code==sdk::CrError_Generic_NotSupported)) {
+            auto release_rc=close(e,stage);if(release_rc)return release_rc;
+            return result(e,SW_OK,stage,0,"Optional property is not implemented by this body");
+        }
+        return rc;
+    }
     int32_t load(CrInt32u code,SwError* e,uint32_t stage) {
         auto rc=sdk::GetSelectDeviceProperties(device,1,&code,&list,&count);
         if(rc) return result(e,SW_SDK,stage,rc,"GetSelectDeviceProperties failed");
@@ -528,13 +540,22 @@ int32_t capture_preconditions(SwError* e) {
         {sdk::CrDeviceProperty_ExposureProgramMode,sdk::CrExposure_M_Manual,"Requires M manual exposure mode; no automatic mode changes"},
         {sdk::CrDeviceProperty_FileType,sdk::CrFileType_Raw,"Requires RAW only, not RAW+JPEG/HEIF"},
         {sdk::CrDeviceProperty_DriveMode,sdk::CrDrive_Single,"Requires Single drive mode, no burst/bracket/timer"},
-        {sdk::CrDeviceProperty_Still_Image_Trans_Size,sdk::CrPropertyStillImageTransSize_Original,"Requires original-size still image transfer"},
-        {sdk::CrDeviceProperty_RemoteSaveImageSize,sdk::CrRemoteSaveImageSize_LargeSize,"Requires Large remote save image size"},
-        {sdk::CrDeviceProperty_RecordingState,sdk::CrMovie_Recording_State_Not_Recording,"Requires no active movie recording"}
     };
     for(const auto& condition:required) {
         uint64_t value=0; auto rc=capture_read_property(condition.code,value,e); if(rc) return rc;
         if(value!=condition.value) return result(e,SW_UNSUPPORTED,SW_CAPTURE_CHECK,0,condition.message);
+    }
+    const Required optional[]={
+        {sdk::CrDeviceProperty_Still_Image_Trans_Size,sdk::CrPropertyStillImageTransSize_Original,"Requires original-size still image transfer"},
+        {sdk::CrDeviceProperty_RemoteSaveImageSize,sdk::CrRemoteSaveImageSize_LargeSize,"Requires Large remote save image size"},
+        {sdk::CrDeviceProperty_RecordingState,sdk::CrMovie_Recording_State_Not_Recording,"Requires no active movie recording"}
+    };
+    for(const auto& condition:optional) {
+        PropertyList p;bool present=false;
+        auto rc=p.load_optional(condition.code,present,e,SW_CAPTURE_CHECK);if(rc)return rc;
+        if(!present)continue;
+        const auto value=p.list[0].GetCurrentValue();rc=p.close(e,SW_CAPTURE_CHECK);if(rc)return rc;
+        if(value!=condition.value)return result(e,SW_UNSUPPORTED,SW_CAPTURE_CHECK,0,condition.message);
     }
     // Hardware finding 2026-10-24 (A7 V + electronic lens): with AF-C active the camera did not
     // release the shutter for a 120 ms Down/Up press and produced no file, no warning and no error.
@@ -551,12 +572,24 @@ int32_t capture_preconditions(SwError* e) {
                 "Requires manual lens focus (MF); autofocus can swallow the release and produce no file");
         } else if(focus_rc!=SW_UNSUPPORTED) return focus_rc;
     }
-    uint64_t raw=0,store=0;
-    auto rc=capture_read_property(sdk::CrDeviceProperty_RAW_FileCompressionType,raw,e); if(rc) return rc;
-    if(raw==sdk::CrRAWFile_Compression) capture.output.raw_format=SW_RAW_COMPRESSED;
-    else if(raw==sdk::CrRAWFile_LossLess) capture.output.raw_format=SW_RAW_LOSSLESS;
-    else if(raw==sdk::CrRAWFile_Compressed_HQ) capture.output.raw_format=SW_RAW_COMPRESSED_HQ;
-    else return result(e,SW_UNSUPPORTED,SW_CAPTURE_CHECK,0,"Only full-size Compressed, Lossless or Compressed HQ RAW supported in this step");
+    uint64_t store=0;
+    PropertyList raw_property;bool raw_present=false;
+    auto rc=raw_property.load_optional(sdk::CrDeviceProperty_RAW_FileCompressionType,raw_present,e,SW_CAPTURE_CHECK);if(rc)return rc;
+    capture.output.raw_format=SW_RAW_UNKNOWN;
+    if(raw_present) {
+        const auto raw=raw_property.list[0].GetCurrentValue();
+        rc=raw_property.close(e,SW_CAPTURE_CHECK);if(rc)return rc;
+        switch(raw) {
+        case sdk::CrRAWFile_Uncompression:capture.output.raw_format=SW_RAW_UNCOMPRESSED;break;
+        case sdk::CrRAWFile_Compression:capture.output.raw_format=SW_RAW_COMPRESSED;break;
+        case sdk::CrRAWFile_LossLess:capture.output.raw_format=SW_RAW_LOSSLESS;break;
+        case sdk::CrRAWFile_LossLessS:capture.output.raw_format=SW_RAW_LOSSLESS_SMALL;break;
+        case sdk::CrRAWFile_LossLessM:capture.output.raw_format=SW_RAW_LOSSLESS_MEDIUM;break;
+        case sdk::CrRAWFile_LossLessL:capture.output.raw_format=SW_RAW_LOSSLESS_LARGE;break;
+        case sdk::CrRAWFile_Compressed_HQ:capture.output.raw_format=SW_RAW_COMPRESSED_HQ;break;
+        default:return result(e,SW_UNSUPPORTED,SW_CAPTURE_CHECK,0,"Unrecognised RAW compression token; no capture submitted");
+        }
+    }
     rc=capture_read_property(sdk::CrDeviceProperty_StillImageStoreDestination,store,e); if(rc) return rc;
     if(store==sdk::CrStillImageStoreDestination_HostPC) capture.output.save_destination=SW_SAVE_COMPUTER;
     else if(store==sdk::CrStillImageStoreDestination_HostPCAndMemoryCard) capture.output.save_destination=SW_SAVE_COMPUTER_AND_CARD;
@@ -570,7 +603,6 @@ int32_t capture_snapshot(SwError* e) {
     SwParameters p{}; p.size=sizeof(p); p.iso=static_cast<uint32_t>(v.iso)&0xFFFFFF; p.iso_kind=SW_ISO_FIXED;
     p.shutter_kind=capture.bulb?SW_SHUTTER_BULB:SW_SHUTTER_SECONDS; p.exposure_seconds=capture.bulb?std::numeric_limits<double>::quiet_NaN():seconds(static_cast<uint32_t>(v.shutter));
     std::fesetround(FE_TONEAREST); p.f_number=v.aperture?double(v.aperture)/100.0:std::numeric_limits<double>::quiet_NaN();
-    if(p.exposure_seconds>30) return result(e,SW_UNSUPPORTED,SW_CAPTURE_CHECK,0,"Ordinary shutter longer than 30 seconds outside this minimal step");
     capture.output.actual_parameters=p; capture.output.actual_valid=1; return SW_OK;
 }
 struct NativeFile {
@@ -742,8 +774,8 @@ int32_t validate_request(const SwExposureRequest& r,SwError* e) {
         return capture_error(e,SW_ARGUMENT,SW_EXPOSURE_SETUP,0,"Invalid layout/mode/timeouts; finite exact millisecond timeouts required",0);
     if(r.mode==SW_EXPOSURE_BULB && !milliseconds_exact(r.exposure_seconds,1,900))
         return capture_error(e,SW_UNSUPPORTED,SW_EXPOSURE_SETUP,0,"Software Bulb policy: 1..900 seconds, exact millisecond values; no rounding",0);
-    if(r.mode==SW_EXPOSURE_ORDINARY && (r.exposure_seconds>30 || r.exposure_timeout_seconds<r.exposure_seconds))
-        return capture_error(e,SW_UNSUPPORTED,SW_EXPOSURE_SETUP,0,"Ordinary <=30 seconds; exposure timeout must cover requested exposure",0);
+    if(r.mode==SW_EXPOSURE_ORDINARY && r.exposure_timeout_seconds<r.exposure_seconds)
+        return capture_error(e,SW_UNSUPPORTED,SW_EXPOSURE_SETUP,0,"Ordinary exposure timeout must cover the exact camera shutter",0);
     return SW_OK;
 }
 bool has_candidate(sdk::CrDeviceProperty& p,uint64_t target) {
@@ -796,10 +828,14 @@ int32_t prepare_exposure(const SwExposureRequest& request,SwError* e) {
         capture.shutter_dirty=true;capture.exposure.restore_state=SW_RESTORE_PENDING;
         rc=setup_write(sdk::CrDeviceProperty_ShutterSpeed,sdk::CrShutterSpeed_Bulb,e);if(rc)return rc;
     }
-    PropertyList timer;rc=timer.load(sdk::CrDeviceProperty_BulbTimerSetting,e,SW_EXPOSURE_SETUP);if(rc)return rc;
+    PropertyList timer;bool timer_present=false;
+    rc=timer.load_optional(sdk::CrDeviceProperty_BulbTimerSetting,timer_present,e,SW_EXPOSURE_SETUP);if(rc)return rc;
+    // Older bodies have no Bulb Timer property. Never interpret an unreadable/transient
+    // property as Off: load_optional accepts only explicit unsupported/absent results.
+    if(!timer_present)return SW_OK;
     capture.original_timer=timer.list[0].GetCurrentValue();
-    if(capture.original_timer>1 || !has_candidate(timer.list[0],sdk::CrBulbTimerSetting_Off))
-        return result(e,SW_UNSUPPORTED,SW_EXPOSURE_SETUP,0,"Requires queryable Bulb Timer with writable Off; software timing cannot compete with camera timer");
+    if(capture.original_timer>1 || (capture.original_timer!=sdk::CrBulbTimerSetting_Off && !has_candidate(timer.list[0],sdk::CrBulbTimerSetting_Off)))
+        return result(e,SW_UNSUPPORTED,SW_EXPOSURE_SETUP,0,"Bulb Timer must read Off, or offer writable Off when enabled; software timing cannot compete with camera timer");
     capture.exposure.original_timer_enabled=static_cast<uint32_t>(capture.original_timer);capture.exposure.timer_original_valid=1;
     rc=timer.close(e,SW_EXPOSURE_SETUP);if(rc)return rc;
     if(capture.original_timer!=sdk::CrBulbTimerSetting_Off) {
@@ -1193,7 +1229,7 @@ int32_t SW_CALL sw_get_exposure_capabilities(SwExposureCapabilities* out,SwError
             out->timer_setting_readable=1;out->timer_enabled=static_cast<uint32_t>(timer.list[0].GetCurrentValue());
             rc=timer.close(e,SW_SUPPORT);if(rc)return rc;
         }
-        return result(e,SW_OK,SW_SUPPORT,0,"Bulb candidate queried; setup must additionally confirm writable Timer Off; time range is project policy");
+        return result(e,SW_OK,SW_SUPPORT,0,"Bulb candidate queried; if Timer exists setup must confirm writable Off; time range is project policy");
     });
 }
 int32_t SW_CALL sw_capture_start_v2(const char* root,const char* prefix,const SwExposureRequest* request,SwCaptureResult* out,SwError* e) {

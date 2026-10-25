@@ -6,3 +6,6 @@
 *.json text eol=lf
 *.ps1 text eol=crlf
 *.cmd text eol=crlf
+
+# Preserve the exact upstream bytes used by the LibRaw source lock.
+third_party/LibRaw/** -text

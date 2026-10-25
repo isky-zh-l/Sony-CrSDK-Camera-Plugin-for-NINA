@@ -1,4 +1,5 @@
 using System.IO;
+using SonyCamera.Client;
 using System.Text.Json;
 using NINA.Core.Model;
 using NINA.Core.Model.Equipment;
@@ -45,18 +46,47 @@ internal static class AutoTest
         var seconds = EnvDouble("SONY_A7V_TEST_SECONDS", 1.0);
         var cancelAfter = EnvDouble("SONY_A7V_TEST_CANCEL_AFTER", 0);
         var frames = (int)EnvDouble("SONY_A7V_TEST_FRAMES", 1);
+        CameraParameters? originalParameters=null;
+        CameraPropertyInfo? originalRaw=null;
+        long[] rawFormats=Array.Empty<long>();
+        var astroTest=Environment.GetEnvironmentVariable("SONY_A7V_TEST_ASTRO")=="1";
+        var recoveryTest=Environment.GetEnvironmentVariable("SONY_A7V_TEST_RECOVERY")=="1";
+        var originalImagePath=profiles.ActiveProfile.ImageFileSettings.FilePath;
+        var originalPattern=profiles.ActiveProfile.ImageFileSettings.FilePattern;
         try
         {
             Note("connecting");
             using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(seconds + 420));
             if (!await camera.Connect(cts.Token).ConfigureAwait(false)) throw new InvalidOperationException("Connect returned false");
             report["device"] = new { camera.DisplayName, camera.SensorName, camera.CameraXSize, camera.CameraYSize, camera.BitDepth, sensor = camera.SensorType.ToString(), driver = camera.DriverInfo };
+            if(recoveryTest){
+                var service=SonyCameraService.Shared;
+                if(CameraSupport.Normalize(service.Model)!="ILCE-7M5")throw new InvalidOperationException("A7M5 hardware authorization required");
+                originalParameters=service.Facts!.Parameters;
+                var connection=service.ConnectionId;
+                camera.StartExposure(new CaptureSequence{ExposureTime=1,Gain=int.MaxValue,ImageType="LIGHT",Binning=new BinningMode(1,1)});
+                bool rejected=false;
+                try{await camera.WaitUntilExposureIsReady(cts.Token).ConfigureAwait(false);}catch(CameraCorrectionRequiredException){rejected=true;}
+                if(!rejected||service.LastCapture is not null)throw new InvalidOperationException("Invalid request was not blocked before capture");
+                camera.AbortExposure();
+                if(!camera.Connected||service.Unconfirmed||service.ConnectionId!=connection)throw new InvalidOperationException("Host cleanup broke correctable session");
+                await service.RecheckReadyAsync().ConfigureAwait(false);
+                report["recoverableRequest"]=new{rejectedBeforeCapture=rejected,connectedAfterHostAbort=camera.Connected,sameConnection=connection==service.ConnectionId,rechecked=service.CorrectionHint.Length==0};
+                await Task.Delay(100).ConfigureAwait(false);
+            }
+            if(astroTest){
+                if(CameraSupport.Normalize(SonyCameraService.Shared.Model)!="ILCE-7M5")throw new InvalidOperationException("A7M5 hardware authorization required");
+                originalParameters=SonyCameraService.Shared.Facts!.Parameters;
+                originalRaw=(await SonyCameraService.Shared.ReadUiPropertiesAsync().ConfigureAwait(false)).Single(x=>x.Property==CameraProperty.RawCompression).Info;
+                rawFormats=originalRaw is {Readable:true,Writable:true}?new long[]{1,2,6,0}.Where(x=>originalRaw.Accepts(x)).ToArray():Array.Empty<long>();
+                report["astronomyUi"]=await AstroUiVerification.TestHardwareAsync(camera,Path.Combine(root,"astronomy-ui")).ConfigureAwait(false);
+            }
             var gains = camera.Gains;
             var gain = gains.Contains(800) ? 800 : gains.Min();
             camera.Gain = gain;
             Note($"exposing {seconds}s at ISO {gain} (cancelAfter={cancelAfter})");
             var started = DateTime.UtcNow;
-            camera.StartExposure(new CaptureSequence { ExposureTime = seconds, Gain = gain, ImageType = "LIGHT", Binning = new BinningMode(1, 1) });
+            if(cancelAfter>0)camera.StartExposure(new CaptureSequence { ExposureTime = seconds, Gain = gain, ImageType = "LIGHT", Binning = new BinningMode(1, 1) });
 
             if (cancelAfter > 0)
             {
@@ -85,8 +115,12 @@ internal static class AutoTest
             var frameResults = new List<object>();
             for (var frame = 1; frame <= frames; frame++)
             {
-            if (frame > 1)
             {
+                if(astroTest&&originalRaw is not null){
+                    var desired=frame<=rawFormats.Length?rawFormats[frame-1]:originalRaw.Current;
+                    var current=(await SonyCameraService.Shared.ReadUiPropertiesAsync().ConfigureAwait(false)).Single(x=>x.Property==CameraProperty.RawCompression).Info!;
+                    if(current.Current!=desired)await SonyCameraService.Shared.ApplyUiPropertyAsync(SonyCameraService.Shared.ConnectionId,CameraProperty.RawCompression,current.Current,desired).ConfigureAwait(false);
+                }
                 camera.StartExposure(new CaptureSequence { ExposureTime = seconds, Gain = gain, ImageType = "LIGHT", Binning = new BinningMode(1, 1) });
                 started = DateTime.UtcNow;
             }
@@ -149,11 +183,18 @@ internal static class AutoTest
             Note($"frame {frame}/{frames} saved {finalPath} ({savedBytes.Length} bytes) rawAttached={rawAttached} match={matches}");
             if (rawAttached && !matches) throw new InvalidDataException("Host-saved ARW differs from the captured RAW bytes");
             if (!rawAttached && savedBytes.Length < (long)camera.CameraXSize * camera.CameraYSize) throw new InvalidDataException("Saved container is smaller than the raw pixel payload");
-            frameResults.Add(new { frame, seconds, elapsed = Math.Round((DateTime.UtcNow - started).TotalSeconds, 2), path = finalPath, bytes = savedBytes.Length, sha256 = savedSha, fileType = saved.FileType.ToString(), width = data.Properties.Width, height = data.Properties.Height });
+            frameResults.Add(new { frame, seconds, elapsed = Math.Round((DateTime.UtcNow - started).TotalSeconds, 2), path = finalPath, bytes = savedBytes.Length, sha256 = savedSha, fileType = saved.FileType.ToString(), width = data.Properties.Width, height = data.Properties.Height, rawFormat=SonyCameraService.Shared.LastCapture?.RawFormat, arwPath=SonyCameraService.Shared.LastCapture?.ArwPath, exposureDetails=SonyCameraService.Shared.LastCapture?.Exposure });
             }
             report["frames"] = frameResults;
             Note($"all {frames} frame(s) completed");
-            camera.Disconnect();
+            if(recoveryTest){
+                var service=SonyCameraService.Shared;var connection=service.ConnectionId;
+                camera.StartExposure(new CaptureSequence{ExposureTime=1,Gain=int.MaxValue,ImageType="LIGHT",Binning=new BinningMode(1,1)});
+                bool rejected=false;try{await camera.WaitUntilExposureIsReady(cts.Token).ConfigureAwait(false);}catch(CameraCorrectionRequiredException){rejected=true;}
+                camera.AbortExposure();
+                if(!rejected||service.LastCapture is not null||!camera.Connected||service.ConnectionId!=connection)throw new InvalidOperationException("Rejected request can reuse an old capture or disconnected camera");
+                await service.RecheckReadyAsync().ConfigureAwait(false);report["staleFrameBlockedWithoutDisconnect"]=true;
+            }
             report["result"] = "PASS";
         }
         catch (Exception ex)
@@ -164,6 +205,22 @@ internal static class AutoTest
         }
         finally
         {
+            if((astroTest||recoveryTest)&&originalParameters is {} before&&SonyCameraService.Shared.Connected&&!SonyCameraService.Shared.Unconfirmed){
+                try{
+                    var service=SonyCameraService.Shared;
+                    if(service.LiveViewActive)await service.StopLiveViewAsync().ConfigureAwait(false);
+                    if(originalRaw is {Readable:true,Writable:true}){
+                        var current=(await service.ReadUiPropertiesAsync().ConfigureAwait(false)).Single(x=>x.Property==CameraProperty.RawCompression).Info!;
+                        if(current.Current!=originalRaw.Current)await service.ApplyUiPropertyAsync(service.ConnectionId,CameraProperty.RawCompression,current.Current,originalRaw.Current).ConfigureAwait(false);
+                    }
+                    if(before.IsoKind==IsoKind.Fixed&&service.Facts!.Parameters.Iso!=before.Iso)await service.SetIsoAsync(before.Iso).ConfigureAwait(false);
+                    if(before.ShutterKind==ShutterKind.Seconds&&service.Facts!.Parameters.ExposureSeconds!=before.ExposureSeconds)await service.SetExposureSecondsAsync(before.ExposureSeconds).ConfigureAwait(false);
+                    report["restoredInitialSettings"]=true;
+                }catch(Exception ex){report["restoredInitialSettings"]=false;report["restoreError"]=ex.ToString();report["result"]="FAIL";Note("restore failed: "+ex.Message);}
+            }
+            profiles.ActiveProfile.ImageFileSettings.FilePath=originalImagePath;
+            profiles.ActiveProfile.ImageFileSettings.FilePattern=originalPattern;
+            report["hostSavePreferencesRestored"]=true;
             report["log"] = log;
             report["finishedUtc"] = DateTimeOffset.UtcNow.ToString("O");
             try { File.WriteAllText(Path.Combine(root, "autotest-result.json"), JsonSerializer.Serialize(report, new JsonSerializerOptions { WriteIndented = true })); }

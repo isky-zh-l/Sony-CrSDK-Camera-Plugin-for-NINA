@@ -99,7 +99,7 @@ public sealed partial class SonyCameraClient : IAsyncDisposable {
     }
     public Task ConnectAsync(uint index)=>Submit("连接",()=>{
         if(!initialized||connected||state==SessionState.Unconfirmed)throw new InvalidOperationException("当前不能连接，请检查初始化和未确认状态");
-        var e=Native.New<Native.Error>();int code=Native.sw_connect(index,15000,ref e);if(code!=0){if(code is 3 or 4 or 6){connected=false;state=SessionState.Initialized;WriteLog("连接","连接未建立，已复位到可重试状态");}Check(code,e);}connected=true;
+        var e=Native.New<Native.Error>();int code=Native.sw_connect(index,15000,ref e);if(code!=0){if(code is 3 or 4 or 6){connected=false;state=SessionState.Initialized;WriteLog("连接","连接未建立，已复位到可重试状态");}Check(code,e);}connected=true;astroSession=Guid.NewGuid();
         e=Native.New<Native.Error>();code=Native.sw_wait_ready(15000,ref e);if(code!=0){state=SessionState.Unconfirmed;Check(code,e);}state=SessionState.Connected;
     });
     /// <summary>

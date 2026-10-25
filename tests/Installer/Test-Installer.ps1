@@ -61,11 +61,19 @@ $results+=[pscustomobject]@{case='fresh-uninstall-preserves-settings';passed=$tr
 [IO.File]::WriteAllText((Join-Path $plugin 'SonyA7V.Camera.dll'),'previous plugin marker')
 [IO.File]::WriteAllText((Join-Path $plugin 'settings.json'),'{"saveOriginalRaw":"also","liveViewColor":false,"rawCopyFolder":"custom"}')
 $settingsHash=(Get-FileHash -LiteralPath (Join-Path $plugin 'settings.json')).Hash
+$cachePath=Join-Path $TestRoot 'user-cache'
+$previousDeployment=[ordered]@{manifestPath='native/approved-native.json';approvedManifestSha256=('0'*64);receiveRoot=$cachePath}
+$previousDeployment|ConvertTo-Json|Set-Content -LiteralPath (Join-Path $plugin 'sony-a7v.json') -Encoding utf8
+$previousDeploymentHash=(Get-FileHash -LiteralPath (Join-Path $plugin 'sony-a7v.json')).Hash
 Run-Setup @() $true 'upgrade-preserves-settings'
+$upgraded=Get-Content -LiteralPath (Join-Path $plugin 'sony-a7v.json') -Raw|ConvertFrom-Json
+if($upgraded.receiveRoot -ne $cachePath -or $upgraded.approvedManifestSha256 -eq ('0'*64)){throw 'Upgrade must preserve cache but replace native approval'}
+$results+=[pscustomobject]@{case='upgrade-preserves-cache-and-refreshes-approval';passed=$true;exitCode=0}
 if((Get-FileHash -LiteralPath (Join-Path $plugin 'settings.json')).Hash -ne $settingsHash){throw 'Upgrade overwrote settings'}
 $receipt=Get-ChildItem -LiteralPath $backups -Filter 'install-receipt.json' -Recurse|Sort-Object LastWriteTime -Descending|Select-Object -First 1
 & powershell.exe -NoProfile -ExecutionPolicy Bypass -File (Join-Path $PackageDirectory 'Uninstall.ps1') -ReceiptPath $receipt.FullName *> (Join-Path $TestRoot 'restore-previous.log')
 if($LASTEXITCODE -ne 0 -or [IO.File]::ReadAllText((Join-Path $plugin 'SonyA7V.Camera.dll')) -ne 'previous plugin marker'){throw 'Restore previous plugin failed'}
+if((Get-FileHash -LiteralPath (Join-Path $plugin 'sony-a7v.json')).Hash -ne $previousDeploymentHash){throw 'Rollback did not restore previous deployment config'}
 $results+=[pscustomobject]@{case='restore-previous-plugin';passed=$true;exitCode=0}
 $results|ConvertTo-Json -Depth 4|Set-Content -LiteralPath (Join-Path $TestRoot 'results.json') -Encoding utf8
 $results|Format-Table

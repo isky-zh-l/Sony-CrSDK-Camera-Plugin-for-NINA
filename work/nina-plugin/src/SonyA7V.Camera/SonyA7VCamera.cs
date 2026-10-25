@@ -1,4 +1,8 @@
 using System.IO;
+using System.Globalization;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using SonyCamera.Client;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using NINA.Core.Enum;
@@ -12,18 +16,10 @@ using NINA.Image.Interfaces;
 
 namespace SonyA7V.Camera;
 
-/// <summary>
-/// N.I.N.A. camera driver for the Sony ILCE-7M5 over the Sony Camera Remote SDK.
-/// Verified geometry (7028x4688 active, RGGB, 16-bit container) comes from the real ARW files,
-/// not from a JPEG preview. Capabilities the camera does not expose are reported as unsupported.
-/// </summary>
+/// <summary>Capability-driven Sony CrSDK NINA adapter. Class/assembly identity is retained
+/// so existing A7 V profiles and installed plugin references continue to resolve.</summary>
 public sealed class SonyA7VCamera : ICamera
 {
-    // Verified against real A7 V ARW: raw 7040x4688, active 7028x4688, left/top 0, right 12 columns dropped.
-    private const int SensorWidth = 7028;
-    private const int SensorHeight = 4688;
-    private const short BitDepth16 = 16;
-
     private readonly SonyCameraService service;
     private readonly IImageDataFactory factory;
     private readonly AsyncObservableCollection<BinningMode> binningModes;
@@ -45,7 +41,7 @@ public sealed class SonyA7VCamera : ICamera
         this.factory = factory;
         this.profiles = profiles;
         binningModes = new AsyncObservableCollection<BinningMode> { new BinningMode(1, 1) };
-        service.Changed += () => { foreach (var name in new[] { nameof(Connected), nameof(CameraState), nameof(Gain), nameof(CameraXSize) }) Raise(name); };
+        service.Changed += () => { foreach (var name in new[] { nameof(Connected), nameof(CameraState), nameof(Gain), nameof(CameraXSize), nameof(CameraYSize), nameof(PixelSizeX), nameof(PixelSizeY), nameof(SensorType), nameof(SensorName), nameof(Name), nameof(DisplayName), nameof(Description), nameof(Gains), nameof(GainMin), nameof(GainMax), nameof(ExposureMin), nameof(ExposureMax), nameof(CanShowLiveView), nameof(HasBattery), nameof(BatteryLevel) }) Raise(name); };
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;
@@ -58,17 +54,37 @@ public sealed class SonyA7VCamera : ICamera
     }
 
     public string Id => "SonyA7V-ILCE-7M5-SonyCrSDK";
-    public string Name => "Sony A7 V";
-    public string DisplayName => "Sony A7 V (ILCE-7M5)";
+    public string Name => service.Model;
+    public string DisplayName => service.Facts is null ? "Sony CrSDK Camera" : $"Sony {service.Model} (CrSDK)";
     public string Category => "Sony";
-    public string Description => "Sony ILCE-7M5 through the official Sony Camera Remote SDK (RAW only, manual focus required).";
+    public string Description => $"{service.Model} through Sony Camera Remote SDK; capability-driven static RAW capture. Hardware validation is model-specific.";
     public string DriverInfo => $"Sony Camera Remote SDK 2.02.00 / project wrapper feature ABI 1 / camera driver {DriverVersion}";
     public string DriverVersion => typeof(SonyA7VCamera).Assembly.GetName().Version?.ToString() ?? "unknown";
-    public bool HasSetupDialog => false;
-    public void SetupDialog() { }
-    public IList<string> SupportedActions => Array.Empty<string>();
-    public string Action(string actionName, string actionParameters) =>
-        throw new NotSupportedException("This driver exposes no arbitrary SDK command surface: " + actionName);
+    public bool HasSetupDialog => true;
+    public void SetupDialog() => AstroSettingsWindow.Show(service);
+    public IList<string> SupportedActions => new[]{"Sony.GetAstroStatus","Sony.PrepareAstroSession","Sony.RestoreAstroSession","Sony.SetAperture"};
+    public string Action(string actionName, string actionParameters) {
+        switch(actionName) {
+        case "Sony.GetAstroStatus":
+            return JsonSerializer.Serialize(new{model=service.Model,connected=Connected,unconfirmed=service.Unconfirmed,
+                geometry=service.Geometry,pixelSizeMicrons=double.IsFinite(PixelSizeX)?PixelSizeX:(double?)null,
+                batteryPercent=service.Battery?.Percent,realTimeSensorTemperatureC=(double?)null,
+                ordinaryShutters=service.Facts?.Shutters,exposureCapabilities=service.Facts?.Capabilities,
+                preparation=service.PreparationReceipt?.Changes});
+        case "Sony.PrepareAstroSession":
+            var options=JsonSerializer.Deserialize<AstroPreparationOptions>(actionParameters,new JsonSerializerOptions{
+                PropertyNameCaseInsensitive=true,UnmappedMemberHandling=JsonUnmappedMemberHandling.Disallow})
+                ??throw new ArgumentException("Provide an explicit JSON astronomy preparation plan");
+            return JsonSerializer.Serialize(Task.Run(()=>service.PrepareAstroAsync(options)).GetAwaiter().GetResult().Changes);
+        case "Sony.RestoreAstroSession":
+            if(!string.IsNullOrWhiteSpace(actionParameters))throw new ArgumentException("Restore takes no parameters; it uses the same-session receipt");
+            Task.Run(()=>service.RestoreAstroAsync()).GetAwaiter().GetResult();return "restored";
+        case "Sony.SetAperture":
+            var fNumber=double.Parse(actionParameters,NumberStyles.Float,CultureInfo.InvariantCulture);
+            return Task.Run(()=>service.SetApertureAsync(fNumber)).GetAwaiter().GetResult().ToString("R",CultureInfo.InvariantCulture);
+        default:throw new NotSupportedException("Unknown Sony action: "+actionName);
+        }
+    }
     public void SendCommandBlind(string command, bool raw = true) => throw new NotSupportedException("No raw command pass-through");
     public bool SendCommandBool(string command, bool raw = true) => throw new NotSupportedException("No raw command pass-through");
     public string SendCommandString(string command, bool raw = true) => throw new NotSupportedException("No raw command pass-through");
@@ -110,15 +126,15 @@ public sealed class SonyA7VCamera : ICamera
         BinX = 1; BinY = 1;
     }
 
-    public int CameraXSize => SensorWidth;
-    public int CameraYSize => SensorHeight;
-    public double PixelSizeX => 5.09; // 35.9 mm / 7040 px, derived from the official 35.9x23.9 mm frame
-    public double PixelSizeY => 5.09;
-    public short BayerOffsetX => 0;
+    public int CameraXSize => service.Geometry?.Width ?? 0;
+    public int CameraYSize => service.Geometry?.Height ?? 0;
+    public double PixelSizeX => service.PixelSizeMicrons;
+    public double PixelSizeY => service.PixelSizeMicrons;
+    public short BayerOffsetX => 0; // CFA is reported for the decoded active origin.
     public short BayerOffsetY => 0;
-    public int BitDepth => BitDepth16;
-    public string SensorName => "Sony ILCE-7M5 full-frame CMOS";
-    public SensorType SensorType => SensorType.RGGB;
+    public int BitDepth => 16; // unpacked ushort container, not a claim of sensor ADC depth
+    public string SensorName => service.Model;
+    public SensorType SensorType => service.Geometry is { } g ? Enum.Parse<SensorType>(g.Cfa) : SensorType.RGGB;
     public double ElectronsPerADU => 1; // not characterised; 1 is NINA's "unknown" convention
     public double Temperature => double.NaN; // no real-time sensor temperature in this SDK path
     public bool CanSetTemperature => false;
@@ -127,8 +143,8 @@ public sealed class SonyA7VCamera : ICamera
     public double CoolerPower => 0;
     public bool HasDewHeater => false;
     public bool DewHeaterOn { get => false; set => throw new NotSupportedException("No dew heater control"); }
-    public bool HasBattery => false;
-    public int BatteryLevel => 0; // the SDK does not report a percentage on this body
+    public bool HasBattery => Connected && service.Battery?.Percent is not null;
+    public int BatteryLevel => HasBattery ? service.Battery!.Percent!.Value : -1; // unknown is never fabricated as zero
 
     public bool CanSubSample => false;
     public bool EnableSubSample { get; set; }
@@ -139,7 +155,7 @@ public sealed class SonyA7VCamera : ICamera
     public void UpdateSubSampleArea() => throw new NotSupportedException("Sensor ROI is not exposed by this SDK path");
     public bool HasShutter => true;
 
-    public bool CanShowLiveView => true;
+    public bool CanShowLiveView => service.Facts?.LiveViewAvailable == true;
     public bool LiveViewEnabled => service.LiveViewActive;
 
     public void StartLiveView(CaptureSequence sequence)
@@ -148,20 +164,13 @@ public sealed class SonyA7VCamera : ICamera
         // to the camera here; otherwise NINA's parameter changes would never reach the body.
         try
         {
-            Task.Run(async () =>
-            {
-                if (sequence is { Gain: > 0 })
-                {
-                    try { await service.SetIsoAsync((uint)sequence.Gain).ConfigureAwait(false); lastLiveGain = sequence.Gain; Logger.Info("[SonyA7V] Live view ISO " + sequence.Gain); }
-                    catch (Exception ex) { Logger.Error("[SonyA7V] Live view ISO rejected: " + ex.Message, ex); }
-                }
-                if (sequence is { ExposureTime: > 0 } && IsShutterCandidate(sequence.ExposureTime))
-                {
-                    try { await service.SetExposureSecondsAsync(sequence.ExposureTime).ConfigureAwait(false); lastLiveShutter = sequence.ExposureTime; Logger.Info("[SonyA7V] Live view shutter " + sequence.ExposureTime); }
-                    catch (Exception ex) { Logger.Error("[SonyA7V] Live view shutter rejected: " + ex.Message, ex); }
-                }
-                await service.StartLiveViewAsync().ConfigureAwait(false);
-            }).Wait(TimeSpan.FromSeconds(6));
+            Task.Run(async () => {
+                uint? iso = sequence is {Gain: > 0} ? (uint)sequence.Gain : null;
+                double? shutter = sequence is {ExposureTime: > 0} && IsShutterCandidate(sequence.ExposureTime) ? sequence.ExposureTime : null;
+                await service.ConfigureLiveViewAsync(iso, shutter).ConfigureAwait(false);
+                if (iso.HasValue) lastLiveGain = (int)iso.Value;
+                if (shutter.HasValue) lastLiveShutter = shutter.Value;
+            }).GetAwaiter().GetResult();
         }
         catch (AggregateException ex) { throw ex.GetBaseException(); }
         Raise(nameof(LiveViewEnabled));
@@ -170,7 +179,7 @@ public sealed class SonyA7VCamera : ICamera
     private bool IsShutterCandidate(double seconds)
     {
         var shutters = service.Facts?.Shutters;
-        return shutters is not null && shutters.Any(s => Math.Abs(s - seconds) < 1e-9);
+        return shutters is not null && shutters.Contains(seconds);
     }
 
     public async Task<IExposureData> DownloadLiveView(CancellationToken token)
@@ -189,10 +198,10 @@ public sealed class SonyA7VCamera : ICamera
                 // answer OperationInvalid and latches the session; stop, write, then restart.
                 try
                 {
-                    await service.StopLiveViewAsync().ConfigureAwait(false);
-                    if (newGain != 0) { await service.SetIsoAsync((uint)newGain).ConfigureAwait(false); lastLiveGain = newGain; Logger.Info("[SonyA7V] Live view ISO applied (preview restarted): " + newGain); }
-                    if (!double.IsNaN(newShutter)) { await service.SetExposureSecondsAsync(newShutter).ConfigureAwait(false); lastLiveShutter = newShutter; Logger.Info("[SonyA7V] Live view shutter applied (preview restarted): " + newShutter); }
-                    await service.StartLiveViewAsync().ConfigureAwait(false);
+                    await service.ConfigureLiveViewAsync(newGain == 0 ? null : (uint)newGain,
+                        double.IsNaN(newShutter) ? null : newShutter, token).ConfigureAwait(false);
+                    if (newGain != 0) lastLiveGain = newGain;
+                    if (!double.IsNaN(newShutter)) lastLiveShutter = newShutter;
                 }
                 catch (Exception ex)
                 {
@@ -277,18 +286,17 @@ public sealed class SonyA7VCamera : ICamera
     public int USBLimitStep => 0;
 
     public double ExposureMin => service.Facts is { } f && f.Shutters.Count > 0 ? f.Shutters.Min() : 0.000125;
-    public double ExposureMax => service.Facts is { } f ? Math.Max(30, f.Capabilities.BulbMaximumSeconds) : 900;
+    public double ExposureMax => service.Facts is { } f ? SonyCamera.Client.ExposurePolicy.Maximum(f.Shutters, f.Capabilities) : 0;
 
     public void StartExposure(CaptureSequence captureSequence)
     {
         ArgumentNullException.ThrowIfNull(captureSequence);
         if (!Connected) throw new InvalidOperationException("Camera is not connected");
         if (exposureTask is { IsCompleted: false }) throw new InvalidOperationException("An exposure is already running");
-        if (service.LiveViewActive) service.StopLiveViewAsync().GetAwaiter().GetResult();
         if (captureSequence.Binning.X != 1 || captureSequence.Binning.Y != 1)
             throw new NotSupportedException("Only 1x1 binning is supported");
         sequence = captureSequence;
-        gain = captureSequence.Gain;
+        gain = captureSequence.Gain > 0 ? captureSequence.Gain : checked((int)(service.Facts?.Parameters.Iso ?? 0));
         exposureSeconds = captureSequence.ExposureTime;
         exposureStart = DateTime.UtcNow;
         exposureCts?.Dispose();

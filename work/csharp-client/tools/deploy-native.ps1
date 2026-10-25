@@ -1,4 +1,4 @@
-﻿param(
+param(
  [Parameter(Mandatory=$true)][string]$WrapperDll,
  [Parameter(Mandatory=$true)][string]$SdkRuntime,
  [Parameter(Mandatory=$true)][string]$HostDirectory,
@@ -7,7 +7,8 @@
  [switch]$TestOnly,
  [string]$TestCoreDll,
  [string]$WriteConfiguration,
- [switch]$RelativeManifestPath
+ [switch]$RelativeManifestPath,
+ [string[]]$SupportedModels=@('ILCE-7M5')
 )
 $ErrorActionPreference='Stop'
 if($RelativeManifestPath -and !$WriteConfiguration){throw '-RelativeManifestPath requires -WriteConfiguration'}
@@ -38,7 +39,7 @@ foreach($item in $approval.sdkFiles){
  $files+=[ordered]@{role=$item.role;base=$base;path=$relative;sha256=(Get-FileHash -LiteralPath $destination).Hash}
 }
 $manifest=Join-Path $native 'approved-native.json'
-[ordered]@{schemaVersion=1;packageId=$PackageId;backend=$(if($TestOnly){'test'}else{'production'});abiVersion=2;supportedModels=@('ILCE-7M5');structureSizes=[ordered]@{SwError=184;SwCameraInfo=168;SwParameters=32;SwCaptureResult=2304;SwExposureRequest=40;SwExposureCapabilities=56;SwExposureInfo=464};files=$files}|ConvertTo-Json -Depth 8|Set-Content -LiteralPath $manifest -Encoding utf8
+[ordered]@{schemaVersion=1;packageId=$PackageId;backend=$(if($TestOnly){'test'}else{'production'});abiVersion=2;supportedModels=$SupportedModels;structureSizes=[ordered]@{SwError=184;SwCameraInfo=168;SwParameters=32;SwCaptureResult=2304;SwExposureRequest=40;SwExposureCapabilities=56;SwExposureInfo=464};files=$files}|ConvertTo-Json -Depth 8|Set-Content -LiteralPath $manifest -Encoding utf8
 $pin=(Get-FileHash -LiteralPath $manifest).Hash
 $receipt=[ordered]@{packageId=$PackageId;manifest=$manifest;approvedManifestSha256=$pin;preparationApprovalSha256=(Get-FileHash -LiteralPath $ApprovedBuilds).Hash;trust='Explicit local preparation from maintainer-reviewed allowlist and legally obtained SDK. Not vendor authentication or redistribution permission.';backend=$(if($TestOnly){'test'}else{'production'})}
 $receipt|ConvertTo-Json -Depth 4|Set-Content -LiteralPath (Join-Path $hostRoot 'local-preparation-receipt.json') -Encoding utf8

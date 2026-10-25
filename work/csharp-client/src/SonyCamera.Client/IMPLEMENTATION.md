@@ -1,10 +1,12 @@
-# C#调用层实现说明（更新2026-10-24）
+> 0.5.0-dev 更新：清单 supportedModels 现在是非空、无重复、最多 256 项的包设备库存，旧 ILCE-7M5 单项清单保持兼容；库存不代表真机验收。8 依赖角色、路径、哈希、AMD64 与 ABI 校验保持不变。通用曝光策略见 ExposurePolicy.cs，完整多机型限制见 docs/MULTI_CAMERA.md。下文是早期基线的历史实现记录。
 
-本目录只依赖.NET，不包含Sony SDK。`SonyCamera.Client.csproj`目标net8.0/x64，允许unsafe，仅Native.cs中的固定缓冲区及数组调用使用指针。没有UI、NINA或直接Sony SDK调用。未来NINA集成只引用本程序集；并未据此验证NINA插件兼容性。
+# C#调用层实现说明
+
+本目录只依赖.NET，不包含Sony SDK。`SonyCamera.Client.csproj`目标net8.0/x64，允许unsafe，仅Native.cs中的固定缓冲区及数组调用使用指针。没有UI、NINA或直接Sony SDK调用。NINA 适配层引用本程序集；硬件验证范围见根 docs/VALIDATION.md。
 
 ## 文件
 
-- Models.cs：主对话统一的项目模型。
+- Models.cs：通用项目模型。
 - Native.cs：当前权威sony_wrapper.h的26个cdecl入口和7个Pack8结构；UTF-8固定字节数组，调用方所有权；NaN原样保留，不能视为0秒。
 - Deployment.cs：部署清单、包一致性只读校验及用户配置文件读写。业务运行不访问SDK原包，也不含批准哈希或开发机路径。
 - NativeLoader.cs：Windows/x64限制、安全LoadLibraryEx依赖搜索、已批准包文件加载和ABI大小/偏移核验。库、只读文件锁和AddDllDirectory cookie固定到进程结束，不调用FreeLibrary。
@@ -33,7 +35,7 @@
 
 `CameraClientConfiguration.Load/Save`默认读写用户LocalApplicationData/SonyNinaCrSdk/client.json，字段为manifestPath/approvedManifestSha256/allowTestPackage。Load将相对manifestPath按配置文件所在目录解析，不依赖cwd；保存只会创建用户指定配置目录，不在安装目录自动创建数据。`ToDeploymentOptions()`用于构造调用层。配置及清单可含一个UTF-8 BOM，解析前剥除；批准清单哈希仍包含BOM原字节，兼容Windows PowerShell 5.1的UTF-8写入行为。
 
-SDK v2.02的CrAdapter要求位于**宿主EXE同级**；主对话实证仅修改工作目录无效，将官方CrAdapter放到EXE同级后枚举成功。因此启动时验证该目录，不修改进程全局工作目录，也不自行预加载adapter。未来NINA宿主部署此依赖的影响仍需评估。
+SDK v2.02的CrAdapter要求位于**宿主EXE同级**；部署验证表明仅修改工作目录无效，将官方CrAdapter放到EXE同级后枚举成功。因此启动时验证该目录，不修改进程全局工作目录，也不自行预加载adapter。NINA 安装器同时校验宿主 CrAdapter，冲突时拒绝覆盖。
 
 测试清单backend=test且AllowTestPackage=true才允许加载，日志明确记录TEST ONLY。同一进程不能在包之间切换。替身产生的伪TIFF绝不是RAW解码或相机验收证据。生产只承诺ILCE-7M5，未扩大到其他Sony型号。
 
@@ -47,6 +49,6 @@ CaptureAsync成功开始后保持同一owner轮询，同时处理CancelAsync、E
 
 DisposeAsync主动取消活动任务，最多10秒尝试已有拍摄的显式恢复，然后尝试断开和shutdown；从不热卸载或强杀进程。拍摄仍未取得恢复证据时，保持Unconfirmed并抛出CameraException，即使SDK资源已释放也不宣称相机空闲。同步SDK调用及操作系统阻塞没有硬时间上界。
 
-## 本子任务验证边界
+## 验证边界
 
-本子任务只编译调用层，Release构建0警告0错误；未操作相机。实机、替身回归、桌面及RAW解码由主对话统一执行并写入模块技术文档，避免并行占用设备。
+客户端构建与模拟回归不构成硬件验收。当前结果及限制见根 docs/VALIDATION.md。

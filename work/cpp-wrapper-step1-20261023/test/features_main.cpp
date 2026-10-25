@@ -1,4 +1,4 @@
-﻿#include "sony_features.h"
+#include "sony_features.h"
 #include <Windows.h>
 #include <cstdio>
 #include <cstring>
@@ -34,6 +34,8 @@ int wmain(int argc,wchar_t** argv){
    ok(sw_get_property(SW_PROP_APERTURE,&p,nullptr,0,&n,&e),"query aperture count");need(n==3&&p.current==280&&p.writable,"aperture capabilities");
    int64_t a[3]={99,99,99};need(sw_get_property(SW_PROP_APERTURE,&p,a,2,&n,&e)==SW_BUFFER&&a[0]==99,"short option buffer untouched");
    ok(sw_get_property(SW_PROP_APERTURE,&p,a,3,&n,&e),"query aperture list");int64_t actual=0;need(sw_set_property(SW_PROP_APERTURE,350,10,&actual,&e)==SW_UNSUPPORTED,"invalid aperture rejected");ok(sw_set_property(SW_PROP_APERTURE,400,100,&actual,&e),"aperture set and readback");need(actual==400,"actual aperture");
+   ok(sw_get_property(SW_PROP_FOCUSMAGNIFIER,&p,nullptr,0,&n,&e),"magnifier status readable");need(!p.writable,"magnifier requires dedicated position protocol");
+   need(sw_set_property(SW_PROP_FOCUSMAGNIFIER,0x00000028FFFFFFFFll,100,&actual,&e)==SW_UNSUPPORTED&&actual==0,"magnifier generic write rejected before submission");ok(sw_check_capture_ready(&e),"rejected magnifier preserves idle capture session");
    need(sw_set_property(SW_PROP_BATTERYPERCENT,2,100,&actual,&e)==SW_UNSUPPORTED,"readonly cannot write");
    ok(sw_set_property(SW_PROP_FOCUSPOSITION,12345,100,&actual,&e),"absolute focus range and actual position");
    need(sw_set_property(SW_PROP_FOCUSPOSITION,65536,10,&actual,&e)==SW_UNSUPPORTED,"out of focus range");

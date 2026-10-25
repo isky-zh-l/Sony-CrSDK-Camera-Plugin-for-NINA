@@ -1,4 +1,4 @@
-param(
+﻿param(
  [string]$SonySdkRoot,
  [string]$NinaApp,
  [string]$PluginDirectory=(Join-Path $env:LOCALAPPDATA 'NINA\Plugins\3.0.0\SonyA7V.Camera'),
@@ -74,7 +74,21 @@ foreach($entry in $sdkLock.sdkFiles){
 }
 $manifestPath=Join-Path $preparedPlugin 'native\approved-native.json'
 $template|ConvertTo-Json -Depth 10|Set-Content -LiteralPath $manifestPath -Encoding utf8
-[ordered]@{manifestPath='native/approved-native.json';approvedManifestSha256=(Hash $manifestPath);receiveRoot=''}|ConvertTo-Json|Set-Content -LiteralPath (Join-Path $preparedPlugin 'sony-a7v.json') -Encoding utf8
+# Preserve the user-owned cache location while refreshing all native approval fields.
+$receiveRoot=''
+$existingConfig=Join-Path $PluginDirectory 'sony-a7v.json'
+if(Test-Path -LiteralPath $existingConfig){
+ Assert-NoReparse $existingConfig
+ $previousConfig=Get-Content -LiteralPath $existingConfig -Raw -Encoding utf8|ConvertFrom-Json
+ $rootProperty=@($previousConfig.PSObject.Properties|Where-Object {$_.Name -ieq 'receiveRoot'})
+ if($rootProperty.Count -gt 1){throw 'Existing receiveRoot is ambiguous'}
+ if($rootProperty.Count -eq 1 -and $null -ne $rootProperty[0].Value){
+  if($rootProperty[0].Value -isnot [string]){throw 'Existing receiveRoot must be a string'}
+  $receiveRoot=[string]$rootProperty[0].Value
+  if($receiveRoot -and ($receiveRoot -notmatch '^[A-Za-z]:[\\/]' -or $receiveRoot.IndexOf([char]0) -ge 0)){throw 'Existing receiveRoot must be an absolute local path'}
+ }
+}
+[ordered]@{manifestPath='native/approved-native.json';approvedManifestSha256=(Hash $manifestPath);receiveRoot=$receiveRoot}|ConvertTo-Json|Set-Content -LiteralPath (Join-Path $preparedPlugin 'sony-a7v.json') -Encoding utf8
 $operations=@()
 foreach($file in Get-ChildItem -LiteralPath $preparedPlugin -File -Recurse){
  $relative=$file.FullName.Substring($preparedPlugin.Length+1)
@@ -109,6 +123,6 @@ $receipt=Join-Path $session 'install-receipt.json'
 [ordered]@{schemaVersion=1;version=$integrity.version;pluginDirectory=$PluginDirectory;hostDirectory=$NinaApp;backupDirectory=$session;files=$records}|ConvertTo-Json -Depth 10|Set-Content -LiteralPath $receipt -Encoding utf8
 Write-Output "安装完成：$PluginDirectory"
 Write-Output "备份与卸载记录：$receipt"
-Write-Output '可以打开 NINA，选择 Sony A7 V。默认不另存 ARW 副本；请在 NINA 开启保存并选 FITS/XISF。'
+Write-Output '可以打开 NINA，选择 Sony CrSDK Camera。默认不另存 ARW 副本；请在 NINA 开启保存并选 FITS/XISF。'
 Write-Output '本脚本未启动 NINA、初始化 SDK、操作相机或修改驱动。'
 

@@ -7,7 +7,7 @@ public sealed partial class SonyCameraClient {
     /// <summary>Last confirmed command state, not a live poll of the camera. Query RecordingState for authoritative readback.</summary>
     public bool MovieRecording=>movieRecording;
     public CameraConnectionMode ConnectionMode=>connectionMode;
-    void ResetFeatureState(){previewEnabled=false;movieRecording=false;contentDownloading=false;connectionMode=CameraConnectionMode.Remote;}
+    void ResetFeatureState(){astroSession=Guid.NewGuid();previewEnabled=false;movieRecording=false;contentDownloading=false;connectionMode=CameraConnectionMode.Remote;}
     unsafe void EnsureFeatures(){
         if(!initialized)throw new InvalidOperationException("请先初始化");if(featuresChecked)return;
         var e=Native.New<Native.Error>();int rc;
@@ -24,7 +24,7 @@ public sealed partial class SonyCameraClient {
         if(connected||state==SessionState.Unconfirmed)throw new InvalidOperationException("先干净断开并重新枚举，再指定连接模式");
         var e=Native.New<Native.Error>();int rc=Native.sw_connect_mode(index,(uint)mode,15000,ref e);
         if(rc!=0){if(rc is 3 or 4 or 6){connected=true;state=SessionState.Unconfirmed;}Check(rc,e);}
-        connected=true;connectionMode=mode;
+        connected=true;astroSession=Guid.NewGuid();connectionMode=mode;
         if(mode==CameraConnectionMode.Remote){e=Native.New<Native.Error>();Check(Native.sw_wait_ready(15000,ref e),e);}
         state=SessionState.Connected;
     });

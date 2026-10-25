@@ -49,6 +49,7 @@ public sealed class SonyA7VPlugin : PluginBase, IPluginManifest
     public override Task Initialize()
     {
         Logger.Info($"[SonyA7V] Plugin initialized {Version}; host={CoreUtil.Version}; framework={System.Runtime.InteropServices.RuntimeInformation.FrameworkDescription}");
+        AstroUiVerification.ScheduleIfRequested(Name);
         AutoTest.ScheduleIfRequested(factory, imaging, saving, profiles);
         return Task.CompletedTask;
     }
@@ -74,7 +75,7 @@ public sealed class SonyA7VEquipmentProvider : IEquipmentProvider<ICamera>, IEqu
 
     private IImageDataFactory Factory { get; }
 
-    public string Name => "Sony A7 V";
+    public string Name => "Sony CrSDK Cameras";
 
     public IList<ICamera> GetEquipment()
     {

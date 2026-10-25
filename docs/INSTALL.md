@@ -1,11 +1,13 @@
 # 安装 Sony CrSDK Camera Plugin for N.I.N.A.
 
-作者与维护者：isky。当前候选二进制版本 0.4.1.2，目标 N.I.N.A. 3.2.0.9001、Windows x64。
+作者与维护者：isky。当前候选二进制版本 0.5.4-rc.1（程序集 0.5.4.0），目标 N.I.N.A. 3.2.0.9001、Windows x64。
+
+其他型号配置见 [机型与 RAW](MULTI_CAMERA.md)。必须升级完整匹配包，不能仅替换托管 DLL。
 
 ## 普通用户安装（无需编译）
 
 1. 安装目标版本 N.I.N.A.，记下包含 `NINA.exe` 的目录。目标系统还需 Microsoft Visual C++ v14 x64 运行库，可从 [微软官方页面](https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist) 获取；本包不捆绑或自动安装系统运行库。
-2. 从项目 Releases（发布后）获取 **Sony-CrSDK-Camera-Plugin-0.4.1.2-rc.zip**。不要使用 GitHub 自动生成的 Source code ZIP 作为安装包。
+2. 从项目 GitHub Releases 获取 **Sony-CrSDK-Camera-Plugin-0.5.4-rc.1.zip**。不要使用 GitHub 自动生成的 Source code ZIP 作为安装包。
 3. 自行通过 [Sony 官方许可与下载入口](https://support.d-imaging.sony.co.jp/app/sdk/licenseagreement_d/en.html) 获取 Camera Remote SDK 2.02.00 Windows x64。脚本不会替你接受许可、下载 SDK 或安装驱动。按官方指引配置 PC Remote USB 及驱动。
 4. 解压 SDK 内的 SimpleCli 示例；保留 `SimpleCli/external/crsdk/` 下完整运行库及 `CrAdapter/` 子目录。安装仅需运行库，源码开发才需要 `app/CRSDK` 下的头文件。不要从不明来源下载单个 DLL 拼凑。
 5. 解压插件候选包到独立目录（不要直接解压进 NINA），完全退出目标 N.I.N.A.。
@@ -35,7 +37,7 @@
 
 ## 使用与配置
 
-打开 NINA，选择 Sony A7 V（ILCE-7M5）。机身使用 M（手动曝光）、MF（手动对焦）、仅 RAW、单张拍摄；目前仅验证 Compressed RAW。按官方说明准备其他相机条件。
+打开 NINA，选择 Sony CrSDK Camera。机身使用 M（手动曝光）、MF（手动对焦）、仅 RAW、单张拍摄；本版本 A7M5 固件 2.00 已验证 Compressed、Lossless、Compressed HQ，其他型号待实测。按官方说明准备其他相机条件。
 
 在 NINA 中设置保存路径、FITS/XISF 格式并开启保存。先拍一张短曝光，再开始序列。
 
@@ -73,9 +75,9 @@
 
 ## 常见问题
 
-- 列表出现 Sony A7 V，只表示驱动入口加载；点击连接后才实际枚举相机。
-- 非 M 或非 MF 等条件会拒绝连接，改正后可重新尝试。
+- 列表出现 Sony CrSDK Camera，只表示驱动入口加载；点击连接后才实际枚举相机。
+- 已知可修正的 M、MF 或 RAW 设置问题可保留干净连接；修正后点击重新检查或重试拍摄。真实 SDK/USB 故障仍需按提示恢复或重连。
 - 图片历史为空：检查 NINA 快照保存开关和保存路径。
 - SDK 哈希不符：核对官方版本；不要修改清单绕过版本检查。
 - 连接失败：检查 PC Remote、USB 驱动、线缆及是否被 Imaging Edge 等其他程序占用。
-- 本包为发布候选，跨电脑与本版本最终真机部署验证完成后再发布稳定版。
+- 本包为发布候选；已完成另一台 Windows 11 x64 电脑的独立部署与基本成像验证，整夜序列及其他机型仍需分别验证。详见 [验证范围](VALIDATION.md)。

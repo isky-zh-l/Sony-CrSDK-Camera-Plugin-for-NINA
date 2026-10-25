@@ -29,7 +29,8 @@ PropertySpec property_spec(uint32_t id) {
         case 24: return {sdk::CrDeviceProperty_MediaSLOT2_RemainingTime,false};
         case 25: return {sdk::CrDeviceProperty_FocusPositionSetting,true};
         case 26: return {sdk::CrDeviceProperty_FocusPositionCurrentValue,false};
-        case 27: return {sdk::CrDeviceProperty_Focus_Magnifier_Setting,true};
+        // Magnifier writes also require live-view position bounds and a dedicated protocol.
+        case 27: return {sdk::CrDeviceProperty_Focus_Magnifier_Setting,false};
         case 28: return {sdk::CrDeviceProperty_FocusMagnificationTime,true};
         case 29: return {sdk::CrDeviceProperty_InitialFocusMagnifier,true};
         case 30: return {sdk::CrDeviceProperty_Movie_File_Format,true};
@@ -48,6 +49,8 @@ PropertySpec property_spec(uint32_t id) {
         case 43: return {sdk::CrDeviceProperty_FocusIndication,false};
         case 44: return {sdk::CrDeviceProperty_APS_C_S35,true};
         case 45: return {sdk::CrDeviceProperty_Movie_RecordingMedia,true};
+        case 46: return {sdk::CrDeviceProperty_FocusDrivingStatus,false};
+        case 47: return {sdk::CrDeviceProperty_StillImageStoreDestination,true};
 
     default:return {0,false};
     }
@@ -177,11 +180,37 @@ int32_t SW_CALL sw_get_feature_abi(uint32_t* version,uint32_t* ps,uint32_t* fs_,
     return boundary(e,SW_NONE,[&]()->int32_t {if(!version||!ps||!fs_||!folders||!contents||!ts)return result(e,SW_ARGUMENT,SW_NONE,0,"All feature ABI size outputs required");
         *version=1;*ps=sizeof(SwPropertyInfo);*fs_=sizeof(SwFrameInfo);*folders=sizeof(SwFolderInfo);*contents=sizeof(SwContentInfo);*ts=sizeof(SwTransferInfo);return SW_OK;});
 }
+int32_t SW_CALL sw_get_astro_target(uint32_t setting,uint32_t* property,int64_t* value,SwError* e) {
+    return boundary(e,SW_SUPPORT,[&]()->int32_t {
+        if(!property||!value)return result(e,SW_ARGUMENT,SW_SUPPORT,0,"Target outputs required");
+        *property=0;*value=0;auto rc=ready_check(e,SW_SUPPORT);if(rc)return rc;
+        if(connection_mode!=SW_MODE_REMOTE)return result(e,SW_STATE,SW_SUPPORT,0,"Astronomy targets require remote mode");
+        switch(setting) {
+        case 1:*property=SW_PROP_LONGEXPOSURENOISEREDUCTION;*value=sdk::CrLongExposureNR_Off;break;
+        case 2:*property=SW_PROP_HIGHISONOISEREDUCTION;*value=sdk::CrHighIsoNR_Off;break;
+        case 3:*property=SW_PROP_STEADYSHOT;*value=sdk::CrImageStabilizationSteadyShot_Off;break;
+        case 4:*property=SW_PROP_FOCUSMODE;*value=sdk::CrFocus_MF;break;
+        case 5:{
+            *property=SW_PROP_RAWCOMPRESSION;
+            PropertyList p;rc=p.load(sdk::CrDeviceProperty_RAW_FileCompressionType,e,SW_SUPPORT);if(rc)return rc;
+            NumericValues n;rc=decode_choices(p.list[0],n,e);if(rc)return rc;
+            const auto current=p.list[0].GetCurrentValue();
+            if(current==sdk::CrRAWFile_LossLess || current==sdk::CrRAWFile_LossLessL)*value=current;
+            else if(n.accepts(sdk::CrRAWFile_LossLess))*value=sdk::CrRAWFile_LossLess;
+            else if(n.accepts(sdk::CrRAWFile_LossLessL))*value=sdk::CrRAWFile_LossLessL;
+            else return result(e,SW_UNSUPPORTED,SW_SUPPORT,0,"Full-size lossless RAW not offered; reduced or lossy RAW is not a substitute");
+            return p.close(e,SW_SUPPORT);
+        }
+        default:return result(e,SW_ARGUMENT,SW_SUPPORT,0,"Unknown astronomy setting");
+        }
+        return SW_OK;
+    });
+}
 int32_t SW_CALL sw_get_property(uint32_t id,SwPropertyInfo* out,int64_t* values,uint32_t capacity,uint32_t* count,SwError* e) {
     return boundary(e,SW_SUPPORT,[&]()->int32_t {
         if(!out||out->size!=sizeof(*out)||!count||(!values&&capacity))return result(e,SW_ARGUMENT,SW_SUPPORT,0,"Invalid property output/buffer");
         *out={};out->size=sizeof(*out);*count=0;auto spec=property_spec(id);if(!spec.code)return result(e,SW_UNSUPPORTED,SW_SUPPORT,0,"Unknown project property");
-        auto rc=ready_check(e,SW_SUPPORT);if(rc)return rc;PropertyList p;rc=p.load(spec.code,e,SW_SUPPORT);if(rc){if(e->sony_code==sdk::CrError_Generic_NotSupported||e->sony_code==sdk::CrError_Api_InvalidCalled)return result(e,SW_UNSUPPORTED,SW_SUPPORT,e->sony_code,"Property not supported by this device");return rc;}
+        auto rc=ready_check(e,SW_SUPPORT);if(rc)return rc;PropertyList p;rc=p.load(spec.code,e,SW_SUPPORT);if(rc){if(e->sony_code==sdk::CrError_Generic_NotSupported)return result(e,SW_UNSUPPORTED,SW_SUPPORT,e->sony_code,"Property not supported by this device");return rc;}
         NumericValues n;rc=decode_choices(p.list[0],n,e);if(rc)return rc;
         SwPropertyInfo info{};info.size=sizeof(info);info.id=id;info.readable=p.list[0].IsGetEnableCurrentValue();
         if(!numeric_value(p.list[0].GetCurrentValue(),p.list[0].GetValueType(),info.current))return result(e,SW_UNSUPPORTED,SW_SUPPORT,0,"Unsupported property current value");

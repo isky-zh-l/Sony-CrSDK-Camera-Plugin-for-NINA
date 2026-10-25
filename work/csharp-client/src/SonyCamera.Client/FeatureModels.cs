@@ -46,6 +46,8 @@ public enum CameraProperty {
     FocusIndicator=43,
     ApsCMode=44,
     MovieRecordingMedia=45,
+    FocusDrivingStatus=46,
+    StillStorageDestination=47,
 }
 public enum CameraConnectionMode { Remote=0, Contents=1 }
 public sealed record CameraPropertyInfo(CameraProperty Property,bool Readable,bool Writable,long Current,

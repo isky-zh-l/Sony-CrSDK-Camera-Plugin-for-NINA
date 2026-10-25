@@ -46,7 +46,12 @@ public static class NativePackageValidator {
         if(string.IsNullOrWhiteSpace(manifest.PackageId)||manifest.PackageId.Length>128)throw new InvalidDataException("packageId必须为1～128个非空白字符");
         if(manifest.Backend is not ("production" or "test"))throw new InvalidDataException("backend必须为production或test");
         if(manifest.Backend=="test"&&!options.AllowTestPackage)throw new InvalidDataException("拒绝测试包：必须显式AllowTestPackage=true，测试包不提供实机证据");
-        if(manifest.SupportedModels is not ["ILCE-7M5"])throw new InvalidDataException("当前仅承诺ILCE-7M5；supportedModels必须仅含该型号");
+        // This is an explicit package model inventory, not a hardware-verification claim.
+        // Keep the original one-model manifests valid while allowing reviewed multi-model packages.
+        if(manifest.SupportedModels is not { Length: >0 and <=256 } ||
+           manifest.SupportedModels.Any(model=>string.IsNullOrWhiteSpace(model)||model.Length>128||model.Any(char.IsControl)) ||
+           manifest.SupportedModels.Distinct(StringComparer.OrdinalIgnoreCase).Count()!=manifest.SupportedModels.Length)
+            throw new InvalidDataException("supportedModels must be a nonempty, unique model inventory (at most 256 entries)");
         if(manifest.StructureSizes==null||manifest.StructureSizes.Count!=ExpectedSizes.Count||ExpectedSizes.Any(pair=>!manifest.StructureSizes.TryGetValue(pair.Key,out var size)||size!=pair.Value))throw new InvalidDataException("清单ABI结构大小必须与客户端已知ABI2布局完全一致");
         if(manifest.Files==null||manifest.Files.Length!=Required.Count)throw new InvalidDataException("清单必须含8项固定原生角色，不得删除必需项或添加未审查角色");
         var roles=new HashSet<string>(StringComparer.Ordinal);var paths=new HashSet<string>(StringComparer.OrdinalIgnoreCase);var files=new List<ValidatedNativeFile>();
