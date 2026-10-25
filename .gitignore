@@ -1,4 +1,9 @@
-# External SDK/host and all generated local files
+# External dependencies and local output
+/work/
+/reports/
+/screenshots/
+**/logs/
+*.bak
 /deps/
 /artifacts/
 **/bin/

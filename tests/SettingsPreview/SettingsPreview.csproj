@@ -9,8 +9,9 @@
     <NinaApp Condition="'$(NinaApp)' == ''">$(NINA_APP)</NinaApp>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="../../work/nina-plugin/src/SonyA7V.Camera/JpegPreview.cs" Link="JpegPreview.cs" />
-    <Compile Include="../../work/nina-plugin/src/SonyA7V.Camera/PluginSettings.cs" Link="PluginSettings.cs" />
+    <Compile Include="../../src/nina/src/SonyA7V.Camera/JpegPreview.cs" Link="JpegPreview.cs" />
+    <Compile Include="../../src/nina/src/SonyA7V.Camera/PluginSettings.cs" Link="PluginSettings.cs" />
+    <ProjectReference Include="../../src/managed/src/SonyCamera.Client/SonyCamera.Client.csproj" />
     <Reference Include="$(NinaApp)/NINA.Core.dll" />
   </ItemGroup>
 </Project>

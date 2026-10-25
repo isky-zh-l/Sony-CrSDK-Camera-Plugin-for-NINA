@@ -9,8 +9,8 @@
     <NinaApp Condition="'$(NinaApp)' == ''">$(NINA_APP)</NinaApp>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="../../work/nina-plugin/src/SonyA7V.Camera/bin/Release/net8.0-windows/SonyA7V.Camera.dll" />
-    <Reference Include="../../work/csharp-client/src/SonyCamera.Client/bin/Release/net8.0/SonyCamera.Client.dll" />
+    <Reference Include="../../src/nina/src/SonyA7V.Camera/bin/Release/net8.0-windows/SonyA7V.Camera.dll" />
+    <Reference Include="../../src/managed/src/SonyCamera.Client/bin/Release/net8.0/SonyCamera.Client.dll" />
     <Reference Include="$(NinaApp)/NINA.Image.dll;$(NinaApp)/NINA.Core.dll"><Private>false</Private></Reference>
     <Reference Include="$(NinaApp)/System.Text.Json.dll;$(NinaApp)/System.Text.Encodings.Web.dll" />
   </ItemGroup>

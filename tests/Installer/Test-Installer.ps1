@@ -1,4 +1,4 @@
-﻿param(
+param(
  [Parameter(Mandatory=$true)][string]$PackageDirectory,
  [Parameter(Mandatory=$true)][string]$SonySdkRoot,
  [Parameter(Mandatory=$true)][string]$NinaApp,
@@ -45,7 +45,7 @@ $config=Get-Content -LiteralPath (Join-Path $plugin 'sony-a7v.json') -Raw|Conver
 if((Get-FileHash -LiteralPath (Join-Path $plugin $config.manifestPath)).Hash -ne $config.approvedManifestSha256){throw 'Installed manifest pin mismatch'}
 # Validate using the real C# client, in a fresh process located next to the cloned adapters.
 # --mode validate never initializes the SDK or contacts a camera.
-$acceptance=Join-Path $projectRoot 'work\csharp-client\tests\SonyCamera.Acceptance\bin\Release\net8.0'
+$acceptance=Join-Path $projectRoot 'src\managed\tests\SonyCamera.Acceptance\bin\Release\net8.0'
 foreach($file in Get-ChildItem -LiteralPath $acceptance -File|Where-Object {$_.Extension -in '.exe','.dll','.json'}){Copy-Item -LiteralPath $file.FullName -Destination $hostCopy -Force}
 $validationConfig=Join-Path $hostCopy 'client-validation.json'
 [ordered]@{manifestPath=(Join-Path $plugin $config.manifestPath);approvedManifestSha256=$config.approvedManifestSha256;allowTestPackage=$false}|ConvertTo-Json|Set-Content -LiteralPath $validationConfig -Encoding utf8

@@ -32,7 +32,7 @@ foreach($path in @($SonySdkRoot,$NinaApp,$PluginDirectory,$BackupRoot)){Assert-N
 if($PluginDirectory -eq [IO.Path]::GetPathRoot($PluginDirectory) -or $PluginDirectory -eq $NinaApp){throw '插件目标必须是独立子目录'}
 if($BackupRoot.StartsWith($PluginDirectory.TrimEnd('\')+'\',[StringComparison]::OrdinalIgnoreCase)){throw '备份目录不能位于插件目录内'}
 $hostCore=Join-Path $NinaApp 'NINA.Core.dll'
-if(!(Test-Path -LiteralPath (Join-Path $NinaApp 'NINA.exe')) -or (Get-Item -LiteralPath $hostCore).VersionInfo.FileVersion -ne '3.2.0.9001'){throw '当前候选包仅适配 NINA 3.2.0.9001；请检查安装目录和版本'}
+if(!(Test-Path -LiteralPath (Join-Path $NinaApp 'NINA.exe')) -or (Get-Item -LiteralPath $hostCore).VersionInfo.FileVersion -ne '3.2.0.9001'){throw '当前版本适配 NINA 3.2.0.9001；请检查安装目录和版本'}
 $integrity=Get-Content -LiteralPath (Join-Path $PSScriptRoot 'package-integrity.json') -Raw -Encoding utf8|ConvertFrom-Json
 if($integrity.schemaVersion -ne 1){throw '安装包清单版本不匹配'}
 foreach($entry in $integrity.files){

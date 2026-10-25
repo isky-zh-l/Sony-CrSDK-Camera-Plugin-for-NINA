@@ -1,8 +1,8 @@
-﻿$ErrorActionPreference='Stop'
+$ErrorActionPreference='Stop'
 if(!(Get-Command cl.exe -ErrorAction SilentlyContinue)){throw 'Use an x64 MSVC developer PowerShell or run root build.ps1 -Native.'}
 $root=Split-Path $PSScriptRoot -Parent
 $source=Join-Path $root 'third_party\LibRaw'
-$lock=Get-Content -LiteralPath (Join-Path $root 'work\nina-plugin\dependencies\libraw-source-lock.json') -Raw -Encoding utf8|ConvertFrom-Json
+$lock=Get-Content -LiteralPath (Join-Path $root 'src\nina\dependencies\libraw-source-lock.json') -Raw -Encoding utf8|ConvertFrom-Json
 foreach($entry in $lock.files){
  if((Get-FileHash -LiteralPath (Join-Path $source $entry.path)).Hash -ne $entry.sha256){throw "LibRaw source identity mismatch: $($entry.path)"}
 }
@@ -17,7 +17,7 @@ try {
  if($LASTEXITCODE -ne 0){throw 'LibRaw DLL build failed.'}
 } finally {Pop-Location}
 Copy-Item -LiteralPath (Join-Path $build 'bin\libraw.dll') -Destination $output -Force
-$shim=Join-Path $root 'work\nina-plugin\native\SonyArw6.cpp'
+$shim=Join-Path $root 'src\nina\native\SonyArw6.cpp'
 Push-Location $output
 try {
  & cl.exe /nologo /LD /MD /EHsc /std:c++17 /O2 "/I$build" $shim (Join-Path $build 'lib\libraw.lib') /link /OUT:SonyArw6.dll

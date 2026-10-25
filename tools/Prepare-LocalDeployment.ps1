@@ -9,7 +9,7 @@ $wrapper=Join-Path $root 'artifacts\native\sony_wrapper.dll'
 if($ReviewedWrapperSha256 -notmatch '^[A-Fa-f0-9]{64}$' -or (Get-FileHash -LiteralPath $wrapper).Hash -ne $ReviewedWrapperSha256){throw 'Supply the independently reviewed hash of this locally built wrapper.'}
 $output=[IO.Path]::GetFullPath($OutputDirectory)
 if(Test-Path -LiteralPath $output){throw 'Choose a NEW local output directory.'}
-$built=Join-Path $root 'work\nina-plugin\src\SonyA7V.Camera\bin\Release\net8.0-windows'
+$built=Join-Path $root 'src\nina\src\SonyA7V.Camera\bin\Release\net8.0-windows'
 $decoder=Join-Path $root 'artifacts\decoder'
 foreach($p in @((Join-Path $built 'SonyA7V.Camera.dll'),(Join-Path $built 'SonyCamera.Client.dll'),(Join-Path $decoder 'SonyArw6.dll'),(Join-Path $decoder 'libraw.dll'))){if(!(Test-Path -LiteralPath $p)){throw "Build input missing: $p"}}
 $sdkLock=Get-Content -LiteralPath (Join-Path $root 'config\sdk-runtime-lock.json') -Raw -Encoding utf8|ConvertFrom-Json
@@ -21,7 +21,7 @@ New-Item -ItemType Directory -Path $plugin -Force|Out-Null
 Copy-Item -LiteralPath (Join-Path $built 'SonyA7V.Camera.dll'),(Join-Path $built 'SonyCamera.Client.dll') -Destination $plugin
 $approval=Join-Path $output 'reviewed-local-build.json'
 [ordered]@{schemaVersion=1;wrapperSha256=$ReviewedWrapperSha256;sdkFiles=$sdkLock.sdkFiles}|ConvertTo-Json -Depth 8|Set-Content -LiteralPath $approval -Encoding utf8
-& (Join-Path $root 'work\csharp-client\tools\deploy-native.ps1') -WrapperDll $wrapper -SdkRuntime $sdkRuntime -HostDirectory $plugin -ApprovedBuilds $approval -PackageId 'sony-crsdk-0.5.1-dev-local' -WriteConfiguration (Join-Path $plugin 'sony-a7v.json') -RelativeManifestPath -SupportedModels ((Get-Content -LiteralPath (Join-Path $root 'config/camera-models.json') -Raw|ConvertFrom-Json).models)
+& (Join-Path $root 'src\managed\tools\deploy-native.ps1') -WrapperDll $wrapper -SdkRuntime $sdkRuntime -HostDirectory $plugin -ApprovedBuilds $approval -PackageId 'sony-crsdk-local-build' -WriteConfiguration (Join-Path $plugin 'sony-a7v.json') -RelativeManifestPath -SupportedModels ((Get-Content -LiteralPath (Join-Path $root 'config/camera-models.json') -Raw|ConvertFrom-Json).models)
 # CrAdapter must be installed beside NINA.exe, not inside the installed plugin.
 Move-Item -LiteralPath (Join-Path $plugin 'CrAdapter') -Destination $output
 Copy-Item -LiteralPath (Join-Path $root 'config\settings.json') -Destination $plugin
