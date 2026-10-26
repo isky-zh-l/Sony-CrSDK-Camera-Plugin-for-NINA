@@ -4,7 +4,7 @@
 
 通过 Sony Camera Remote SDK，让 Sony 相机在 N.I.N.A. 中完成曝光、完整 ARW 接收、Bayer RAW 解码及 FITS/XISF 保存。
 
-**当前正式版：[0.5.4-rc.1](https://github.com/isky-zh-l/Sony-CrSDK-Camera-Plugin-for-NINA/releases/latest)**，程序集 `0.5.4.0`。沿用现有版本号，GitHub 发布状态为正式版及 Latest。
+**当前正式版：[0.5.4](https://github.com/isky-zh-l/Sony-CrSDK-Camera-Plugin-for-NINA/releases/latest)**，程序集 `0.5.4.0`。GitHub 发布状态为正式版及 Latest。安装包沿用已验证构建，界面版本可能仍显示 `0.5.4-rc.1`。
 
 作者：[isky](https://github.com/isky-zh-l)。独立社区项目，与 Sony 或 N.I.N.A. 官方无隶属或认证关系。
 

@@ -1,6 +1,6 @@
 # 安装与卸载
 
-适用正式版 **0.5.4-rc.1**（程序集 0.5.4.0）。普通用户使用二进制包，不需要 Visual Studio、CMake、Ninja 或 .NET SDK。
+适用正式版 **0.5.4**（程序集 0.5.4.0）。普通用户使用二进制包，不需要 Visual Studio、CMake、Ninja 或 .NET SDK。
 
 ## 1. 准备环境
 
@@ -21,13 +21,13 @@
 
 在 [最新正式版](https://github.com/isky-zh-l/Sony-CrSDK-Camera-Plugin-for-NINA/releases/latest) 下载：
 
-- `Sony-CrSDK-Camera-Plugin-0.5.4-rc.1.zip`：插件安装包。
+- `Sony-CrSDK-Camera-Plugin-0.5.4.zip`：插件安装包。
 - `SHA256SUMS`：对应校验值。
 
 GitHub 自动提供的 Source code ZIP 和单独 `-source.zip` 均为源码，不是安装包。
 
 ```powershell
-Get-FileHash -LiteralPath '.\Sony-CrSDK-Camera-Plugin-0.5.4-rc.1.zip' -Algorithm SHA256
+Get-FileHash -LiteralPath '.\Sony-CrSDK-Camera-Plugin-0.5.4.zip' -Algorithm SHA256
 ```
 
 将结果与 SHA256SUMS 中同名文件的值对比，匹配后解压到独立目录；不要直接解压进 NINA。

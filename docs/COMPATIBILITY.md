@@ -1,6 +1,6 @@
 # 兼容性与验证范围
 
-正式版 0.5.4-rc.1（程序集 0.5.4.0）面向 Windows x64、N.I.N.A. 3.2.0.9001 和 Sony Camera Remote SDK 2.02.00。
+正式版 0.5.4（程序集 0.5.4.0）面向 Windows x64、N.I.N.A. 3.2.0.9001 和 Sony Camera Remote SDK 2.02.00。
 
 ## 已验证
 
