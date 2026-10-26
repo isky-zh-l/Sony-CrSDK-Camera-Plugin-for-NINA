@@ -25,6 +25,16 @@ internal static class Program {
     }
     [MethodImpl(MethodImplOptions.NoInlining)]
     static async Task Run() {
+        // Localized messages: named interpolation holes must format instead of throwing.
+        var savedLanguage=Text.Language;
+        try {
+            Text.SetLanguage("en");
+            Check(Text.T("已连接，等待修正设置")=="Connected; settings need correction","catalog resolves English text");
+            Check(Text.F($"不是原生PE文件：{"/tmp/x.dll"}")=="Not a native PE file: /tmp/x.dll","named holes format in English");
+            Text.SetLanguage("zh");
+            Check(Text.F($"原生文件必须为AMD64，实际machine=0x{0x14c:X4}：{"/tmp/y.dll"}")=="原生文件必须为AMD64，实际machine=0x014C：/tmp/y.dll","named holes with a format specifier");
+            Check(Text.F($"已提交 {2} 项，已确认 {1} 项")=="已提交 2 项，已确认 1 项","uncatalogued template keeps argument order");
+        } finally { Text.SetLanguage(savedLanguage); }
         var caps = new ExposureCapabilities(true,1,900,.001,1800,3600,false,false);
         foreach(var s in new[]{.01,1.0/60,30.0,60.0})
             Check(ExposurePolicy.Create(s,new[]{s},caps).Mode==ExposureMode.Ordinary,"exact candidate must win, including 60s");
@@ -72,7 +82,7 @@ internal static class Program {
             File.Delete(testManifest);
         }
         var client=new SonyCameraClient(options);
-        var service=new SonyCameraService();
+        var service=new SonyCameraService(()=>new CameraDeployment{ManifestPath=manifest,ApprovedManifestSha256=Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(manifest))),ReceiveRoot=Path.Combine(AppContext.BaseDirectory,"receive")},()=>PluginSettings.Load(AppContext.BaseDirectory));
         typeof(SonyCameraService).GetField("client",BindingFlags.NonPublic|BindingFlags.Instance)!.SetValue(service,client);
         var driver=new SonyA7VCamera(service,null!);
         async Task Connect(string scenario,string model="ILCE-6700") {

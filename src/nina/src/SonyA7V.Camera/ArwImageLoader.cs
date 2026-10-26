@@ -31,7 +31,7 @@ public sealed class ArwImageLoader(IImageDataFactory factory) {
         token.ThrowIfCancellationRequested();
         var path=Path.GetFullPath(input);
         using var source=new FileStream(path,FileMode.Open,FileAccess.Read,FileShare.Read);
-        if(source.Length<1024 || source.Length>512L*1024*1024) throw new InvalidDataException("Unsupported input length");
+        if(source.Length<1024 || source.Length>512L*1024*1024) throw new InvalidDataException(Text.T("Unsupported input length"));
         var bytes=new byte[(int)source.Length];
         await source.ReadExactlyAsync(bytes,token);
         var sha256=Convert.ToHexString(SHA256.HashData(bytes));
@@ -39,8 +39,8 @@ public sealed class ArwImageLoader(IImageDataFactory factory) {
         token.ThrowIfCancellationRequested();
         var info=decoded.Info;
         if(!Enum.TryParse<BayerPatternEnum>(info.Cfa,out var bayer) || bayer==BayerPatternEnum.Auto || bayer==BayerPatternEnum.None)
-            throw new InvalidDataException("Unsupported CFA: "+info.Cfa);
-        if(decoded.Pixels.Max()>info.Maximum) throw new InvalidDataException("Pixel exceeds decoder maximum");
+            throw new InvalidDataException(Text.T("Unsupported CFA: ")+info.Cfa);
+        if(decoded.Pixels.Max()>info.Maximum) throw new InvalidDataException(Text.T("Pixel exceeds decoder maximum"));
         // A fresh metadata graph per call. Future adapter adds only this capture's snapshot/times.
         var meta=new ImageMetaData();
         meta.Camera.Name=info.Model;
@@ -53,9 +53,9 @@ public sealed class ArwImageLoader(IImageDataFactory factory) {
         IImageData data=factory.CreateBaseImageData(array,(int)info.Width,(int)info.Height,16,true,meta);
         token.ThrowIfCancellationRequested();
         if(data.Data.FlatArray.Length!=(long)info.Width*info.Height)
-            throw new InvalidDataException("NINA image contract failed");
+            throw new InvalidDataException(Text.T("NINA image contract failed"));
         if(attachOriginalRaw && (data.Data.RAWData is null || data.Data.RAWData.Length!=bytes.Length || Convert.ToHexString(SHA256.HashData(data.Data.RAWData))!=sha256))
-            throw new InvalidDataException("NINA kept different original RAW bytes");
+            throw new InvalidDataException(Text.T("NINA kept different original RAW bytes"));
         return new ArwImageFrame(data,info,path,sha256);
     }
 }

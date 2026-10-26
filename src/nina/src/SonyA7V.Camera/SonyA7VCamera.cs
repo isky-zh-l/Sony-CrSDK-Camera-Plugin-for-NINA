@@ -23,7 +23,7 @@ public sealed class SonyA7VCamera : ICamera
     private readonly SonyCameraService service;
     private readonly IImageDataFactory factory;
     private readonly AsyncObservableCollection<BinningMode> binningModes;
-    private readonly List<string> readoutModes = new() { "Full frame" };
+    private readonly List<string> readoutModes = new() { "RAW" };
     private CancellationTokenSource? exposureCts;
     private Task? exposureTask;
     private CaptureSequence? sequence;
@@ -74,27 +74,27 @@ public sealed class SonyA7VCamera : ICamera
         case "Sony.PrepareAstroSession":
             var options=JsonSerializer.Deserialize<AstroPreparationOptions>(actionParameters,new JsonSerializerOptions{
                 PropertyNameCaseInsensitive=true,UnmappedMemberHandling=JsonUnmappedMemberHandling.Disallow})
-                ??throw new ArgumentException("Provide an explicit JSON astronomy preparation plan");
+                ??throw new ArgumentException(Text.T("Provide an explicit JSON astronomy preparation plan"));
             return JsonSerializer.Serialize(Task.Run(()=>service.PrepareAstroAsync(options)).GetAwaiter().GetResult().Changes);
         case "Sony.RestoreAstroSession":
-            if(!string.IsNullOrWhiteSpace(actionParameters))throw new ArgumentException("Restore takes no parameters; it uses the same-session receipt");
+            if(!string.IsNullOrWhiteSpace(actionParameters))throw new ArgumentException(Text.T("Restore takes no parameters; it uses the same-session receipt"));
             Task.Run(()=>service.RestoreAstroAsync()).GetAwaiter().GetResult();return "restored";
         case "Sony.SetAperture":
             var fNumber=double.Parse(actionParameters,NumberStyles.Float,CultureInfo.InvariantCulture);
             return Task.Run(()=>service.SetApertureAsync(fNumber)).GetAwaiter().GetResult().ToString("R",CultureInfo.InvariantCulture);
-        default:throw new NotSupportedException("Unknown Sony action: "+actionName);
+        default:throw new NotSupportedException(Text.T("Unknown Sony action: ")+actionName);
         }
     }
-    public void SendCommandBlind(string command, bool raw = true) => throw new NotSupportedException("No raw command pass-through");
-    public bool SendCommandBool(string command, bool raw = true) => throw new NotSupportedException("No raw command pass-through");
-    public string SendCommandString(string command, bool raw = true) => throw new NotSupportedException("No raw command pass-through");
+    public void SendCommandBlind(string command, bool raw = true) => throw new NotSupportedException(Text.T("No raw command pass-through"));
+    public bool SendCommandBool(string command, bool raw = true) => throw new NotSupportedException(Text.T("No raw command pass-through"));
+    public string SendCommandString(string command, bool raw = true) => throw new NotSupportedException(Text.T("No raw command pass-through"));
 
     public bool Connected => service.Connected;
 
     public async Task<bool> Connect(CancellationToken token)
     {
         await service.ConnectAsync(factory, token).ConfigureAwait(false);
-        var facts = service.Facts ?? throw new InvalidOperationException("Camera facts were not read");
+        var facts = service.Facts ?? throw new InvalidOperationException(Text.T("Camera facts were not read"));
         gain = checked((int)facts.Parameters.Iso);
         Raise(nameof(Connected));
         Raise(nameof(CameraState));
@@ -138,11 +138,11 @@ public sealed class SonyA7VCamera : ICamera
     public double ElectronsPerADU => 1; // not characterised; 1 is NINA's "unknown" convention
     public double Temperature => double.NaN; // no real-time sensor temperature in this SDK path
     public bool CanSetTemperature => false;
-    public double TemperatureSetPoint { get => double.NaN; set => throw new NotSupportedException("No cooler on this camera"); }
-    public bool CoolerOn { get => false; set => throw new NotSupportedException("No cooler on this camera"); }
+    public double TemperatureSetPoint { get => double.NaN; set => throw new NotSupportedException(Text.T("No cooler on this camera")); }
+    public bool CoolerOn { get => false; set => throw new NotSupportedException(Text.T("No cooler on this camera")); }
     public double CoolerPower => 0;
     public bool HasDewHeater => false;
-    public bool DewHeaterOn { get => false; set => throw new NotSupportedException("No dew heater control"); }
+    public bool DewHeaterOn { get => false; set => throw new NotSupportedException(Text.T("No dew heater control")); }
     public bool HasBattery => Connected && service.Battery?.Percent is not null;
     public int BatteryLevel => HasBattery ? service.Battery!.Percent!.Value : -1; // unknown is never fabricated as zero
 
@@ -152,7 +152,7 @@ public sealed class SonyA7VCamera : ICamera
     public int SubSampleY { get; set; }
     public int SubSampleWidth { get; set; }
     public int SubSampleHeight { get; set; }
-    public void UpdateSubSampleArea() => throw new NotSupportedException("Sensor ROI is not exposed by this SDK path");
+    public void UpdateSubSampleArea() => throw new NotSupportedException(Text.T("Sensor ROI is not exposed by this SDK path"));
     public bool HasShutter => true;
 
     public bool CanShowLiveView => service.Facts?.LiveViewAvailable == true;
@@ -211,7 +211,7 @@ public sealed class SonyA7VCamera : ICamera
             }
         }
         var frame = await service.GetLiveViewFrameAsync(token).ConfigureAwait(false)
-            ?? throw new InvalidOperationException("The camera has no live view frame ready yet");
+            ?? throw new InvalidOperationException(Text.T("The camera has no live view frame ready yet"));
         var color = service.Settings.LiveViewColor;
         var pixels = JpegPreview.ToPixels(frame.Jpeg, color, out var width, out var height);
         var meta = new ImageMetaData();
@@ -276,11 +276,11 @@ public sealed class SonyA7VCamera : ICamera
     public IList<int> Gains => service.Facts is { } f ? f.Isos.Select(x => (int)x).ToList() : new List<int>();
 
     public bool CanSetOffset => false;
-    public int Offset { get => 0; set => throw new NotSupportedException("No hardware offset control"); }
+    public int Offset { get => 0; set => throw new NotSupportedException(Text.T("No hardware offset control")); }
     public int OffsetMin => 0;
     public int OffsetMax => 0;
     public bool CanSetUSBLimit => false;
-    public int USBLimit { get => 0; set => throw new NotSupportedException("No host USB bandwidth control"); }
+    public int USBLimit { get => 0; set => throw new NotSupportedException(Text.T("No host USB bandwidth control")); }
     public int USBLimitMin => 0;
     public int USBLimitMax => 0;
     public int USBLimitStep => 0;
@@ -291,10 +291,10 @@ public sealed class SonyA7VCamera : ICamera
     public void StartExposure(CaptureSequence captureSequence)
     {
         ArgumentNullException.ThrowIfNull(captureSequence);
-        if (!Connected) throw new InvalidOperationException("Camera is not connected");
-        if (exposureTask is { IsCompleted: false }) throw new InvalidOperationException("An exposure is already running");
+        if (!Connected) throw new InvalidOperationException(Text.T("Camera is not connected"));
+        if (exposureTask is { IsCompleted: false }) throw new InvalidOperationException(Text.T("An exposure is already running"));
         if (captureSequence.Binning.X != 1 || captureSequence.Binning.Y != 1)
-            throw new NotSupportedException("Only 1x1 binning is supported");
+            throw new NotSupportedException(Text.T("Only 1x1 binning is supported"));
         sequence = captureSequence;
         gain = captureSequence.Gain > 0 ? captureSequence.Gain : checked((int)(service.Facts?.Parameters.Iso ?? 0));
         exposureSeconds = captureSequence.ExposureTime;
@@ -357,10 +357,11 @@ public sealed class SonyA7VCamera : ICamera
         meta.Image.ImageType = sequence?.ImageType ?? "LIGHT";
         meta.Image.Binning = "1x1";
         meta.Image.SetExposureTimes(exposureStart, exposureStart + TimeSpan.FromSeconds(exposureSeconds));
-        meta.Camera.Gain = gain;
+        var actual=service.LastCapture?.ActualParameters ?? throw new InvalidDataException(Text.T("Capture has no verified camera parameters"));
+        meta.Camera.Gain = checked((int)actual.Iso);
         meta.Camera.BinX = 1; meta.Camera.BinY = 1;
         meta.Camera.ReadoutModeIndex = 0;
-        meta.Camera.ReadoutModeName = "Full frame";
+        meta.Camera.ReadoutModeName = service.CaptureFrame.ToString();
         meta.Camera.PixelSize = PixelSizeX;
         meta.Camera.Temperature = double.NaN;
         meta.Camera.ElectronsPerADU = ElectronsPerADU;
@@ -385,6 +386,7 @@ public sealed class SonyA7VCamera : ICamera
             for (var n = 1; File.Exists(target); n++) target = Path.Combine(targetDirectory, Path.GetFileNameWithoutExtension(name) + "(" + n + ")" + Path.GetExtension(name));
             File.Copy(source, target);
             Logger.Info("[SonyA7V] Original RAW kept at " + target);
+            if(service.LastCapture is {} delivered)service.CompleteDelivery(delivered);
         }
         catch (Exception ex) { Logger.Error("[SonyA7V] Could not keep the original RAW: " + ex.Message, ex); }
     }

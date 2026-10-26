@@ -23,7 +23,7 @@ public static class AstroSettingsWindow {
             if(ReferenceEquals(session,SonyCameraService.Shared)&&host is not null&&
                AstroDockViewModel.RegisteredContentId is {} contentId&&SonyDockNavigation.TryActivate(host,contentId))return;
             if(current is not null){current.Activate();return;}
-            current=new Window{Title="Sony CrSDK · 天文参数与状态",Width=980,Height=Math.Min(820,SystemParameters.WorkArea.Height-40),MinWidth=740,MinHeight=500,Content=new AstroSettingsView(session,new PluginSettingsStore(PluginStorage.Current.SettingsDirectory())),WindowStartupLocation=WindowStartupLocation.CenterOwner};
+            current=new Window{Title=Text.T("Sony CrSDK · 天文参数与状态"),Width=980,Height=Math.Min(820,SystemParameters.WorkArea.Height-40),MinWidth=740,MinHeight=500,Content=new AstroSettingsView(session,new PluginSettingsStore(PluginStorage.Current.SettingsDirectory())),WindowStartupLocation=WindowStartupLocation.CenterOwner};
             if(Application.Current?.MainWindow is {} owner&&owner.IsVisible)current.Owner=owner;
             current.Closed+=(_,_)=>current=null;current.Show();
         });

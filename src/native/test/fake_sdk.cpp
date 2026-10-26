@@ -79,10 +79,13 @@ extern "C" bool Release(){return true;}
 extern "C" CrError EnumCameraObjects(ICrEnumCameraObjectInfo** p,CrInt8u){*p=new Enumeration;return 0;}
 extern "C" CrError Connect(ICrCameraObjectInfo*,IDeviceCallback* cb,CrDeviceHandle* handle,CrSdkControlMode,CrReconnectingSet,const char*,const char*,const char*,CrInt32u,const CrInt16u*) {
  if(!sessions.empty()&&!sessions.back().last_file.empty()) sessions.back().cb->OnCompleteDownload(sessions.back().last_file.data(),0xFFFFFFFF); // old connection callback object
- feature_properties.clear();queued_remaining=0; sessions.push_back({cb});*handle=static_cast<CrDeviceHandle>(sessions.size());cb->OnConnected(static_cast<DeviceConnectionVersioin>(0));return 0;
+ feature_properties.clear();queued_remaining=0; sessions.push_back({cb});*handle=static_cast<CrDeviceHandle>(sessions.size());
+ if(scenario()=="connect-timeout")return 0;
+ if(scenario()=="connect-error-handle")return CrError_Api_InvalidCalled;
+ cb->OnConnected(static_cast<DeviceConnectionVersioin>(0));return 0;
 }
 extern "C" CrError Disconnect(CrDeviceHandle h){sessions.at(static_cast<size_t>(h)-1).cb->OnDisconnected(0);return 0;}
-extern "C" CrError ReleaseDevice(CrDeviceHandle){return 0;}
+extern "C" CrError ReleaseDevice(CrDeviceHandle){return scenario()=="release-fail"?CrError_Api_InvalidCalled:0;}
 extern "C" CrError GetSelectDeviceProperties(CrDeviceHandle h,CrInt32u count,CrInt32u* codes,CrDeviceProperty** out,CrInt32* n) {
  *out=nullptr;*n=0;
  for(CrInt32u i=0;i<count;++i) {
@@ -110,7 +113,12 @@ extern "C" CrError GetSelectDeviceProperties(CrDeviceHandle h,CrInt32u count,CrI
    p.SetValueSize(sizeof(choices));p.SetValues(reinterpret_cast<CrInt8u*>(choices));continue;
   }
   switch(codes[i]) {
-  case CrDeviceProperty_IsoSensitivity:v=iso;options={0x10000032,100,400,800,0xFFFFFF};break;
+  case CrDeviceProperty_IsoSensitivity:{
+   static std::string last_body;char body[32]{};GetEnvironmentVariableA("SW_FAKE_BODY_ISO",body,sizeof(body));
+   if(last_body!=body){last_body=body;if(body[0])iso=std::strtoul(body,nullptr,10);}
+   v=iso;options={0x10000032,100,400,800,1600,0xFFFFFF};break;
+  }
+  case CrDeviceProperty_APS_C_S35:{char body[8]{};GetEnvironmentVariableA("SW_FAKE_CROP",body,sizeof(body));v=body[0]?std::strtoul(body,nullptr,10):1;options={1,2,3};break;}
   case CrDeviceProperty_ShutterSpeed:v=shutter;options=scenario()=="no-bulb"?std::vector<uint32_t>{0x10064,0x1003C,0x3C0001}:std::vector<uint32_t>{0,0x10064,0x1003C,0x3C0001};break;
   case CrDeviceProperty_FNumber:v=scenario()=="feature-no-lens"?0:(feature_properties.count(codes[i])?feature_properties[codes[i]]:280);options={280,400,560};break;
   case CrDeviceProperty_LiveViewStatus:v=CrLiveView_Enable;break;
@@ -147,7 +155,7 @@ extern "C" CrError SetDeviceProperty(CrDeviceHandle,CrDeviceProperty* p){
  if(scenario()!="feature-set-timeout"){feature_properties[p->GetCode()]=(p->GetCode()==CrDeviceProperty_Focus_Magnifier_Setting&&static_cast<uint32_t>(p->GetCurrentValue())==0xFFFFFFFFu)?((p->GetCurrentValue()&0xFFFFFFFF00000000ull)|0x00960064ull):p->GetCurrentValue();if(p->GetCode()==CrDeviceProperty_FocusPositionSetting)feature_properties[CrDeviceProperty_FocusPositionCurrentValue]=p->GetCurrentValue();}
 if(scenario()=="queue")queued_remaining=2;
  if(scenario()=="bulb-restorefail" && p->GetCode()==CrDeviceProperty_ShutterSpeed && p->GetCurrentValue()!=0)return CrError_Api_InvalidCalled;switch(p->GetCode()){case CrDeviceProperty_IsoSensitivity:iso=p->GetCurrentValue();break;case CrDeviceProperty_ShutterSpeed:shutter=p->GetCurrentValue();break;case CrDeviceProperty_BulbTimerSetting:bulb_timer=p->GetCurrentValue();break;case CrDeviceProperty_StillImageStoreDestination:destination=p->GetCurrentValue();break;}return 0;}
-extern "C" CrError SetSaveInfo(CrDeviceHandle h,CrChar* dir,CrChar* prefix,CrInt32){auto& s=sessions.at(static_cast<size_t>(h)-1);s.directory=dir;s.prefix=prefix;return 0;}
+extern "C" CrError SetSaveInfo(CrDeviceHandle h,CrChar* dir,CrChar* prefix,CrInt32){if(scenario()=="iso-race")iso=1600;if(scenario()=="crop-race")SetEnvironmentVariableA("SW_FAKE_CROP","2");auto& s=sessions.at(static_cast<size_t>(h)-1);s.directory=dir;s.prefix=prefix;return 0;}
 extern "C" CrError SendCommand(CrDeviceHandle h,CrInt32u command,CrCommandParam param) {
  if(command==CrCommandId_MovieRecord){if(scenario()=="feature-movie-fail")return CrError_Api_InvalidCalled;recording=param==CrCommandParam_Down?1:0;return 0;}
  if(command==CrCommandId_CancelContentsTransfer)return 0;

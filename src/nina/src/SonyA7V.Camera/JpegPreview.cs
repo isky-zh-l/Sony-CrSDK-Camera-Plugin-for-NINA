@@ -12,7 +12,7 @@ internal static class JpegPreview
 {
     internal static ushort[] ToPixels(byte[] jpeg, bool color, out int width, out int height)
     {
-        if (jpeg.Length == 0) throw new InvalidDataException("Empty live view frame");
+        if (jpeg.Length == 0) throw new InvalidDataException(Text.T("Empty live view frame"));
         var image = new BitmapImage();
         image.BeginInit();
         image.CacheOption = BitmapCacheOption.OnLoad;

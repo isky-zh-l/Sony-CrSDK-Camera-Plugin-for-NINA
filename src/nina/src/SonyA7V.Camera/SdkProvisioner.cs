@@ -21,14 +21,14 @@ public static class SdkProvisioner {
             };
             if(elevate)start.Verb="runas";
             foreach(var arg in new[]{"-NoProfile","-NonInteractive","-ExecutionPolicy","Bypass","-File",script,"-SonySdkRoot",sdk,"-NinaApp",storage.HostDirectory,"-DataDirectory",storage.DataDirectory,"-ResultFile",resultFile})start.ArgumentList.Add(arg);
-            using var child=Process.Start(start)??throw new IOException("无法启动 SDK 配置。");
+            using var child=Process.Start(start)??throw new IOException(Text.T("无法启动 SDK 配置。"));
             var stdout=elevate?Task.FromResult(""):child.StandardOutput.ReadToEndAsync();
             var stderr=elevate?Task.FromResult(""):child.StandardError.ReadToEndAsync();
             // Do not abandon a filesystem transaction after the child has started.
             await child.WaitForExitAsync();await stdout;await stderr;
-            var message=File.Exists(resultFile)?File.ReadAllText(resultFile):child.ExitCode==0?"SDK 配置完成。":"SDK 导入失败，请检查目录权限和 SDK 版本。";
+            var message=File.Exists(resultFile)?File.ReadAllText(resultFile):child.ExitCode==0?Text.T("SDK 配置完成。"):Text.T("SDK 导入失败，请检查目录权限和 SDK 版本。");
             return new(child.ExitCode,message);
-        }catch(Win32Exception ex)when(ex.NativeErrorCode==1223){return new(1223,"已取消管理员授权；可稍后在 SDK 配置页重试。");}
+        }catch(Win32Exception ex)when(ex.NativeErrorCode==1223){return new(1223,Text.T("已取消管理员授权；可稍后在 SDK 配置页重试。"));}
         finally{if(File.Exists(resultFile)){try{File.Delete(resultFile);}catch(IOException){}}}
     }
     public static bool SdkLoaded()=>Process.GetCurrentProcess().Modules.Cast<ProcessModule>().Any(m=>m.ModuleName.Equals("Cr_Core.dll",StringComparison.OrdinalIgnoreCase));

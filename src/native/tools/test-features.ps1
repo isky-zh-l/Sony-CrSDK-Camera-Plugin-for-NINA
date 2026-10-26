@@ -1,4 +1,4 @@
-param([string]$BuildDirectory=(Join-Path (Split-Path $PSScriptRoot -Parent) 'build-features'),[string]$OutputDirectory=(Join-Path $env:TEMP ('sony-native-features-'+[guid]::NewGuid().ToString('N'))))
+﻿param([string]$BuildDirectory=(Join-Path (Split-Path $PSScriptRoot -Parent) 'build-features'),[string]$OutputDirectory=(Join-Path $env:TEMP ('sony-native-features-'+[guid]::NewGuid().ToString('N'))))
 $ErrorActionPreference='Stop'
 $OutputDirectory=[IO.Path]::GetFullPath($OutputDirectory)
 $exe=Join-Path $BuildDirectory 'fake\wrapper_features_test.exe'

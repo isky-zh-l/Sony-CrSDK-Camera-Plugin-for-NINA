@@ -1,4 +1,4 @@
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.IO;
 using System.Text.Json;
 using Microsoft.Win32;
@@ -17,19 +17,31 @@ public sealed class SdkDiscovery(PluginStorage storage) {
             var lockPath=Path.Combine(storage.PluginDirectory,"config","sdk-runtime-lock.json");PluginStorage.NoLinks(lockPath);
             using var json=JsonDocument.Parse(File.ReadAllText(lockPath).TrimStart('\ufeff'));
             var entries=json.RootElement.GetProperty("sdkFiles").EnumerateArray().ToArray();
-            if (entries.Length!=required.Length) throw new InvalidDataException("SDK lock does not contain seven fixed files.");
-            foreach(var runtime in new[]{Path.Combine(root,"external","crsdk"),Path.Combine(root,"SimpleCli","external","crsdk"),root}) {
-                if (!File.Exists(Path.Combine(runtime,"Cr_Core.dll"))) continue;
-                bool valid=true;
-                foreach(var name in required) {
-                    var matches=entries.Where(e=>e.GetProperty("path").GetString()==name).ToArray();
-                    if(matches.Length!=1){valid=false;break;}
-                    var path=Path.Combine(runtime,name);PluginStorage.NoLinks(path);
-                    if(!File.Exists(path)||new FileInfo(path).Length>64L*1024*1024||!string.Equals(PluginStorage.Hash(path),matches[0].GetProperty("sha256").GetString(),StringComparison.OrdinalIgnoreCase)){valid=false;break;}
-                }
-                if(valid)return Path.GetFullPath(runtime); // Configure-Sdk accepts this exact runtime layout.
+            if (entries.Length!=required.Length) throw new InvalidDataException(Text.T("SDK lock does not declare the expected files"));
+            var found=CompatibleRuntime(root,entries);
+            if(found is not null)return found;
+            // Users often select the ZIP extraction root, one level above the SDK tree; the folders
+            // below are bounded, name-filtered and hash-validated, so this stays read-only and exact.
+            foreach(var child in Children(root).Take(64)) {
+                if(!SdkNamed(Path.GetFileName(child)))continue;
+                try{found=CompatibleRuntime(child,entries);}catch(Exception ex)when(ex is IOException or UnauthorizedAccessException or ArgumentException){continue;}
+                if(found is not null)return found;
             }
         }catch(Exception ex)when(ex is IOException or UnauthorizedAccessException or ArgumentException or System.Security.SecurityException) { }
+        return null;
+    }
+    private static string? CompatibleRuntime(string root,JsonElement[] entries) {
+        foreach(var runtime in new[]{Path.Combine(root,"external","crsdk"),Path.Combine(root,"SimpleCli","external","crsdk"),root}) {
+            if (!File.Exists(Path.Combine(runtime,"Cr_Core.dll"))) continue;
+            bool valid=true;
+            foreach(var name in required) {
+                var matches=entries.Where(e=>e.GetProperty("path").GetString()==name).ToArray();
+                if(matches.Length!=1){valid=false;break;}
+                var path=Path.Combine(runtime,name);PluginStorage.NoLinks(path);
+                if(!File.Exists(path)||new FileInfo(path).Length>64L*1024*1024||!string.Equals(PluginStorage.Hash(path),matches[0].GetProperty("sha256").GetString(),StringComparison.OrdinalIgnoreCase)){valid=false;break;}
+            }
+            if(valid)return Path.GetFullPath(runtime); // Configure-Sdk accepts this exact runtime layout.
+        }
         return null;
     }
     public IEnumerable<string> DefaultRoots() {

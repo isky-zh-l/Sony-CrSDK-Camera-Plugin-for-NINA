@@ -1,0 +1,3242 @@
+{
+  "Sony CrSDK 控制": {
+    "zh": "Sony CrSDK 控制",
+    "en": "Sony CrSDK Controls"
+  },
+  "Sony CrSDK Controls": {
+    "zh": "Sony CrSDK 控制",
+    "en": "Sony CrSDK Controls"
+  },
+  "Sony CrSDK · 天文参数与状态": {
+    "zh": "Sony CrSDK · 天文参数与状态",
+    "en": "Sony CrSDK · Astronomy settings and status"
+  },
+  "Sony CrSDK · Astronomy settings and status": {
+    "zh": "Sony CrSDK · 天文参数与状态",
+    "en": "Sony CrSDK · Astronomy settings and status"
+  },
+  "当前模式或镜头未提供": {
+    "zh": "当前模式或镜头未提供",
+    "en": "Not available in this mode or with this lens"
+  },
+  "Not available in this mode or with this lens": {
+    "zh": "当前模式或镜头未提供",
+    "en": "Not available in this mode or with this lens"
+  },
+  "当前选项暂未识别": {
+    "zh": "当前选项暂未识别",
+    "en": "Unrecognized current option"
+  },
+  "Unrecognized current option": {
+    "zh": "当前选项暂未识别",
+    "en": "Unrecognized current option"
+  },
+  "未提供": {
+    "zh": "未提供",
+    "en": "Unavailable"
+  },
+  "Unavailable": {
+    "zh": "未提供",
+    "en": "Unavailable"
+  },
+  "不可读": {
+    "zh": "不可读",
+    "en": "Unreadable"
+  },
+  "Unreadable": {
+    "zh": "不可读",
+    "en": "Unreadable"
+  },
+  "只读": {
+    "zh": "只读",
+    "en": "Read only"
+  },
+  "Read only": {
+    "zh": "只读",
+    "en": "Read only"
+  },
+  "无已识别可写选项": {
+    "zh": "无已识别可写选项",
+    "en": "No recognized writable options"
+  },
+  "No recognized writable options": {
+    "zh": "无已识别可写选项",
+    "en": "No recognized writable options"
+  },
+  "可调整": {
+    "zh": "可调整",
+    "en": "Adjustable"
+  },
+  "Adjustable": {
+    "zh": "可调整",
+    "en": "Adjustable"
+  },
+  "尚无本连接的图像": {
+    "zh": "尚无本连接的图像",
+    "en": "No image in this connection yet"
+  },
+  "No image in this connection yet": {
+    "zh": "尚无本连接的图像",
+    "en": "No image in this connection yet"
+  },
+  "未知": {
+    "zh": "未知",
+    "en": "Unknown"
+  },
+  "Unknown": {
+    "zh": "未知",
+    "en": "Unknown"
+  },
+  "保持不变": {
+    "zh": "保持不变",
+    "en": "Unchanged"
+  },
+  "Unchanged": {
+    "zh": "保持不变",
+    "en": "Unchanged"
+  },
+  "已确认": {
+    "zh": "已确认",
+    "en": "Confirmed"
+  },
+  "Confirmed": {
+    "zh": "已确认",
+    "en": "Confirmed"
+  },
+  "未确认": {
+    "zh": "未确认",
+    "en": "Unconfirmed"
+  },
+  "Unconfirmed": {
+    "zh": "未确认",
+    "en": "Unconfirmed"
+  },
+  "本连接尚无准备回执": {
+    "zh": "本连接尚无准备回执",
+    "en": "No preparation receipt in this connection"
+  },
+  "No preparation receipt in this connection": {
+    "zh": "本连接尚无准备回执",
+    "en": "No preparation receipt in this connection"
+  },
+  "已提交 {0} 项，已确认 {1} 项": {
+    "zh": "已提交 {0} 项，已确认 {1} 项",
+    "en": "Submitted {0}; confirmed {1}"
+  },
+  "Submitted {0}; confirmed {1}": {
+    "zh": "已提交 {0} 项，已确认 {1} 项",
+    "en": "Submitted {0}; confirmed {1}"
+  },
+  "仅保存 NINA 图像": {
+    "zh": "仅保存 NINA 图像",
+    "en": "Save NINA images only"
+  },
+  "Save NINA images only": {
+    "zh": "仅保存 NINA 图像",
+    "en": "Save NINA images only"
+  },
+  "NINA 图像 + ARW 副本": {
+    "zh": "NINA 图像 + ARW 副本",
+    "en": "NINA images + ARW copies"
+  },
+  "NINA images + ARW copies": {
+    "zh": "NINA 图像 + ARW 副本",
+    "en": "NINA images + ARW copies"
+  },
+  "向 NINA 交付原始 ARW": {
+    "zh": "向 NINA 交付原始 ARW",
+    "en": "Deliver original ARW to NINA"
+  },
+  "Deliver original ARW to NINA": {
+    "zh": "向 NINA 交付原始 ARW",
+    "en": "Deliver original ARW to NINA"
+  },
+  "处理中…": {
+    "zh": "处理中…",
+    "en": "Working…"
+  },
+  "Working…": {
+    "zh": "处理中…",
+    "en": "Working…"
+  },
+  "连接已改变，请重新刷新": {
+    "zh": "连接已改变，请重新刷新",
+    "en": "Connection changed. Refresh again."
+  },
+  "Connection changed. Refresh again.": {
+    "zh": "连接已改变，请重新刷新",
+    "en": "Connection changed. Refresh again."
+  },
+  "拍摄条件已通过检查；可以重试拍摄，不会自动重拍。": {
+    "zh": "拍摄条件已通过检查；可以重试拍摄，不会自动重拍。",
+    "en": "Capture checks passed. You can retry the exposure; no automatic retry is performed."
+  },
+  "Capture checks passed. You can retry the exposure; no automatic retry is performed.": {
+    "zh": "拍摄条件已通过检查；可以重试拍摄，不会自动重拍。",
+    "en": "Capture checks passed. You can retry the exposure; no automatic retry is performed."
+  },
+  "已读回相机当前参数；不可用与只读项目不会写入。": {
+    "zh": "已读回相机当前参数；不可用与只读项目不会写入。",
+    "en": "Current camera settings read back. Unavailable and read-only settings are not written."
+  },
+  "Current camera settings read back. Unavailable and read-only settings are not written.": {
+    "zh": "已读回相机当前参数；不可用与只读项目不会写入。",
+    "en": "Current camera settings read back. Unavailable and read-only settings are not written."
+  },
+  "参数不可写或连接已变化，请刷新后选择有效候选": {
+    "zh": "参数不可写或连接已变化，请刷新后选择有效候选",
+    "en": "Setting is not writable or connection changed. Refresh and choose an available option."
+  },
+  "Setting is not writable or connection changed. Refresh and choose an available option.": {
+    "zh": "参数不可写或连接已变化，请刷新后选择有效候选",
+    "en": "Setting is not writable or connection changed. Refresh and choose an available option."
+  },
+  "相机已接受参数并完成回读。": {
+    "zh": "相机已接受参数并完成回读。",
+    "en": "The camera accepted and confirmed the setting."
+  },
+  "The camera accepted and confirmed the setting.": {
+    "zh": "相机已接受参数并完成回读。",
+    "en": "The camera accepted and confirmed the setting."
+  },
+  "请先停止曝光、预览或镜头移动": {
+    "zh": "请先停止曝光、预览或镜头移动",
+    "en": "Stop exposure, live view or lens movement first."
+  },
+  "Stop exposure, live view or lens movement first.": {
+    "zh": "请先停止曝光、预览或镜头移动",
+    "en": "Stop exposure, live view or lens movement first."
+  },
+  "所选天文准备已应用并回读；可在本连接恢复原设置。": {
+    "zh": "所选天文准备已应用并回读；可在本连接恢复原设置。",
+    "en": "Selected preparation applied and verified. Original settings can be restored in this connection."
+  },
+  "Selected preparation applied and verified. Original settings can be restored in this connection.": {
+    "zh": "所选天文准备已应用并回读；可在本连接恢复原设置。",
+    "en": "Selected preparation applied and verified. Original settings can be restored in this connection."
+  },
+  "本连接的准备设置已恢复。": {
+    "zh": "本连接的准备设置已恢复。",
+    "en": "Original preparation settings restored for this connection."
+  },
+  "Original preparation settings restored for this connection.": {
+    "zh": "本连接的准备设置已恢复。",
+    "en": "Original preparation settings restored for this connection."
+  },
+  "默认设置已保存；下次连接相机生效。当前相机参数未改变。": {
+    "zh": "默认设置已保存；下次连接相机生效。当前相机参数未改变。",
+    "en": "Defaults saved for the next connection. Camera settings have not changed."
+  },
+  "Defaults saved for the next connection. Camera settings have not changed.": {
+    "zh": "默认设置已保存；下次连接相机生效。当前相机参数未改变。",
+    "en": "Defaults saved for the next connection. Camera settings have not changed."
+  },
+  "已重新载入保存的默认设置。": {
+    "zh": "已重新载入保存的默认设置。",
+    "en": "Saved defaults reloaded."
+  },
+  "Saved defaults reloaded.": {
+    "zh": "已重新载入保存的默认设置。",
+    "en": "Saved defaults reloaded."
+  },
+  "镜头光圈": {
+    "zh": "镜头光圈",
+    "en": "Lens aperture"
+  },
+  "Lens aperture": {
+    "zh": "镜头光圈",
+    "en": "Lens aperture"
+  },
+  "仅接受当前电子镜头提供的精确光圈。": {
+    "zh": "仅接受当前电子镜头提供的精确光圈。",
+    "en": "Accepts only exact aperture values offered by the attached electronic lens."
+  },
+  "Accepts only exact aperture values offered by the attached electronic lens.": {
+    "zh": "仅接受当前电子镜头提供的精确光圈。",
+    "en": "Accepts only exact aperture values offered by the attached electronic lens."
+  },
+  "RAW 压缩": {
+    "zh": "RAW 压缩",
+    "en": "RAW compression"
+  },
+  "RAW compression": {
+    "zh": "RAW 压缩",
+    "en": "RAW compression"
+  },
+  "切换格式可能改变图像尺寸；不要混用校准与叠加组。": {
+    "zh": "切换格式可能改变图像尺寸；不要混用校准与叠加组。",
+    "en": "Changing format may change image dimensions. Keep calibration and stacking groups consistent."
+  },
+  "Changing format may change image dimensions. Keep calibration and stacking groups consistent.": {
+    "zh": "切换格式可能改变图像尺寸；不要混用校准与叠加组。",
+    "en": "Changing format may change image dimensions. Keep calibration and stacking groups consistent."
+  },
+  "长曝光降噪": {
+    "zh": "长曝光降噪",
+    "en": "Long-exposure noise reduction"
+  },
+  "Long-exposure noise reduction": {
+    "zh": "长曝光降噪",
+    "en": "Long-exposure noise reduction"
+  },
+  "机内降噪会增加等待；自行建立暗场库时通常关闭。": {
+    "zh": "机内降噪会增加等待；自行建立暗场库时通常关闭。",
+    "en": "In-camera reduction adds waiting time; usually disabled when using your own dark library."
+  },
+  "In-camera reduction adds waiting time; usually disabled when using your own dark library.": {
+    "zh": "机内降噪会增加等待；自行建立暗场库时通常关闭。",
+    "en": "In-camera reduction adds waiting time; usually disabled when using your own dark library."
+  },
+  "高 ISO 降噪": {
+    "zh": "高 ISO 降噪",
+    "en": "High ISO noise reduction"
+  },
+  "High ISO noise reduction": {
+    "zh": "高 ISO 降噪",
+    "en": "High ISO noise reduction"
+  },
+  "对 RAW 的影响依机型而异。": {
+    "zh": "对 RAW 的影响依机型而异。",
+    "en": "Effects on RAW depend on the camera model."
+  },
+  "Effects on RAW depend on the camera model.": {
+    "zh": "对 RAW 的影响依机型而异。",
+    "en": "Effects on RAW depend on the camera model."
+  },
+  "机身防抖": {
+    "zh": "机身防抖",
+    "en": "SteadyShot"
+  },
+  "SteadyShot": {
+    "zh": "机身防抖",
+    "en": "SteadyShot"
+  },
+  "赤道仪或固定望远镜拍摄时通常关闭。": {
+    "zh": "赤道仪或固定望远镜拍摄时通常关闭。",
+    "en": "Usually disabled when imaging on a mount or fixed telescope."
+  },
+  "Usually disabled when imaging on a mount or fixed telescope.": {
+    "zh": "赤道仪或固定望远镜拍摄时通常关闭。",
+    "en": "Usually disabled when imaging on a mount or fixed telescope."
+  },
+  "镜头对焦模式": {
+    "zh": "镜头对焦模式",
+    "en": "Lens focus mode"
+  },
+  "Lens focus mode": {
+    "zh": "镜头对焦模式",
+    "en": "Lens focus mode"
+  },
+  "静态 RAW 拍摄要求 MF；镜头位置请在 NINA 对焦器面板调节。": {
+    "zh": "静态 RAW 拍摄要求 MF；镜头位置请在 NINA 对焦器面板调节。",
+    "en": "Still RAW capture requires MF. Adjust lens position in NINA's focuser panel."
+  },
+  "Still RAW capture requires MF. Adjust lens position in NINA's focuser panel.": {
+    "zh": "静态 RAW 拍摄要求 MF；镜头位置请在 NINA 对焦器面板调节。",
+    "en": "Still RAW capture requires MF. Adjust lens position in NINA's focuser panel."
+  },
+  "快门类型": {
+    "zh": "快门类型",
+    "en": "Shutter type"
+  },
+  "Shutter type": {
+    "zh": "快门类型",
+    "en": "Shutter type"
+  },
+  "以机身当前候选为准；切换后重新检查长曝条件。": {
+    "zh": "以机身当前候选为准；切换后重新检查长曝条件。",
+    "en": "Uses the body's available options. Recheck long-exposure readiness after changing."
+  },
+  "Uses the body's available options. Recheck long-exposure readiness after changing.": {
+    "zh": "以机身当前候选为准；切换后重新检查长曝条件。",
+    "en": "Uses the body's available options. Recheck long-exposure readiness after changing."
+  },
+  "静音模式": {
+    "zh": "静音模式",
+    "en": "Silent mode"
+  },
+  "Silent mode": {
+    "zh": "静音模式",
+    "en": "Silent mode"
+  },
+  "可能与快门、长曝或降噪设置互相约束。": {
+    "zh": "可能与快门、长曝或降噪设置互相约束。",
+    "en": "May interact with shutter, long-exposure or noise reduction settings."
+  },
+  "May interact with shutter, long-exposure or noise reduction settings.": {
+    "zh": "可能与快门、长曝或降噪设置互相约束。",
+    "en": "May interact with shutter, long-exposure or noise reduction settings."
+  },
+  "APS-C 裁切": {
+    "zh": "APS-C 裁切",
+    "en": "APS-C crop"
+  },
+  "APS-C crop": {
+    "zh": "APS-C 裁切",
+    "en": "APS-C crop"
+  },
+  "会改变画幅；新尺寸以实际 RAW 为准。": {
+    "zh": "会改变画幅；新尺寸以实际 RAW 为准。",
+    "en": "Changes the field of view. Actual RAW data determines image dimensions."
+  },
+  "Changes the field of view. Actual RAW data determines image dimensions.": {
+    "zh": "会改变画幅；新尺寸以实际 RAW 为准。",
+    "en": "Changes the field of view. Actual RAW data determines image dimensions."
+  },
+  "实时预览画质": {
+    "zh": "实时预览画质",
+    "en": "Live view quality"
+  },
+  "Live view quality": {
+    "zh": "实时预览画质",
+    "en": "Live view quality"
+  },
+  "请先停止 NINA 实时预览，再更改画质。": {
+    "zh": "请先停止 NINA 实时预览，再更改画质。",
+    "en": "Stop NINA live view before changing its quality."
+  },
+  "Stop NINA live view before changing its quality.": {
+    "zh": "请先停止 NINA 实时预览，再更改画质。",
+    "en": "Stop NINA live view before changing its quality."
+  },
+  "预览曝光效果": {
+    "zh": "预览曝光效果",
+    "en": "Live view exposure effect"
+  },
+  "Live view exposure effect": {
+    "zh": "预览曝光效果",
+    "en": "Live view exposure effect"
+  },
+  "关闭可辅助找星；不会改变 RAW 像素。": {
+    "zh": "关闭可辅助找星；不会改变 RAW 像素。",
+    "en": "Disabling may help locate stars; RAW pixels are unchanged."
+  },
+  "Disabling may help locate stars; RAW pixels are unchanged.": {
+    "zh": "关闭可辅助找星；不会改变 RAW 像素。",
+    "en": "Disabling may help locate stars; RAW pixels are unchanged."
+  },
+  "空闲机身存储位置": {
+    "zh": "空闲机身存储位置",
+    "en": "Idle camera save destination"
+  },
+  "Idle camera save destination": {
+    "zh": "空闲机身存储位置",
+    "en": "Idle camera save destination"
+  },
+  "拍摄时插件临时启用主机接收，结束后恢复；原片副本请在默认设置中选择。": {
+    "zh": "拍摄时插件临时启用主机接收，结束后恢复；原片副本请在默认设置中选择。",
+    "en": "Capture temporarily enables host transfer and restores the destination afterwards. Select RAW copies in Defaults."
+  },
+  "Capture temporarily enables host transfer and restores the destination afterwards. Select RAW copies in Defaults.": {
+    "zh": "拍摄时插件临时启用主机接收，结束后恢复；原片副本请在默认设置中选择。",
+    "en": "Capture temporarily enables host transfer and restores the destination afterwards. Select RAW copies in Defaults."
+  },
+  "卡槽 1 剩余张数": {
+    "zh": "卡槽 1 剩余张数",
+    "en": "Slot 1 remaining images"
+  },
+  "Slot 1 remaining images": {
+    "zh": "卡槽 1 剩余张数",
+    "en": "Slot 1 remaining images"
+  },
+  "机身提供的估计值；不代表主机磁盘余量。": {
+    "zh": "机身提供的估计值；不代表主机磁盘余量。",
+    "en": "Camera estimate; does not indicate free disk space on the computer."
+  },
+  "Camera estimate; does not indicate free disk space on the computer.": {
+    "zh": "机身提供的估计值；不代表主机磁盘余量。",
+    "en": "Camera estimate; does not indicate free disk space on the computer."
+  },
+  "卡槽 2 剩余张数": {
+    "zh": "卡槽 2 剩余张数",
+    "en": "Slot 2 remaining images"
+  },
+  "Slot 2 remaining images": {
+    "zh": "卡槽 2 剩余张数",
+    "en": "Slot 2 remaining images"
+  },
+  "未压缩": {
+    "zh": "未压缩",
+    "en": "Uncompressed"
+  },
+  "Uncompressed": {
+    "zh": "未压缩",
+    "en": "Uncompressed"
+  },
+  "压缩": {
+    "zh": "压缩",
+    "en": "Compressed"
+  },
+  "Compressed": {
+    "zh": "压缩",
+    "en": "Compressed"
+  },
+  "无损压缩": {
+    "zh": "无损压缩",
+    "en": "Lossless compressed"
+  },
+  "Lossless compressed": {
+    "zh": "无损压缩",
+    "en": "Lossless compressed"
+  },
+  "无损压缩 S": {
+    "zh": "无损压缩 S",
+    "en": "Lossless compressed S"
+  },
+  "Lossless compressed S": {
+    "zh": "无损压缩 S",
+    "en": "Lossless compressed S"
+  },
+  "无损压缩 M": {
+    "zh": "无损压缩 M",
+    "en": "Lossless compressed M"
+  },
+  "Lossless compressed M": {
+    "zh": "无损压缩 M",
+    "en": "Lossless compressed M"
+  },
+  "无损压缩 L": {
+    "zh": "无损压缩 L",
+    "en": "Lossless compressed L"
+  },
+  "Lossless compressed L": {
+    "zh": "无损压缩 L",
+    "en": "Lossless compressed L"
+  },
+  "压缩 HQ": {
+    "zh": "压缩 HQ",
+    "en": "Compressed HQ"
+  },
+  "Compressed HQ": {
+    "zh": "压缩 HQ",
+    "en": "Compressed HQ"
+  },
+  "关闭": {
+    "zh": "关闭",
+    "en": "Off"
+  },
+  "Off": {
+    "zh": "关闭",
+    "en": "Off"
+  },
+  "开启": {
+    "zh": "开启",
+    "en": "On"
+  },
+  "On": {
+    "zh": "开启",
+    "en": "On"
+  },
+  "低": {
+    "zh": "低",
+    "en": "Low"
+  },
+  "Low": {
+    "zh": "低",
+    "en": "Low"
+  },
+  "标准": {
+    "zh": "标准",
+    "en": "Standard"
+  },
+  "Standard": {
+    "zh": "标准",
+    "en": "Standard"
+  },
+  "高": {
+    "zh": "高",
+    "en": "High"
+  },
+  "High": {
+    "zh": "高",
+    "en": "High"
+  },
+  "MF 手动": {
+    "zh": "MF 手动",
+    "en": "MF manual"
+  },
+  "MF manual": {
+    "zh": "MF 手动",
+    "en": "MF manual"
+  },
+  "自动": {
+    "zh": "自动",
+    "en": "Automatic"
+  },
+  "Automatic": {
+    "zh": "自动",
+    "en": "Automatic"
+  },
+  "机械快门": {
+    "zh": "机械快门",
+    "en": "Mechanical shutter"
+  },
+  "Mechanical shutter": {
+    "zh": "机械快门",
+    "en": "Mechanical shutter"
+  },
+  "电子快门": {
+    "zh": "电子快门",
+    "en": "Electronic shutter"
+  },
+  "Electronic shutter": {
+    "zh": "电子快门",
+    "en": "Electronic shutter"
+  },
+  "关闭 / 全画幅": {
+    "zh": "关闭 / 全画幅",
+    "en": "Off / full frame"
+  },
+  "Off / full frame": {
+    "zh": "关闭 / 全画幅",
+    "en": "Off / full frame"
+  },
+  "开启 / APS-C": {
+    "zh": "开启 / APS-C",
+    "en": "On / APS-C"
+  },
+  "On / APS-C": {
+    "zh": "开启 / APS-C",
+    "en": "On / APS-C"
+  },
+  "主机": {
+    "zh": "主机",
+    "en": "Computer"
+  },
+  "Computer": {
+    "zh": "主机",
+    "en": "Computer"
+  },
+  "存储卡": {
+    "zh": "存储卡",
+    "en": "Memory card"
+  },
+  "Memory card": {
+    "zh": "存储卡",
+    "en": "Memory card"
+  },
+  "主机与存储卡": {
+    "zh": "主机与存储卡",
+    "en": "Computer and memory card"
+  },
+  "Computer and memory card": {
+    "zh": "主机与存储卡",
+    "en": "Computer and memory card"
+  },
+  "设置文件不能为空": {
+    "zh": "设置文件不能为空",
+    "en": "Settings file must not be empty"
+  },
+  "Settings file must not be empty": {
+    "zh": "设置文件不能为空",
+    "en": "Settings file must not be empty"
+  },
+  "请选择有效的原片保存方式": {
+    "zh": "请选择有效的原片保存方式",
+    "en": "Select a valid original RAW save mode"
+  },
+  "Select a valid original RAW save mode": {
+    "zh": "请选择有效的原片保存方式",
+    "en": "Select a valid original RAW save mode"
+  },
+  "原片子目录须为单个有效文件夹名": {
+    "zh": "原片子目录须为单个有效文件夹名",
+    "en": "The RAW subfolder must be a single valid folder name"
+  },
+  "The RAW subfolder must be a single valid folder name": {
+    "zh": "原片子目录须为单个有效文件夹名",
+    "en": "The RAW subfolder must be a single valid folder name"
+  },
+  "设置已被其他窗口或程序修改，请重新载入后再保存": {
+    "zh": "设置已被其他窗口或程序修改，请重新载入后再保存",
+    "en": "Settings were changed elsewhere. Reload before saving."
+  },
+  "Settings were changed elsewhere. Reload before saving.": {
+    "zh": "设置已被其他窗口或程序修改，请重新载入后再保存",
+    "en": "Settings were changed elsewhere. Reload before saving."
+  },
+  "不能写入链接形式的设置文件": {
+    "zh": "不能写入链接形式的设置文件",
+    "en": "Cannot write settings through a symbolic link"
+  },
+  "Cannot write settings through a symbolic link": {
+    "zh": "不能写入链接形式的设置文件",
+    "en": "Cannot write settings through a symbolic link"
+  },
+  "设置应为 JSON 对象": {
+    "zh": "设置应为 JSON 对象",
+    "en": "Settings must be a JSON object"
+  },
+  "Settings must be a JSON object": {
+    "zh": "设置应为 JSON 对象",
+    "en": "Settings must be a JSON object"
+  },
+  "不接受链接目录或文件：": {
+    "zh": "不接受链接目录或文件：",
+    "en": "Linked directories or files are not accepted: "
+  },
+  "Linked directories or files are not accepted: ": {
+    "zh": "不接受链接目录或文件：",
+    "en": "Linked directories or files are not accepted: "
+  },
+  "请先在插件设置的“SDK 配置”页导入 Sony SDK 2.02.00 Windows x64，然后重新启动 NINA。": {
+    "zh": "请先在插件设置的“SDK 配置”页导入 Sony SDK 2.02.00 Windows x64，然后重新启动 NINA。",
+    "en": "Import Sony SDK 2.02.00 Windows x64 from the plugin's SDK setup tab, then restart NINA."
+  },
+  "Import Sony SDK 2.02.00 Windows x64 from the plugin's SDK setup tab, then restart NINA.": {
+    "zh": "请先在插件设置的“SDK 配置”页导入 Sony SDK 2.02.00 Windows x64，然后重新启动 NINA。",
+    "en": "Import Sony SDK 2.02.00 Windows x64 from the plugin's SDK setup tab, then restart NINA."
+  },
+  "公开包必须使用 production ABI 2。": {
+    "zh": "公开包必须使用 production ABI 2。",
+    "en": "Public packages must use production ABI 2."
+  },
+  "Public packages must use production ABI 2.": {
+    "zh": "公开包必须使用 production ABI 2。",
+    "en": "Public packages must use production ABI 2."
+  },
+  "无效依赖路径": {
+    "zh": "无效依赖路径",
+    "en": "Invalid dependency path"
+  },
+  "Invalid dependency path": {
+    "zh": "无效依赖路径",
+    "en": "Invalid dependency path"
+  },
+  "依赖校验失败：": {
+    "zh": "依赖校验失败：",
+    "en": "Dependency verification failed: "
+  },
+  "Dependency verification failed: ": {
+    "zh": "依赖校验失败：",
+    "en": "Dependency verification failed: "
+  },
+  "运行时清单已改变，请重新配置 SDK。": {
+    "zh": "运行时清单已改变，请重新配置 SDK。",
+    "en": "Runtime manifest changed. Configure the SDK again."
+  },
+  "Runtime manifest changed. Configure the SDK again.": {
+    "zh": "运行时清单已改变，请重新配置 SDK。",
+    "en": "Runtime manifest changed. Configure the SDK again."
+  },
+  "接收缓存必须是绝对路径。": {
+    "zh": "接收缓存必须是绝对路径。",
+    "en": "The receive cache must use an absolute path."
+  },
+  "The receive cache must use an absolute path.": {
+    "zh": "接收缓存必须是绝对路径。",
+    "en": "The receive cache must use an absolute path."
+  },
+  "SDK 已配置，可连接相机。": {
+    "zh": "SDK 已配置，可连接相机。",
+    "en": "SDK is configured. You can connect the camera."
+  },
+  "SDK is configured. You can connect the camera.": {
+    "zh": "SDK 已配置，可连接相机。",
+    "en": "SDK is configured. You can connect the camera."
+  },
+  "未找到匹配的 SDK 2.02.00 Windows x64，请选择正确版本的解压目录。": {
+    "zh": "未找到匹配的 SDK 2.02.00 Windows x64，请选择正确版本的解压目录。",
+    "en": "Matching SDK 2.02.00 Windows x64 not found. Select the extracted directory of the correct version."
+  },
+  "Matching SDK 2.02.00 Windows x64 not found. Select the extracted directory of the correct version.": {
+    "zh": "未找到匹配的 SDK 2.02.00 Windows x64，请选择正确版本的解压目录。",
+    "en": "Matching SDK 2.02.00 Windows x64 not found. Select the extracted directory of the correct version."
+  },
+  "未找到 Sony SDK。请自行下载并解压官方 SDK，再选择目录。": {
+    "zh": "未找到 Sony SDK。请自行下载并解压官方 SDK，再选择目录。",
+    "en": "Sony SDK not found. Download and extract the official SDK, then select its directory."
+  },
+  "Sony SDK not found. Download and extract the official SDK, then select its directory.": {
+    "zh": "未找到 Sony SDK。请自行下载并解压官方 SDK，再选择目录。",
+    "en": "Sony SDK not found. Download and extract the official SDK, then select its directory."
+  },
+  "当前进程已加载 Sony SDK，请重启后再配置。": {
+    "zh": "当前进程已加载 Sony SDK，请重启后再配置。",
+    "en": "This process has loaded Sony SDK. Restart before configuring it."
+  },
+  "This process has loaded Sony SDK. Restart before configuring it.": {
+    "zh": "当前进程已加载 Sony SDK，请重启后再配置。",
+    "en": "This process has loaded Sony SDK. Restart before configuring it."
+  },
+  "已自动找到并配置 SDK，可连接相机。": {
+    "zh": "已自动找到并配置 SDK，可连接相机。",
+    "en": "SDK found and configured. You can connect the camera."
+  },
+  "SDK found and configured. You can connect the camera.": {
+    "zh": "已自动找到并配置 SDK，可连接相机。",
+    "en": "SDK found and configured. You can connect the camera."
+  },
+  "已找到 SDK；写入 NINA 共享适配器需要管理员权限。": {
+    "zh": "已找到 SDK；写入 NINA 共享适配器需要管理员权限。",
+    "en": "SDK found. Administrator access is needed to install NINA's shared adapters."
+  },
+  "SDK found. Administrator access is needed to install NINA's shared adapters.": {
+    "zh": "已找到 SDK；写入 NINA 共享适配器需要管理员权限。",
+    "en": "SDK found. Administrator access is needed to install NINA's shared adapters."
+  },
+  "已取消 SDK 查找。": {
+    "zh": "已取消 SDK 查找。",
+    "en": "SDK search cancelled."
+  },
+  "SDK search cancelled.": {
+    "zh": "已取消 SDK 查找。",
+    "en": "SDK search cancelled."
+  },
+  "无法启动 SDK 配置。": {
+    "zh": "无法启动 SDK 配置。",
+    "en": "Cannot start SDK setup."
+  },
+  "Cannot start SDK setup.": {
+    "zh": "无法启动 SDK 配置。",
+    "en": "Cannot start SDK setup."
+  },
+  "SDK 配置完成。": {
+    "zh": "SDK 配置完成。",
+    "en": "SDK configuration completed."
+  },
+  "SDK configuration completed.": {
+    "zh": "SDK 配置完成。",
+    "en": "SDK configuration completed."
+  },
+  "SDK 导入失败，请检查目录权限和 SDK 版本。": {
+    "zh": "SDK 导入失败，请检查目录权限和 SDK 版本。",
+    "en": "SDK import failed. Check directory permissions and SDK version."
+  },
+  "SDK import failed. Check directory permissions and SDK version.": {
+    "zh": "SDK 导入失败，请检查目录权限和 SDK 版本。",
+    "en": "SDK import failed. Check directory permissions and SDK version."
+  },
+  "已取消管理员授权；可稍后在 SDK 配置页重试。": {
+    "zh": "已取消管理员授权；可稍后在 SDK 配置页重试。",
+    "en": "Administrator authorization cancelled. You can retry in SDK setup later."
+  },
+  "Administrator authorization cancelled. You can retry in SDK setup later.": {
+    "zh": "已取消管理员授权；可稍后在 SDK 配置页重试。",
+    "en": "Administrator authorization cancelled. You can retry in SDK setup later."
+  },
+  "Sony CrSDK · SDK 配置": {
+    "zh": "Sony CrSDK · SDK 配置",
+    "en": "Sony CrSDK · SDK setup"
+  },
+  "Sony CrSDK · SDK setup": {
+    "zh": "Sony CrSDK · SDK 配置",
+    "en": "Sony CrSDK · SDK setup"
+  },
+  "启动时仅检测 SDK；请在此检查文件用途并主动安装。": {
+    "zh": "启动时仅检测 SDK；请在此检查文件用途并主动安装。",
+    "en": "Startup only detects the SDK. Review the file descriptions here and explicitly install it."
+  },
+  "Startup only detects the SDK. Review the file descriptions here and explicitly install it.": {
+    "zh": "启动时仅检测 SDK；请在此检查文件用途并主动安装。",
+    "en": "Startup only detects the SDK. Review the file descriptions here and explicitly install it."
+  },
+  "正在自动查找 SDK…": {
+    "zh": "正在自动查找 SDK…",
+    "en": "Searching for SDK…"
+  },
+  "Searching for SDK…": {
+    "zh": "正在自动查找 SDK…",
+    "en": "Searching for SDK…"
+  },
+  "选择官方 SDK 的 SimpleCli 目录": {
+    "zh": "选择官方 SDK 的 SimpleCli 目录",
+    "en": "Select the official SDK's SimpleCli directory"
+  },
+  "Select the official SDK's SimpleCli directory": {
+    "zh": "选择官方 SDK 的 SimpleCli 目录",
+    "en": "Select the official SDK's SimpleCli directory"
+  },
+  "依赖配置完整。此检查未加载 SDK，也未连接相机。": {
+    "zh": "依赖配置完整。此检查未加载 SDK，也未连接相机。",
+    "en": "Dependencies verified. This check did not load the SDK or connect a camera."
+  },
+  "Dependencies verified. This check did not load the SDK or connect a camera.": {
+    "zh": "依赖配置完整。此检查未加载 SDK，也未连接相机。",
+    "en": "Dependencies verified. This check did not load the SDK or connect a camera."
+  },
+  "请先断开 Sony 相机，再导入 SDK。": {
+    "zh": "请先断开 Sony 相机，再导入 SDK。",
+    "en": "Disconnect the Sony camera before importing the SDK."
+  },
+  "Disconnect the Sony camera before importing the SDK.": {
+    "zh": "请先断开 Sony 相机，再导入 SDK。",
+    "en": "Disconnect the Sony camera before importing the SDK."
+  },
+  "本次 NINA 已加载 Sony SDK。请重新启动后，在连接相机前导入。": {
+    "zh": "本次 NINA 已加载 Sony SDK。请重新启动后，在连接相机前导入。",
+    "en": "NINA has loaded Sony SDK. Restart and import before connecting the camera."
+  },
+  "NINA has loaded Sony SDK. Restart and import before connecting the camera.": {
+    "zh": "本次 NINA 已加载 Sony SDK。请重新启动后，在连接相机前导入。",
+    "en": "NINA has loaded Sony SDK. Restart and import before connecting the camera."
+  },
+  "请选择 SimpleCli 目录。": {
+    "zh": "请选择 SimpleCli 目录。",
+    "en": "Select the SimpleCli directory."
+  },
+  "Select the SimpleCli directory.": {
+    "zh": "请选择 SimpleCli 目录。",
+    "en": "Select the SimpleCli directory."
+  },
+  "正在校验并导入 SDK…": {
+    "zh": "正在校验并导入 SDK…",
+    "en": "Verifying and importing SDK…"
+  },
+  "Verifying and importing SDK…": {
+    "zh": "正在校验并导入 SDK…",
+    "en": "Verifying and importing SDK…"
+  },
+  "SDK 配置完成。请重新启动 NINA，再连接相机。": {
+    "zh": "SDK 配置完成。请重新启动 NINA，再连接相机。",
+    "en": "SDK configured. Restart NINA before connecting the camera."
+  },
+  "SDK configured. Restart NINA before connecting the camera.": {
+    "zh": "SDK 配置完成。请重新启动 NINA，再连接相机。",
+    "en": "SDK configured. Restart NINA before connecting the camera."
+  },
+  "已取消管理员授权；未继续配置。": {
+    "zh": "已取消管理员授权；未继续配置。",
+    "en": "Administrator authorization cancelled; setup did not continue."
+  },
+  "Administrator authorization cancelled; setup did not continue.": {
+    "zh": "已取消管理员授权；未继续配置。",
+    "en": "Administrator authorization cancelled; setup did not continue."
+  },
+  "连接相机": {
+    "zh": "连接相机",
+    "en": "Connect camera"
+  },
+  "Connect camera": {
+    "zh": "连接相机",
+    "en": "Connect camera"
+  },
+  "更新电量": {
+    "zh": "更新电量",
+    "en": "Update battery"
+  },
+  "Update battery": {
+    "zh": "更新电量",
+    "en": "Update battery"
+  },
+  "应用天文准备": {
+    "zh": "应用天文准备",
+    "en": "Apply astronomy preparation"
+  },
+  "Apply astronomy preparation": {
+    "zh": "应用天文准备",
+    "en": "Apply astronomy preparation"
+  },
+  "恢复天文准备": {
+    "zh": "恢复天文准备",
+    "en": "Restore astronomy preparation"
+  },
+  "Restore astronomy preparation": {
+    "zh": "恢复天文准备",
+    "en": "Restore astronomy preparation"
+  },
+  "调整镜头光圈": {
+    "zh": "调整镜头光圈",
+    "en": "Set lens aperture"
+  },
+  "Set lens aperture": {
+    "zh": "调整镜头光圈",
+    "en": "Set lens aperture"
+  },
+  "查询镜头状态": {
+    "zh": "查询镜头状态",
+    "en": "Read lens status"
+  },
+  "Read lens status": {
+    "zh": "查询镜头状态",
+    "en": "Read lens status"
+  },
+  "移动镜头": {
+    "zh": "移动镜头",
+    "en": "Move lens"
+  },
+  "Move lens": {
+    "zh": "移动镜头",
+    "en": "Move lens"
+  },
+  "断开相机": {
+    "zh": "断开相机",
+    "en": "Disconnect camera"
+  },
+  "Disconnect camera": {
+    "zh": "断开相机",
+    "en": "Disconnect camera"
+  },
+  "释放相机会话": {
+    "zh": "释放相机会话",
+    "en": "Release camera session"
+  },
+  "Release camera session": {
+    "zh": "释放相机会话",
+    "en": "Release camera session"
+  },
+  "提交曝光": {
+    "zh": "提交曝光",
+    "en": "Start exposure"
+  },
+  "Start exposure": {
+    "zh": "提交曝光",
+    "en": "Start exposure"
+  },
+  "曝光或 ISO 请求不适用于当前相机，请调整参数后重试。未自动断开或重拍。": {
+    "zh": "曝光或 ISO 请求不适用于当前相机，请调整参数后重试。未自动断开或重拍。",
+    "en": "Exposure or ISO request is unavailable. Adjust the settings and retry. No automatic disconnect or retry was performed."
+  },
+  "Exposure or ISO request is unavailable. Adjust the settings and retry. No automatic disconnect or retry was performed.": {
+    "zh": "曝光或 ISO 请求不适用于当前相机，请调整参数后重试。未自动断开或重拍。",
+    "en": "Exposure or ISO request is unavailable. Adjust the settings and retry. No automatic disconnect or retry was performed."
+  },
+  "相机当前不接受 ISO 写入（可能正在处理上一张或已休眠）：{0}。请断开后重新连接。": {
+    "zh": "相机当前不接受 ISO 写入（可能正在处理上一张或已休眠）：{0}。请断开后重新连接。",
+    "en": "The camera cannot currently accept ISO changes (it may be processing or asleep): {0}. Disconnect and reconnect."
+  },
+  "The camera cannot currently accept ISO changes (it may be processing or asleep): {0}. Disconnect and reconnect.": {
+    "zh": "相机当前不接受 ISO 写入（可能正在处理上一张或已休眠）：{0}。请断开后重新连接。",
+    "en": "The camera cannot currently accept ISO changes (it may be processing or asleep): {0}. Disconnect and reconnect."
+  },
+  "相机当前不接受快门写入（可能正在处理上一张或已休眠）：{0}。请断开后重新连接。": {
+    "zh": "相机当前不接受快门写入（可能正在处理上一张或已休眠）：{0}。请断开后重新连接。",
+    "en": "The camera cannot currently accept shutter changes (it may be processing or asleep): {0}. Disconnect and reconnect."
+  },
+  "The camera cannot currently accept shutter changes (it may be processing or asleep): {0}. Disconnect and reconnect.": {
+    "zh": "相机当前不接受快门写入（可能正在处理上一张或已休眠）：{0}。请断开后重新连接。",
+    "en": "The camera cannot currently accept shutter changes (it may be processing or asleep): {0}. Disconnect and reconnect."
+  },
+  "确认曝光结果": {
+    "zh": "确认曝光结果",
+    "en": "Verify exposure result"
+  },
+  "Verify exposure result": {
+    "zh": "确认曝光结果",
+    "en": "Verify exposure result"
+  },
+  "取消曝光并确认状态": {
+    "zh": "取消曝光并确认状态",
+    "en": "Cancel exposure and verify state"
+  },
+  "Cancel exposure and verify state": {
+    "zh": "取消曝光并确认状态",
+    "en": "Cancel exposure and verify state"
+  },
+  "提前结束曝光": {
+    "zh": "提前结束曝光",
+    "en": "End exposure early"
+  },
+  "End exposure early": {
+    "zh": "提前结束曝光",
+    "en": "End exposure early"
+  },
+  "调整 ISO": {
+    "zh": "调整 ISO",
+    "en": "Set ISO"
+  },
+  "Set ISO": {
+    "zh": "设置ISO",
+    "en": "Set ISO"
+  },
+  "调整普通快门": {
+    "zh": "调整普通快门",
+    "en": "Set ordinary shutter"
+  },
+  "Set ordinary shutter": {
+    "zh": "调整普通快门",
+    "en": "Set ordinary shutter"
+  },
+  "准备实时预览": {
+    "zh": "准备实时预览",
+    "en": "Prepare live view"
+  },
+  "Prepare live view": {
+    "zh": "准备实时预览",
+    "en": "Prepare live view"
+  },
+  "读取实时预览": {
+    "zh": "读取实时预览",
+    "en": "Read live view"
+  },
+  "Read live view": {
+    "zh": "读取实时预览",
+    "en": "Read live view"
+  },
+  "停止实时预览": {
+    "zh": "停止实时预览",
+    "en": "Stop live view"
+  },
+  "Stop live view": {
+    "zh": "停止实时预览",
+    "en": "Stop live view"
+  },
+  "交付图像": {
+    "zh": "交付图像",
+    "en": "Deliver image"
+  },
+  "Deliver image": {
+    "zh": "交付图像",
+    "en": "Deliver image"
+  },
+  "原片接收已结束，但本地图像处理失败。连接保留；请检查 RAW 设置后重试拍摄。失败原片保留用于排查：": {
+    "zh": "原片接收已结束，但本地图像处理失败。连接保留；请检查 RAW 设置后重试拍摄。失败原片保留用于排查：",
+    "en": "RAW transfer finished but local image processing failed. The connection is retained. Check RAW settings before retrying. The failed original is retained for diagnosis: "
+  },
+  "RAW transfer finished but local image processing failed. The connection is retained. Check RAW settings before retrying. The failed original is retained for diagnosis: ": {
+    "zh": "原片接收已结束，但本地图像处理失败。连接保留；请检查 RAW 设置后重试拍摄。失败原片保留用于排查：",
+    "en": "RAW transfer finished but local image processing failed. The connection is retained. Check RAW settings before retrying. The failed original is retained for diagnosis: "
+  },
+  "配置 SDK": {
+    "zh": "配置 SDK",
+    "en": "Configure SDK"
+  },
+  "Configure SDK": {
+    "zh": "配置 SDK",
+    "en": "Configure SDK"
+  },
+  "请重新启动 NINA，在连接相机前配置 SDK。": {
+    "zh": "请重新启动 NINA，在连接相机前配置 SDK。",
+    "en": "Restart NINA and configure SDK before connecting the camera."
+  },
+  "Restart NINA and configure SDK before connecting the camera.": {
+    "zh": "请重新启动 NINA，在连接相机前配置 SDK。",
+    "en": "Restart NINA and configure SDK before connecting the camera."
+  },
+  "请将镜头/机身切换到 MF 手动对焦，然后点击重新检查或重试拍摄。连接保留，不会自动重拍。": {
+    "zh": "请将镜头/机身切换到 MF 手动对焦，然后点击重新检查或重试拍摄。连接保留，不会自动重拍。",
+    "en": "Switch the lens/body to MF, then recheck or retry capture. The connection is retained; no automatic retry."
+  },
+  "Switch the lens/body to MF, then recheck or retry capture. The connection is retained; no automatic retry.": {
+    "zh": "请将镜头/机身切换到 MF 手动对焦，然后点击重新检查或重试拍摄。连接保留，不会自动重拍。",
+    "en": "Switch the lens/body to MF, then recheck or retry capture. The connection is retained; no automatic retry."
+  },
+  "请将相机切换到 M 手动曝光，然后点击重新检查或重试拍摄。连接保留。": {
+    "zh": "请将相机切换到 M 手动曝光，然后点击重新检查或重试拍摄。连接保留。",
+    "en": "Switch the camera to M manual exposure, then recheck or retry. The connection is retained."
+  },
+  "Switch the camera to M manual exposure, then recheck or retry. The connection is retained.": {
+    "zh": "请将相机切换到 M 手动曝光，然后点击重新检查或重试拍摄。连接保留。",
+    "en": "Switch the camera to M manual exposure, then recheck or retry. The connection is retained."
+  },
+  "请检查 RAW 格式设置（仅 RAW、有效压缩档），然后点击重新检查或重试。连接保留。": {
+    "zh": "请检查 RAW 格式设置（仅 RAW、有效压缩档），然后点击重新检查或重试。连接保留。",
+    "en": "Check RAW-only and compression settings, then recheck or retry. The connection is retained."
+  },
+  "Check RAW-only and compression settings, then recheck or retry. The connection is retained.": {
+    "zh": "请检查 RAW 格式设置（仅 RAW、有效压缩档），然后点击重新检查或重试。连接保留。",
+    "en": "Check RAW-only and compression settings, then recheck or retry. The connection is retained."
+  },
+  "请按错误提示修正相机设置，然后点击重新检查或重试。连接保留，不会自动重拍。": {
+    "zh": "请按错误提示修正相机设置，然后点击重新检查或重试。连接保留，不会自动重拍。",
+    "en": "Correct the indicated settings, then recheck or retry. The connection is retained; no automatic retry."
+  },
+  "Correct the indicated settings, then recheck or retry. The connection is retained; no automatic retry.": {
+    "zh": "请按错误提示修正相机设置，然后点击重新检查或重试。连接保留，不会自动重拍。",
+    "en": "Correct the indicated settings, then recheck or retry. The connection is retained; no automatic retry."
+  },
+  " 原因：": {
+    "zh": " 原因：",
+    "en": " Reason: "
+  },
+  " Reason: ": {
+    "zh": " 原因：",
+    "en": " Reason: "
+  },
+  "重新检查拍摄条件": {
+    "zh": "重新检查拍摄条件",
+    "en": "Recheck capture readiness"
+  },
+  "Recheck capture readiness": {
+    "zh": "重新检查拍摄条件",
+    "en": "Recheck capture readiness"
+  },
+  "状态未确认，请重新连接": {
+    "zh": "状态未确认，请重新连接",
+    "en": "State unconfirmed; reconnect"
+  },
+  "State unconfirmed; reconnect": {
+    "zh": "状态未确认，请重新连接",
+    "en": "State unconfirmed; reconnect"
+  },
+  "未连接相机": {
+    "zh": "未连接相机",
+    "en": "Camera disconnected"
+  },
+  "Camera disconnected": {
+    "zh": "未连接相机",
+    "en": "Camera disconnected"
+  },
+  "镜头移动中": {
+    "zh": "镜头移动中",
+    "en": "Lens moving"
+  },
+  "Lens moving": {
+    "zh": "镜头移动中",
+    "en": "Lens moving"
+  },
+  "实时预览中": {
+    "zh": "实时预览中",
+    "en": "Live view active"
+  },
+  "Live view active": {
+    "zh": "实时预览中",
+    "en": "Live view active"
+  },
+  "已连接，等待修正设置": {
+    "zh": "已连接，等待修正设置",
+    "en": "Connected; settings need correction"
+  },
+  "Connected; settings need correction": {
+    "zh": "已连接，等待修正设置",
+    "en": "Connected; settings need correction"
+  },
+  "空闲，可调整参数": {
+    "zh": "空闲，可调整参数",
+    "en": "Idle; settings can be adjusted"
+  },
+  "Idle; settings can be adjusted": {
+    "zh": "空闲，可调整参数",
+    "en": "Idle; settings can be adjusted"
+  },
+  "曝光或下载中": {
+    "zh": "曝光或下载中",
+    "en": "Exposure or download in progress"
+  },
+  "Exposure or download in progress": {
+    "zh": "曝光或下载中",
+    "en": "Exposure or download in progress"
+  },
+  "等待首张 RAW 确认": {
+    "zh": "等待首张 RAW 确认",
+    "en": "Waiting for the first RAW to confirm dimensions"
+  },
+  "Waiting for the first RAW to confirm dimensions": {
+    "zh": "等待首张 RAW 确认",
+    "en": "Waiting for the first RAW to confirm dimensions"
+  },
+  "读取相机参数": {
+    "zh": "读取相机参数",
+    "en": "Read camera settings"
+  },
+  "Read camera settings": {
+    "zh": "读取相机参数",
+    "en": "Read camera settings"
+  },
+  "请等待镜头停止": {
+    "zh": "请等待镜头停止",
+    "en": "Wait for the lens to stop"
+  },
+  "Wait for the lens to stop": {
+    "zh": "请等待镜头停止",
+    "en": "Wait for the lens to stop"
+  },
+  "应用相机参数": {
+    "zh": "应用相机参数",
+    "en": "Apply camera setting"
+  },
+  "Apply camera setting": {
+    "zh": "应用相机参数",
+    "en": "Apply camera setting"
+  },
+  "连接已改变，请刷新参数后再选择": {
+    "zh": "连接已改变，请刷新参数后再选择",
+    "en": "Connection changed. Refresh settings before selecting again."
+  },
+  "Connection changed. Refresh settings before selecting again.": {
+    "zh": "连接已改变，请刷新参数后再选择",
+    "en": "Connection changed. Refresh settings before selecting again."
+  },
+  "此界面不提供该参数写入": {
+    "zh": "此界面不提供该参数写入",
+    "en": "This setting cannot be written from this interface"
+  },
+  "This setting cannot be written from this interface": {
+    "zh": "此界面不提供该参数写入",
+    "en": "This setting cannot be written from this interface"
+  },
+  "该参数属于本连接的天文准备回执，请先恢复准备设置再单独调整": {
+    "zh": "该参数属于本连接的天文准备回执，请先恢复准备设置再单独调整",
+    "en": "This setting belongs to the preparation receipt. Restore preparation before adjusting it separately."
+  },
+  "This setting belongs to the preparation receipt. Restore preparation before adjusting it separately.": {
+    "zh": "该参数属于本连接的天文准备回执，请先恢复准备设置再单独调整",
+    "en": "This setting belongs to the preparation receipt. Restore preparation before adjusting it separately."
+  },
+  "请显式指定ARW和ExifTool的完整路径": {
+    "zh": "请显式指定ARW和ExifTool的完整路径",
+    "en": "Specify absolute paths for the ARW and ExifTool"
+  },
+  "Specify absolute paths for the ARW and ExifTool": {
+    "zh": "请显式指定ARW和ExifTool的完整路径",
+    "en": "Specify absolute paths for the ARW and ExifTool"
+  },
+  "ARW或ExifTool不存在": {
+    "zh": "ARW或ExifTool不存在",
+    "en": "ARW or ExifTool not found"
+  },
+  "ARW or ExifTool not found": {
+    "zh": "ARW或ExifTool不存在",
+    "en": "ARW or ExifTool not found"
+  },
+  "无法启动ExifTool": {
+    "zh": "无法启动ExifTool",
+    "en": "Cannot start ExifTool"
+  },
+  "Cannot start ExifTool": {
+    "zh": "无法启动ExifTool",
+    "en": "Cannot start ExifTool"
+  },
+  "ExifTool读取失败：": {
+    "zh": "ExifTool读取失败：",
+    "en": "ExifTool read failed: "
+  },
+  "ExifTool read failed: ": {
+    "zh": "ExifTool读取失败：",
+    "en": "ExifTool read failed: "
+  },
+  "ExifTool返回格式异常": {
+    "zh": "ExifTool返回格式异常",
+    "en": "Invalid ExifTool response format"
+  },
+  "Invalid ExifTool response format": {
+    "zh": "ExifTool返回格式异常",
+    "en": "Invalid ExifTool response format"
+  },
+  "ManifestPath必须是绝对路径": {
+    "zh": "ManifestPath必须是绝对路径",
+    "en": "ManifestPath must be absolute"
+  },
+  "ManifestPath must be absolute": {
+    "zh": "ManifestPath必须是绝对路径",
+    "en": "ManifestPath must be absolute"
+  },
+  "同一进程只能创建一个SonyCameraClient；正常重连请复用当前对象": {
+    "zh": "同一进程只能创建一个SonyCameraClient；正常重连请复用当前对象",
+    "en": "Only one SonyCameraClient is allowed per process; reuse it for reconnects"
+  },
+  "Only one SonyCameraClient is allowed per process; reuse it for reconnects": {
+    "zh": "同一进程只能创建一个SonyCameraClient；正常重连请复用当前对象",
+    "en": "Only one SonyCameraClient is allowed per process; reuse it for reconnects"
+  },
+  "完成": {
+    "zh": "完成",
+    "en": "Completed"
+  },
+  "Completed": {
+    "zh": "完成",
+    "en": "Completed"
+  },
+  "轮询": {
+    "zh": "轮询",
+    "en": "Poll"
+  },
+  "Poll": {
+    "zh": "轮询",
+    "en": "Poll"
+  },
+  "所有者线程": {
+    "zh": "所有者线程",
+    "en": "Owner thread"
+  },
+  "Owner thread": {
+    "zh": "所有者线程",
+    "en": "Owner thread"
+  },
+  "请先连接相机": {
+    "zh": "请先连接相机",
+    "en": "Connect the camera first"
+  },
+  "Connect the camera first": {
+    "zh": "请先连接相机",
+    "en": "Connect the camera first"
+  },
+  "当前状态不允许修改参数或开始新拍摄；请等待任务完成或显式恢复": {
+    "zh": "当前状态不允许修改参数或开始新拍摄；请等待任务完成或显式恢复",
+    "en": "Current state prevents setting changes or capture. Wait for completion or explicitly recover."
+  },
+  "Current state prevents setting changes or capture. Wait for completion or explicitly recover.": {
+    "zh": "当前状态不允许修改参数或开始新拍摄；请等待任务完成或显式恢复",
+    "en": "Current state prevents setting changes or capture. Wait for completion or explicitly recover."
+  },
+  "初始化": {
+    "zh": "初始化",
+    "en": "Initialize"
+  },
+  "Initialize": {
+    "zh": "初始化",
+    "en": "Initialize"
+  },
+  "运行环境": {
+    "zh": "运行环境",
+    "en": "Runtime"
+  },
+  "Runtime": {
+    "zh": "运行环境",
+    "en": "Runtime"
+  },
+  "包={0}, manifest={1}, backend={2}；": {
+    "zh": "包={0}, manifest={1}, backend={2}；",
+    "en": "package={0}, manifest={1}, backend={2}; "
+  },
+  "package={0}, manifest={1}, backend={2}; ": {
+    "zh": "包={0}, manifest={1}, backend={2}；",
+    "en": "package={0}, manifest={1}, backend={2}; "
+  },
+  "TEST ONLY：隔离替身，不是实机证据": {
+    "zh": "TEST ONLY：隔离替身，不是实机证据",
+    "en": "TEST ONLY: isolated simulator; not hardware evidence"
+  },
+  "TEST ONLY: isolated simulator; not hardware evidence": {
+    "zh": "TEST ONLY：隔离替身，不是实机证据",
+    "en": "TEST ONLY: isolated simulator; not hardware evidence"
+  },
+  "生产包一致性已按宿主外部批准清单验证；哈希不提供来源认证": {
+    "zh": "生产包一致性已按宿主外部批准清单验证；哈希不提供来源认证",
+    "en": "Production package consistency checked against the host approval manifest; hashes do not authenticate provenance"
+  },
+  "Production package consistency checked against the host approval manifest; hashes do not authenticate provenance": {
+    "zh": "生产包一致性已按宿主外部批准清单验证；哈希不提供来源认证",
+    "en": "Production package consistency checked against the host approval manifest; hashes do not authenticate provenance"
+  },
+  "运行时ABI不匹配：version={0}, sizes={1}/{2}/{3}/{4}/{5}/{6}/{7}": {
+    "zh": "运行时ABI不匹配：version={0}, sizes={1}/{2}/{3}/{4}/{5}/{6}/{7}",
+    "en": "Runtime ABI mismatch: version={0}, sizes={1}/{2}/{3}/{4}/{5}/{6}/{7}"
+  },
+  "Runtime ABI mismatch: version={0}, sizes={1}/{2}/{3}/{4}/{5}/{6}/{7}": {
+    "zh": "运行时ABI不匹配：version={0}, sizes={1}/{2}/{3}/{4}/{5}/{6}/{7}",
+    "en": "Runtime ABI mismatch: version={0}, sizes={1}/{2}/{3}/{4}/{5}/{6}/{7}"
+  },
+  "枚举": {
+    "zh": "枚举",
+    "en": "Enumerate"
+  },
+  "Enumerate": {
+    "zh": "枚举",
+    "en": "Enumerate"
+  },
+  "请先初始化": {
+    "zh": "请先初始化",
+    "en": "Initialize first"
+  },
+  "Initialize first": {
+    "zh": "请先初始化",
+    "en": "Initialize first"
+  },
+  "枚举数量异常": {
+    "zh": "枚举数量异常",
+    "en": "Invalid enumeration count"
+  },
+  "Invalid enumeration count": {
+    "zh": "枚举数量异常",
+    "en": "Invalid enumeration count"
+  },
+  "连接": {
+    "zh": "连接",
+    "en": "Connect"
+  },
+  "Connect": {
+    "zh": "连接",
+    "en": "Connect"
+  },
+  "当前不能连接，请检查初始化和未确认状态": {
+    "zh": "当前不能连接，请检查初始化和未确认状态",
+    "en": "Cannot connect now. Check initialization and unconfirmed state."
+  },
+  "Cannot connect now. Check initialization and unconfirmed state.": {
+    "zh": "当前不能连接，请检查初始化和未确认状态",
+    "en": "Cannot connect now. Check initialization and unconfirmed state."
+  },
+  "重启SDK": {
+    "zh": "重启SDK",
+    "en": "Restart SDK"
+  },
+  "Restart SDK": {
+    "zh": "重启SDK",
+    "en": "Restart SDK"
+  },
+  "SDK 尚未初始化": {
+    "zh": "SDK 尚未初始化",
+    "en": "SDK is not initialized"
+  },
+  "SDK is not initialized": {
+    "zh": "SDK 尚未初始化",
+    "en": "SDK is not initialized"
+  },
+  "设备仍连接，不能重启 SDK": {
+    "zh": "设备仍连接，不能重启 SDK",
+    "en": "Device is still connected; cannot restart SDK"
+  },
+  "Device is still connected; cannot restart SDK": {
+    "zh": "设备仍连接，不能重启 SDK",
+    "en": "Device is still connected; cannot restart SDK"
+  },
+  "SDK 会话已重建": {
+    "zh": "SDK 会话已重建",
+    "en": "SDK session recreated"
+  },
+  "SDK session recreated": {
+    "zh": "SDK 会话已重建",
+    "en": "SDK session recreated"
+  },
+  "重连": {
+    "zh": "重连",
+    "en": "Reconnect"
+  },
+  "Reconnect": {
+    "zh": "重连",
+    "en": "Reconnect"
+  },
+  "设备已释放，清理未确认拍摄状态以便重新连接": {
+    "zh": "设备已释放，清理未确认拍摄状态以便重新连接",
+    "en": "Device released; clearing capture bookkeeping for reconnect"
+  },
+  "Device released; clearing capture bookkeeping for reconnect": {
+    "zh": "设备已释放，清理未确认拍摄状态以便重新连接",
+    "en": "Device released; clearing capture bookkeeping for reconnect"
+  },
+  "断开": {
+    "zh": "断开",
+    "en": "Disconnect"
+  },
+  "Disconnect": {
+    "zh": "断开",
+    "en": "Disconnect"
+  },
+  "读取参数": {
+    "zh": "读取参数",
+    "en": "Read parameters"
+  },
+  "Read parameters": {
+    "zh": "读取参数",
+    "en": "Read parameters"
+  },
+  "ISO候选": {
+    "zh": "ISO候选",
+    "en": "ISO candidates"
+  },
+  "ISO candidates": {
+    "zh": "ISO候选",
+    "en": "ISO candidates"
+  },
+  "ISO候选容量异常": {
+    "zh": "ISO候选容量异常",
+    "en": "Invalid ISO candidate capacity"
+  },
+  "Invalid ISO candidate capacity": {
+    "zh": "ISO候选容量异常",
+    "en": "Invalid ISO candidate capacity"
+  },
+  "ISO候选越界": {
+    "zh": "ISO候选越界",
+    "en": "ISO candidates out of bounds"
+  },
+  "ISO candidates out of bounds": {
+    "zh": "ISO候选越界",
+    "en": "ISO candidates out of bounds"
+  },
+  "ISO候选持续变化，请重试": {
+    "zh": "ISO候选持续变化，请重试",
+    "en": "ISO candidates keep changing. Retry."
+  },
+  "ISO candidates keep changing. Retry.": {
+    "zh": "ISO候选持续变化，请重试",
+    "en": "ISO candidates keep changing. Retry."
+  },
+  "快门候选": {
+    "zh": "快门候选",
+    "en": "Shutter candidates"
+  },
+  "Shutter candidates": {
+    "zh": "快门候选",
+    "en": "Shutter candidates"
+  },
+  "快门候选容量异常": {
+    "zh": "快门候选容量异常",
+    "en": "Invalid shutter candidate capacity"
+  },
+  "Invalid shutter candidate capacity": {
+    "zh": "快门候选容量异常",
+    "en": "Invalid shutter candidate capacity"
+  },
+  "快门候选越界": {
+    "zh": "快门候选越界",
+    "en": "Shutter candidates out of bounds"
+  },
+  "Shutter candidates out of bounds": {
+    "zh": "快门候选越界",
+    "en": "Shutter candidates out of bounds"
+  },
+  "快门候选持续变化，请重试": {
+    "zh": "快门候选持续变化，请重试",
+    "en": "Shutter candidates keep changing. Retry."
+  },
+  "Shutter candidates keep changing. Retry.": {
+    "zh": "快门候选持续变化，请重试",
+    "en": "Shutter candidates keep changing. Retry."
+  },
+  "设置ISO": {
+    "zh": "设置ISO",
+    "en": "Set ISO"
+  },
+  "设置快门": {
+    "zh": "设置快门",
+    "en": "Set shutter"
+  },
+  "Set shutter": {
+    "zh": "设置快门",
+    "en": "Set shutter"
+  },
+  "读取保存位置": {
+    "zh": "读取保存位置",
+    "en": "Read save destination"
+  },
+  "Read save destination": {
+    "zh": "读取保存位置",
+    "en": "Read save destination"
+  },
+  "设置保存位置": {
+    "zh": "设置保存位置",
+    "en": "Set save destination"
+  },
+  "Set save destination": {
+    "zh": "设置保存位置",
+    "en": "Set save destination"
+  },
+  "曝光能力": {
+    "zh": "曝光能力",
+    "en": "Exposure capabilities"
+  },
+  "Exposure capabilities": {
+    "zh": "曝光能力",
+    "en": "Exposure capabilities"
+  },
+  "拍摄就绪": {
+    "zh": "拍摄就绪",
+    "en": "Capture readiness"
+  },
+  "Capture readiness": {
+    "zh": "拍摄就绪",
+    "en": "Capture readiness"
+  },
+  "开始拍摄": {
+    "zh": "开始拍摄",
+    "en": "Start capture"
+  },
+  "Start capture": {
+    "zh": "开始拍摄",
+    "en": "Start capture"
+  },
+  "路径/前缀不得含NUL": {
+    "zh": "路径/前缀不得含NUL",
+    "en": "Path/prefix must not contain NUL"
+  },
+  "Path/prefix must not contain NUL": {
+    "zh": "路径/前缀不得含NUL",
+    "en": "Path/prefix must not contain NUL"
+  },
+  "原生开始拍摄未返回编号": {
+    "zh": "原生开始拍摄未返回编号",
+    "en": "Native capture start returned no capture ID"
+  },
+  "Native capture start returned no capture ID": {
+    "zh": "原生开始拍摄未返回编号",
+    "en": "Native capture start returned no capture ID"
+  },
+  "曝光信息": {
+    "zh": "曝光信息",
+    "en": "Exposure information"
+  },
+  "Exposure information": {
+    "zh": "曝光信息",
+    "en": "Exposure information"
+  },
+  "拍摄终态": {
+    "zh": "拍摄终态",
+    "en": "Capture result"
+  },
+  "Capture result": {
+    "zh": "拍摄终态",
+    "en": "Capture result"
+  },
+  "取消/结束未返回任务": {
+    "zh": "取消/结束未返回任务",
+    "en": "Cancel/end returned no task"
+  },
+  "Cancel/end returned no task": {
+    "zh": "取消/结束未返回任务",
+    "en": "Cancel/end returned no task"
+  },
+  "取消拍摄": {
+    "zh": "取消拍摄",
+    "en": "Cancel capture"
+  },
+  "Cancel capture": {
+    "zh": "取消拍摄",
+    "en": "Cancel capture"
+  },
+  "查询拍摄": {
+    "zh": "查询拍摄",
+    "en": "Query capture"
+  },
+  "Query capture": {
+    "zh": "查询拍摄",
+    "en": "Query capture"
+  },
+  "恢复证据": {
+    "zh": "恢复证据",
+    "en": "Recovery evidence"
+  },
+  "Recovery evidence": {
+    "zh": "恢复证据",
+    "en": "Recovery evidence"
+  },
+  "正在拍摄，不能恢复": {
+    "zh": "正在拍摄，不能恢复",
+    "en": "Cannot reconcile during capture"
+  },
+  "Cannot reconcile during capture": {
+    "zh": "正在拍摄，不能恢复",
+    "en": "Cannot reconcile during capture"
+  },
+  "没有任务": {
+    "zh": "没有任务",
+    "en": "No task"
+  },
+  "No task": {
+    "zh": "没有任务",
+    "en": "No task"
+  },
+  "关闭：取消": {
+    "zh": "关闭：取消",
+    "en": "Close: cancel"
+  },
+  "Close: cancel": {
+    "zh": "关闭：取消",
+    "en": "Close: cancel"
+  },
+  "关闭：恢复": {
+    "zh": "关闭：恢复",
+    "en": "Close: reconcile"
+  },
+  "Close: reconcile": {
+    "zh": "关闭：恢复",
+    "en": "Close: reconcile"
+  },
+  "关闭：断开": {
+    "zh": "关闭：断开",
+    "en": "Close: disconnect"
+  },
+  "Close: disconnect": {
+    "zh": "关闭：断开",
+    "en": "Close: disconnect"
+  },
+  "关闭：释放SDK": {
+    "zh": "关闭：释放SDK",
+    "en": "Close: release SDK"
+  },
+  "Close: release SDK": {
+    "zh": "关闭：释放SDK",
+    "en": "Close: release SDK"
+  },
+  "SDK资源已尝试释放，但拍摄未取得恢复证据；相机状态仍未确认，请人工检查": {
+    "zh": "SDK资源已尝试释放，但拍摄未取得恢复证据；相机状态仍未确认，请人工检查",
+    "en": "SDK cleanup attempted, but capture recovery was not confirmed. Check the camera manually."
+  },
+  "SDK cleanup attempted, but capture recovery was not confirmed. Check the camera manually.": {
+    "zh": "SDK资源已尝试释放，但拍摄未取得恢复证据；相机状态仍未确认，请人工检查",
+    "en": "SDK cleanup attempted, but capture recovery was not confirmed. Check the camera manually."
+  },
+  "关闭失败": {
+    "zh": "关闭失败",
+    "en": "Close failed"
+  },
+  "Close failed": {
+    "zh": "关闭失败",
+    "en": "Close failed"
+  },
+  "关闭存在未确认或清理错误：": {
+    "zh": "关闭存在未确认或清理错误：",
+    "en": "Close has unconfirmed state or cleanup errors: "
+  },
+  "Close has unconfirmed state or cleanup errors: ": {
+    "zh": "关闭存在未确认或清理错误：",
+    "en": "Close has unconfirmed state or cleanup errors: "
+  },
+  "关闭未确认": {
+    "zh": "关闭未确认",
+    "en": "Close unconfirmed"
+  },
+  "Close unconfirmed": {
+    "zh": "关闭未确认",
+    "en": "Close unconfirmed"
+  },
+  "当前原生包只有拍照接口，请显式部署带 Feature ABI 1 的新包": {
+    "zh": "当前原生包只有拍照接口，请显式部署带 Feature ABI 1 的新包",
+    "en": "The native package lacks extended features. Deploy a package with Feature ABI 1."
+  },
+  "The native package lacks extended features. Deploy a package with Feature ABI 1.": {
+    "zh": "当前原生包只有拍照接口，请显式部署带 Feature ABI 1 的新包",
+    "en": "The native package lacks extended features. Deploy a package with Feature ABI 1."
+  },
+  "扩展ABI布局不匹配": {
+    "zh": "扩展ABI布局不匹配",
+    "en": "Feature ABI layout mismatch"
+  },
+  "Feature ABI layout mismatch": {
+    "zh": "扩展ABI布局不匹配",
+    "en": "Feature ABI layout mismatch"
+  },
+  "扩展ABI检查": {
+    "zh": "扩展ABI检查",
+    "en": "Check feature ABI"
+  },
+  "Check feature ABI": {
+    "zh": "扩展ABI检查",
+    "en": "Check feature ABI"
+  },
+  "指定模式连接": {
+    "zh": "指定模式连接",
+    "en": "Connect with mode"
+  },
+  "Connect with mode": {
+    "zh": "指定模式连接",
+    "en": "Connect with mode"
+  },
+  "先干净断开并重新枚举，再指定连接模式": {
+    "zh": "先干净断开并重新枚举，再指定连接模式",
+    "en": "Disconnect cleanly and enumerate again before choosing a connection mode"
+  },
+  "Disconnect cleanly and enumerate again before choosing a connection mode": {
+    "zh": "先干净断开并重新枚举，再指定连接模式",
+    "en": "Disconnect cleanly and enumerate again before choosing a connection mode"
+  },
+  "候选列表超出容量限制": {
+    "zh": "候选列表超出容量限制",
+    "en": "Candidate list exceeds capacity limit"
+  },
+  "Candidate list exceeds capacity limit": {
+    "zh": "候选列表超出容量限制",
+    "en": "Candidate list exceeds capacity limit"
+  },
+  "候选数组越界": {
+    "zh": "候选数组越界",
+    "en": "Candidate array out of bounds"
+  },
+  "Candidate array out of bounds": {
+    "zh": "候选数组越界",
+    "en": "Candidate array out of bounds"
+  },
+  "相机候选列表持续变化，请重试": {
+    "zh": "相机候选列表持续变化，请重试",
+    "en": "Camera candidates keep changing. Retry."
+  },
+  "Camera candidates keep changing. Retry.": {
+    "zh": "相机候选列表持续变化，请重试",
+    "en": "Camera candidates keep changing. Retry."
+  },
+  "电池状态": {
+    "zh": "电池状态",
+    "en": "Battery status"
+  },
+  "Battery status": {
+    "zh": "电池状态",
+    "en": "Battery status"
+  },
+  "读取扩展属性": {
+    "zh": "读取扩展属性",
+    "en": "Read extended property"
+  },
+  "Read extended property": {
+    "zh": "读取扩展属性",
+    "en": "Read extended property"
+  },
+  "扩展能力清单": {
+    "zh": "扩展能力清单",
+    "en": "Extended capabilities"
+  },
+  "Extended capabilities": {
+    "zh": "扩展能力清单",
+    "en": "Extended capabilities"
+  },
+  "写入扩展属性": {
+    "zh": "写入扩展属性",
+    "en": "Write extended property"
+  },
+  "Write extended property": {
+    "zh": "写入扩展属性",
+    "en": "Write extended property"
+  },
+  "启用实时预览": {
+    "zh": "启用实时预览",
+    "en": "Enable live view"
+  },
+  "Enable live view": {
+    "zh": "启用实时预览",
+    "en": "Enable live view"
+  },
+  "实时预览帧": {
+    "zh": "实时预览帧",
+    "en": "Live view frame"
+  },
+  "Live view frame": {
+    "zh": "实时预览帧",
+    "en": "Live view frame"
+  },
+  "预览容量异常": {
+    "zh": "预览容量异常",
+    "en": "Invalid preview capacity"
+  },
+  "Invalid preview capacity": {
+    "zh": "预览容量异常",
+    "en": "Invalid preview capacity"
+  },
+  "预览数组越界": {
+    "zh": "预览数组越界",
+    "en": "Preview array out of bounds"
+  },
+  "Preview array out of bounds": {
+    "zh": "预览数组越界",
+    "en": "Preview array out of bounds"
+  },
+  "预览帧大小持续变化，请重试": {
+    "zh": "预览帧大小持续变化，请重试",
+    "en": "Preview frame size keeps changing. Retry."
+  },
+  "Preview frame size keeps changing. Retry.": {
+    "zh": "预览帧大小持续变化，请重试",
+    "en": "Preview frame size keeps changing. Retry."
+  },
+  "开始机内录像": {
+    "zh": "开始机内录像",
+    "en": "Start in-camera recording"
+  },
+  "Start in-camera recording": {
+    "zh": "开始机内录像",
+    "en": "Start in-camera recording"
+  },
+  "停止机内录像": {
+    "zh": "停止机内录像",
+    "en": "Stop in-camera recording"
+  },
+  "Stop in-camera recording": {
+    "zh": "停止机内录像",
+    "en": "Stop in-camera recording"
+  },
+  "镜头相对对焦": {
+    "zh": "镜头相对对焦",
+    "en": "Relative lens focus"
+  },
+  "Relative lens focus": {
+    "zh": "镜头相对对焦",
+    "en": "Relative lens focus"
+  },
+  "卡内日期目录": {
+    "zh": "卡内日期目录",
+    "en": "Card date folders"
+  },
+  "Card date folders": {
+    "zh": "卡内日期目录",
+    "en": "Card date folders"
+  },
+  "目录过多": {
+    "zh": "目录过多",
+    "en": "Too many folders"
+  },
+  "Too many folders": {
+    "zh": "目录过多",
+    "en": "Too many folders"
+  },
+  "目录数组越界": {
+    "zh": "目录数组越界",
+    "en": "Folder array out of bounds"
+  },
+  "Folder array out of bounds": {
+    "zh": "目录数组越界",
+    "en": "Folder array out of bounds"
+  },
+  "目录列表持续变化": {
+    "zh": "目录列表持续变化",
+    "en": "Folder list keeps changing"
+  },
+  "Folder list keeps changing": {
+    "zh": "目录列表持续变化",
+    "en": "Folder list keeps changing"
+  },
+  "卡内文件": {
+    "zh": "卡内文件",
+    "en": "Card files"
+  },
+  "Card files": {
+    "zh": "卡内文件",
+    "en": "Card files"
+  },
+  "文件过多": {
+    "zh": "文件过多",
+    "en": "Too many files"
+  },
+  "Too many files": {
+    "zh": "文件过多",
+    "en": "Too many files"
+  },
+  "内容数组越界": {
+    "zh": "内容数组越界",
+    "en": "Content array out of bounds"
+  },
+  "Content array out of bounds": {
+    "zh": "内容数组越界",
+    "en": "Content array out of bounds"
+  },
+  "文件列表持续变化": {
+    "zh": "文件列表持续变化",
+    "en": "File list keeps changing"
+  },
+  "File list keeps changing": {
+    "zh": "文件列表持续变化",
+    "en": "File list keeps changing"
+  },
+  "开始原文件下载": {
+    "zh": "开始原文件下载",
+    "en": "Start original file download"
+  },
+  "Start original file download": {
+    "zh": "开始原文件下载",
+    "en": "Start original file download"
+  },
+  "当前有任务或未确认状态": {
+    "zh": "当前有任务或未确认状态",
+    "en": "A task or unconfirmed state is active"
+  },
+  "A task or unconfirmed state is active": {
+    "zh": "当前有任务或未确认状态",
+    "en": "A task or unconfirmed state is active"
+  },
+  "路径含NUL": {
+    "zh": "路径含NUL",
+    "en": "Path contains NUL"
+  },
+  "Path contains NUL": {
+    "zh": "路径含NUL",
+    "en": "Path contains NUL"
+  },
+  "原文件下载进度": {
+    "zh": "原文件下载进度",
+    "en": "Original file download progress"
+  },
+  "Original file download progress": {
+    "zh": "原文件下载进度",
+    "en": "Original file download progress"
+  },
+  "下载未返回匹配任务": {
+    "zh": "下载未返回匹配任务",
+    "en": "Download returned no matching task"
+  },
+  "Download returned no matching task": {
+    "zh": "下载未返回匹配任务",
+    "en": "Download returned no matching task"
+  },
+  "结束下载等待": {
+    "zh": "结束下载等待",
+    "en": "End download wait"
+  },
+  "End download wait": {
+    "zh": "结束下载等待",
+    "en": "End download wait"
+  },
+  "界面参数快照": {
+    "zh": "界面参数快照",
+    "en": "UI setting snapshot"
+  },
+  "UI setting snapshot": {
+    "zh": "界面参数快照",
+    "en": "UI setting snapshot"
+  },
+  "界面参数核对与写入": {
+    "zh": "界面参数核对与写入",
+    "en": "Verify and write UI setting"
+  },
+  "Verify and write UI setting": {
+    "zh": "界面参数核对与写入",
+    "en": "Verify and write UI setting"
+  },
+  "相机参数已改变，请刷新后重新选择；未提交写入": {
+    "zh": "相机参数已改变，请刷新后重新选择；未提交写入",
+    "en": "Camera setting changed. Refresh and select again; no write submitted."
+  },
+  "Camera setting changed. Refresh and select again; no write submitted.": {
+    "zh": "相机参数已改变，请刷新后重新选择；未提交写入",
+    "en": "Camera setting changed. Refresh and select again; no write submitted."
+  },
+  "天文拍摄准备": {
+    "zh": "天文拍摄准备",
+    "en": "Astronomy preparation"
+  },
+  "Astronomy preparation": {
+    "zh": "天文准备",
+    "en": "Astronomy preparation"
+  },
+  "恢复天文准备设置": {
+    "zh": "恢复天文准备设置",
+    "en": "Restore astronomy preparation settings"
+  },
+  "Restore astronomy preparation settings": {
+    "zh": "恢复天文准备设置",
+    "en": "Restore astronomy preparation settings"
+  },
+  "镜头绝对对焦状态": {
+    "zh": "镜头绝对对焦状态",
+    "en": "Absolute lens focus status"
+  },
+  "Absolute lens focus status": {
+    "zh": "镜头绝对对焦状态",
+    "en": "Absolute lens focus status"
+  },
+  "镜头绝对对焦": {
+    "zh": "镜头绝对对焦",
+    "en": "Absolute lens focus"
+  },
+  "Absolute lens focus": {
+    "zh": "镜头绝对对焦",
+    "en": "Absolute lens focus"
+  },
+  "原生字符串没有NUL结尾": {
+    "zh": "原生字符串没有NUL结尾",
+    "en": "Native string is not NUL-terminated"
+  },
+  "Native string is not NUL-terminated": {
+    "zh": "原生字符串没有NUL结尾",
+    "en": "Native string is not NUL-terminated"
+  },
+  "仅支持Windows x64进程": {
+    "zh": "仅支持Windows x64进程",
+    "en": "Only Windows x64 processes are supported"
+  },
+  "Only Windows x64 processes are supported": {
+    "zh": "仅支持Windows x64进程",
+    "en": "Only Windows x64 processes are supported"
+  },
+  "DLL已固定到进程，不能切换包或真实/替身后端": {
+    "zh": "DLL已固定到进程，不能切换包或真实/替身后端",
+    "en": "DLL is pinned to this process; cannot switch packages or production/test backends"
+  },
+  "DLL is pinned to this process; cannot switch packages or production/test backends": {
+    "zh": "DLL已固定到进程，不能切换包或真实/替身后端",
+    "en": "DLL is pinned to this process; cannot switch packages or production/test backends"
+  },
+  "原生目录": {
+    "zh": "原生目录",
+    "en": "Native directory"
+  },
+  "Native directory": {
+    "zh": "原生目录",
+    "en": "Native directory"
+  },
+  "Sony CrSDK · 天文参数": {
+    "zh": "Sony CrSDK · 天文参数",
+    "en": "Sony CrSDK · Astronomy settings"
+  },
+  "Sony CrSDK · Astronomy settings": {
+    "zh": "Sony CrSDK · 天文参数",
+    "en": "Sony CrSDK · Astronomy settings"
+  },
+  "重新检查": {
+    "zh": "重新检查",
+    "en": "Recheck"
+  },
+  "Recheck": {
+    "zh": "重新检查",
+    "en": "Recheck"
+  },
+  "刷新相机参数": {
+    "zh": "刷新相机参数",
+    "en": "Refresh camera settings"
+  },
+  "Refresh camera settings": {
+    "zh": "刷新相机参数",
+    "en": "Refresh camera settings"
+  },
+  "ISO、曝光、拍摄、实时预览及电量使用 NINA 相机面板；镜头位置使用 NINA 对焦器面板。": {
+    "zh": "ISO、曝光、拍摄、实时预览及电量使用 NINA 相机面板；镜头位置使用 NINA 对焦器面板。",
+    "en": "Use NINA's camera panel for ISO, exposure, capture, live view and battery. Use its focuser panel for lens position."
+  },
+  "Use NINA's camera panel for ISO, exposure, capture, live view and battery. Use its focuser panel for lens position.": {
+    "zh": "ISO、曝光、拍摄、实时预览及电量使用 NINA 相机面板；镜头位置使用 NINA 对焦器面板。",
+    "en": "Use NINA's camera panel for ISO, exposure, capture, live view and battery. Use its focuser panel for lens position."
+  },
+  "相机参数": {
+    "zh": "相机参数",
+    "en": "Camera settings"
+  },
+  "Camera settings": {
+    "zh": "相机参数",
+    "en": "Camera settings"
+  },
+  "连接后点击刷新。每行只提交当前机身提供的候选，应用后读回确认；忙碌时停止写入。": {
+    "zh": "连接后点击刷新。每行只提交当前机身提供的候选，应用后读回确认；忙碌时停止写入。",
+    "en": "Connect and refresh. Each row accepts only current camera options and verifies changes by readback. Writes are disabled while busy."
+  },
+  "Connect and refresh. Each row accepts only current camera options and verifies changes by readback. Writes are disabled while busy.": {
+    "zh": "连接后点击刷新。每行只提交当前机身提供的候选，应用后读回确认；忙碌时停止写入。",
+    "en": "Connect and refresh. Each row accepts only current camera options and verifies changes by readback. Writes are disabled while busy."
+  },
+  "尚未读取相机参数。连接相机后，在空闲且实时预览停止时刷新。": {
+    "zh": "尚未读取相机参数。连接相机后，在空闲且实时预览停止时刷新。",
+    "en": "No camera settings loaded. Connect, stop live view and refresh while idle."
+  },
+  "No camera settings loaded. Connect, stop live view and refresh while idle.": {
+    "zh": "尚未读取相机参数。连接相机后，在空闲且实时预览停止时刷新。",
+    "en": "No camera settings loaded. Connect, stop live view and refresh while idle."
+  },
+  "应用": {
+    "zh": "应用",
+    "en": "Apply"
+  },
+  "Apply": {
+    "zh": "应用",
+    "en": "Apply"
+  },
+  "未知选项保持只读；若机身菜单或拍摄模式改变，请重新刷新。恢复天文准备前，不能单独覆盖回执中的设置。": {
+    "zh": "未知选项保持只读；若机身菜单或拍摄模式改变，请重新刷新。恢复天文准备前，不能单独覆盖回执中的设置。",
+    "en": "Unknown options remain read only. Refresh after changing body menus or shooting modes. Restore preparation before overriding its settings."
+  },
+  "Unknown options remain read only. Refresh after changing body menus or shooting modes. Restore preparation before overriding its settings.": {
+    "zh": "未知选项保持只读；若机身菜单或拍摄模式改变，请重新刷新。恢复天文准备前，不能单独覆盖回执中的设置。",
+    "en": "Unknown options remain read only. Refresh after changing body menus or shooting modes. Restore preparation before overriding its settings."
+  },
+  "天文准备": {
+    "zh": "天文准备",
+    "en": "Astronomy preparation"
+  },
+  "选择希望统一准备的项目": {
+    "zh": "选择希望统一准备的项目",
+    "en": "Choose settings to prepare together"
+  },
+  "Choose settings to prepare together": {
+    "zh": "选择希望统一准备的项目",
+    "en": "Choose settings to prepare together"
+  },
+  "立即应用会先检查全部选项，再写入并确认。任何请求不适用于当前机身或模式时会明确报错。": {
+    "zh": "立即应用会先检查全部选项，再写入并确认。任何请求不适用于当前机身或模式时会明确报错。",
+    "en": "Apply checks all options before writing and verifying. Unsupported requests report an error."
+  },
+  "Apply checks all options before writing and verifying. Unsupported requests report an error.": {
+    "zh": "立即应用会先检查全部选项，再写入并确认。任何请求不适用于当前机身或模式时会明确报错。",
+    "en": "Apply checks all options before writing and verifying. Unsupported requests report an error."
+  },
+  "关闭长曝光降噪（避免机内等长等待）": {
+    "zh": "关闭长曝光降噪（避免机内等长等待）",
+    "en": "Disable long-exposure noise reduction (avoids in-camera waiting)"
+  },
+  "Disable long-exposure noise reduction (avoids in-camera waiting)": {
+    "zh": "关闭长曝光降噪（避免机内等长等待）",
+    "en": "Disable long-exposure noise reduction (avoids in-camera waiting)"
+  },
+  "关闭机身防抖": {
+    "zh": "关闭机身防抖",
+    "en": "Disable SteadyShot"
+  },
+  "Disable SteadyShot": {
+    "zh": "关闭机身防抖",
+    "en": "Disable SteadyShot"
+  },
+  "使用全尺寸无损 RAW 压缩档（不改变 APS-C 选择）": {
+    "zh": "使用全尺寸无损 RAW 压缩档（不改变 APS-C 选择）",
+    "en": "Use full-size lossless RAW (preserves APS-C selection)"
+  },
+  "Use full-size lossless RAW (preserves APS-C selection)": {
+    "zh": "使用全尺寸无损 RAW 压缩档（不改变 APS-C 选择）",
+    "en": "Use full-size lossless RAW (preserves APS-C selection)"
+  },
+  "电子镜头切换为 MF 手动对焦": {
+    "zh": "电子镜头切换为 MF 手动对焦",
+    "en": "Set electronic lens to MF manual focus"
+  },
+  "Set electronic lens to MF manual focus": {
+    "zh": "电子镜头切换为 MF 手动对焦",
+    "en": "Set electronic lens to MF manual focus"
+  },
+  "关闭高 ISO 降噪（可选，对 RAW 的影响依机型而异）": {
+    "zh": "关闭高 ISO 降噪（可选，对 RAW 的影响依机型而异）",
+    "en": "Disable high ISO noise reduction (optional; RAW effects vary by model)"
+  },
+  "Disable high ISO noise reduction (optional; RAW effects vary by model)": {
+    "zh": "关闭高 ISO 降噪（可选，对 RAW 的影响依机型而异）",
+    "en": "Disable high ISO noise reduction (optional; RAW effects vary by model)"
+  },
+  "立即应用所选": {
+    "zh": "立即应用所选",
+    "en": "Apply selected now"
+  },
+  "Apply selected now": {
+    "zh": "立即应用所选",
+    "en": "Apply selected now"
+  },
+  "恢复本连接原设置": {
+    "zh": "恢复本连接原设置",
+    "en": "Restore original settings"
+  },
+  "Restore original settings": {
+    "zh": "恢复本连接原设置",
+    "en": "Restore original settings"
+  },
+  "下次连接时自动应用以上选择": {
+    "zh": "下次连接时自动应用以上选择",
+    "en": "Apply these choices automatically on next connection"
+  },
+  "Apply these choices automatically on next connection": {
+    "zh": "下次连接时自动应用以上选择",
+    "en": "Apply these choices automatically on next connection"
+  },
+  "勾选后还需点击底部“保存默认设置”。仅保存不会立即修改相机；立即应用也不会自动保存默认值。": {
+    "zh": "勾选后还需点击底部“保存默认设置”。仅保存不会立即修改相机；立即应用也不会自动保存默认值。",
+    "en": "Also click Save defaults below. Saving does not immediately change the camera; Apply does not save defaults."
+  },
+  "Also click Save defaults below. Saving does not immediately change the camera; Apply does not save defaults.": {
+    "zh": "勾选后还需点击底部“保存默认设置”。仅保存不会立即修改相机；立即应用也不会自动保存默认值。",
+    "en": "Also click Save defaults below. Saving does not immediately change the camera; Apply does not save defaults."
+  },
+  "恢复只适用于同一干净连接，且不会覆盖之后的手动改动。断开连接不会自动恢复机身。": {
+    "zh": "恢复只适用于同一干净连接，且不会覆盖之后的手动改动。断开连接不会自动恢复机身。",
+    "en": "Restore applies only to the same clean connection and preserves subsequent manual changes. Disconnect does not automatically restore settings."
+  },
+  "Restore applies only to the same clean connection and preserves subsequent manual changes. Disconnect does not automatically restore settings.": {
+    "zh": "恢复只适用于同一干净连接，且不会覆盖之后的手动改动。断开连接不会自动恢复机身。",
+    "en": "Restore applies only to the same clean connection and preserves subsequent manual changes. Disconnect does not automatically restore settings."
+  },
+  "默认设置": {
+    "zh": "默认设置",
+    "en": "Defaults"
+  },
+  "Defaults": {
+    "zh": "默认设置",
+    "en": "Defaults"
+  },
+  "保存后在下次连接相机时生效": {
+    "zh": "保存后在下次连接相机时生效",
+    "en": "Saved camera preferences apply on the next connection"
+  },
+  "Saved camera preferences apply on the next connection": {
+    "zh": "保存后在下次连接相机时生效",
+    "en": "Saved camera preferences apply on the next connection"
+  },
+  "此页保存插件偏好，不写入相机，也不修改 NINA 的曝光、ISO 或图像保存目录。": {
+    "zh": "此页保存插件偏好，不写入相机，也不修改 NINA 的曝光、ISO 或图像保存目录。",
+    "en": "Stores plugin preferences. Does not change camera settings or NINA's exposure, ISO or output folder."
+  },
+  "Stores plugin preferences. Does not change camera settings or NINA's exposure, ISO or output folder.": {
+    "zh": "此页保存插件偏好，不写入相机，也不修改 NINA 的曝光、ISO 或图像保存目录。",
+    "en": "Stores plugin preferences. Does not change camera settings or NINA's exposure, ISO or output folder."
+  },
+  "界面语言": {
+    "zh": "界面语言",
+    "en": "Interface language"
+  },
+  "Interface language": {
+    "zh": "界面语言",
+    "en": "Interface language"
+  },
+  "要求全画幅（裁切或未知状态将阻止曝光）": {
+    "zh": "要求全画幅（裁切或未知状态将阻止曝光）",
+    "en": "Require full frame (crop or unknown mode blocks exposure)"
+  },
+  "Require full frame (crop or unknown mode blocks exposure)": {
+    "zh": "要求全画幅（裁切或未知状态将阻止曝光）",
+    "en": "Require full frame (crop or unknown mode blocks exposure)"
+  },
+  "相机型号（留空时仅在发现一台相机时自动选择）": {
+    "zh": "相机型号（留空时仅在发现一台相机时自动选择）",
+    "en": "Camera model (leave empty to select the only detected camera)"
+  },
+  "Camera model (leave empty to select the only detected camera)": {
+    "zh": "相机型号（留空时仅在发现一台相机时自动选择）",
+    "en": "Camera model (leave empty to select the only detected camera)"
+  },
+  "原始 ARW 保存方式": {
+    "zh": "原始 ARW 保存方式",
+    "en": "Original ARW save mode"
+  },
+  "Original ARW save mode": {
+    "zh": "原始 ARW 保存方式",
+    "en": "Original ARW save mode"
+  },
+  "ARW 副本子目录（位于 NINA 当前图像保存目录下）": {
+    "zh": "ARW 副本子目录（位于 NINA 当前图像保存目录下）",
+    "en": "ARW copy subfolder (inside NINA's image output folder)"
+  },
+  "ARW copy subfolder (inside NINA's image output folder)": {
+    "zh": "ARW 副本子目录（位于 NINA 当前图像保存目录下）",
+    "en": "ARW copy subfolder (inside NINA's image output folder)"
+  },
+  "彩色实时预览（取消为灰度，不改变 RAW）": {
+    "zh": "彩色实时预览（取消为灰度，不改变 RAW）",
+    "en": "Color live view (uncheck for grayscale; RAW is unchanged)"
+  },
+  "Color live view (uncheck for grayscale; RAW is unchanged)": {
+    "zh": "彩色实时预览（取消为灰度，不改变 RAW）",
+    "en": "Color live view (uncheck for grayscale; RAW is unchanged)"
+  },
+  "启用 NINA 镜头对焦器（实验功能）": {
+    "zh": "启用 NINA 镜头对焦器（实验功能）",
+    "en": "Enable NINA lens focuser (experimental)"
+  },
+  "Enable NINA lens focuser (experimental)": {
+    "zh": "启用 NINA 镜头对焦器（实验功能）",
+    "en": "Enable NINA lens focuser (experimental)"
+  },
+  "先连接相机，再在 NINA 对焦器面板连接 Sony CrSDK Lens Focus。位置为 SDK 单位；绝对移动没有已验证的中途停止，需实机检查往返焦点。": {
+    "zh": "先连接相机，再在 NINA 对焦器面板连接 Sony CrSDK Lens Focus。位置为 SDK 单位；绝对移动没有已验证的中途停止，需实机检查往返焦点。",
+    "en": "Connect the camera first, then Sony CrSDK Lens Focus in NINA. Positions use SDK units. Stopping absolute moves mid-way is unverified; test focus return on hardware."
+  },
+  "Connect the camera first, then Sony CrSDK Lens Focus in NINA. Positions use SDK units. Stopping absolute moves mid-way is unverified; test focus return on hardware.": {
+    "zh": "先连接相机，再在 NINA 对焦器面板连接 Sony CrSDK Lens Focus。位置为 SDK 单位；绝对移动没有已验证的中途停止，需实机检查往返焦点。",
+    "en": "Connect the camera first, then Sony CrSDK Lens Focus in NINA. Positions use SDK units. Stopping absolute moves mid-way is unverified; test focus return on hardware."
+  },
+  "高级：像元与首次连接的几何提示": {
+    "zh": "高级：像元与首次连接的几何提示",
+    "en": "Advanced: pixel size and initial geometry"
+  },
+  "Advanced: pixel size and initial geometry": {
+    "zh": "高级：像元与首次连接的几何提示",
+    "en": "Advanced: pixel size and initial geometry"
+  },
+  "不清楚时留空。实际图像尺寸与 Bayer 排列始终以解码的 RAW 为准；这些字段不裁切图像。": {
+    "zh": "不清楚时留空。实际图像尺寸与 Bayer 排列始终以解码的 RAW 为准；这些字段不裁切图像。",
+    "en": "Leave empty if unsure. Decoded RAW determines image dimensions and Bayer pattern. These fields do not crop images."
+  },
+  "Leave empty if unsure. Decoded RAW determines image dimensions and Bayer pattern. These fields do not crop images.": {
+    "zh": "不清楚时留空。实际图像尺寸与 Bayer 排列始终以解码的 RAW 为准；这些字段不裁切图像。",
+    "en": "Leave empty if unsure. Decoded RAW determines image dimensions and Bayer pattern. These fields do not crop images."
+  },
+  "物理像元尺寸（μm）": {
+    "zh": "物理像元尺寸（μm）",
+    "en": "Physical pixel size (μm)"
+  },
+  "Physical pixel size (μm)": {
+    "zh": "物理像元尺寸（μm）",
+    "en": "Physical pixel size (μm)"
+  },
+  "首次图像前的宽度 / 高度（需同时填写）": {
+    "zh": "首次图像前的宽度 / 高度（需同时填写）",
+    "en": "Width / height before the first image (supply both)"
+  },
+  "Width / height before the first image (supply both)": {
+    "zh": "首次图像前的宽度 / 高度（需同时填写）",
+    "en": "Width / height before the first image (supply both)"
+  },
+  "SDK 配置": {
+    "zh": "SDK 配置",
+    "en": "SDK setup"
+  },
+  "SDK setup": {
+    "zh": "SDK 配置",
+    "en": "SDK setup"
+  },
+  "重新载入默认": {
+    "zh": "重新载入默认",
+    "en": "Reload defaults"
+  },
+  "Reload defaults": {
+    "zh": "重新载入默认",
+    "en": "Reload defaults"
+  },
+  "保存默认设置（下次连接）": {
+    "zh": "保存默认设置（下次连接）",
+    "en": "Save defaults (next connection)"
+  },
+  "Save defaults (next connection)": {
+    "zh": "保存默认设置（下次连接）",
+    "en": "Save defaults (next connection)"
+  },
+  "Sony SDK 配置": {
+    "zh": "Sony SDK 配置",
+    "en": "Sony SDK setup"
+  },
+  "Sony SDK setup": {
+    "zh": "Sony SDK 配置",
+    "en": "Sony SDK setup"
+  },
+  "自行下载并解压 Sony Camera Remote SDK 2.02.00 Windows x64。启动时仅检测。请主动选择 SDK、SimpleCli 或 crsdk 目录，然后点击导入。公开包不含 SDK，配置不会连接相机。": {
+    "zh": "自行下载并解压 Sony Camera Remote SDK 2.02.00 Windows x64。启动时仅检测。请主动选择 SDK、SimpleCli 或 crsdk 目录，然后点击导入。公开包不含 SDK，配置不会连接相机。",
+    "en": "Download and extract Sony Camera Remote SDK 2.02.00 Windows x64. Startup only detects it. Select SDK, SimpleCli or crsdk and click Import. The package excludes SDK files; setup does not connect a camera."
+  },
+  "Download and extract Sony Camera Remote SDK 2.02.00 Windows x64. Startup only detects it. Select SDK, SimpleCli or crsdk and click Import. The package excludes SDK files; setup does not connect a camera.": {
+    "zh": "自行下载并解压 Sony Camera Remote SDK 2.02.00 Windows x64。启动时仅检测。请主动选择 SDK、SimpleCli 或 crsdk 目录，然后点击导入。公开包不含 SDK，配置不会连接相机。",
+    "en": "Download and extract Sony Camera Remote SDK 2.02.00 Windows x64. Startup only detects it. Select SDK, SimpleCli or crsdk and click Import. The package excludes SDK files; setup does not connect a camera."
+  },
+  "SDK 目录": {
+    "zh": "SDK 目录",
+    "en": "SDK directory"
+  },
+  "SDK directory": {
+    "zh": "SDK 目录",
+    "en": "SDK directory"
+  },
+  "浏览…": {
+    "zh": "浏览…",
+    "en": "Browse…"
+  },
+  "Browse…": {
+    "zh": "浏览…",
+    "en": "Browse…"
+  },
+  "使用管理员权限（NINA 安装目录受保护时需要）": {
+    "zh": "使用管理员权限（NINA 安装目录受保护时需要）",
+    "en": "Use administrator access (needed for protected NINA installations)"
+  },
+  "Use administrator access (needed for protected NINA installations)": {
+    "zh": "使用管理员权限（NINA 安装目录受保护时需要）",
+    "en": "Use administrator access (needed for protected NINA installations)"
+  },
+  "安装会将 Cr_PTP_USB.dll、Cr_PTP_IP.dll、libusb-1.0.dll 和 libssh2.dll 写入 NINA/CrAdapter，供 Sony SDK 定位 USB/IP 适配器。其他运行库缓存在用户插件数据目录。只有宿主目录受保护时才需管理员权限；已有不同版本会停止。导入后重启 NINA。": {
+    "zh": "安装会将 Cr_PTP_USB.dll、Cr_PTP_IP.dll、libusb-1.0.dll 和 libssh2.dll 写入 NINA/CrAdapter，供 Sony SDK 定位 USB/IP 适配器。其他运行库缓存在用户插件数据目录。只有宿主目录受保护时才需管理员权限；已有不同版本会停止。导入后重启 NINA。",
+    "en": "Installs Cr_PTP_USB.dll, Cr_PTP_IP.dll, libusb-1.0.dll and libssh2.dll in NINA/CrAdapter so Sony SDK can locate USB/IP adapters. Other runtime files are cached in user plugin data. Administrator access is needed only for a protected host folder. Conflicting versions stop setup. Restart NINA after import."
+  },
+  "Installs Cr_PTP_USB.dll, Cr_PTP_IP.dll, libusb-1.0.dll and libssh2.dll in NINA/CrAdapter so Sony SDK can locate USB/IP adapters. Other runtime files are cached in user plugin data. Administrator access is needed only for a protected host folder. Conflicting versions stop setup. Restart NINA after import.": {
+    "zh": "安装会将 Cr_PTP_USB.dll、Cr_PTP_IP.dll、libusb-1.0.dll 和 libssh2.dll 写入 NINA/CrAdapter，供 Sony SDK 定位 USB/IP 适配器。其他运行库缓存在用户插件数据目录。只有宿主目录受保护时才需管理员权限；已有不同版本会停止。导入后重启 NINA。",
+    "en": "Installs Cr_PTP_USB.dll, Cr_PTP_IP.dll, libusb-1.0.dll and libssh2.dll in NINA/CrAdapter so Sony SDK can locate USB/IP adapters. Other runtime files are cached in user plugin data. Administrator access is needed only for a protected host folder. Conflicting versions stop setup. Restart NINA after import."
+  },
+  "导入 SDK": {
+    "zh": "导入 SDK",
+    "en": "Import SDK"
+  },
+  "Import SDK": {
+    "zh": "导入 SDK",
+    "en": "Import SDK"
+  },
+  "查找并安装 SDK": {
+    "zh": "查找并安装 SDK",
+    "en": "Find and install SDK"
+  },
+  "Find and install SDK": {
+    "zh": "查找并安装 SDK",
+    "en": "Find and install SDK"
+  },
+  "检查配置": {
+    "zh": "检查配置",
+    "en": "Check configuration"
+  },
+  "Check configuration": {
+    "zh": "检查配置",
+    "en": "Check configuration"
+  },
+  "全画幅": {
+    "zh": "全画幅",
+    "en": "Full frame"
+  },
+  "Full frame": {
+    "zh": "全画幅",
+    "en": "Full frame"
+  },
+  "当前使用 APS-C／Super 35 裁切模式。请确认这是预期设置，并检查图像尺寸、视场及解算配置。": {
+    "zh": "当前使用 APS-C／Super 35 裁切模式。请确认这是预期设置，并检查图像尺寸、视场及解算配置。",
+    "en": "APS-C / Super 35 crop mode is active. Confirm this is intended and check image dimensions, field of view and plate-solving settings."
+  },
+  "APS-C / Super 35 crop mode is active. Confirm this is intended and check image dimensions, field of view and plate-solving settings.": {
+    "zh": "当前使用 APS-C／Super 35 裁切模式。请确认这是预期设置，并检查图像尺寸、视场及解算配置。",
+    "en": "APS-C / Super 35 crop mode is active. Confirm this is intended and check image dimensions, field of view and plate-solving settings."
+  },
+  "画幅状态未知。不能仅凭图像尺寸确定 APS-C 模式。": {
+    "zh": "画幅状态未知。不能仅凭图像尺寸确定 APS-C 模式。",
+    "en": "Sensor mode is unknown. Image dimensions alone do not establish APS-C mode."
+  },
+  "Sensor mode is unknown. Image dimensions alone do not establish APS-C mode.": {
+    "zh": "画幅状态未知。不能仅凭图像尺寸确定 APS-C 模式。",
+    "en": "Sensor mode is unknown. Image dimensions alone do not establish APS-C mode."
+  },
+  "画幅已变为全画幅。请检查图像尺寸、视场及解算配置。": {
+    "zh": "画幅已变为全画幅。请检查图像尺寸、视场及解算配置。",
+    "en": "Sensor mode changed to full frame. Check image dimensions, field of view and plate-solving settings."
+  },
+  "Sensor mode changed to full frame. Check image dimensions, field of view and plate-solving settings.": {
+    "zh": "画幅已变为全画幅。请检查图像尺寸、视场及解算配置。",
+    "en": "Sensor mode changed to full frame. Check image dimensions, field of view and plate-solving settings."
+  },
+  "已要求全画幅，但机身报告 APS-C 或未知模式。请选择全画幅或关闭此要求。": {
+    "zh": "已要求全画幅，但机身报告 APS-C 或未知模式。请选择全画幅或关闭此要求。",
+    "en": "Full frame is required, but the body reports APS-C or an unknown mode. Select full frame or disable this requirement."
+  },
+  "Full frame is required, but the body reports APS-C or an unknown mode. Select full frame or disable this requirement.": {
+    "zh": "已要求全画幅，但机身报告 APS-C 或未知模式。请选择全画幅或关闭此要求。",
+    "en": "Full frame is required, but the body reports APS-C or an unknown mode. Select full frame or disable this requirement."
+  },
+  "打开 SDK 配置，检查并主动安装所需文件。": {
+    "zh": "打开 SDK 配置，检查并主动安装所需文件。",
+    "en": "Open SDK setup to review and explicitly install the required files."
+  },
+  "Open SDK setup to review and explicitly install the required files.": {
+    "zh": "打开 SDK 配置，检查并主动安装所需文件。",
+    "en": "Open SDK setup to review and explicitly install the required files."
+  },
+  "已取消 SDK 检测。": {
+    "zh": "已取消 SDK 检测。",
+    "en": "SDK detection cancelled."
+  },
+  "SDK detection cancelled.": {
+    "zh": "已取消 SDK 检测。",
+    "en": "SDK detection cancelled."
+  },
+  "Ui001": {
+    "zh": "Sony CrSDK · 天文参数",
+    "en": "Sony CrSDK · Astronomy settings"
+  },
+  "Ui002": {
+    "zh": "重新检查",
+    "en": "Recheck"
+  },
+  "Ui003": {
+    "zh": "刷新相机参数",
+    "en": "Refresh camera settings"
+  },
+  "Ui004": {
+    "zh": "ISO、曝光、拍摄、实时预览及电量使用 NINA 相机面板；镜头位置使用 NINA 对焦器面板。",
+    "en": "Use NINA's camera panel for ISO, exposure, capture, live view and battery. Use its focuser panel for lens position."
+  },
+  "Ui005": {
+    "zh": "相机参数",
+    "en": "Camera settings"
+  },
+  "Ui006": {
+    "zh": "连接后点击刷新。每行只提交当前机身提供的候选，应用后读回确认；忙碌时停止写入。",
+    "en": "Connect and refresh. Each row accepts only current camera options and verifies changes by readback. Writes are disabled while busy."
+  },
+  "Ui007": {
+    "zh": "尚未读取相机参数。连接相机后，在空闲且实时预览停止时刷新。",
+    "en": "No camera settings loaded. Connect, stop live view and refresh while idle."
+  },
+  "Ui008": {
+    "zh": "应用",
+    "en": "Apply"
+  },
+  "Ui009": {
+    "zh": "未知选项保持只读；若机身菜单或拍摄模式改变，请重新刷新。恢复天文准备前，不能单独覆盖回执中的设置。",
+    "en": "Unknown options remain read only. Refresh after changing body menus or shooting modes. Restore preparation before overriding its settings."
+  },
+  "Ui010": {
+    "zh": "天文准备",
+    "en": "Astronomy preparation"
+  },
+  "Ui011": {
+    "zh": "选择希望统一准备的项目",
+    "en": "Choose settings to prepare together"
+  },
+  "Ui012": {
+    "zh": "立即应用会先检查全部选项，再写入并确认。任何请求不适用于当前机身或模式时会明确报错。",
+    "en": "Apply checks all options before writing and verifying. Unsupported requests report an error."
+  },
+  "Ui013": {
+    "zh": "关闭长曝光降噪（避免机内等长等待）",
+    "en": "Disable long-exposure noise reduction (avoids in-camera waiting)"
+  },
+  "Ui014": {
+    "zh": "关闭机身防抖",
+    "en": "Disable SteadyShot"
+  },
+  "Ui015": {
+    "zh": "使用全尺寸无损 RAW 压缩档（不改变 APS-C 选择）",
+    "en": "Use full-size lossless RAW (preserves APS-C selection)"
+  },
+  "Ui016": {
+    "zh": "电子镜头切换为 MF 手动对焦",
+    "en": "Set electronic lens to MF manual focus"
+  },
+  "Ui017": {
+    "zh": "关闭高 ISO 降噪（可选，对 RAW 的影响依机型而异）",
+    "en": "Disable high ISO noise reduction (optional; RAW effects vary by model)"
+  },
+  "Ui018": {
+    "zh": "立即应用所选",
+    "en": "Apply selected now"
+  },
+  "Ui019": {
+    "zh": "恢复本连接原设置",
+    "en": "Restore original settings"
+  },
+  "Ui020": {
+    "zh": "下次连接时自动应用以上选择",
+    "en": "Apply these choices automatically on next connection"
+  },
+  "Ui021": {
+    "zh": "勾选后还需点击底部“保存默认设置”。仅保存不会立即修改相机；立即应用也不会自动保存默认值。",
+    "en": "Also click Save defaults below. Saving does not immediately change the camera; Apply does not save defaults."
+  },
+  "Ui022": {
+    "zh": "恢复只适用于同一干净连接，且不会覆盖之后的手动改动。断开连接不会自动恢复机身。",
+    "en": "Restore applies only to the same clean connection and preserves subsequent manual changes. Disconnect does not automatically restore settings."
+  },
+  "Ui023": {
+    "zh": "默认设置",
+    "en": "Defaults"
+  },
+  "Ui024": {
+    "zh": "保存后在下次连接相机时生效",
+    "en": "Saved camera preferences apply on the next connection"
+  },
+  "Ui025": {
+    "zh": "此页保存插件偏好，不写入相机，也不修改 NINA 的曝光、ISO 或图像保存目录。",
+    "en": "Stores plugin preferences. Does not change camera settings or NINA's exposure, ISO or output folder."
+  },
+  "Ui026": {
+    "zh": "界面语言",
+    "en": "Interface language"
+  },
+  "Ui027": {
+    "zh": "要求全画幅（裁切或未知状态将阻止曝光）",
+    "en": "Require full frame (crop or unknown mode blocks exposure)"
+  },
+  "Ui028": {
+    "zh": "相机型号（留空时仅在发现一台相机时自动选择）",
+    "en": "Camera model (leave empty to select the only detected camera)"
+  },
+  "Ui029": {
+    "zh": "原始 ARW 保存方式",
+    "en": "Original ARW save mode"
+  },
+  "Ui030": {
+    "zh": "ARW 副本子目录（位于 NINA 当前图像保存目录下）",
+    "en": "ARW copy subfolder (inside NINA's image output folder)"
+  },
+  "Ui031": {
+    "zh": "彩色实时预览（取消为灰度，不改变 RAW）",
+    "en": "Color live view (uncheck for grayscale; RAW is unchanged)"
+  },
+  "Ui032": {
+    "zh": "启用 NINA 镜头对焦器（实验功能）",
+    "en": "Enable NINA lens focuser (experimental)"
+  },
+  "Ui033": {
+    "zh": "先连接相机，再在 NINA 对焦器面板连接 Sony CrSDK Lens Focus。位置为 SDK 单位；绝对移动没有已验证的中途停止，需实机检查往返焦点。",
+    "en": "Connect the camera first, then Sony CrSDK Lens Focus in NINA. Positions use SDK units. Stopping absolute moves mid-way is unverified; test focus return on hardware."
+  },
+  "Ui034": {
+    "zh": "高级：像元与首次连接的几何提示",
+    "en": "Advanced: pixel size and initial geometry"
+  },
+  "Ui035": {
+    "zh": "不清楚时留空。实际图像尺寸与 Bayer 排列始终以解码的 RAW 为准；这些字段不裁切图像。",
+    "en": "Leave empty if unsure. Decoded RAW determines image dimensions and Bayer pattern. These fields do not crop images."
+  },
+  "Ui036": {
+    "zh": "物理像元尺寸（μm）",
+    "en": "Physical pixel size (μm)"
+  },
+  "Ui037": {
+    "zh": "首次图像前的宽度 / 高度（需同时填写）",
+    "en": "Width / height before the first image (supply both)"
+  },
+  "Ui038": {
+    "zh": "SDK 配置",
+    "en": "SDK setup"
+  },
+  "Ui039": {
+    "zh": "重新载入默认",
+    "en": "Reload defaults"
+  },
+  "Ui040": {
+    "zh": "保存默认设置（下次连接）",
+    "en": "Save defaults (next connection)"
+  },
+  "Ui041": {
+    "zh": "Sony SDK 配置",
+    "en": "Sony SDK setup"
+  },
+  "Ui042": {
+    "zh": "自行下载并解压 Sony Camera Remote SDK 2.02.00 Windows x64。启动时仅检测。请主动选择 SDK、SimpleCli 或 crsdk 目录，然后点击导入。公开包不含 SDK，配置不会连接相机。",
+    "en": "Download and extract Sony Camera Remote SDK 2.02.00 Windows x64. Startup only detects it. Select SDK, SimpleCli or crsdk and click Import. The package excludes SDK files; setup does not connect a camera."
+  },
+  "Ui043": {
+    "zh": "SDK 目录",
+    "en": "SDK directory"
+  },
+  "Ui044": {
+    "zh": "浏览…",
+    "en": "Browse…"
+  },
+  "Ui045": {
+    "zh": "使用管理员权限（NINA 安装目录受保护时需要）",
+    "en": "Use administrator access (needed for protected NINA installations)"
+  },
+  "Ui046": {
+    "zh": "安装会将 Cr_PTP_USB.dll、Cr_PTP_IP.dll、libusb-1.0.dll 和 libssh2.dll 写入 NINA/CrAdapter，供 Sony SDK 定位 USB/IP 适配器。其他运行库缓存在用户插件数据目录。只有宿主目录受保护时才需管理员权限；已有不同版本会停止。导入后重启 NINA。",
+    "en": "Installs Cr_PTP_USB.dll, Cr_PTP_IP.dll, libusb-1.0.dll and libssh2.dll in NINA/CrAdapter so Sony SDK can locate USB/IP adapters. Other runtime files are cached in user plugin data. Administrator access is needed only for a protected host folder. Conflicting versions stop setup. Restart NINA after import."
+  },
+  "Ui047": {
+    "zh": "导入 SDK",
+    "en": "Import SDK"
+  },
+  "Ui048": {
+    "zh": "查找并安装 SDK",
+    "en": "Find and install SDK"
+  },
+  "Ui049": {
+    "zh": "检查配置",
+    "en": "Check configuration"
+  },
+  "ABI {0}.{1}偏移错误：{2}": {
+    "zh": "ABI {0}.{1}偏移错误：{2}",
+    "en": "ABI {0}.{1} offset mismatch: {2}"
+  },
+  "ABI {0}大小 {1} != {2}": {
+    "zh": "ABI {0}大小 {1} != {2}",
+    "en": "ABI {0} size {1} != {2}"
+  },
+  "JSON重复属性：{0}": {
+    "zh": "JSON重复属性：{0}",
+    "en": "Duplicate JSON property: {0}"
+  },
+  "ManifestPath不能为空": {
+    "zh": "ManifestPath不能为空",
+    "en": "ManifestPath must not be empty"
+  },
+  "ManifestPath必须为绝对路径；配置文件中的相对路径请通过CameraClientConfiguration.Load解析": {
+    "zh": "ManifestPath必须为绝对路径；配置文件中的相对路径请通过CameraClientConfiguration.Load解析",
+    "en": "ManifestPath must be absolute; resolve relative paths in configuration through CameraClientConfiguration.Load"
+  },
+  "PE头越界：{0}": {
+    "zh": "PE头越界：{0}",
+    "en": "PE header is out of bounds: {0}"
+  },
+  "PE签名无效：{0}": {
+    "zh": "PE签名无效：{0}",
+    "en": "Invalid PE signature: {0}"
+  },
+  "backend必须为production或test": {
+    "zh": "backend必须为production或test",
+    "en": "backend must be production or test"
+  },
+  "packageId必须为1～128个非空白字符": {
+    "zh": "packageId必须为1～128个非空白字符",
+    "en": "packageId must be 1-128 non-whitespace characters"
+  },
+  "{0} [项目={1}, Sony=0x{2:X8}, 阶段={3}, 拍摄={4}]": {
+    "zh": "{0} [项目={1}, Sony=0x{2:X8}, 阶段={3}, 拍摄={4}]",
+    "en": "{0} [project={1}, Sony=0x{2:X8}, stage={3}, capture={4}]"
+  },
+  "{0}必须是64位SHA-256十六进制文本，必须从包以外的批准配置提供": {
+    "zh": "{0}必须是64位SHA-256十六进制文本，必须从包以外的批准配置提供",
+    "en": "{0} must be 64 hexadecimal SHA-256 characters supplied by an approved configuration outside the package"
+  },
+  "不是原生PE文件：{0}": {
+    "zh": "不是原生PE文件：{0}",
+    "en": "Not a native PE file: {0}"
+  },
+  "仅支持schemaVersion=1、abiVersion=2": {
+    "zh": "仅支持schemaVersion=1、abiVersion=2",
+    "en": "Only schemaVersion=1 and abiVersion=2 are supported"
+  },
+  "加载{0}失败：{1}。Win32={2}。若为126/127，请检查包依赖及Microsoft Visual C++ x64运行库；若为193，请检查AMD64架构。请修复部署后重新启动进程。": {
+    "zh": "加载{0}失败：{1}。Win32={2}。若为126/127，请检查包依赖及Microsoft Visual C++ x64运行库；若为193，请检查AMD64架构。请修复部署后重新启动进程。",
+    "en": "Failed to load {0}: {1}. Win32={2}. For 126/127 check package dependencies and the Microsoft Visual C++ x64 runtime; for 193 check the AMD64 architecture. Fix the deployment and restart the process."
+  },
+  "原生依赖不能是托管程序集：{0}": {
+    "zh": "原生依赖不能是托管程序集：{0}",
+    "en": "A native dependency cannot be a managed assembly: {0}"
+  },
+  "原生文件哈希不匹配：role={0}, path={1}, actual={2}": {
+    "zh": "原生文件哈希不匹配：role={0}, path={1}, actual={2}",
+    "en": "Native file hash mismatch: role={0}, path={1}, actual={2}"
+  },
+  "原生文件必须为AMD64，实际machine=0x{0:X4}：{1}": {
+    "zh": "原生文件必须为AMD64，实际machine=0x{0:X4}：{1}",
+    "en": "Native file must be AMD64; actual machine=0x{0:X4}: {1}"
+  },
+  "拒绝测试包：必须显式AllowTestPackage=true，测试包不提供实机证据": {
+    "zh": "拒绝测试包：必须显式AllowTestPackage=true，测试包不提供实机证据",
+    "en": "Test package refused: AllowTestPackage=true must be explicit; test packages are not hardware evidence"
+  },
+  "拒绝重解析点/符号链接路径：{0}": {
+    "zh": "拒绝重解析点/符号链接路径：{0}",
+    "en": "Refused reparse point or symbolic link path: {0}"
+  },
+  "无法验证必需依赖：role={0}, path={1}；{2}。请检查完整部署和读取权限；host适配器须位于EXE同级CrAdapter。": {
+    "zh": "无法验证必需依赖：role={0}, path={1}；{2}。请检查完整部署和读取权限；host适配器须位于EXE同级CrAdapter。",
+    "en": "Cannot verify a required dependency: role={0}, path={1}; {2}. Check the complete deployment and read permissions; host adapters must be in CrAdapter beside the EXE."
+  },
+  "本部署验证器仅支持Windows x64进程；不会加载DLL或访问相机": {
+    "zh": "本部署验证器仅支持Windows x64进程；不会加载DLL或访问相机",
+    "en": "This deployment validator supports Windows x64 processes only; it does not load DLLs or access the camera"
+  },
+  "清单ABI结构大小必须与客户端已知ABI2布局完全一致": {
+    "zh": "清单ABI结构大小必须与客户端已知ABI2布局完全一致",
+    "en": "Manifest ABI structure sizes must exactly match the client's known ABI 2 layout"
+  },
+  "清单为空": {
+    "zh": "清单为空",
+    "en": "Manifest is empty"
+  },
+  "清单必须含8项固定原生角色，不得删除必需项或添加未审查角色": {
+    "zh": "清单必须含8项固定原生角色，不得删除必需项或添加未审查角色",
+    "en": "Manifest must contain the eight fixed native roles; do not remove required entries or add unaudited roles"
+  },
+  "清单文件路径逃逸或重复": {
+    "zh": "清单文件路径逃逸或重复",
+    "en": "Manifest file path escapes its root or is duplicated"
+  },
+  "清单未获批准：实际SHA256={0}，与宿主外部批准值不一致": {
+    "zh": "清单未获批准：实际SHA256={0}，与宿主外部批准值不一致",
+    "en": "Manifest not approved: actual SHA256={0} differs from the host's external approval"
+  },
+  "清单角色未知、空或重复": {
+    "zh": "清单角色未知、空或重复",
+    "en": "Manifest role is unknown, empty or duplicated"
+  },
+  "角色{0}必须固定为{1}:{2}，不得使用绝对路径、跳转或其他路径": {
+    "zh": "角色{0}必须固定为{1}:{2}，不得使用绝对路径、跳转或其他路径",
+    "en": "Role {0} must be fixed at {1}:{2}; absolute paths, traversal or other paths are not allowed"
+  },
+  "进程已加载未知原生依赖：{0}，请使用独立进程启动": {
+    "zh": "进程已加载未知原生依赖：{0}，请使用独立进程启动",
+    "en": "The process already loaded an unknown native dependency: {0}. Start it in a separate process."
+  },
+  "部署清单不能超过1MiB": {
+    "zh": "部署清单不能超过1MiB",
+    "en": "Deployment manifest must not exceed 1 MiB"
+  },
+  "配置为空": {
+    "zh": "配置为空",
+    "en": "Configuration is empty"
+  },
+  "配置缺少ManifestPath": {
+    "zh": "配置缺少ManifestPath",
+    "en": "Configuration is missing ManifestPath"
+  },
+  "需要64位PE32+：{0}": {
+    "zh": "需要64位PE32+：{0}",
+    "en": "A 64-bit PE32+ image is required: {0}"
+  },
+  "需要有效原生DLL PE头：{0}": {
+    "zh": "需要有效原生DLL PE头：{0}",
+    "en": "A valid native DLL PE header is required: {0}"
+  },
+  "验证后文件发生变化：{0} {1}": {
+    "zh": "验证后文件发生变化：{0} {1}",
+    "en": "File changed after verification: {0} {1}"
+  },
+  "{name}必须是64位SHA-256十六进制文本，必须从包以外的批准配置提供": {
+    "zh": "{name}必须是64位SHA-256十六进制文本，必须从包以外的批准配置提供",
+    "en": "{name} must be 64 hexadecimal SHA-256 characters supplied by an approved configuration outside the package"
+  },
+  "拒绝重解析点/符号链接路径：{current}": {
+    "zh": "拒绝重解析点/符号链接路径：{current}",
+    "en": "Refused reparse point or symbolic link path: {current}"
+  },
+  "JSON重复属性：{item.Name}": {
+    "zh": "JSON重复属性：{item.Name}",
+    "en": "Duplicate JSON property: {item.Name}"
+  },
+  "不是原生PE文件：{path}": {
+    "zh": "不是原生PE文件：{path}",
+    "en": "Not a native PE file: {path}"
+  },
+  "PE头越界：{path}": {
+    "zh": "PE头越界：{path}",
+    "en": "PE header is out of bounds: {path}"
+  },
+  "PE签名无效：{path}": {
+    "zh": "PE签名无效：{path}",
+    "en": "Invalid PE signature: {path}"
+  },
+  "原生文件必须为AMD64，实际machine=0x{machine:X4}：{path}": {
+    "zh": "原生文件必须为AMD64，实际machine=0x{machine:X4}：{path}",
+    "en": "Native file must be AMD64; actual machine=0x{machine:X4}: {path}"
+  },
+  "需要有效原生DLL PE头：{path}": {
+    "zh": "需要有效原生DLL PE头：{path}",
+    "en": "A valid native DLL PE header is required: {path}"
+  },
+  "需要64位PE32+：{path}": {
+    "zh": "需要64位PE32+：{path}",
+    "en": "A 64-bit PE32+ image is required: {path}"
+  },
+  "原生依赖不能是托管程序集：{path}": {
+    "zh": "原生依赖不能是托管程序集：{path}",
+    "en": "A native dependency cannot be a managed assembly: {path}"
+  },
+  "清单未获批准：实际SHA256={hash}，与宿主外部批准值不一致": {
+    "zh": "清单未获批准：实际SHA256={hash}，与宿主外部批准值不一致",
+    "en": "Manifest not approved: actual SHA256={hash} differs from the host's external approval"
+  },
+  "角色{entry.Role}必须固定为{required.Base}:{required.Path}，不得使用绝对路径、跳转或其他路径": {
+    "zh": "角色{entry.Role}必须固定为{required.Base}:{required.Path}，不得使用绝对路径、跳转或其他路径",
+    "en": "Role {entry.Role} must be fixed at {required.Base}:{required.Path}; absolute paths, traversal or other paths are not allowed"
+  },
+  "原生文件哈希不匹配：role={entry.Role}, path={path}, actual={actual}": {
+    "zh": "原生文件哈希不匹配：role={entry.Role}, path={path}, actual={actual}",
+    "en": "Native file hash mismatch: role={entry.Role}, path={path}, actual={actual}"
+  },
+  "无法验证必需依赖：role={entry.Role}, path={path}；{ex.Message}。请检查完整部署和读取权限；host适配器须位于EXE同级CrAdapter。": {
+    "zh": "无法验证必需依赖：role={entry.Role}, path={path}；{ex.Message}。请检查完整部署和读取权限；host适配器须位于EXE同级CrAdapter。",
+    "en": "Cannot verify a required dependency: role={entry.Role}, path={path}; {ex.Message}. Check the complete deployment and read permissions; host adapters must be in CrAdapter beside the EXE."
+  },
+  "加载{role}失败：{path}。Win32={code}。若为126/127，请检查包依赖及Microsoft Visual C++ x64运行库；若为193，请检查AMD64架构。请修复部署后重新启动进程。": {
+    "zh": "加载{role}失败：{path}。Win32={code}。若为126/127，请检查包依赖及Microsoft Visual C++ x64运行库；若为193，请检查AMD64架构。请修复部署后重新启动进程。",
+    "en": "Failed to load {role}: {path}. Win32={code}. For 126/127 check package dependencies and the Microsoft Visual C++ x64 runtime; for 193 check the AMD64 architecture. Fix the deployment and restart the process."
+  },
+  "进程已加载未知原生依赖：{file.Role}，请使用独立进程启动": {
+    "zh": "进程已加载未知原生依赖：{file.Role}，请使用独立进程启动",
+    "en": "The process already loaded an unknown native dependency: {file.Role}. Start it in a separate process."
+  },
+  "验证后文件发生变化：{file.Role} {file.FullPath}": {
+    "zh": "验证后文件发生变化：{file.Role} {file.FullPath}",
+    "en": "File changed after verification: {file.Role} {file.FullPath}"
+  },
+  "ABI {name}大小 {actual} != {size}": {
+    "zh": "ABI {name}大小 {actual} != {size}",
+    "en": "ABI {name} size {actual} != {size}"
+  },
+  "ABI {name}.{parts[0]}偏移错误：{value}": {
+    "zh": "ABI {name}.{parts[0]}偏移错误：{value}",
+    "en": "ABI {name}.{parts[0]} offset mismatch: {value}"
+  },
+  "包={package.PackageId}, manifest={package.ManifestSha256}, backend={package.Backend}；": {
+    "zh": "包={package.PackageId}, manifest={package.ManifestSha256}, backend={package.Backend}；",
+    "en": "package={package.PackageId}, manifest={package.ManifestSha256}, backend={package.Backend}; "
+  },
+  "运行时ABI不匹配：version={version}, sizes={es}/{cs}/{ps}/{crs}/{rs}/{caps}/{infos}": {
+    "zh": "运行时ABI不匹配：version={version}, sizes={es}/{cs}/{ps}/{crs}/{rs}/{caps}/{infos}",
+    "en": "Runtime ABI mismatch: version={version}, sizes={es}/{cs}/{ps}/{crs}/{rs}/{caps}/{infos}"
+  },
+  "已提交 {snapshot.Preparation.Count(x=>x.Submitted)} 项，已确认 {snapshot.Preparation.Count(x=>x.Submitted&&x.Confirmed)} 项": {
+    "zh": "已提交 {snapshot.Preparation.Count(x=>x.Submitted)} 项，已确认 {snapshot.Preparation.Count(x=>x.Submitted&&x.Confirmed)} 项",
+    "en": "Submitted {snapshot.Preparation.Count(x=>x.Submitted)} settings, confirmed {snapshot.Preparation.Count(x=>x.Submitted&&x.Confirmed)} settings"
+  },
+  "相机当前不接受 ISO 写入（可能正在处理上一张或已休眠）：{ex.Error.Message}。请断开后重新连接。": {
+    "zh": "相机当前不接受 ISO 写入（可能正在处理上一张或已休眠）：{ex.Error.Message}。请断开后重新连接。",
+    "en": "The camera is not accepting an ISO write right now (it may still be processing the previous frame or asleep): {ex.Error.Message}. Disconnect and reconnect."
+  },
+  "相机当前不接受快门写入（可能正在处理上一张或已休眠）：{ex.Error.Message}。请断开后重新连接。": {
+    "zh": "相机当前不接受快门写入（可能正在处理上一张或已休眠）：{ex.Error.Message}。请断开后重新连接。",
+    "en": "The camera is not accepting a shutter write right now (it may still be processing the previous frame or asleep): {ex.Error.Message}. Disconnect and reconnect."
+  },
+  "Plugin assembly has no directory": {
+    "zh": "插件程序集没有所在目录",
+    "en": "Plugin assembly has no directory"
+  },
+  "Connect the camera and stop exposure/live view before changing astronomy settings": {
+    "zh": "修改天文设置前请先连接相机，并停止曝光与实时预览",
+    "en": "Connect the camera and stop exposure/live view before changing astronomy settings"
+  },
+  "Restore the existing preparation receipt before applying another plan": {
+    "zh": "应用新的准备方案前，请先恢复现有回执",
+    "en": "Restore the existing preparation receipt before applying another plan"
+  },
+  "Camera is not connected": {
+    "zh": "相机未连接",
+    "en": "Camera is not connected"
+  },
+  "The previous exposure left the camera unconfirmed; disconnect and reconnect: ": {
+    "zh": "上次曝光使相机状态未确认，请断开后重新连接：",
+    "en": "The previous exposure left the camera unconfirmed; disconnect and reconnect: "
+  },
+  "An exposure is already running": {
+    "zh": "已有曝光正在进行",
+    "en": "An exposure is already running"
+  },
+  "ISO readback differs from requested ISO": {
+    "zh": "ISO 回读值与请求值不一致",
+    "en": "ISO readback differs from requested ISO"
+  },
+  "Shutter readback differs from requested shutter": {
+    "zh": "快门回读值与请求值不一致",
+    "en": "Shutter readback differs from requested shutter"
+  },
+  "No exposure was started": {
+    "zh": "没有正在进行的曝光",
+    "en": "No exposure was started"
+  },
+  "Exposure failed: ": {
+    "zh": "曝光失败：",
+    "en": "Exposure failed: "
+  },
+  "Camera connection or exposure changed before delivery": {
+    "zh": "交付前相机连接或曝光已改变",
+    "en": "Camera connection or exposure changed before delivery"
+  },
+  "No completed capture to download": {
+    "zh": "没有可下载的已完成拍摄",
+    "en": "No completed capture to download"
+  },
+  "Capture was not successful: ": {
+    "zh": "拍摄未成功：",
+    "en": "Capture was not successful: "
+  },
+  "No lens temperature compensation": {
+    "zh": "镜头不支持温度补偿",
+    "en": "No lens temperature compensation"
+  },
+  "No raw command pass-through": {
+    "zh": "不支持原始命令透传",
+    "en": "No raw command pass-through"
+  },
+  "Enable enableLensFocuser in settings.json, reconnect the Sony camera, then connect the lens focuser": {
+    "zh": "请在 settings.json 中启用 enableLensFocuser，重新连接相机后再连接镜头对焦器",
+    "en": "Enable enableLensFocuser in settings.json, reconnect the Sony camera, then connect the lens focuser"
+  },
+  "Lens is already moving": {
+    "zh": "镜头正在移动",
+    "en": "Lens is already moving"
+  },
+  "Wait for the in-flight absolute move; SDK does not provide a verified absolute Halt": {
+    "zh": "请等待当前绝对移动结束；SDK 未提供经验证的绝对停止",
+    "en": "Wait for the in-flight absolute move; SDK does not provide a verified absolute Halt"
+  },
+  "Lens focuser is not connected": {
+    "zh": "镜头对焦器未连接",
+    "en": "Lens focuser is not connected"
+  },
+  "A lens move is already in progress": {
+    "zh": "已有镜头移动正在进行",
+    "en": "A lens move is already in progress"
+  },
+  "Sony SDK does not document a verified stop for an absolute focus-position request. The owned move continues until actual position and idle are confirmed; relative pulse stop is a different operation.": {
+    "zh": "Sony SDK 未提供经验证的绝对对焦位置停止方式。已发起的移动会继续，直到实际位置与空闲状态被确认；相对脉冲停止是另一种操作。",
+    "en": "Sony SDK does not document a verified stop for an absolute focus-position request. The owned move continues until actual position and idle are confirmed; relative pulse stop is a different operation."
+  },
+  "Provide an explicit JSON astronomy preparation plan": {
+    "zh": "请提供明确的 JSON 天文准备方案",
+    "en": "Provide an explicit JSON astronomy preparation plan"
+  },
+  "Restore takes no parameters; it uses the same-session receipt": {
+    "zh": "恢复操作不接受参数，使用同一连接的回执",
+    "en": "Restore takes no parameters; it uses the same-session receipt"
+  },
+  "Unknown Sony action: ": {
+    "zh": "未知的 Sony 操作：",
+    "en": "Unknown Sony action: "
+  },
+  "Camera facts were not read": {
+    "zh": "相机参数尚未读取",
+    "en": "Camera facts were not read"
+  },
+  "No cooler on this camera": {
+    "zh": "此相机没有制冷器",
+    "en": "No cooler on this camera"
+  },
+  "No dew heater control": {
+    "zh": "不支持除露加热控制",
+    "en": "No dew heater control"
+  },
+  "Sensor ROI is not exposed by this SDK path": {
+    "zh": "此 SDK 接口未提供传感器 ROI",
+    "en": "Sensor ROI is not exposed by this SDK path"
+  },
+  "The camera has no live view frame ready yet": {
+    "zh": "相机尚未提供实时预览帧",
+    "en": "The camera has no live view frame ready yet"
+  },
+  "No hardware offset control": {
+    "zh": "不支持硬件偏移控制",
+    "en": "No hardware offset control"
+  },
+  "No host USB bandwidth control": {
+    "zh": "不支持主机 USB 带宽控制",
+    "en": "No host USB bandwidth control"
+  },
+  "Only 1x1 binning is supported": {
+    "zh": "仅支持 1x1 合并",
+    "en": "Only 1x1 binning is supported"
+  },
+  "Unsupported input length": {
+    "zh": "输入长度不受支持",
+    "en": "Unsupported input length"
+  },
+  "Unsupported CFA: ": {
+    "zh": "不支持的 CFA：",
+    "en": "Unsupported CFA: "
+  },
+  "Pixel exceeds decoder maximum": {
+    "zh": "像素值超出解码器上限",
+    "en": "Pixel exceeds decoder maximum"
+  },
+  "NINA image contract failed": {
+    "zh": "NINA 图像接口校验失败",
+    "en": "NINA image contract failed"
+  },
+  "NINA kept different original RAW bytes": {
+    "zh": "NINA 保留的原始 RAW 字节不一致",
+    "en": "NINA kept different original RAW bytes"
+  },
+  "Language must be auto, zh or en": {
+    "zh": "语言必须为 auto、zh 或 en",
+    "en": "Language must be auto, zh or en"
+  },
+  "sensorWidth and sensorHeight must be supplied together with valid positive RAW dimensions": {
+    "zh": "sensorWidth 与 sensorHeight 必须同时提供，且为有效的正 RAW 尺寸",
+    "en": "sensorWidth and sensorHeight must be supplied together with valid positive RAW dimensions"
+  },
+  "bayerPattern must be RGGB, BGGR, GRBG or GBRG": {
+    "zh": "bayerPattern 必须为 RGGB、BGGR、GRBG 或 GBRG",
+    "en": "bayerPattern must be RGGB, BGGR, GRBG or GBRG"
+  },
+  "pixelSizeMicrons must be finite and within (0, 100]": {
+    "zh": "pixelSizeMicrons 必须为有限值且位于 (0, 100]",
+    "en": "pixelSizeMicrons must be finite and within (0, 100]"
+  },
+  "Empty live view frame": {
+    "zh": "实时预览帧为空",
+    "en": "Empty live view frame"
+  },
+  "Invalid RAW active geometry or unsupported Bayer pattern": {
+    "zh": "RAW 有效区域或 Bayer 排列无效",
+    "en": "Invalid RAW active geometry or unsupported Bayer pattern"
+  },
+  "Decoder identity mismatch: ": {
+    "zh": "解码器身份不匹配：",
+    "en": "Decoder identity mismatch: "
+  },
+  "Another libraw.dll is already loaded: ": {
+    "zh": "已加载另一个 libraw.dll：",
+    "en": "Another libraw.dll is already loaded: "
+  },
+  "Invalid decoder ABI or RAW error": {
+    "zh": "解码器 ABI 或 RAW 错误",
+    "en": "Invalid decoder ABI or RAW error"
+  },
+  "RAW pixel copy failed": {
+    "zh": "RAW 像素复制失败",
+    "en": "RAW pixel copy failed"
+  },
+  "Plugin deployment configuration missing: ": {
+    "zh": "缺少插件部署配置：",
+    "en": "Plugin deployment configuration missing: "
+  },
+  "Empty plugin deployment configuration": {
+    "zh": "插件部署配置为空",
+    "en": "Empty plugin deployment configuration"
+  },
+  "Capture has no verified camera parameters": {
+    "zh": "拍摄缺少经验证的相机参数",
+    "en": "Capture has no verified camera parameters"
+  },
+  "SDK lock does not declare the expected files": {
+    "zh": "SDK 锁文件未声明预期的文件",
+    "en": "SDK lock does not declare the expected files"
+  },
+  "Exposure must be finite and positive": {
+    "zh": "曝光时间必须为有限正值",
+    "en": "Exposure must be finite and positive"
+  },
+  "Camera shutter exceeds the wrapper timeout policy": {
+    "zh": "快门时间超出封装层超时策略",
+    "en": "Camera shutter exceeds the wrapper timeout policy"
+  },
+  "Bulb exceeds the wrapper timeout policy": {
+    "zh": "Bulb 超出封装层超时策略",
+    "en": "Bulb exceeds the wrapper timeout policy"
+  },
+  "Device cleanup is not confirmed; disconnect must succeed before reset": {
+    "zh": "设备清理未确认，必须先成功断开才能重置",
+    "en": "Device cleanup is not confirmed; disconnect must succeed before reset"
+  },
+  "Exposure {seconds:R}s is not a camera shutter candidate and this camera does not offer Bulb in its current mode": {
+    "zh": "曝光 {seconds:R} 秒不是机身候选快门，且当前模式下不提供 Bulb",
+    "en": "Exposure {seconds:R}s is not a camera shutter candidate and this camera does not offer Bulb in its current mode"
+  },
+  "Software Bulb requires exact milliseconds within {caps.BulbMinimumSeconds}..{caps.BulbMaximumSeconds}s": {
+    "zh": "软件 Bulb 需精确到毫秒，且位于 {caps.BulbMinimumSeconds}..{caps.BulbMaximumSeconds} 秒之间",
+    "en": "Software Bulb requires exact milliseconds within {caps.BulbMinimumSeconds}..{caps.BulbMaximumSeconds}s"
+  },
+  "Expected exactly one Sony camera (filter: {filter}); found {choices.Length}. Detected: {detected}. Connect one body or set an unambiguous cameraModel in settings.json.": {
+    "zh": "期望恰好一台 Sony 相机（筛选：{filter}）；实际找到 {choices.Length} 台。检测到：{detected}。请只连接一台机身，或在 settings.json 中设置明确的 cameraModel。",
+    "en": "Expected exactly one Sony camera (filter: {filter}); found {choices.Length}. Detected: {detected}. Connect one body or set an unambiguous cameraModel in settings.json."
+  }
+}

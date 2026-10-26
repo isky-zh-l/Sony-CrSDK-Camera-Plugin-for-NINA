@@ -171,3 +171,14 @@ static_assert(sizeof(SwParameters)==32, "SwParameters ABI");
 static_assert(sizeof(SwCaptureResult)==2304, "SwCaptureResult ABI");
 #endif
 #endif
+
+/* Additive verified capture API: expected_iso must be fixed/nonzero; flags bit 0
+   requires explicit body full-frame mode. Existing pack8 structures are unchanged. */
+#ifdef __cplusplus
+extern "C" {
+#endif
+SW_API int32_t SW_CALL sw_capture_start_verified(const char* root, const char* prefix,
+    const SwExposureRequest* request, uint32_t expected_iso, uint32_t flags, SwCaptureResult* output, SwError* error);
+#ifdef __cplusplus
+}
+#endif

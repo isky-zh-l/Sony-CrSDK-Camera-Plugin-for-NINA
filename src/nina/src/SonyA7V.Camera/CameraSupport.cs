@@ -17,9 +17,11 @@ public static class CameraSupport {
     public static CameraDescription Select(IReadOnlyList<CameraDescription> cameras, string? requestedModel) {
         var choices = string.IsNullOrWhiteSpace(requestedModel) ? cameras.ToArray() :
             cameras.Where(c => Normalize(c.Model) == Normalize(requestedModel)).ToArray();
-        if (choices.Length != 1)
-            throw new InvalidOperationException($"Expected exactly one Sony camera{(string.IsNullOrWhiteSpace(requestedModel) ? "" : " matching cameraModel=" + requestedModel)}; found {choices.Length}. Detected: " +
-                string.Join(", ", cameras.Select(c => c.Model + " (" + c.Connection + ")")) + ". Connect one body or set an unambiguous cameraModel in settings.json.");
+        if (choices.Length != 1) {
+            var filter = string.IsNullOrWhiteSpace(requestedModel) ? "" : requestedModel;
+            var detected = string.Join(", ", cameras.Select(c => c.Model + " (" + c.Connection + ")"));
+            throw new InvalidOperationException(Text.F($"Expected exactly one Sony camera (filter: {filter}); found {choices.Length}. Detected: {detected}. Connect one body or set an unambiguous cameraModel in settings.json."));
+        }
         return choices[0];
     }
 }
@@ -37,7 +39,7 @@ public sealed record CameraGeometry(int Width, int Height, string Cfa) {
             info.Width > 20000 || info.Height > 20000 ||
             (ulong)info.Left + info.Width > info.RawWidth || (ulong)info.Top + info.Height > info.RawHeight ||
             info.Pitch < (ulong)info.RawWidth * 2 || info.Cfa is not ("RGGB" or "BGGR" or "GRBG" or "GBRG"))
-            throw new InvalidDataException("Invalid RAW active geometry or unsupported Bayer pattern");
+            throw new InvalidDataException(Text.T("Invalid RAW active geometry or unsupported Bayer pattern"));
         return new(checked((int)info.Width), checked((int)info.Height), info.Cfa);
     }
 }

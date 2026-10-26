@@ -19,7 +19,8 @@ public sealed class AstroDockViewModel : DockableVM {
     [ImportingConstructor]
     public AstroDockViewModel(IProfileService profiles) : base(profiles) {
         RegisteredContentId = ContentId;
-        Title = "Sony CrSDK 控制";
+        Title = Text.T("Sony CrSDK 控制");
+        Text.Changed+=()=>{var dispatcher=System.Windows.Application.Current?.Dispatcher;if(dispatcher is null)Title=Text.T("Sony CrSDK 控制");else dispatcher.BeginInvoke(new Action(()=>Title=Text.T("Sony CrSDK 控制")));};
         CanClose = true;
         HasSettings = false;
         ImageGeometry = new GeometryGroup();

@@ -1,6 +1,6 @@
 # 兼容性
 
-0.5.5（程序集 0.5.5.0）面向 Windows x64、N.I.N.A. 3.2.0.9001 和 Sony Camera Remote SDK 2.02.00。
+0.5.6（程序集 0.5.6.0）面向 Windows x64、N.I.N.A. 3.2.0.9001 和 Sony Camera Remote SDK 2.02.00。
 
 ## 已验证机型
 

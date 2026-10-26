@@ -38,7 +38,8 @@ if($BackupRoot.StartsWith($PluginDirectory.TrimEnd('\')+'\',[StringComparison]::
 $legacy=Join-Path (Split-Path $PluginDirectory -Parent) 'SonyA7V.Camera/SonyA7V.Camera.dll'
 if((Test-Path -LiteralPath $legacy) -and !([IO.Path]::GetFullPath((Join-Path $PluginDirectory 'SonyA7V.Camera.dll')) -eq [IO.Path]::GetFullPath($legacy))){throw '检测到旧目录中的 Sony 插件。请先保留旧设置，并在 NINA 中卸载旧版、重启后再安装。'}
 $hostCore=Join-Path $NinaApp 'NINA.Core.dll'
-if(!(Test-Path -LiteralPath (Join-Path $NinaApp 'NINA.exe')) -or (Get-Item -LiteralPath $hostCore).VersionInfo.FileVersion -ne '3.2.0.9001'){throw '当前版本适配 NINA 3.2.0.9001；请检查安装目录和版本'}
+$hostVersion=[version](Get-Item -LiteralPath (Join-Path $NinaApp 'NINA.Core.dll')).VersionInfo.FileVersion
+if(!(Test-Path -LiteralPath (Join-Path $NinaApp 'NINA.exe')) -or $hostVersion -lt [version]'3.2.0.9001' -or $hostVersion.Major -ne 3){throw 'Requires NINA 3.x, minimum 3.2.0.9001; other major versions are not verified.'}
 $integrity=Get-Content -LiteralPath (Join-Path $PSScriptRoot 'package-integrity.json') -Raw -Encoding utf8|ConvertFrom-Json
 if($integrity.schemaVersion -ne 1){throw '安装包清单版本不匹配'}
 foreach($entry in $integrity.files){

@@ -13,10 +13,10 @@ public sealed record CameraParameters(uint Iso, IsoKind IsoKind, ShutterKind Shu
 public sealed record CameraError(ProjectCode Code, uint SonyCode, uint Stage, ulong CaptureId, string Message);
 public sealed class CameraException : Exception {
     public CameraError Error { get; }
-    public CameraException(CameraError error) : base($"{error.Message} [项目={error.Code}, Sony=0x{error.SonyCode:X8}, 阶段={error.Stage}, 拍摄={error.CaptureId}]") => Error=error;
+    public CameraException(CameraError error) : base(Text.CameraError(error)) => Error=error;
 }
 public sealed record ExposureCapabilities(bool BulbAvailable, double BulbMinimumSeconds, double BulbMaximumSeconds, double BulbStepSeconds, double MaximumExposureTimeoutSeconds, double MaximumDownloadTimeoutSeconds, bool TimerReadable, bool TimerEnabled);
-public sealed record ExposureRequest(ExposureMode Mode, double Seconds, double ExposureTimeoutSeconds, double DownloadTimeoutSeconds=120, uint SetupTimeoutMilliseconds=15000);
+public sealed record ExposureRequest(ExposureMode Mode, double Seconds, double ExposureTimeoutSeconds, double DownloadTimeoutSeconds=120, uint SetupTimeoutMilliseconds=15000, uint ExpectedIso=0, bool RequireFullFrame=false);
 public sealed record ExposureDetails(ExposureMode Mode, double RequestedSeconds, double SoftwareHoldSeconds, uint? CameraElapsedSeconds, ExposurePhase Phase, uint EndReason, uint ReleaseAttempts, uint RestoreState, CameraError ReleaseError, CameraError RestoreError, CameraParameters OriginalParameters, bool? OriginalTimerEnabled);
 public sealed record CaptureSnapshot(ProjectCode Code, CaptureState State, ulong CaptureId, CameraParameters? ActualParameters, uint RawFormat, SaveDestination SaveDestination, uint DownloadNotifications, ulong FileBytes, CameraError Failure, string ReceiveDirectory, string ArwPath, ExposureDetails? Exposure) {
     public bool IsSuccess => Code==ProjectCode.Ok && State==CaptureState.Succeeded && !string.IsNullOrEmpty(ArwPath);

@@ -11,6 +11,8 @@
   <ItemGroup>
     <Compile Include="../../src/nina/src/SonyA7V.Camera/JpegPreview.cs" Link="JpegPreview.cs" />
     <Compile Include="../../src/nina/src/SonyA7V.Camera/PluginSettings.cs" Link="PluginSettings.cs" />
+    <!-- The plugin project gets this alias from Localization.cs; linked sources need it too. -->
+    <Using Include="SonyCamera.Client.Text" Alias="Text" />
     <ProjectReference Include="../../src/managed/src/SonyCamera.Client/SonyCamera.Client.csproj" />
     <Reference Include="$(NinaApp)/NINA.Core.dll" />
   </ItemGroup>

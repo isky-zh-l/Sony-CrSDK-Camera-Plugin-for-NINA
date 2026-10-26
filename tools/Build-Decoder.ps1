@@ -12,17 +12,22 @@ if(!(Test-Path -LiteralPath $build)){New-Item -ItemType Directory -Path $build -
 # Upstream Makefile expects output directories to exist.
 New-Item -ItemType Directory -Path (Join-Path $build 'object'),(Join-Path $build 'lib'),(Join-Path $build 'bin') -Force|Out-Null
 Push-Location $build
+$previous=$ErrorActionPreference
 try {
+ $ErrorActionPreference='Continue'   # nmake/cl write progress to stderr; Stop would abort on harmless output
  & nmake.exe /f Makefile.msvc 'bin\libraw.dll'
- if($LASTEXITCODE -ne 0){throw 'LibRaw DLL build failed.'}
-} finally {Pop-Location}
+ $nmakeExit=$LASTEXITCODE
+} finally {Pop-Location;$ErrorActionPreference=$previous}
+if($nmakeExit -ne 0){throw 'LibRaw DLL build failed.'}
 Copy-Item -LiteralPath (Join-Path $build 'bin\libraw.dll') -Destination $output -Force
 $shim=Join-Path $root 'src\nina\native\SonyArw6.cpp'
 Push-Location $output
 try {
+ $ErrorActionPreference='Continue'
  & cl.exe /nologo /LD /MD /EHsc /std:c++17 /O2 "/I$build" $shim (Join-Path $build 'lib\libraw.lib') /link /OUT:SonyArw6.dll
- if($LASTEXITCODE -ne 0){throw 'SonyArw6 bridge build failed.'}
-} finally {Pop-Location}
+ $clExit=$LASTEXITCODE
+} finally {Pop-Location;$ErrorActionPreference=$previous}
+if($clExit -ne 0){throw 'SonyArw6 bridge build failed.'}
 $identity=[ordered]@{}
 foreach($name in @('SonyArw6.dll','libraw.dll')){$identity[$name]=(Get-FileHash -LiteralPath (Join-Path $output $name)).Hash}
 $identity|ConvertTo-Json|Set-Content -LiteralPath (Join-Path $output 'identity.json') -Encoding utf8

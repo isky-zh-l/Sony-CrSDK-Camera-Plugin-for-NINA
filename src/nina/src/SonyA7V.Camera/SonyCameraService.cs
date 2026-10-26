@@ -17,11 +17,11 @@ public sealed class CameraDeployment
     {
         var path = Path.Combine(pluginDirectory, "sony-a7v.json");
         if (!File.Exists(path))
-            throw new FileNotFoundException("Plugin deployment configuration missing: " + path +
+            throw new FileNotFoundException(Text.T("Plugin deployment configuration missing: ") + path +
                 ". Provide manifestPath, approvedManifestSha256 and receiveRoot.", path);
         var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
         var deployment = JsonSerializer.Deserialize<CameraDeployment>(File.ReadAllText(path), options)
-            ?? throw new InvalidDataException("Empty plugin deployment configuration");
+            ?? throw new InvalidDataException(Text.T("Empty plugin deployment configuration"));
         if (!Path.IsPathFullyQualified(deployment.ManifestPath))
             deployment = new CameraDeployment
             {
@@ -55,6 +55,12 @@ public sealed record CameraFacts(
 /// </summary>
 public sealed partial class SonyCameraService
 {
+    private readonly Func<CameraDeployment> loadDeployment;
+    private readonly Func<PluginSettings> loadSettings;
+    public SonyCameraService(Func<CameraDeployment>? loadDeployment=null,Func<PluginSettings>? loadSettings=null) {
+        this.loadDeployment=loadDeployment??(()=>PluginStorage.Current.LoadDeployment());
+        this.loadSettings=loadSettings??(()=>PluginSettings.Load(PluginStorage.Current.SettingsDirectory()));
+    }
     private readonly SemaphoreSlim opGate = new(1, 1);
     private readonly CancellationTokenSource lifetime = new();
     private readonly object stateGate = new();
@@ -87,19 +93,19 @@ public sealed partial class SonyCameraService
 
     private static string PluginDirectory =>
         Path.GetDirectoryName(typeof(SonyCameraService).Assembly.Location)
-        ?? throw new InvalidOperationException("Plugin assembly has no directory");
+        ?? throw new InvalidOperationException(Text.T("Plugin assembly has no directory"));
 
     public async Task ConnectAsync(IImageDataFactory factory, CancellationToken token)
     {
         await SdkStartup.WaitAsync().WaitAsync(token).ConfigureAwait(false);
         using var connectionLifetime=CancellationTokenSource.CreateLinkedTokenSource(token,lifetime.Token);
         token=connectionLifetime.Token;
-        await EnterOperationAsync("连接相机", token).ConfigureAwait(false);
+        await EnterOperationAsync(Text.T("连接相机"), token).ConfigureAwait(false);
         try
         {
             if (Connected) return;
-            deployment = PluginStorage.Current.LoadDeployment();
-            Settings = PluginSettings.Load(PluginStorage.Current.SettingsDirectory());
+            deployment = loadDeployment();
+            Settings = loadSettings();
             Settings.ValidateCameraSettings();
             Geometry = null;
             loader ??= new ArwImageLoader(factory);
@@ -117,7 +123,7 @@ public sealed partial class SonyCameraService
                 await client.DisconnectAsync().ConfigureAwait(false);
             // A pulled cable leaves the previous session unconfirmed; the native layer released it,
             // so clear the managed bookkeeping and let this connect re-prove the camera state.
-            if (client.State == SessionState.Unconfirmed && client.State != SessionState.Connected)
+            if (client.State == SessionState.Unconfirmed)
             {
                 try { await client.DisconnectAsync().ConfigureAwait(false); } catch (Exception ex) { Logger.Info("[SonyA7V] Disconnect before reconnect: " + ex.Message); }
                 client.ResetForReconnect();
@@ -162,6 +168,8 @@ public sealed partial class SonyCameraService
             ConnectionId = Guid.NewGuid();
             Facts = new CameraFacts(parameters, isos, shutters, capabilities, camera, liveAvailable);
             Geometry = CameraGeometry.Bootstrap(camera.Model, Settings);
+            cropMonitor.Reset();
+            await RefreshCropCoreAsync().ConfigureAwait(false);
             await RefreshBatteryCoreAsync().ConfigureAwait(false);
             active = null;
             ready = null;
@@ -204,7 +212,7 @@ public sealed partial class SonyCameraService
         }
         return last;
     }
-    public Task RefreshBatteryAsync() => CoordinateAsync("更新电量", RefreshBatteryCoreAsync);
+    public Task RefreshBatteryAsync() => CoordinateAsync(Text.T("更新电量"), RefreshBatteryCoreAsync);
     private async Task RefreshBatteryCoreAsync() {
         if(client is null)return;
         try { Battery = await client.GetBatteryAsync().ConfigureAwait(false); }
@@ -212,14 +220,14 @@ public sealed partial class SonyCameraService
     }
     private void RequireIdleSettings(bool allowPreview = false) {
         if(client is null || Facts is null || Unconfirmed || client.State!=SessionState.Connected || (!allowPreview && LiveViewActive) || active is {IsCompleted:false})
-            throw new InvalidOperationException("Connect the camera and stop exposure/live view before changing astronomy settings");
+            throw new InvalidOperationException(Text.T("Connect the camera and stop exposure/live view before changing astronomy settings"));
     }
     public async Task<AstroPreparationReceipt> PrepareAstroAsync(AstroPreparationOptions options) {
-        await EnterOperationAsync("应用天文准备").ConfigureAwait(false);
+        await EnterOperationAsync(Text.T("应用天文准备")).ConfigureAwait(false);
         try {
             RequireIdleSettings();
             if(PreparationReceipt?.Changes.Any(x=>x.Submitted)==true)
-                throw new InvalidOperationException("Restore the existing preparation receipt before applying another plan");
+                throw new InvalidOperationException(Text.T("Restore the existing preparation receipt before applying another plan"));
             try {PreparationReceipt=await client!.PrepareAstroSessionAsync(options).ConfigureAwait(false);}
             catch(AstroPreparationException ex){PreparationReceipt=ex.Receipt;throw;}
             var parameters=await client!.ReadParametersAsync().ConfigureAwait(false);
@@ -228,17 +236,17 @@ public sealed partial class SonyCameraService
         }finally {ExitOperation();NotifyChanged();}
     }
     public async Task RestoreAstroAsync() {
-        await EnterOperationAsync("恢复天文准备").ConfigureAwait(false);
+        await EnterOperationAsync(Text.T("恢复天文准备")).ConfigureAwait(false);
         try {
             RequireIdleSettings();
-            var receipt=PreparationReceipt??throw new InvalidOperationException("No preparation receipt in this connection");
+            var receipt=PreparationReceipt??throw new InvalidOperationException(Text.T("No preparation receipt in this connection"));
             await client!.RestoreAstroSessionAsync(receipt).ConfigureAwait(false);
             PreparationReceipt=null;
             Facts=Facts! with{Parameters=await client.ReadParametersAsync().ConfigureAwait(false)};
         }finally {ExitOperation();NotifyChanged();}
     }
     public async Task<double> SetApertureAsync(double fNumber) {
-        await EnterOperationAsync("调整镜头光圈").ConfigureAwait(false);
+        await EnterOperationAsync(Text.T("调整镜头光圈")).ConfigureAwait(false);
         try {
             RequireIdleSettings();
             var actual=await client!.SetApertureAsync(fNumber).ConfigureAwait(false);
@@ -246,17 +254,17 @@ public sealed partial class SonyCameraService
             return actual;
         }finally {ExitOperation();NotifyChanged();}
     }
-    public Task<LensFocusStatus> GetLensFocusAsync() => CoordinateAsync("查询镜头状态", async () => {
+    public Task<LensFocusStatus> GetLensFocusAsync() => CoordinateAsync(Text.T("查询镜头状态"), async () => {
         RequireIdleSettings(); return await client!.GetLensFocusAsync().ConfigureAwait(false);
     });
     public async Task<LensFocusStatus> MoveLensFocusAsync(long position,CancellationToken token) {
-        await EnterOperationAsync("移动镜头", token).ConfigureAwait(false);
+        await EnterOperationAsync(Text.T("移动镜头"), token).ConfigureAwait(false);
         try {RequireIdleSettings();Interlocked.Exchange(ref lensMoving,1);NotifyChanged();return await client!.MoveLensFocusAsync(position,token).ConfigureAwait(false);}
         finally {Interlocked.Exchange(ref lensMoving,0);ExitOperation();NotifyChanged();}
     }
     public async Task DisconnectAsync()
     {
-        await EnterOperationAsync("断开相机").ConfigureAwait(false);
+        await EnterOperationAsync(Text.T("断开相机")).ConfigureAwait(false);
         try
         {
             if (client is null) return;
@@ -274,6 +282,7 @@ public sealed partial class SonyCameraService
             Facts = null;
             ConnectionId = Guid.Empty;
             Battery = null;
+            cropMonitor.Reset();CropWarning="";CaptureFrame=SensorFrame.Unknown;
             PreparationReceipt = null;
             lock(stateGate)correctionHint="";
             Geometry = null;
@@ -289,7 +298,7 @@ public sealed partial class SonyCameraService
     public async Task ShutdownAsync()
     {
         lifetime.Cancel(); // Cancel enumeration/retry waits before waiting for the coordinator.
-        await EnterOperationAsync("释放相机会话").ConfigureAwait(false);
+        await EnterOperationAsync(Text.T("释放相机会话")).ConfigureAwait(false);
         try
         {
             if (client is null) return;
@@ -312,10 +321,10 @@ public sealed partial class SonyCameraService
     /// </summary>
     public async Task StartExposureAsync(double seconds, int gain, string prefix, CancellationToken token)
     {
-        await EnterOperationAsync("提交曝光", token).ConfigureAwait(false);
+        await EnterOperationAsync(Text.T("提交曝光"), token).ConfigureAwait(false);
         try { await StartExposureCoreAsync(seconds, gain, prefix, token).ConfigureAwait(false); }
         catch (ArgumentException ex) {
-            var problem=RequireCorrection(ex,"曝光或 ISO 请求不适用于当前相机，请调整参数后重试。未自动断开或重拍。");
+            var problem=RequireCorrection(ex,Text.T("曝光或 ISO 请求不适用于当前相机，请调整参数后重试。未自动断开或重拍。"));
             ready?.TrySetException(problem);throw problem;
         }
         catch (Exception ex) { ready?.TrySetException(ex); throw; }
@@ -324,28 +333,35 @@ public sealed partial class SonyCameraService
 
     private async Task StartExposureCoreAsync(double seconds, int gain, string prefix, CancellationToken token)
     {
-        if (client is null || Facts is null) throw new InvalidOperationException("Camera is not connected");
+        if (client is null || Facts is null) throw new InvalidOperationException(Text.T("Camera is not connected"));
         if (LiveViewActive) await client.StopLiveViewAsync().ConfigureAwait(false);
         RequireIdleSettings();
-        if (Unconfirmed) throw new InvalidOperationException("The previous exposure left the camera unconfirmed; disconnect and reconnect: " + LastError);
-        if (active is { IsCompleted: false }) throw new InvalidOperationException("An exposure is already running");
+        if (Unconfirmed) throw new InvalidOperationException(Text.T("The previous exposure left the camera unconfirmed; disconnect and reconnect: ") + LastError);
+        if (active is { IsCompleted: false }) throw new InvalidOperationException(Text.T("An exposure is already running"));
         // A rejected new request must never leave the previous exposure downloadable as its result.
         active=null;
         lock(stateGate)last=null;
         // Validate mode/focus/RAW before any ISO/shutter mutation or capture submission.
         await CheckCaptureReadyCoreAsync().ConfigureAwait(false);
         ClearCorrection();
+        Facts=Facts with {Parameters=await client.ReadParametersAsync().ConfigureAwait(false),
+            Isos=await client.GetSupportedIsoAsync().ConfigureAwait(false),
+            Shutters=await client.GetSupportedExposureSecondsAsync().ConfigureAwait(false)};
+        await RefreshCropCoreAsync().ConfigureAwait(false);
+        if(Settings.RequireFullFrame && Crop.State!=SensorFrame.FullFrame)
+            throw new InvalidOperationException(Text.T("Full frame is required, but the body reports APS-C or an unknown mode. Select full frame or disable this requirement."));
         var isos = Facts.Isos;
         // NINA sends Gain = -1 when the profile has no gain preference; keep the camera value.
         var iso = gain > 0 ? (uint)gain : Facts.Parameters.Iso;
         if (!isos.Contains(iso))
             throw new ArgumentOutOfRangeException(nameof(gain), $"ISO {iso} is not offered by this camera right now");
-        var request = ExposurePolicy.Create(seconds, Facts.Shutters, Facts.Capabilities);
+        var request = ExposurePolicy.Create(seconds, Facts.Shutters, Facts.Capabilities) with {ExpectedIso=iso,RequireFullFrame=Settings.RequireFullFrame};
         if (request.Mode == ExposureMode.Ordinary)
             await ApplyOrdinaryParametersAsync(iso, request.Seconds).ConfigureAwait(false);
         else
             await ApplyIsoAsync(iso).ConfigureAwait(false);
         token.ThrowIfCancellationRequested();
+        exposureCrop=Crop;CaptureFrame=Crop.State;
         var startedAt = DateTime.UtcNow;
         var requestedSeconds = seconds;
         lock (stateGate) last = null;
@@ -370,16 +386,20 @@ public sealed partial class SonyCameraService
     /// </summary>
     private async Task ApplyIsoAsync(uint iso)
     {
-        if (Facts is not null && Facts.Parameters.Iso == iso && Facts.Parameters.IsoKind == IsoKind.Fixed) return;
+        var actual=await client!.ReadParametersAsync().ConfigureAwait(false);
+        if(Facts is not null)Facts=Facts with {Parameters=actual};
+        if(actual.Iso==iso && actual.IsoKind==IsoKind.Fixed)return;
         try
         {
             await client!.SetIsoAsync(iso).ConfigureAwait(false);
-            if (Facts is not null) Facts = Facts with { Parameters = Facts.Parameters with { Iso = iso, IsoKind = IsoKind.Fixed } };
+            actual=await client.ReadParametersAsync().ConfigureAwait(false);
+            if(actual.Iso!=iso || actual.IsoKind!=IsoKind.Fixed)throw new InvalidOperationException(Text.T("ISO readback differs from requested ISO"));
+            if (Facts is not null) Facts = Facts with { Parameters = actual };
         }
         catch (CameraException ex)
         {
             throw new InvalidOperationException(
-                $"相机当前不接受 ISO 写入（可能正在处理上一张或已休眠）：{ex.Error.Message}。请断开后重新连接。", ex);
+                Text.F($"相机当前不接受 ISO 写入（可能正在处理上一张或已休眠）：{ex.Error.Message}。请断开后重新连接。"), ex);
         }
     }
 
@@ -390,34 +410,40 @@ public sealed partial class SonyCameraService
     }
 
     private async Task ApplyShutterAsync(double seconds) {
-        if (Facts is not null && Math.Abs(Facts.Parameters.ExposureSeconds - seconds) < 1e-9) return;
+        var actual=await client!.ReadParametersAsync().ConfigureAwait(false);
+        if(Facts is not null)Facts=Facts with {Parameters=actual};
+        if(actual.ShutterKind==ShutterKind.Seconds && actual.ExposureSeconds==seconds)return;
         try
         {
             await client!.SetExposureSecondsAsync(seconds).ConfigureAwait(false);
-            if (Facts is not null) Facts = Facts with { Parameters = Facts.Parameters with { ExposureSeconds = seconds } };
+            // Same contract as ISO: trust the camera's readback, not the request.
+            var readback=await client.ReadParametersAsync().ConfigureAwait(false);
+            if(readback.ShutterKind!=ShutterKind.Seconds || readback.ExposureSeconds!=seconds)
+                throw new InvalidOperationException(Text.T("Shutter readback differs from requested shutter"));
+            if (Facts is not null) Facts = Facts with { Parameters = readback };
         }
         catch (CameraException ex)
         {
             throw new InvalidOperationException(
-                $"相机当前不接受快门写入（可能正在处理上一张或已休眠）：{ex.Error.Message}。请断开后重新连接。", ex);
+                Text.F($"相机当前不接受快门写入（可能正在处理上一张或已休眠）：{ex.Error.Message}。请断开后重新连接。"), ex);
         }
     }
     /// <summary>Returns as soon as the exposure itself is finished; NINA times this separately from the download.</summary>
     public async Task WaitExposureReadyAsync(CancellationToken token)
     {
-        var gate = ready ?? throw new InvalidOperationException("No exposure was started");
+        var gate = ready ?? throw new InvalidOperationException(Text.T("No exposure was started"));
         var snapshot = await gate.Task.WaitAsync(token).ConfigureAwait(false);
         if (!snapshot.IsPending && !snapshot.IsSuccess)
         {
             lock (stateGate) { last = snapshot; lastError = snapshot.Failure.Message; unconfirmed = client?.State == SessionState.Unconfirmed; }
             NotifyChanged();
-            throw new InvalidOperationException("Exposure failed: " + snapshot.Failure.Message);
+            throw new InvalidOperationException(Text.T("Exposure failed: ") + snapshot.Failure.Message);
         }
     }
 
     /// <summary>Waits for the native capture (exposure, download and settings restore) to finish.</summary>
     public async Task WaitAsync(CancellationToken token) {
-        var running = active ?? throw new InvalidOperationException("No exposure was started");
+        var running = active ?? throw new InvalidOperationException(Text.T("No exposure was started"));
         var connection = ConnectionId;
         // Do not hold the coordinator while waiting: cancellation must be able to enter it.
         CaptureSnapshot snapshot;
@@ -426,12 +452,12 @@ public sealed partial class SonyCameraService
             if (connection == ConnectionId) lock (stateGate) {lastError = ex.Message; unconfirmed = client?.State == SessionState.Unconfirmed;}
             NotifyChanged(); throw;
         }
-        await EnterOperationAsync("确认曝光结果", token).ConfigureAwait(false);
+        await EnterOperationAsync(Text.T("确认曝光结果"), token).ConfigureAwait(false);
         try {
             if (connection != ConnectionId || !ReferenceEquals(running, active))
-                throw new InvalidOperationException("Camera connection or exposure changed before delivery");
+                throw new InvalidOperationException(Text.T("Camera connection or exposure changed before delivery"));
             lock (stateGate) last = snapshot;
-            if (snapshot.IsSuccess) await RefreshBatteryCoreAsync().ConfigureAwait(false);
+            if (snapshot.IsSuccess) {await RefreshBatteryCoreAsync().ConfigureAwait(false);await RefreshCropCoreAsync().ConfigureAwait(false);}
         } catch (Exception ex) {
             lock (stateGate) {lastError = ex.Message; unconfirmed = client?.State == SessionState.Unconfirmed;}
             throw;
@@ -440,7 +466,7 @@ public sealed partial class SonyCameraService
 
     public async Task AbortAsync()
     {
-        await EnterOperationAsync("取消曝光并确认状态").ConfigureAwait(false);
+        await EnterOperationAsync(Text.T("取消曝光并确认状态")).ConfigureAwait(false);
         try {
         if (client is null) return;
         // NINA calls Abort after local decoding/metadata errors too. With no live capture and a
@@ -466,7 +492,7 @@ public sealed partial class SonyCameraService
 
     public async Task EndEarlyAsync()
     {
-        await EnterOperationAsync("提前结束曝光").ConfigureAwait(false);
+        await EnterOperationAsync(Text.T("提前结束曝光")).ConfigureAwait(false);
         try {
         if (client is null) return;
         var snapshot = active is { IsCompleted: false } ? await client.EndExposureAsync().ConfigureAwait(false) : null;
@@ -476,13 +502,13 @@ public sealed partial class SonyCameraService
 
     public CaptureSnapshot? LastCapture { get { lock (stateGate) return last; } }
 
-    public Task SetIsoAsync(uint iso) => CoordinateAsync("调整 ISO", async () => {
+    public Task SetIsoAsync(uint iso) => CoordinateAsync(Text.T("调整 ISO"), async () => {
         RequireIdleSettings();
         if (!Facts!.Isos.Contains(iso)) throw new ArgumentOutOfRangeException(nameof(iso));
         await ApplyIsoAsync(iso).ConfigureAwait(false);
     });
 
-    public Task SetExposureSecondsAsync(double seconds) => CoordinateAsync("调整普通快门", async () => {
+    public Task SetExposureSecondsAsync(double seconds) => CoordinateAsync(Text.T("调整普通快门"), async () => {
         RequireIdleSettings();
         if (!Facts!.Shutters.Contains(seconds)) throw new ArgumentOutOfRangeException(nameof(seconds));
         await ApplyShutterAsync(seconds).ConfigureAwait(false);
@@ -494,7 +520,7 @@ public sealed partial class SonyCameraService
 
     /// <summary>Stop, update and restart preview as one coordinated operation shared by all entry points.</summary>
     public Task ConfigureLiveViewAsync(uint? iso, double? seconds, CancellationToken token = default) =>
-        CoordinateAsync("准备实时预览", async () => {
+        CoordinateAsync(Text.T("准备实时预览"), async () => {
             RequireIdleSettings(allowPreview: true);
             if (Facts!.LiveViewAvailable != true) throw new NotSupportedException($"{Model} has no available live view");
             if (iso.HasValue && !Facts.Isos.Contains(iso.Value)) throw new ArgumentOutOfRangeException(nameof(iso));
@@ -509,22 +535,22 @@ public sealed partial class SonyCameraService
     public Task StartLiveViewAsync() => ConfigureLiveViewAsync(null, null);
 
     public Task<LiveViewFrame?> GetLiveViewFrameAsync(CancellationToken token) =>
-        CoordinateAsync("读取实时预览", () => (client ?? throw new InvalidOperationException("Camera is not connected")).GetLiveViewFrameAsync(token), token, announce: false);
+        CoordinateAsync(Text.T("读取实时预览"), () => (client ?? throw new InvalidOperationException(Text.T("Camera is not connected"))).GetLiveViewFrameAsync(token), token, announce: false);
 
-    public Task StopLiveViewAsync() => CoordinateAsync("停止实时预览", async () => {
+    public Task StopLiveViewAsync() => CoordinateAsync(Text.T("停止实时预览"), async () => {
         if (client is not null && LiveViewActive) await client.StopLiveViewAsync().ConfigureAwait(false);
     });
 
     /// <summary>The only path that turns a completed capture into an image handed to NINA.</summary>
     public async Task<ArwImageFrame> LoadAsync(CancellationToken token)
     {
-        await EnterOperationAsync("交付图像", token).ConfigureAwait(false);
+        await EnterOperationAsync(Text.T("交付图像"), token).ConfigureAwait(false);
         try {
         CaptureSnapshot? snapshot;
         lock (stateGate) snapshot = last;
-        if (snapshot is null) throw new InvalidOperationException("No completed capture to download");
+        if (snapshot is null) throw new InvalidOperationException(Text.T("No completed capture to download"));
         if (!snapshot.IsSuccess || string.IsNullOrEmpty(snapshot.ArwPath))
-            throw new InvalidOperationException("Capture was not successful: " + snapshot.Failure.Message);
+            throw new InvalidOperationException(Text.T("Capture was not successful: ") + snapshot.Failure.Message);
         var info = new FileInfo(snapshot.ArwPath);
         if (!info.Exists) throw new FileNotFoundException("Camera reported a file that is not on disk", snapshot.ArwPath);
         if ((ulong)info.Length != snapshot.FileBytes)
@@ -533,10 +559,12 @@ public sealed partial class SonyCameraService
         if (Facts?.Description is { } camera && CameraSupport.Normalize(frame.RawInfo.Model) != CameraSupport.Normalize(camera.Model))
             throw new InvalidDataException($"RAW model {frame.RawInfo.Model} does not match connected camera {camera.Model}");
         Geometry = CameraGeometry.FromRaw(frame.RawInfo);
+        VerifyRawCrop(frame.RawInfo);
+        if(!Settings.CopyOriginalRaw)CompleteDelivery(snapshot);
         NotifyChanged();
         return frame;
         } catch(Exception ex) when(ex is not OperationCanceledException && LastCapture is {IsSuccess:true} && client?.State==SessionState.Connected && !Unconfirmed) {
-            _=RequireCorrection(ex,"原片接收已结束，但本地图像处理失败。连接保留；请检查 RAW 设置后重试拍摄。失败原片保留用于排查："+(LastCapture?.ArwPath??"未知"));
+            _=RequireCorrection(ex,Text.T("原片接收已结束，但本地图像处理失败。连接保留；请检查 RAW 设置后重试拍摄。失败原片保留用于排查：")+(LastCapture?.ArwPath??Text.T("未知")));
             throw;
         } finally {ExitOperation();}
     }

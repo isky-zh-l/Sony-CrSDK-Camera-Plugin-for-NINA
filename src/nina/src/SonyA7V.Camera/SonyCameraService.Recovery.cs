@@ -16,15 +16,16 @@ public sealed partial class SonyCameraService {
     private void ClearCorrection() {lock(stateGate){correctionHint="";lastError="";}}
 
     private CameraCorrectionRequiredException RequireCorrection(Exception cause, string? hint = null) {
-        hint ??= cause.Message.Contains("(MF)", StringComparison.Ordinal)
-            ? "请将镜头/机身切换到 MF 手动对焦，然后点击重新检查或重试拍摄。连接保留，不会自动重拍。"
-            : cause.Message.Contains("M manual", StringComparison.Ordinal)
-            ? "请将相机切换到 M 手动曝光，然后点击重新检查或重试拍摄。连接保留。"
-            : cause.Message.Contains("RAW", StringComparison.Ordinal)
-            ? "请检查 RAW 格式设置（仅 RAW、有效压缩档），然后点击重新检查或重试。连接保留。"
-            : "请按错误提示修正相机设置，然后点击重新检查或重试。连接保留，不会自动重拍。";
+        var detail=cause is CameraException camera?camera.Error.Message:cause.Message;
+        hint ??= detail.Contains("(MF)", StringComparison.Ordinal)
+            ? Text.T("请将镜头/机身切换到 MF 手动对焦，然后点击重新检查或重试拍摄。连接保留，不会自动重拍。")
+            : detail.Contains("M manual", StringComparison.Ordinal)
+            ? Text.T("请将相机切换到 M 手动曝光，然后点击重新检查或重试拍摄。连接保留。")
+            : detail.Contains("RAW", StringComparison.Ordinal)
+            ? Text.T("请检查 RAW 格式设置（仅 RAW、有效压缩档），然后点击重新检查或重试。连接保留。")
+            : Text.T("请按错误提示修正相机设置，然后点击重新检查或重试。连接保留，不会自动重拍。");
         lock(stateGate){lastError=cause.Message;correctionHint=hint;}
-        return new CameraCorrectionRequiredException(hint + " 原因：" + cause.Message, cause);
+        return new CameraCorrectionRequiredException(hint + Text.T(" 原因：") + cause.Message, cause);
     }
 
     private async Task CheckCaptureReadyCoreAsync() {
@@ -32,7 +33,7 @@ public sealed partial class SonyCameraService {
         catch(CameraException ex) when(IsCorrectablePreflight(ex)) {throw RequireCorrection(ex);}
     }
 
-    public Task RecheckReadyAsync() => CoordinateAsync("重新检查拍摄条件", async () => {
+    public Task RecheckReadyAsync() => CoordinateAsync(Text.T("重新检查拍摄条件"), async () => {
         RequireIdleSettings();
         await CheckCaptureReadyCoreAsync().ConfigureAwait(false);
         Facts=Facts! with {

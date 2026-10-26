@@ -1,4 +1,4 @@
-param([switch]$Desktop)
+﻿param([switch]$Desktop)
 $ErrorActionPreference='Stop'
 if(![Environment]::Is64BitOperatingSystem -or ![Environment]::Is64BitProcess){throw 'Use Windows x64 and the x64 PowerShell/dotnet host.'}
 $dotnet=Join-Path $env:ProgramFiles 'dotnet\dotnet.exe'

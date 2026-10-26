@@ -8,7 +8,7 @@
 - [Microsoft VC++ 运行库](https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist)
 - [Sony SDK 许可与下载](https://support.d-imaging.sony.co.jp/app/sdk/licenseagreement_d/en.html)
 
-Sony SDK 由用户自行取得并接受许可。解压到任意可读取的本地目录，保留 `SimpleCli/external/crsdk/` 和完整 `CrAdapter/` 结构；无需编译示例，也无需把 SDK 手动复制进 NINA 目录。插件不下载 SDK、不接受许可、不安装驱动；PC Remote、驱动和 USB 设置请遵循 Sony 说明。
+Sony SDK 由用户自行取得并接受许可。解压到任意可读取的本地目录，保留 `SimpleCli/external/crsdk/` 或 `external/crsdk/` 结构，以及完整的 `CrAdapter/`；无需编译示例，也无需把 SDK 手动复制进 NINA 目录。插件不下载 SDK、不接受许可、不安装驱动；PC Remote、驱动和 USB 设置请遵循 Sony 说明。
 
 ## 从 0.5.4 或更早手动安装版本升级
 
@@ -26,8 +26,8 @@ Sony SDK 由用户自行取得并接受许可。解压到任意可读取的本�
 
 1. 自行下载并解压指定版本的 Sony SDK。
 2. 在 NINA 插件管理器中点击 **Install** 安装 **Sony CrSDK Camera Plugin for N.I.N.A.**，然后按 NINA 提示重新启动。
-3. 插件启动时自动查找、校验和配置 SDK。NINA 目录受保护时，Windows 会请求管理员权限；已有不同版本的共享适配器时停止，不覆盖。
-4. 没有找到 SDK 时会显示配置页。选择 SDK 解压目录、`SimpleCli` 或 `crsdk` 目录，点击 **导入 SDK**。此后保留该配置，无需反复选择。
+3. 插件启动时**只检测**已配置的 SDK，不会自动安装文件、提权或弹出安装向导；只有在 **SDK 配置** 页显式导入时才会复制文件，若 NINA 目录受保护则此时请求管理员权限。已有不同版本的共享适配器时停止，不覆盖。
+4. 未检测到 SDK 时插件不会自动弹窗。请打开插件设置 → **SDK 配置**，选择 SDK 解压目录、`SimpleCli` 或 `crsdk` 目录，点击 **导入 SDK**。此后保留该配置，无需反复选择。
 5. 机身设为 M、MF、仅 RAW、Single Shooting，在 NINA 选择 **Sony CrSDK Camera**；开启保存，先拍一张短曝光。
 
 SDK 的盘符和顶层文件夹名不限。自动查找优先使用已有配置和已保存位置，再查找下载、桌面、文档及常见 Sony/SDK 文件夹；不会无界扫描全部磁盘。放在未找到的自定义深层目录时，首次选择一次即可。也可通过环境变量 `SONY_CRSDK_ROOT` 指定位置。
@@ -50,6 +50,10 @@ Get-FileHash -LiteralPath '<插件ZIP>' -Algorithm SHA256
 ```
 
 NINA 目录受保护时需要管理员 PowerShell。安装器检查 SDK、原生架构及包完整性；不同版本的共享适配器会导致安装停止。保留安装器输出的回执，供手动卸载使用。
+
+为什么适配器必须装在 NINA 目录：Sony Camera Remote SDK 按宿主可执行文件所在目录查找 `CrAdapter/`（USB/IP 适配器及其运行库），不会从插件目录加载。因此安装器把 `Cr_PTP_USB.dll`、`Cr_PTP_IP.dll`、`libusb-1.0.dll`、`libssh2.dll` 写入 `NINA.exe` 同级的 `CrAdapter/`。这是 SDK 的路径约束而非插件偏好；该目录可能与其他 Sony 插件共享，安装器发现不同版本时会停止而不是覆盖，手动删除也可能影响其他插件。
+
+安装脚本与 SDK 导入都需要用户显式触发：插件启动时只检测已配置的 SDK，不安装文件、不提权，也不弹出安装向导。
 
 ## 设置与升级
 

@@ -30,7 +30,7 @@ internal static class Program
         using var document = System.Text.Json.JsonDocument.Parse(File.ReadAllText(manifest).TrimStart('\uFEFF'));
         Check(document.RootElement.GetProperty("backend").GetString() == "test", "Refuse a real SDK package");
         var client = new SonyCameraClient(new NativeDeploymentOptions(manifest, hash, AllowTestPackage: true));
-        var service = new SonyCameraService();
+        var service = new SonyCameraService(()=>new CameraDeployment{ManifestPath=manifest,ApprovedManifestSha256=hash,ReceiveRoot=Path.Combine(AppContext.BaseDirectory,"receive")},()=>new());
         typeof(SonyCameraService).GetField("client", BindingFlags.NonPublic | BindingFlags.Instance)!.SetValue(service, client);
         var saved = Environment.GetEnvironmentVariable("SW_FAKE_CASE");
         var savedModel = Environment.GetEnvironmentVariable("SW_FAKE_MODEL_A7V");
@@ -41,10 +41,14 @@ internal static class Program
             foreach (var scenario in new[] { "feature-not-manual", "feature-af-blocks" })
             {
                 Environment.SetEnvironmentVariable("SW_FAKE_CASE", scenario);
-                try { await service.ConnectAsync(null!, CancellationToken.None); throw new Exception("Readiness failure was skipped"); }
-                catch (CameraException ex) { Check(ex.Message.Contains(scenario == "feature-not-manual" ? "manual exposure" : "focus", StringComparison.OrdinalIgnoreCase), "Preserve the original readiness error: " + ex.Message); }
-                Check(!service.Connected && service.Facts is null, "Failed connection must not appear ready");
-                Check(client.State == SessionState.Disconnected, "Release partial SDK connection");
+                await service.ConnectAsync(null!, CancellationToken.None);
+                Check(service.Connected && service.Facts is not null, "Correctable readiness error keeps the session connected");
+                Check(service.CorrectionHint.Length>0, "Correction is visible");
+                var sameConnection=service.ConnectionId;
+                Environment.SetEnvironmentVariable("SW_FAKE_CASE","feature-normal");
+                await service.RecheckReadyAsync();
+                Check(service.ConnectionId==sameConnection && service.CorrectionHint.Length==0,"Correct settings without reconnecting");
+                await service.DisconnectAsync();
             }
             Environment.SetEnvironmentVariable("SW_FAKE_CASE", "feature-normal");
             await service.ConnectAsync(null!, CancellationToken.None);
@@ -53,7 +57,46 @@ internal static class Program
             Check(!service.Connected && service.Facts is null, "Disconnect clears readiness facts");
             await service.ConnectAsync(null!, CancellationToken.None);
             Check(service.Connected && service.Facts is not null, "Reconnect reloads facts");
-            Console.WriteLine("PASS: two readiness failures release the session; same-client retry, disconnect and reconnect succeed.");
+            await service.SetIsoAsync(800);
+            Environment.SetEnvironmentVariable("SW_FAKE_BODY_ISO","1600");
+            service.PrepareExposureGate();
+            await service.StartExposureAsync(0.01,800,"ISO",CancellationToken.None);
+            await service.WaitAsync(CancellationToken.None);
+            Check(service.LastCapture?.ActualParameters?.Iso==800,"Body-side ISO changes are corrected despite cached 800");
+            Environment.SetEnvironmentVariable("SW_FAKE_BODY_ISO","400");
+            service.PrepareExposureGate();
+            await service.StartExposureAsync(0.01,-1,"ISO",CancellationToken.None);
+            await service.WaitAsync(CancellationToken.None);
+            Check(service.LastCapture?.ActualParameters?.Iso==400,"Unspecified gain uses fresh body ISO");
+            // Retention policy: delivered frames are cleaned, failures and foreign paths are kept.
+            var receiveRoot=Path.Combine(AppContext.BaseDirectory,"receive");
+            var staged=Path.Combine(receiveRoot,"capture-test0001-p1");
+            Directory.CreateDirectory(staged);
+            var stagedRaw=Path.Combine(staged,"TEST00001.ARW");
+            File.WriteAllBytes(stagedRaw,new byte[64]);
+            var delivered=new CaptureSnapshot(ProjectCode.Ok,CaptureState.Succeeded,1,null,0,SaveDestination.Computer,0,64,new CameraError(ProjectCode.Ok,0,0,0,""),staged,stagedRaw,null);
+            service.CompleteDelivery(delivered);
+            Check(!File.Exists(stagedRaw)&&!Directory.Exists(staged),"successful delivery removes the staged RAW and its empty folder");
+            var keptDir=Path.Combine(receiveRoot,"capture-test0002-p1");
+            Directory.CreateDirectory(keptDir);
+            var keptRaw=Path.Combine(keptDir,"TEST00002.ARW");
+            File.WriteAllBytes(keptRaw,new byte[64]);
+            service.CompleteDelivery(delivered with{State=CaptureState.Failed,ArwPath=keptRaw,ReceiveDirectory=keptDir});
+            Check(File.Exists(keptRaw)&&Directory.Exists(keptDir),"failed capture keeps its RAW for diagnosis");
+            var outside=Path.Combine(AppContext.BaseDirectory,"outside-capture");
+            Directory.CreateDirectory(outside);
+            var outsideRaw=Path.Combine(outside,"TEST00003.ARW");
+            File.WriteAllBytes(outsideRaw,new byte[64]);
+            service.CompleteDelivery(delivered with{ArwPath=outsideRaw,ReceiveDirectory=outside});
+            Check(File.Exists(outsideRaw),"cleanup refuses paths outside the receive root");
+            Directory.Delete(outside,true);
+            await service.DisconnectAsync();
+            Environment.SetEnvironmentVariable("SW_FAKE_CASE","connect-timeout");
+            try{await service.ConnectAsync(null!,CancellationToken.None);throw new Exception("Timeout expected");}catch(CameraException ex){Check(ex.Error.Code==ProjectCode.Timeout,"Connection timeout reported");}
+            Environment.SetEnvironmentVariable("SW_FAKE_CASE","feature-normal");
+            await service.ConnectAsync(null!,CancellationToken.None);
+            Check(service.Connected,"Timeout recovers on same client and process");
+            Console.WriteLine("PASS: correctable readiness, body-side ISO changes, unspecified gain, timeout and same-client reconnect.");
         }
         finally
         {

@@ -5,6 +5,7 @@ namespace SonyCamera.Client;
 
 internal static unsafe partial class Native {
     internal const string Dll="sony_wrapper.dll";
+    [DllImport(Dll,CallingConvention=CallingConvention.Cdecl,ExactSpelling=true)] internal static extern int sw_capture_start_verified([MarshalAs(UnmanagedType.LPUTF8Str)] string root,[MarshalAs(UnmanagedType.LPUTF8Str)] string? prefix,ref Request request,uint iso,uint flags,ref Capture capture,ref Error error);
     [StructLayout(LayoutKind.Sequential, Pack=8)] internal struct Error { internal uint Size; internal int Code; internal uint Sony,Stage; internal ulong Id; internal fixed byte Message[160]; }
     [StructLayout(LayoutKind.Sequential, Pack=8)] internal struct Camera { internal uint Size,Index; internal fixed byte Model[128]; internal fixed byte Connection[32]; }
     [StructLayout(LayoutKind.Sequential, Pack=8)] internal struct Parameters { internal uint Size,Iso,IsoKind,ShutterKind; internal double Seconds,FNumber; }
@@ -13,7 +14,7 @@ internal static unsafe partial class Native {
     [StructLayout(LayoutKind.Sequential, Pack=8)] internal struct Capabilities { internal uint Size,Candidate; internal double Min,Max,Step,MaxExposure,MaxDownload; internal uint TimerReadable,TimerEnabled; }
     [StructLayout(LayoutKind.Sequential, Pack=8)] internal struct Exposure { internal uint Size,Mode; internal double Requested,Hold; internal uint Elapsed,ElapsedValid,Phase,Reason,Attempts,Reserved,Restore,Reserved2; internal Error ReleaseError,RestoreError; internal Parameters Original; internal uint Timer,TimerValid; }
     internal static T New<T>() where T:unmanaged { T value=default; *(uint*)&value=(uint)sizeof(T); return value; }
-    internal static string Utf8(byte* p,int capacity) { var span=new ReadOnlySpan<byte>(p,capacity); var n=span.IndexOf((byte)0); if(n<0) throw new InvalidDataException("原生字符串没有NUL结尾"); return new UTF8Encoding(false,true).GetString(span[..n]); }
+    internal static string Utf8(byte* p,int capacity) { var span=new ReadOnlySpan<byte>(p,capacity); var n=span.IndexOf((byte)0); if(n<0) throw new InvalidDataException(Text.T("原生字符串没有NUL结尾")); return new UTF8Encoding(false,true).GetString(span[..n]); }
     internal static CameraError Convert(Error e) => new((ProjectCode)e.Code,e.Sony,e.Stage,e.Id,Utf8(e.Message,160));
     internal static CameraParameters Convert(Parameters p)=>new(p.Iso,(IsoKind)p.IsoKind,(ShutterKind)p.ShutterKind,p.Seconds,p.FNumber);
     internal static ExposureDetails Convert(Exposure e)=>new((ExposureMode)e.Mode,e.Requested,e.Hold,e.ElapsedValid!=0?e.Elapsed:null,(ExposurePhase)e.Phase,e.Reason,e.Attempts,e.Restore,Convert(e.ReleaseError),Convert(e.RestoreError),e.Original.Size==32?Convert(e.Original):new(0,IsoKind.Special,ShutterKind.Unavailable,double.NaN,double.NaN),e.TimerValid!=0?e.Timer!=0:null);

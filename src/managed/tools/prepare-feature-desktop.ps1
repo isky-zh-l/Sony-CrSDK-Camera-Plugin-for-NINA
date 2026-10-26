@@ -1,4 +1,4 @@
-param(
+﻿param(
  [Parameter(Mandatory=$true)][string]$WrapperDll,
  [Parameter(Mandatory=$true)][string]$SdkRuntime,
  [Parameter(Mandatory=$true)][string]$ApprovedBuilds,

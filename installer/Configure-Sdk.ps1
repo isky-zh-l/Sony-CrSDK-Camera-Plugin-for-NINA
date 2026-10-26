@@ -44,7 +44,8 @@ $NinaApp=(Resolve-Path -LiteralPath $NinaApp).Path
 $DataDirectory=[IO.Path]::GetFullPath($DataDirectory)
 foreach($path in @($package,$SonySdkRoot,$NinaApp,$DataDirectory)){NoLinks $path}
 if($DataDirectory -eq [IO.Path]::GetPathRoot($DataDirectory) -or $DataDirectory.StartsWith($NinaApp.TrimEnd('\')+'\',[StringComparison]::OrdinalIgnoreCase) -or $DataDirectory -eq $NinaApp){throw 'User data must be separate from the host'}
-if(!(Test-Path -LiteralPath (Join-Path $NinaApp 'NINA.exe')) -or (Get-Item -LiteralPath (Join-Path $NinaApp 'NINA.Core.dll')).VersionInfo.FileVersion -ne '3.2.0.9001'){throw '需要 NINA 3.2.0.9001'}
+$hostVersion=[version](Get-Item -LiteralPath (Join-Path $NinaApp 'NINA.Core.dll')).VersionInfo.FileVersion
+if(!(Test-Path -LiteralPath (Join-Path $NinaApp 'NINA.exe')) -or $hostVersion -lt [version]'3.2.0.9001' -or $hostVersion.Major -ne 3){throw 'Requires NINA 3.x, minimum 3.2.0.9001; other major versions are not verified.'}
 $integrity=Get-Content -LiteralPath (Join-Path $package 'package-integrity.json') -Raw -Encoding utf8|ConvertFrom-Json
 if($integrity.schemaVersion -ne 1){throw 'Invalid package integrity schema'}
 foreach($name in @('Configure-Sdk.ps1','native/sony_wrapper.dll','config/sdk-runtime-lock.json','config/native-manifest.template.json')){

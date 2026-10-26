@@ -1,4 +1,4 @@
-param([Parameter(Mandatory=$true)][string]$PackageDirectory)
+﻿param([Parameter(Mandatory=$true)][string]$PackageDirectory)
 $ErrorActionPreference='Stop'
 & (Join-Path $PSScriptRoot 'check-runtime.ps1') -Desktop
 $exe=Join-Path $PackageDirectory 'SonyCamera.Desktop.exe'

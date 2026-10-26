@@ -304,9 +304,17 @@ int32_t SW_CALL sw_camera_info(uint32_t index,SwCameraInfo* info,SwError* e) {
     });
 }
 static void release_failed_attempt() noexcept {
-    // A failed attempt leaves no device handle. Keeping "attempted" would poison enum/connect/shutdown
-    // until the process restarts, so reset it and let the caller retry or shut down cleanly.
-    if(device) return;
+    // Connect may allocate a handle without delivering OnConnected. Release that partial
+    // session as well. Callback objects remain pinned, so late events cannot target a new session.
+    if(device) {
+        ready=false;
+        if(cb && !cb->disconnected.load()) sdk::Disconnect(device);
+        const auto released=sdk::ReleaseDevice(device);
+        if(released) { fault=true; return; } // retained ownership; explicit disconnect may retry
+        device=0;
+        reset_features();
+    }
+    cb=nullptr;
     if(cameras) { cameras->Release(); cameras=nullptr; }
     attempted=false; fault=false; ready=false;
 }
@@ -377,7 +385,8 @@ int32_t SW_CALL sw_read_parameters(SwParameters* p,SwError* e) {
 int32_t SW_CALL sw_disconnect(uint32_t ms,SwError* e) {
     return boundary(e,SW_DISCONNECT,[&]()->int32_t {
         if(!valid_timeout(ms)) return result(e,SW_ARGUMENT,SW_DISCONNECT,0,"timeout_ms must be 1..60000");
-        if(!initialized || !device) return result(e,SW_STATE,SW_DISCONNECT,0,"No device to disconnect");
+        if(!initialized) return result(e,SW_STATE,SW_DISCONNECT,0,"SDK is not initialized");
+        if(!device) { release_failed_attempt(); return SW_OK; }
         auto feature_cleanup=cleanup_features(e,ms); if(feature_cleanup)return feature_cleanup;
         const auto interrupted=disconnect_capture_id();
         capture_on_disconnect();
@@ -392,7 +401,7 @@ int32_t SW_CALL sw_disconnect(uint32_t ms,SwError* e) {
         while(!cb->disconnected.load() && Clock::now()<deadline) std::this_thread::sleep_for(20ms);
         if(!cb->disconnected.load()) { fault=true; return failure(SW_TIMEOUT,0,"Stopped waiting; disconnection unconfirmed; session retained"); }
         auto rc=sdk::ReleaseDevice(device);
-        if(rc) { device=0; reset_features(); attempted=false; fault=false; unsafe_capture_id=0; return failure(SW_SDK,rc,"ReleaseDevice failed after the link was lost; handle dropped; camera idle not confirmed"); }
+        if(rc) { fault=true; return failure(SW_SDK,rc,"ReleaseDevice failed; handle retained for explicit cleanup retry"); }
         device=0; reset_features();
         // The device handle is gone, so this session is over even if the SDK reported an error while
         // disconnecting (typically a pulled cable). Leaving attempted=true would block enumeration,
@@ -440,7 +449,8 @@ struct CaptureTask {
     HANDLE reader=INVALID_HANDLE_VALUE;
     uint64_t read_total=0, expected_bytes=0, verified_bytes=0;
     std::wstring verified_path;
-    uint32_t notification_count=0;
+    uint32_t notification_count=0, expected_iso=0;
+    bool require_full_frame=false;
     uint32_t asynchronous_failure=0, asynchronous_detail=0;
     SwCaptureResult output{};
     SwExposureInfo exposure{};
@@ -600,7 +610,15 @@ int32_t capture_snapshot(SwError* e) {
     Values v; auto rc=read_values(v,e,SW_CAPTURE_CHECK); if(rc) return rc;
     if(!fixed_iso(static_cast<uint32_t>(v.iso)) || !(capture.bulb?v.shutter==sdk::CrShutterSpeed_Bulb:ordinary_shutter(static_cast<uint32_t>(v.shutter))))
         return result(e,SW_UNSUPPORTED,SW_CAPTURE_CHECK,0,"Requires fixed ISO, readable aperture and ordinary (non-Bulb) shutter");
-    SwParameters p{}; p.size=sizeof(p); p.iso=static_cast<uint32_t>(v.iso)&0xFFFFFF; p.iso_kind=SW_ISO_FIXED;
+    const auto actual_iso=static_cast<uint32_t>(v.iso)&0xFFFFFF;
+    if(capture.expected_iso && actual_iso!=capture.expected_iso)
+        return result(e,SW_UNSUPPORTED,SW_CAPTURE_CHECK,0,"ISO readback differs from requested ISO; no shutter submitted");
+    if(capture.require_full_frame) {
+        uint64_t crop=0;
+        rc=capture_read_property(sdk::CrDeviceProperty_APS_C_S35,crop,e); if(rc)return rc;
+        if(crop!=sdk::CrAPS_C_S35_Off) return result(e,SW_UNSUPPORTED,SW_CAPTURE_CHECK,0,"Full frame is required; APS-C or unconfirmed Auto mode prevents capture");
+    }
+    SwParameters p{}; p.size=sizeof(p); p.iso=actual_iso; p.iso_kind=SW_ISO_FIXED;
     p.shutter_kind=capture.bulb?SW_SHUTTER_BULB:SW_SHUTTER_SECONDS; p.exposure_seconds=capture.bulb?std::numeric_limits<double>::quiet_NaN():seconds(static_cast<uint32_t>(v.shutter));
     std::fesetround(FE_TONEAREST); p.f_number=v.aperture?double(v.aperture)/100.0:std::numeric_limits<double>::quiet_NaN();
     capture.output.actual_parameters=p; capture.output.actual_valid=1; return SW_OK;
@@ -952,7 +970,7 @@ void stop_exposure_worker() {
     if(exposure_worker){exposure_worker->join();delete exposure_worker;exposure_worker=nullptr;}
 }
 
-int32_t start_capture(const char* root_utf8,const char* prefix_utf8,uint32_t ms,SwCaptureResult* out,SwError* e,const SwExposureRequest* request=nullptr) {
+int32_t start_capture(const char* root_utf8,const char* prefix_utf8,uint32_t ms,SwCaptureResult* out,SwError* e,const SwExposureRequest* request=nullptr,uint32_t expected_iso=0,bool require_full_frame=false) {
     return capture_boundary(0,out,e,SW_CAPTURE_CHECK,[&]()->int32_t {
         if(request) { auto validation=validate_request(*request,e); if(validation) return validation; ms=request->setup_timeout_ms; }
         if(!root_utf8 || !valid_timeout(ms)) return capture_error(e,SW_ARGUMENT,SW_CAPTURE_CHECK,0,"Root required; timeout_ms 1..60000",0);
@@ -988,6 +1006,7 @@ int32_t start_capture(const char* root_utf8,const char* prefix_utf8,uint32_t ms,
         capture.deadline=Clock::now()+std::chrono::milliseconds(ms);
         capture.exposure.size=sizeof(SwExposureInfo); capture.exposure.software_hold_seconds=std::numeric_limits<double>::quiet_NaN();
         capture.exposure.release_error.size=sizeof(SwError); capture.exposure.restore_error.size=sizeof(SwError);
+        capture.expected_iso=expected_iso; capture.require_full_frame=require_full_frame;
         capture.v2=request!=nullptr; capture.bulb=request && request->mode==SW_EXPOSURE_BULB;
         if(request) { capture.exposure.mode=request->mode; capture.exposure.requested_seconds=request->exposure_seconds;
             capture.exposure_limit=request->exposure_timeout_seconds; capture.download_limit=request->download_timeout_seconds; }
@@ -1267,3 +1286,12 @@ int32_t SW_CALL sw_capture_end_exposure(uint64_t id,SwCaptureResult* out,SwError
 }
 
 #include "sony_features.inc"
+
+int32_t SW_CALL sw_capture_start_verified(const char* root,const char* prefix,const SwExposureRequest* request,
+    uint32_t iso,uint32_t flags,SwCaptureResult* out,SwError* e) {
+    if(!request || !iso || iso>=0xFFFFFF || (flags&~1u))
+        return capture_boundary(0,out,e,SW_CAPTURE_CHECK,[&]()->int32_t {
+            return result(e,SW_ARGUMENT,SW_CAPTURE_CHECK,0,"Verified capture requires a fixed ISO and supported flags");
+        });
+    return start_capture(root,prefix,request?request->setup_timeout_ms:0,out,e,request,iso,(flags&1)!=0);
+}

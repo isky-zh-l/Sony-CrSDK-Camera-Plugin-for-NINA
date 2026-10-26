@@ -87,3 +87,10 @@ add_custom_target(feature_fake_runtime ALL
  COMMAND "${CMAKE_COMMAND}" -E copy "$<TARGET_FILE:wrapper_features_test>" "${CMAKE_BINARY_DIR}/fake/wrapper_features_test.exe"
  COMMAND "${CMAKE_COMMAND}" -E copy "$<TARGET_FILE:wrapper_closeout_test>" "${CMAKE_BINARY_DIR}/fake/wrapper_closeout_test.exe"
  DEPENDS sony_wrapper fake_sdk wrapper_features_test wrapper_closeout_test)
+
+add_executable(wrapper_review_test test/review_main.cpp)
+target_link_libraries(wrapper_review_test PRIVATE sony_wrapper)
+target_compile_features(wrapper_review_test PRIVATE cxx_std_17)
+target_compile_options(wrapper_review_test PRIVATE /W4 /EHsc /utf-8)
+add_custom_command(TARGET wrapper_review_test POST_BUILD
+ COMMAND "${CMAKE_COMMAND}" -E copy "$<TARGET_FILE:wrapper_review_test>" "${CMAKE_BINARY_DIR}/fake/wrapper_review_test.exe")

@@ -1,4 +1,4 @@
-param(
+﻿param(
  [Parameter(Mandatory=$true)][string]$ReviewedWrapperSha256,
  [string]$SonySdkRoot=(Join-Path (Split-Path $PSScriptRoot -Parent) 'deps\sony\SimpleCli'),
  [Parameter(Mandatory=$true)][string]$OutputDirectory

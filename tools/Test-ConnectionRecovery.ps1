@@ -1,4 +1,4 @@
-﻿param(
+param(
  [Parameter(Mandatory=$true)][string]$NinaApp,
  [Parameter(Mandatory=$true)][string]$LocalDeployment,
  [string]$PackageCache
@@ -12,8 +12,13 @@ $env:MSBuildEnableWorkloadResolver='false'
 $project=Join-Path $root 'tests\ConnectionRecovery\ConnectionRecovery.csproj'
 $restoreArgs=@()
 if($PackageCache){$restoreArgs+="-p:RestorePackagesPath=$PackageCache"}
-& dotnet build $project -c Release "-p:NinaApp=$NinaApp" @restoreArgs
-if($LASTEXITCODE -ne 0){throw 'Recovery test build failed'}
+$previous=$ErrorActionPreference
+try {
+ $ErrorActionPreference='Continue'   # dotnet writes progress to stderr; Stop would abort on harmless output
+ & dotnet build $project -c Release "-p:NinaApp=$NinaApp" @restoreArgs
+ $buildExit=$LASTEXITCODE
+} finally {$ErrorActionPreference=$previous}
+if($buildExit -ne 0){throw 'Recovery test build failed'}
 $output=Join-Path $root 'tests\ConnectionRecovery\bin\Release\net8.0-windows'
 $fake=Join-Path $root 'artifacts\native\fake\Cr_Core.dll'
 if(!(Test-Path -LiteralPath $fake)){throw 'Build native test targets with root build.ps1 -Native first.'}

@@ -1,4 +1,4 @@
-param(
+﻿param(
  [Parameter(Mandatory=$true)][string]$PackageDirectory,
  [Parameter(Mandatory=$true)][string]$SonySdkRoot,
  [Parameter(Mandatory=$true)][string]$NinaApp,

@@ -49,6 +49,8 @@ public sealed class SonyA7VPlugin : PluginBase, IPluginManifest
     public override Task Initialize()
     {
         Logger.Info($"[SonyA7V] Plugin initialized {Version}; host={CoreUtil.Version}; framework={System.Runtime.InteropServices.RuntimeInformation.FrameworkDescription}");
+        HostLanguage.Initialize(profiles);
+        Text.SetLanguage(PluginSettings.Load(PluginStorage.DefaultDataDirectory).Language);
         SdkStartup.Start();
         AstroUiVerification.ScheduleIfRequested(Name);
         AutoTest.ScheduleIfRequested(factory, imaging, saving, profiles);

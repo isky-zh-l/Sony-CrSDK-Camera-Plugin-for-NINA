@@ -33,16 +33,20 @@ public sealed record PluginSettings
     public AstroPreparationOptions? AstroPreparationSelection { get; init; }
     /// <summary>Experimental, shared-session lens focus provider. Requires camera connected first.</summary>
     public bool EnableLensFocuser { get; init; }
+    public string Language { get; init; } = "auto";
+    public bool RequireFullFrame { get; init; }
+
 
     public void ValidateCameraSettings() {
+        if(Language is not ("auto" or "zh" or "en"))throw new InvalidDataException(Text.T("Language must be auto, zh or en"));
         if (SensorWidth.HasValue != SensorHeight.HasValue ||
             SensorWidth is <= 0 or > 20000 || SensorHeight is <= 0 or > 20000 ||
             (long)(SensorWidth ?? 0) * (SensorHeight ?? 0) > 200_000_000)
-            throw new InvalidDataException("sensorWidth and sensorHeight must be supplied together with valid positive RAW dimensions");
+            throw new InvalidDataException(Text.T("sensorWidth and sensorHeight must be supplied together with valid positive RAW dimensions"));
         if (BayerPattern is not ("RGGB" or "BGGR" or "GRBG" or "GBRG"))
-            throw new InvalidDataException("bayerPattern must be RGGB, BGGR, GRBG or GBRG");
+            throw new InvalidDataException(Text.T("bayerPattern must be RGGB, BGGR, GRBG or GBRG"));
         if (PixelSizeMicrons.HasValue && (!double.IsFinite(PixelSizeMicrons.Value) || PixelSizeMicrons <= 0 || PixelSizeMicrons > 100))
-            throw new InvalidDataException("pixelSizeMicrons must be finite and within (0, 100]");
+            throw new InvalidDataException(Text.T("pixelSizeMicrons must be finite and within (0, 100]"));
     }
 
     public bool AttachOriginalRaw => string.Equals(SaveOriginalRaw, "only", StringComparison.OrdinalIgnoreCase);

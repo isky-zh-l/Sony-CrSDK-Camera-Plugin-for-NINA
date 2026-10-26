@@ -1,4 +1,4 @@
-param(
+﻿param(
  [switch]$Native,
  [string]$SonySdkRoot=(Join-Path $PSScriptRoot 'deps\sony\SimpleCli'),
  [string]$NinaApp=$env:NINA_APP,
@@ -8,7 +8,8 @@ param(
 $ErrorActionPreference='Stop'
 if(!$NinaApp){throw 'Specify -NinaApp <NINA 3.2.0.9001 installation directory> or set NINA_APP.'}
 $NinaApp=(Resolve-Path -LiteralPath $NinaApp).Path
-if((Get-Item -LiteralPath (Join-Path $NinaApp 'NINA.Core.dll')).VersionInfo.FileVersion -ne '3.2.0.9001'){throw 'This release targets NINA 3.2.0.9001.'}
+$hostVersion=[version](Get-Item -LiteralPath (Join-Path $NinaApp 'NINA.Core.dll')).VersionInfo.FileVersion
+if(!(Test-Path -LiteralPath (Join-Path $NinaApp 'NINA.exe')) -or $hostVersion -lt [version]'3.2.0.9001' -or $hostVersion.Major -ne 3){throw 'Requires NINA 3.x, minimum 3.2.0.9001; other major versions are not verified.'}
 $env:DOTNET_CLI_HOME=Join-Path $PSScriptRoot 'artifacts\dotnet-home'
 $env:DOTNET_CLI_TELEMETRY_OPTOUT='1'
 $env:DOTNET_SKIP_FIRST_TIME_EXPERIENCE='1'

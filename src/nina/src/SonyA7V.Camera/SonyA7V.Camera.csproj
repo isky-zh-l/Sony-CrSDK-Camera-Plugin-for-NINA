@@ -5,15 +5,18 @@
     <PlatformTarget>x64</PlatformTarget>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Version>0.5.5</Version>
+    <Version>0.5.6</Version>
     <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
-    <FileVersion>0.5.5.0</FileVersion>
-    <AssemblyVersion>0.5.5.0</AssemblyVersion>
+    <FileVersion>0.5.6.0</FileVersion>
+    <AssemblyVersion>0.5.6.0</AssemblyVersion>
     <AssemblyTitle>Sony CrSDK Camera Plugin for N.I.N.A.</AssemblyTitle>
     <Company>isky</Company>
     <Description>Sony CrSDK camera driver for N.I.N.A.; verified with Sony ILCE-7M5.</Description>
     <NinaApp Condition="'$(NinaApp)' == ''">$(NINA_APP)</NinaApp>
     <ClientRoot Condition="'$(ClientRoot)' == ''">$(MSBuildThisFileDirectory)..\..\..\managed</ClientRoot>
+    <!-- ModuleInit installs the plugin-directory assembly/native resolver before any plugin type
+         is used; that is the documented reason to use a module initializer in a plugin assembly. -->
+    <NoWarn>$(NoWarn);CA2255</NoWarn>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="$(NinaApp)\NINA.Core.dll;$(NinaApp)\NINA.Image.dll;$(NinaApp)\NINA.Plugin.dll;$(NinaApp)\NINA.Profile.dll;$(NinaApp)\NINA.Equipment.dll;$(NinaApp)\NINA.WPF.Base.dll;$(NinaApp)\NINA.Astrometry.dll;$(NinaApp)\NINA.dll"><Private>false</Private></Reference>

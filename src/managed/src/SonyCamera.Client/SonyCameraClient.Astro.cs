@@ -6,7 +6,7 @@ public sealed partial class SonyCameraClient {
     }
     /// <summary>Preflight every requested setting before the first write. One owner command prevents
     /// interleaving with capture. Missing/read-only/conflicting settings fail explicitly, never skip.</summary>
-    public Task<AstroPreparationReceipt> PrepareAstroSessionAsync(AstroPreparationOptions options)=>Submit("天文拍摄准备",()=>{
+    public Task<AstroPreparationReceipt> PrepareAstroSessionAsync(AstroPreparationOptions options)=>Submit(Text.T("天文拍摄准备"),()=>{
         ArgumentNullException.ThrowIfNull(options);EnsureFeatures();RequireConnected(true);
         if(previewEnabled||movieRecording)throw new InvalidOperationException("Stop preview/movie before preparing astronomy settings");
         var plan=new List<AstroSettingChange>();
@@ -33,7 +33,7 @@ public sealed partial class SonyCameraClient {
     });
     /// <summary>Explicit restore only, on the same clean session, after preflighting all old/current
     /// values. Does not overwrite subsequent user changes or guess after disconnect/write failure.</summary>
-    public Task RestoreAstroSessionAsync(AstroPreparationReceipt receipt)=>Submit("恢复天文准备设置",()=>{
+    public Task RestoreAstroSessionAsync(AstroPreparationReceipt receipt)=>Submit(Text.T("恢复天文准备设置"),()=>{
         ArgumentNullException.ThrowIfNull(receipt);EnsureFeatures();RequireConnected(true);
         if(receipt.Session!=astroSession||receipt.Restored)throw new InvalidOperationException("Receipt is stale or already restored");
         if(previewEnabled||movieRecording)throw new InvalidOperationException("Stop preview/movie before restoring settings");
@@ -59,10 +59,10 @@ public sealed partial class SonyCameraClient {
             throw new NotSupportedException("Absolute lens focus needs a writable position range, actual position, driving status and manual focus; telescope-only rigs do not provide this");
         return new(target,actual.Current,driving.Current==2);
     }
-    public Task<LensFocusStatus> GetLensFocusAsync()=>Submit("镜头绝对对焦状态",()=>{EnsureFeatures();RequireConnected();return ReadLensFocus();});
+    public Task<LensFocusStatus> GetLensFocusAsync()=>Submit(Text.T("镜头绝对对焦状态"),()=>{EnsureFeatures();RequireConnected();return ReadLensFocus();});
     /// <summary>Exact SDK position units, not micrometres. No nearest selection. Once submitted,
     /// cancellation cannot prove a physical stop; wait for readback and idle before returning cancellation.</summary>
-    public Task<LensFocusStatus> MoveLensFocusAsync(long position,CancellationToken cancellationToken=default)=>Submit("镜头绝对对焦",()=>{
+    public Task<LensFocusStatus> MoveLensFocusAsync(long position,CancellationToken cancellationToken=default)=>Submit(Text.T("镜头绝对对焦"),()=>{
         EnsureFeatures();RequireConnected(true);cancellationToken.ThrowIfCancellationRequested();
         if(previewEnabled)throw new InvalidOperationException("Stop preview before moving lens focus");
         var before=ReadLensFocus();if(before.Driving)throw new InvalidOperationException("Lens is already moving");
