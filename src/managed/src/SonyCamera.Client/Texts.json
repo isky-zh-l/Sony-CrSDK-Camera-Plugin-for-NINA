@@ -2911,102 +2911,6 @@
     "zh": "验证后文件发生变化：{0} {1}",
     "en": "File changed after verification: {0} {1}"
   },
-  "{name}必须是64位SHA-256十六进制文本，必须从包以外的批准配置提供": {
-    "zh": "{name}必须是64位SHA-256十六进制文本，必须从包以外的批准配置提供",
-    "en": "{name} must be 64 hexadecimal SHA-256 characters supplied by an approved configuration outside the package"
-  },
-  "拒绝重解析点/符号链接路径：{current}": {
-    "zh": "拒绝重解析点/符号链接路径：{current}",
-    "en": "Refused reparse point or symbolic link path: {current}"
-  },
-  "JSON重复属性：{item.Name}": {
-    "zh": "JSON重复属性：{item.Name}",
-    "en": "Duplicate JSON property: {item.Name}"
-  },
-  "不是原生PE文件：{path}": {
-    "zh": "不是原生PE文件：{path}",
-    "en": "Not a native PE file: {path}"
-  },
-  "PE头越界：{path}": {
-    "zh": "PE头越界：{path}",
-    "en": "PE header is out of bounds: {path}"
-  },
-  "PE签名无效：{path}": {
-    "zh": "PE签名无效：{path}",
-    "en": "Invalid PE signature: {path}"
-  },
-  "原生文件必须为AMD64，实际machine=0x{machine:X4}：{path}": {
-    "zh": "原生文件必须为AMD64，实际machine=0x{machine:X4}：{path}",
-    "en": "Native file must be AMD64; actual machine=0x{machine:X4}: {path}"
-  },
-  "需要有效原生DLL PE头：{path}": {
-    "zh": "需要有效原生DLL PE头：{path}",
-    "en": "A valid native DLL PE header is required: {path}"
-  },
-  "需要64位PE32+：{path}": {
-    "zh": "需要64位PE32+：{path}",
-    "en": "A 64-bit PE32+ image is required: {path}"
-  },
-  "原生依赖不能是托管程序集：{path}": {
-    "zh": "原生依赖不能是托管程序集：{path}",
-    "en": "A native dependency cannot be a managed assembly: {path}"
-  },
-  "清单未获批准：实际SHA256={hash}，与宿主外部批准值不一致": {
-    "zh": "清单未获批准：实际SHA256={hash}，与宿主外部批准值不一致",
-    "en": "Manifest not approved: actual SHA256={hash} differs from the host's external approval"
-  },
-  "角色{entry.Role}必须固定为{required.Base}:{required.Path}，不得使用绝对路径、跳转或其他路径": {
-    "zh": "角色{entry.Role}必须固定为{required.Base}:{required.Path}，不得使用绝对路径、跳转或其他路径",
-    "en": "Role {entry.Role} must be fixed at {required.Base}:{required.Path}; absolute paths, traversal or other paths are not allowed"
-  },
-  "原生文件哈希不匹配：role={entry.Role}, path={path}, actual={actual}": {
-    "zh": "原生文件哈希不匹配：role={entry.Role}, path={path}, actual={actual}",
-    "en": "Native file hash mismatch: role={entry.Role}, path={path}, actual={actual}"
-  },
-  "无法验证必需依赖：role={entry.Role}, path={path}；{ex.Message}。请检查完整部署和读取权限；host适配器须位于EXE同级CrAdapter。": {
-    "zh": "无法验证必需依赖：role={entry.Role}, path={path}；{ex.Message}。请检查完整部署和读取权限；host适配器须位于EXE同级CrAdapter。",
-    "en": "Cannot verify a required dependency: role={entry.Role}, path={path}; {ex.Message}. Check the complete deployment and read permissions; host adapters must be in CrAdapter beside the EXE."
-  },
-  "加载{role}失败：{path}。Win32={code}。若为126/127，请检查包依赖及Microsoft Visual C++ x64运行库；若为193，请检查AMD64架构。请修复部署后重新启动进程。": {
-    "zh": "加载{role}失败：{path}。Win32={code}。若为126/127，请检查包依赖及Microsoft Visual C++ x64运行库；若为193，请检查AMD64架构。请修复部署后重新启动进程。",
-    "en": "Failed to load {role}: {path}. Win32={code}. For 126/127 check package dependencies and the Microsoft Visual C++ x64 runtime; for 193 check the AMD64 architecture. Fix the deployment and restart the process."
-  },
-  "进程已加载未知原生依赖：{file.Role}，请使用独立进程启动": {
-    "zh": "进程已加载未知原生依赖：{file.Role}，请使用独立进程启动",
-    "en": "The process already loaded an unknown native dependency: {file.Role}. Start it in a separate process."
-  },
-  "验证后文件发生变化：{file.Role} {file.FullPath}": {
-    "zh": "验证后文件发生变化：{file.Role} {file.FullPath}",
-    "en": "File changed after verification: {file.Role} {file.FullPath}"
-  },
-  "ABI {name}大小 {actual} != {size}": {
-    "zh": "ABI {name}大小 {actual} != {size}",
-    "en": "ABI {name} size {actual} != {size}"
-  },
-  "ABI {name}.{parts[0]}偏移错误：{value}": {
-    "zh": "ABI {name}.{parts[0]}偏移错误：{value}",
-    "en": "ABI {name}.{parts[0]} offset mismatch: {value}"
-  },
-  "包={package.PackageId}, manifest={package.ManifestSha256}, backend={package.Backend}；": {
-    "zh": "包={package.PackageId}, manifest={package.ManifestSha256}, backend={package.Backend}；",
-    "en": "package={package.PackageId}, manifest={package.ManifestSha256}, backend={package.Backend}; "
-  },
-  "运行时ABI不匹配：version={version}, sizes={es}/{cs}/{ps}/{crs}/{rs}/{caps}/{infos}": {
-    "zh": "运行时ABI不匹配：version={version}, sizes={es}/{cs}/{ps}/{crs}/{rs}/{caps}/{infos}",
-    "en": "Runtime ABI mismatch: version={version}, sizes={es}/{cs}/{ps}/{crs}/{rs}/{caps}/{infos}"
-  },
-  "已提交 {snapshot.Preparation.Count(x=>x.Submitted)} 项，已确认 {snapshot.Preparation.Count(x=>x.Submitted&&x.Confirmed)} 项": {
-    "zh": "已提交 {snapshot.Preparation.Count(x=>x.Submitted)} 项，已确认 {snapshot.Preparation.Count(x=>x.Submitted&&x.Confirmed)} 项",
-    "en": "Submitted {snapshot.Preparation.Count(x=>x.Submitted)} settings, confirmed {snapshot.Preparation.Count(x=>x.Submitted&&x.Confirmed)} settings"
-  },
-  "相机当前不接受 ISO 写入（可能正在处理上一张或已休眠）：{ex.Error.Message}。请断开后重新连接。": {
-    "zh": "相机当前不接受 ISO 写入（可能正在处理上一张或已休眠）：{ex.Error.Message}。请断开后重新连接。",
-    "en": "The camera is not accepting an ISO write right now (it may still be processing the previous frame or asleep): {ex.Error.Message}. Disconnect and reconnect."
-  },
-  "相机当前不接受快门写入（可能正在处理上一张或已休眠）：{ex.Error.Message}。请断开后重新连接。": {
-    "zh": "相机当前不接受快门写入（可能正在处理上一张或已休眠）：{ex.Error.Message}。请断开后重新连接。",
-    "en": "The camera is not accepting a shutter write right now (it may still be processing the previous frame or asleep): {ex.Error.Message}. Disconnect and reconnect."
-  },
   "Plugin assembly has no directory": {
     "zh": "插件程序集没有所在目录",
     "en": "Plugin assembly has no directory"
@@ -3227,16 +3131,136 @@
     "zh": "设备清理未确认，必须先成功断开才能重置",
     "en": "Device cleanup is not confirmed; disconnect must succeed before reset"
   },
-  "Exposure {seconds:R}s is not a camera shutter candidate and this camera does not offer Bulb in its current mode": {
-    "zh": "曝光 {seconds:R} 秒不是机身候选快门，且当前模式下不提供 Bulb",
-    "en": "Exposure {seconds:R}s is not a camera shutter candidate and this camera does not offer Bulb in its current mode"
+  "Exposure {0:R}s is not a camera shutter candidate and this camera does not offer Bulb in its current mode": {
+    "zh": "曝光 {0:R} 秒不是机身候选快门，且当前模式下不提供 Bulb",
+    "en": "Exposure {0:R}s is not a camera shutter candidate and this camera does not offer Bulb in its current mode"
   },
-  "Software Bulb requires exact milliseconds within {caps.BulbMinimumSeconds}..{caps.BulbMaximumSeconds}s": {
-    "zh": "软件 Bulb 需精确到毫秒，且位于 {caps.BulbMinimumSeconds}..{caps.BulbMaximumSeconds} 秒之间",
-    "en": "Software Bulb requires exact milliseconds within {caps.BulbMinimumSeconds}..{caps.BulbMaximumSeconds}s"
+  "Software Bulb requires exact milliseconds within {0}..{1}s": {
+    "zh": "软件 Bulb 需精确到毫秒，且位于 {0}..{1} 秒之间",
+    "en": "Software Bulb requires exact milliseconds within {0}..{1}s"
   },
-  "Expected exactly one Sony camera (filter: {filter}); found {choices.Length}. Detected: {detected}. Connect one body or set an unambiguous cameraModel in settings.json.": {
-    "zh": "期望恰好一台 Sony 相机（筛选：{filter}）；实际找到 {choices.Length} 台。检测到：{detected}。请只连接一台机身，或在 settings.json 中设置明确的 cameraModel。",
-    "en": "Expected exactly one Sony camera (filter: {filter}); found {choices.Length}. Detected: {detected}. Connect one body or set an unambiguous cameraModel in settings.json."
+  "Expected exactly one Sony camera (filter: {0}); found {1}. Detected: {2}. Connect one body or set an unambiguous cameraModel in settings.json.": {
+    "zh": "期望恰好一台 Sony 相机（筛选：{0}）；实际找到 {1} 台。检测到：{2}。请只连接一台机身，或在 settings.json 中设置明确的 cameraModel。",
+    "en": "Expected exactly one Sony camera (filter: {0}); found {1}. Detected: {2}. Connect one body or set an unambiguous cameraModel in settings.json."
+  },
+  "ISO {0} is not offered by this camera right now": {
+    "en": "ISO {0} is not offered by this camera right now",
+    "zh": "相机当前不提供 ISO {0}"
+  },
+  "{0} does not expose writable fixed ISO and ordinary still shutters in the current mode. Static RAW capture is required by NINA.": {
+    "zh": "{0} 在当前模式下不提供可写的固定 ISO 和普通照片快门。NINA 需要静态 RAW 拍摄。",
+    "en": "{0} does not expose writable fixed ISO and ordinary still shutters in the current mode. Static RAW capture is required by NINA."
+  },
+  "{0} has no available live view": {
+    "zh": "{0} 当前不提供实时预览",
+    "en": "{0} has no available live view"
+  },
+  "File size {0} does not match the camera's reported {1} bytes": {
+    "zh": "文件大小 {0} 与相机报告的 {1} 字节不一致",
+    "en": "File size {0} does not match the camera's reported {1} bytes"
+  },
+  "RAW model {0} does not match connected camera {1}": {
+    "zh": "RAW 机型 {0} 与已连接相机 {1} 不一致",
+    "en": "RAW model {0} does not match connected camera {1}"
+  },
+  "ISO {0} is not offered by this camera": {
+    "zh": "相机不提供 ISO {0}",
+    "en": "ISO {0} is not offered by this camera"
+  },
+  "RAW unpack failed ({0}): {1}": {
+    "zh": "RAW 解包失败（{0}）：{1}",
+    "en": "RAW unpack failed ({0}): {1}"
+  },
+  "Implausible live view geometry {0}x{1}": {
+    "zh": "实时预览尺寸异常：{0}x{1}",
+    "en": "Implausible live view geometry {0}x{1}"
+  },
+  "{0}: property unavailable in current mode/lens": {
+    "zh": "{0}：当前模式或镜头不提供此属性",
+    "en": "{0}: property unavailable in current mode/lens"
+  },
+  "{0}: requested value is not a current writable candidate": {
+    "zh": "{0}：请求值不在当前可写候选值中",
+    "en": "{0}: requested value is not a current writable candidate"
+  },
+  "{0}: state changed or original value no longer writable; no restore submitted": {
+    "zh": "{0}：状态已改变或原始值已不可写，未执行恢复",
+    "en": "{0}: state changed or original value no longer writable; no restore submitted"
+  },
+  "Absolute lens focus needs a writable position range, actual position, driving status and manual focus; telescope-only rigs do not provide this": {
+    "zh": "镜头绝对位置对焦需要可写位置范围、实际位置、运动状态以及手动对焦模式；仅连接望远镜时不提供这些能力",
+    "en": "Absolute lens focus needs a writable position range, actual position, driving status and manual focus; telescope-only rigs do not provide this"
+  },
+  "Camera reported a file that is not on disk": {
+    "zh": "相机报告的文件未在磁盘上找到",
+    "en": "Camera reported a file that is not on disk"
+  },
+  "Cannot restore an unconfirmed preparation receipt": {
+    "zh": "无法恢复尚未确认的天文准备回执",
+    "en": "Cannot restore an unconfirmed preparation receipt"
+  },
+  "Capture requires fixed ISO": {
+    "zh": "拍摄需要固定 ISO",
+    "en": "Capture requires fixed ISO"
+  },
+  "Deploy the complete astronomy native candidate before using preparation": {
+    "zh": "使用天文准备前，请部署完整的原生组件",
+    "en": "Deploy the complete astronomy native candidate before using preparation"
+  },
+  "Expected the fixed native dependency set": {
+    "zh": "需要完整且符合规定的原生依赖文件集合",
+    "en": "Expected the fixed native dependency set"
+  },
+  "Invalid inspection list": {
+    "zh": "参数检查列表无效",
+    "en": "Invalid inspection list"
+  },
+  "Invalid native dependency role: ": {
+    "zh": "原生依赖角色无效：",
+    "en": "Invalid native dependency role: "
+  },
+  "Invalid production manifest": {
+    "zh": "正式运行依赖清单无效",
+    "en": "Invalid production manifest"
+  },
+  "Lens idle/position unconfirmed; reconnect before further operations": {
+    "zh": "镜头空闲状态或位置尚未确认，请重新连接后再操作",
+    "en": "Lens idle/position unconfirmed; reconnect before further operations"
+  },
+  "Native readback does not match requested value": {
+    "zh": "原生层回读值与请求值不一致",
+    "en": "Native readback does not match requested value"
+  },
+  "Property is unavailable in this mode/lens": {
+    "zh": "当前模式或镜头不提供此属性",
+    "en": "Property is unavailable in this mode/lens"
+  },
+  "Receipt is stale or already restored": {
+    "zh": "回执已失效或已经恢复",
+    "en": "Receipt is stale or already restored"
+  },
+  "Stop live view/movie before editing settings": {
+    "zh": "修改设置前请停止实时预览或录像",
+    "en": "Stop live view/movie before editing settings"
+  },
+  "Stop live view/movie before inspecting settings": {
+    "zh": "检查设置前请停止实时预览或录像",
+    "en": "Stop live view/movie before inspecting settings"
+  },
+  "Stop preview before moving lens focus": {
+    "zh": "移动镜头焦点前请停止预览",
+    "en": "Stop preview before moving lens focus"
+  },
+  "Stop preview/movie before preparing astronomy settings": {
+    "zh": "应用天文准备前请停止预览或录像",
+    "en": "Stop preview/movie before preparing astronomy settings"
+  },
+  "Stop preview/movie before restoring settings": {
+    "zh": "恢复设置前请停止预览或录像",
+    "en": "Stop preview/movie before restoring settings"
+  },
+  "supportedModels must be a nonempty, unique model inventory (at most 256 entries)": {
+    "zh": "supportedModels 必须是非空且不重复的机型列表（最多 256 项）",
+    "en": "supportedModels must be a nonempty, unique model inventory (at most 256 entries)"
   }
 }

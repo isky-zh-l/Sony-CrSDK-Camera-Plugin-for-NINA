@@ -14,8 +14,9 @@ public sealed partial class SonyCameraService {
         catch(Exception ex){Logger.Trace("[SonyCrSDK] Crop mode unavailable: "+ex.Message);}
         PublishCrop(CropMonitor.FromBody(Model,mode));
     }
-    private void PublishCrop(CropObservation observation) {
-        var notify=cropMonitor.Observe(observation);
+    private void PublishCrop(CropObservation observation, bool fromRaw=false) {
+        var notify=fromRaw?cropMonitor.ObserveRaw(observation):cropMonitor.ObserveBody(observation);
+        observation=cropMonitor.Current;
         CropWarning=observation.State==SensorFrame.ApsC
             ?Text.T("APS-C / Super 35 crop mode is active. Confirm this is intended and check image dimensions, field of view and plate-solving settings.")
             :observation.State==SensorFrame.Unknown?Text.T("Sensor mode is unknown. Image dimensions alone do not establish APS-C mode."):"";
@@ -29,9 +30,8 @@ public sealed partial class SonyCameraService {
     private void VerifyRawCrop(RawInfo raw) {
         var verified=CropMonitor.VerifyRaw(exposureCrop,Model,raw,LastCapture?.RawFormat??0);
         CaptureFrame=verified.State;
-        if(verified.State!=exposureCrop.State) {
-            PublishCrop(verified);
+        PublishCrop(verified,fromRaw:true);
+        if(verified.State!=exposureCrop.State)
             Logger.Warning("[SonyCrSDK] Body sensor mode disagrees with model-specific RAW evidence; frame mode is unknown");
-        } else if(Crop.BodyMode==exposureCrop.BodyMode)PublishCrop(verified);
     }
 }

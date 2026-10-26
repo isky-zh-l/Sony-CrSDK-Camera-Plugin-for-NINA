@@ -39,6 +39,11 @@ public sealed class AstroParameterRow : UiObservable {
         selected=Choices.FirstOrDefault(x=>x.Value==Info?.Current);
     }
 }
+public sealed class UiLocalizedChoice(string key, string label) : UiObservable {
+    public string Key {get;}=key;
+    public string Value=>Text.T(label);
+    public void Refresh()=>Raise(nameof(Value));
+}
 public sealed class AstroSettingsViewModel : UiObservable, IDisposable {
     private readonly IAstroSettingsSession session;
     private readonly PluginSettingsStore store;
@@ -56,8 +61,13 @@ public sealed class AstroSettingsViewModel : UiObservable, IDisposable {
     public string SensorFrameLabel=>Text.T(snapshot.SensorFrame switch {SensorFrame.FullFrame=>"Full frame",SensorFrame.ApsC=>"APS-C",_=>"Unknown"});
     public string CropWarning=>snapshot.CropWarning;
     private string language="auto";
-    public string Language {get=>language;set {language=value;Text.SetLanguage(value);Raise("");}}
-    public IReadOnlyList<KeyValuePair<string,string>> Languages=>new[]{new KeyValuePair<string,string>("auto",Text.T("Automatic")),new("zh","中文"),new("en","English")};
+    public string Language {get=>language;set {
+        // WPF can transiently clear SelectedValue. Never turn that into a language change.
+        if(value is not ("auto" or "zh" or "en") || language==value && Text.Language==value)return;
+        language=value;Text.SetLanguage(value);Raise(nameof(Language));
+    }}
+    // Stable item identity prevents ItemsSource refresh from clearing selection and re-entering the setter.
+    public IReadOnlyList<UiLocalizedChoice> Languages {get;}=new UiLocalizedChoice[]{new("auto","Automatic"),new("zh","中文"),new("en","English")};
     public bool RequireFullFrame {get;set;}
 
     public string LastFile=>string.IsNullOrEmpty(snapshot.LastFile)?Text.T("尚无本连接的图像"):snapshot.LastFile;
@@ -77,9 +87,9 @@ public sealed class AstroSettingsViewModel : UiObservable, IDisposable {
     public UiAsyncCommand SaveCommand {get;}
     public UiAsyncCommand ReloadCommand {get;}
     public string CameraModel {get;set;}="";
-    public IReadOnlyList<string> Models=>new[]{""}.Concat(CameraSupport.SdkModels).ToArray();
+    public IReadOnlyList<string> Models {get;}=new[]{""}.Concat(CameraSupport.SdkModels).ToArray();
     public string SaveOriginalRaw {get;set;}="never";
-    public IReadOnlyList<KeyValuePair<string,string>> RawSaveModes=>new[]{new KeyValuePair<string,string>("never",Text.T("仅保存 NINA 图像")),new KeyValuePair<string,string>("also",Text.T("NINA 图像 + ARW 副本")),new KeyValuePair<string,string>("only",Text.T("向 NINA 交付原始 ARW"))};
+    public IReadOnlyList<UiLocalizedChoice> RawSaveModes {get;}=new UiLocalizedChoice[]{new("never","仅保存 NINA 图像"),new("also","NINA 图像 + ARW 副本"),new("only","向 NINA 交付原始 ARW")};
     public string RawCopyFolder {get;set;}="raw";
     public bool LiveViewColor {get;set;}
     public bool EnableLensFocuser {get;set;}
@@ -108,6 +118,7 @@ public sealed class AstroSettingsViewModel : UiObservable, IDisposable {
     private void OnLanguageChanged() {
         if(disposed||dispatcher.HasShutdownStarted)return;
         if(!dispatcher.CheckAccess()){dispatcher.BeginInvoke(new Action(OnLanguageChanged));return;}
+        foreach(var choice in Languages.Concat(RawSaveModes))choice.Refresh();
         var rows=Rows.Select(row=>(row.Definition,row.Info,row.ConnectionId,selected:row.Selected?.Value)).ToArray();
         Rows.Clear();
         foreach(var row in rows){var updated=new AstroParameterRow(row.Definition,new(row.Definition.Property,row.Info,null),row.ConnectionId,()=>ApplyRowCommand.Refresh());updated.Selected=updated.Choices.FirstOrDefault(x=>x.Value==row.selected);Rows.Add(updated);}

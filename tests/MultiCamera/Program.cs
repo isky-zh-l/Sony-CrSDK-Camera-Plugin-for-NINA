@@ -7,7 +7,7 @@ using System.Text.Json;
 using SonyA7V.Camera;
 using SonyCamera.Client;
 
-internal static class Program {
+internal static partial class Program {
     static int assertions;
     static int realRawPipelineFiles;
     static void Check(bool ok, string message) { assertions++; if (!ok) throw new Exception(message); }
@@ -25,7 +25,8 @@ internal static class Program {
     }
     [MethodImpl(MethodImplOptions.NoInlining)]
     static async Task Run() {
-        // Localized messages: named interpolation holes must format instead of throwing.
+        ReviewRegression();
+        // Localized messages use positional .NET interpolation holes.
         var savedLanguage=Text.Language;
         try {
             Text.SetLanguage("en");
@@ -306,7 +307,8 @@ internal static class Program {
                     await service.WaitAsync(CancellationToken.None);
                     var frame=await service.LoadAsync(CancellationToken.None);
                     Check(service.LastCapture?.IsSuccess==true&&service.LastCapture.FileBytes==(ulong)new FileInfo(path).Length,"fake transport completes full real RAW");
-                    Check(Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(service.LastCapture!.ArwPath))).Equals(expectedHash,StringComparison.OrdinalIgnoreCase),"received real RAW is byte-identical to public input");
+                    Check(frame.SourceSha256.Equals(expectedHash,StringComparison.OrdinalIgnoreCase),"decoded real RAW is byte-identical to verified input");
+                    Check(!File.Exists(service.LastCapture!.ArwPath),"real RAW staging is cleaned after owned pixel delivery");
                     Check(frame.RawInfo.Model==model&&frame.RawInfo.Cfa=="RGGB","NINA receives actual Sony model and CFA");
                     Check(frame.ImageData.Data.FlatArray.LongLength==(long)frame.RawInfo.Width*frame.RawInfo.Height,"NINA receives complete Bayer array");
                     if(sample.TryGetProperty("expectedGeometry",out var geometry)) {

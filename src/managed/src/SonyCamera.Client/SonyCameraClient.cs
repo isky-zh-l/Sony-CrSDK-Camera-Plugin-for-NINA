@@ -158,7 +158,7 @@ public sealed partial class SonyCameraClient : IAsyncDisposable {
             if(receiveRoot.IndexOf('\0')>=0||prefix.IndexOf('\0')>=0)throw new ArgumentException(Text.T("路径/前缀不得含NUL"));
             var r=Native.New<Native.Request>();r.Mode=(uint)request.Mode;r.Seconds=request.Seconds;r.ExposureTimeout=request.ExposureTimeoutSeconds;r.DownloadTimeout=request.DownloadTimeoutSeconds;r.Setup=request.SetupTimeoutMilliseconds;
             var expectedIso=request.ExpectedIso;
-            if(expectedIso==0) {var actual=Native.New<Native.Parameters>();var readError=Native.New<Native.Error>();Check(Native.sw_read_parameters(ref actual,ref readError),readError);if(actual.IsoKind!=(uint)IsoKind.Fixed)throw new InvalidOperationException("Capture requires fixed ISO");expectedIso=actual.Iso;}
+            if(expectedIso==0) {var actual=Native.New<Native.Parameters>();var readError=Native.New<Native.Error>();Check(Native.sw_read_parameters(ref actual,ref readError),readError);if(actual.IsoKind!=(uint)IsoKind.Fixed)throw new InvalidOperationException(Text.T("Capture requires fixed ISO"));expectedIso=actual.Iso;}
             var c=Native.New<Native.Capture>();var e=Native.New<Native.Error>();int rc=Native.sw_capture_start_verified(receiveRoot,string.IsNullOrEmpty(prefix)?null:prefix,ref r,expectedIso,request.RequireFullFrame?1u:0u,ref c,ref e);
             if(c.Id==0){Check(rc,e,true);throw new InvalidDataException(Text.T("原生开始拍摄未返回编号"));}
             p.Id=c.Id;pending=p;state=SessionState.Capturing;

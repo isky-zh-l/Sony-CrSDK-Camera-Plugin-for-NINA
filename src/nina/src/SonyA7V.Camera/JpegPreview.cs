@@ -25,7 +25,7 @@ internal static class JpegPreview
         width = image.PixelWidth & ~1;
         height = image.PixelHeight & ~1;
         if (width <= 0 || height <= 0 || (long)width * height > 64L * 1024 * 1024)
-            throw new InvalidDataException($"Implausible live view geometry {image.PixelWidth}x{image.PixelHeight}");
+            throw new InvalidDataException(Text.F($"Implausible live view geometry {image.PixelWidth}x{image.PixelHeight}"));
 
         var converted = new FormatConvertedBitmap(image, PixelFormats.Bgr24, null, 0);
         var stride = image.PixelWidth * 3;

@@ -265,7 +265,7 @@ public sealed class SonyA7VCamera : ICamera
             var facts = service.Facts;
             if (facts is null) { gain = value; return; }
             if (!facts.Isos.Contains((uint)value))
-                throw new ArgumentOutOfRangeException(nameof(value), $"ISO {value} is not offered by this camera");
+                throw new ArgumentOutOfRangeException(nameof(value), Text.F($"ISO {value} is not offered by this camera"));
             gain = value;
             Raise();
             // Deliberately no write here: live view applies panel changes by restarting the preview.

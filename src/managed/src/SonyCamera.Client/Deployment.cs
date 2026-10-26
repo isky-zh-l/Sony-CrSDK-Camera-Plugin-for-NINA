@@ -53,7 +53,7 @@ public static class NativePackageValidator {
         if(manifest.SupportedModels is not { Length: >0 and <=256 } ||
            manifest.SupportedModels.Any(model=>string.IsNullOrWhiteSpace(model)||model.Length>128||model.Any(char.IsControl)) ||
            manifest.SupportedModels.Distinct(StringComparer.OrdinalIgnoreCase).Count()!=manifest.SupportedModels.Length)
-            throw new InvalidDataException("supportedModels must be a nonempty, unique model inventory (at most 256 entries)");
+            throw new InvalidDataException(Text.T("supportedModels must be a nonempty, unique model inventory (at most 256 entries)"));
         if(manifest.StructureSizes==null||manifest.StructureSizes.Count!=ExpectedSizes.Count||ExpectedSizes.Any(pair=>!manifest.StructureSizes.TryGetValue(pair.Key,out var size)||size!=pair.Value))throw new InvalidDataException(Text.T("清单ABI结构大小必须与客户端已知ABI2布局完全一致"));
         if(manifest.Files==null||manifest.Files.Length!=Required.Count)throw new InvalidDataException(Text.T("清单必须含8项固定原生角色，不得删除必需项或添加未审查角色"));
         var roles=new HashSet<string>(StringComparer.Ordinal);var paths=new HashSet<string>(StringComparer.OrdinalIgnoreCase);var files=new List<ValidatedNativeFile>();

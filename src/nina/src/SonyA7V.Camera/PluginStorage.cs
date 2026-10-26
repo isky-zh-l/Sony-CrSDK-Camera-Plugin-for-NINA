@@ -88,22 +88,22 @@ public sealed class PluginStorage(string pluginDirectory, string dataDirectory, 
         using var document=JsonDocument.Parse(File.ReadAllText(template).TrimStart('\uFEFF'));
         var root=document.RootElement;
         if(root.GetProperty("backend").GetString()!="production" || root.GetProperty("abiVersion").GetInt32()!=2)
-            throw new InvalidDataException("Invalid production manifest");
+            throw new InvalidDataException(Text.T("Invalid production manifest"));
         var entries=root.GetProperty("files").EnumerateArray().ToArray();
         var roles=NativePackageValidator.RequiredRoles;
-        if(entries.Length!=roles.Count)throw new InvalidDataException("Expected the fixed native dependency set");
+        if(entries.Length!=roles.Count)throw new InvalidDataException(Text.T("Expected the fixed native dependency set"));
         var seen=new HashSet<string>(StringComparer.Ordinal);
         foreach(var entry in entries){
             var role=entry.GetProperty("role").GetString()!;
-            if(!roles.Contains(role)||!seen.Add(role))throw new InvalidDataException("Invalid native dependency role: "+role);
+            if(!roles.Contains(role)||!seen.Add(role))throw new InvalidDataException(Text.T("Invalid native dependency role: ")+role);
         }
         foreach(var entry in entries){
             var name=entry.GetProperty("path").GetString()!;
-            if(Path.IsPathRooted(name)||name.Contains('\\')||name.Split('/').Any(x=>x is ".." or "." or ""))throw new InvalidDataException("Invalid dependency path");
+            if(Path.IsPathRooted(name)||name.Contains('\\')||name.Split('/').Any(x=>x is ".." or "." or ""))throw new InvalidDataException(Text.T("Invalid dependency path"));
             var path=entry.GetProperty("base").GetString()=="host"?Path.Combine(HostDirectory,name):
                 entry.GetProperty("role").GetString()=="wrapper"?Path.Combine(PluginDirectory,"native",name):Path.Combine(SdkCacheDirectory,name);
             NoLinks(path);
-            if(!string.Equals(Hash(path),entry.GetProperty("sha256").GetString(),StringComparison.OrdinalIgnoreCase))throw new InvalidDataException("Dependency verification failed: "+name);
+            if(!string.Equals(Hash(path),entry.GetProperty("sha256").GetString(),StringComparison.OrdinalIgnoreCase))throw new InvalidDataException(Text.T("Dependency verification failed: ")+name);
         }
     }
     public void Verify() {

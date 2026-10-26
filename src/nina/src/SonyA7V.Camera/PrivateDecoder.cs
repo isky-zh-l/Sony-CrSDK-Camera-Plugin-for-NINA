@@ -49,7 +49,7 @@ public sealed class PrivateDecoder {
         IntPtr frame=IntPtr.Zero;
         try {
             var rc=open(pinned.AddrOfPinnedObject(),(ulong)bytes.LongLength,out frame,out var info,error,512);
-            if(rc!=0) throw new InvalidDataException($"RAW unpack failed ({rc}): {error}");
+            if(rc!=0) throw new InvalidDataException(Text.F($"RAW unpack failed ({rc}): {error}"));
             token.ThrowIfCancellationRequested();
             if(info.Abi!=1 || info.Errors!=0) throw new InvalidDataException(Text.T("Invalid decoder ABI or RAW error"));
             CameraGeometry.FromRaw(info); // validate before any allocation, including checked wide multiplication

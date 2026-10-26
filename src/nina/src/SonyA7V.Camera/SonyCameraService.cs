@@ -158,7 +158,7 @@ public sealed partial class SonyCameraService
             var shutters = await client.GetSupportedExposureSecondsAsync().ConfigureAwait(false);
             var capabilities = await client.GetExposureCapabilitiesAsync().ConfigureAwait(false);
             if (isos.Count == 0 || shutters.Count == 0)
-                throw new NotSupportedException($"{camera.Model} does not expose writable fixed ISO and ordinary still shutters in the current mode. Static RAW capture is required by NINA.");
+                throw new NotSupportedException(Text.F($"{camera.Model} does not expose writable fixed ISO and ordinary still shutters in the current mode. Static RAW capture is required by NINA."));
             var preview = await client.GetPropertyAsync(CameraProperty.LiveViewStatus).ConfigureAwait(false);
             // SDK LiveViewStatus: Enable=2, Disable=1, NotSupport=0. Disabled may be enabled later.
             var liveAvailable = preview.Info is { Readable: true, Current: 1 or 2 };
@@ -354,14 +354,14 @@ public sealed partial class SonyCameraService
         // NINA sends Gain = -1 when the profile has no gain preference; keep the camera value.
         var iso = gain > 0 ? (uint)gain : Facts.Parameters.Iso;
         if (!isos.Contains(iso))
-            throw new ArgumentOutOfRangeException(nameof(gain), $"ISO {iso} is not offered by this camera right now");
+            throw new ArgumentOutOfRangeException(nameof(gain), Text.F($"ISO {iso} is not offered by this camera right now"));
         var request = ExposurePolicy.Create(seconds, Facts.Shutters, Facts.Capabilities) with {ExpectedIso=iso,RequireFullFrame=Settings.RequireFullFrame};
         if (request.Mode == ExposureMode.Ordinary)
             await ApplyOrdinaryParametersAsync(iso, request.Seconds).ConfigureAwait(false);
         else
             await ApplyIsoAsync(iso).ConfigureAwait(false);
         token.ThrowIfCancellationRequested();
-        exposureCrop=Crop;CaptureFrame=Crop.State;
+        exposureCrop=cropMonitor.Body;CaptureFrame=Crop.State;
         var startedAt = DateTime.UtcNow;
         var requestedSeconds = seconds;
         lock (stateGate) last = null;
@@ -522,7 +522,7 @@ public sealed partial class SonyCameraService
     public Task ConfigureLiveViewAsync(uint? iso, double? seconds, CancellationToken token = default) =>
         CoordinateAsync(Text.T("准备实时预览"), async () => {
             RequireIdleSettings(allowPreview: true);
-            if (Facts!.LiveViewAvailable != true) throw new NotSupportedException($"{Model} has no available live view");
+            if (Facts!.LiveViewAvailable != true) throw new NotSupportedException(Text.F($"{Model} has no available live view"));
             if (iso.HasValue && !Facts.Isos.Contains(iso.Value)) throw new ArgumentOutOfRangeException(nameof(iso));
             if (seconds.HasValue && !Facts.Shutters.Contains(seconds.Value)) throw new ArgumentOutOfRangeException(nameof(seconds));
             if (LiveViewActive && !iso.HasValue && !seconds.HasValue) return;
@@ -552,12 +552,12 @@ public sealed partial class SonyCameraService
         if (!snapshot.IsSuccess || string.IsNullOrEmpty(snapshot.ArwPath))
             throw new InvalidOperationException(Text.T("Capture was not successful: ") + snapshot.Failure.Message);
         var info = new FileInfo(snapshot.ArwPath);
-        if (!info.Exists) throw new FileNotFoundException("Camera reported a file that is not on disk", snapshot.ArwPath);
+        if (!info.Exists) throw new FileNotFoundException(Text.T("Camera reported a file that is not on disk"), snapshot.ArwPath);
         if ((ulong)info.Length != snapshot.FileBytes)
-            throw new InvalidDataException($"File size {info.Length} does not match the camera's reported {snapshot.FileBytes} bytes");
+            throw new InvalidDataException(Text.F($"File size {info.Length} does not match the camera's reported {snapshot.FileBytes} bytes"));
         var frame = await loader!.LoadAsync(snapshot.ArwPath, token, attachOriginalRaw: Settings.AttachOriginalRaw).ConfigureAwait(false);
         if (Facts?.Description is { } camera && CameraSupport.Normalize(frame.RawInfo.Model) != CameraSupport.Normalize(camera.Model))
-            throw new InvalidDataException($"RAW model {frame.RawInfo.Model} does not match connected camera {camera.Model}");
+            throw new InvalidDataException(Text.F($"RAW model {frame.RawInfo.Model} does not match connected camera {camera.Model}"));
         Geometry = CameraGeometry.FromRaw(frame.RawInfo);
         VerifyRawCrop(frame.RawInfo);
         if(!Settings.CopyOriginalRaw)CompleteDelivery(snapshot);

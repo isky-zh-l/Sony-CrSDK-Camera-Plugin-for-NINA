@@ -6,13 +6,28 @@ public sealed record CropObservation(SensorFrame State,long? BodyMode,bool RawVe
 public sealed class CropMonitor {
     private SensorFrame? previous;
     public CropObservation Current {get;private set;}=new(SensorFrame.Unknown,null);
-    public void Reset(){previous=null;Current=new(SensorFrame.Unknown,null);}
+    public CropObservation Body {get;private set;}=new(SensorFrame.Unknown,null);
+    private CropObservation? rawEvidence;
+    public void Reset(){previous=null;rawEvidence=null;Body=Current=new(SensorFrame.Unknown,null);}
+    public bool ObserveBody(CropObservation observation) {
+        // Re-reading the same property does not resolve conflicting RAW evidence.
+        if(Body.State!=observation.State || Body.BodyMode!=observation.BodyMode)rawEvidence=null;
+        Body=observation;
+        return Observe(rawEvidence??Body);
+    }
+    public bool ObserveRaw(CropObservation observation) {
+        // A completed older frame must not replace a new body mode on the panel.
+        if(observation.BodyMode!=Body.BodyMode)return false;
+        // Only verified RAW evidence can clear an earlier contradiction.
+        if(observation.State==SensorFrame.Unknown || observation.RawVerified)rawEvidence=observation;
+        return Observe(rawEvidence??Body);
+    }
     public static CropObservation FromBody(string model,long? mode) {
         // Only these full-frame sensor identities have model-specific RAW evidence in this repository.
         bool fullFrameBody=CameraSupport.Normalize(model) is "ILCE-7M5" or "ILCE-7RM6";
         return new(mode==2?SensorFrame.ApsC:mode==1&&fullFrameBody?SensorFrame.FullFrame:SensorFrame.Unknown,mode);
     }
-    public bool Observe(CropObservation observation) {
+    private bool Observe(CropObservation observation) {
         bool notify=(previous is null && observation.State==SensorFrame.ApsC) ||
             (previous is not null && previous!=observation.State);
         previous=observation.State;Current=observation;return notify;

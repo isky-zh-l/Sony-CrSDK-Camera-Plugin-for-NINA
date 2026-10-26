@@ -83,6 +83,20 @@ internal static class Program {
    window.Content=view;await Idle();Check(ReferenceEquals(vm,view.DataContext)&&vm.RawCopyFolder=="unsaved-dock-preference"&&fake.Subscribers==1,"redocking retains unsaved UI preferences and one subscription");
    var resources=new AstroOptionsResources();var manifest=new SonyA7VPlugin(null!,null!,null!,null!);Check(resources[manifest.Name+"_Options"] is DataTemplate,"options key matches actual NINA manifest name");
    var profile=DispatchProxy.Create<NINA.Profile.Interfaces.IProfileService,UiProfileProxy>();var dock=new AstroDockViewModel(profile);
+   var writesBeforeLanguage=fake.Writes;
+   // Exercise the actual NINA profile -> host-language bridge and bound controls.
+   typeof(SonyA7VPlugin).Assembly.GetType("SonyA7V.Camera.HostLanguage")!.GetMethod("Initialize",BindingFlags.NonPublic|BindingFlags.Static)!.Invoke(null,new object[]{profile});
+   vm.Language="auto";
+   profile.ActiveProfile.ApplicationSettings.Language=new System.Globalization.CultureInfo("zh-CN");await Idle();
+   Check(Text.EffectiveLanguage=="zh" && vm.SensorFrameLabel=="未知","auto follows actual NINA Chinese profile");
+   Check(Descendants<Button>(view).Any(b=>Equals(b.Content,Text.T("Ui003"))),"Chinese refresh button binding updates");
+   profile.ActiveProfile.ApplicationSettings.Language=new System.Globalization.CultureInfo("de-DE");await Idle();
+   Check(Text.EffectiveLanguage=="en" && vm.SensorFrameLabel=="Unknown","non-Chinese NINA profile falls back to English");
+   Check(Descendants<Button>(view).Any(b=>Equals(b.Content,Text.T("Ui003"))),"English refresh button binding updates");
+   vm.Language="zh";await Idle();Check(Text.EffectiveLanguage=="zh","explicit Chinese overrides host language");
+   vm.Language="en";vm.RequireFullFrame=true;await vm.SaveAsync();
+   Check(store.Read().Settings.Language=="en" && store.Read().Settings.RequireFullFrame,"language and strict full-frame preference persist: " + vm.Message + " language=" + vm.Language + " raw=" + vm.SaveOriginalRaw + " full=" + vm.RequireFullFrame);
+   Check(fake.Writes==writesBeforeLanguage,"changing language and crop preference does not write camera properties");
    var workerDock=await Task.Run(()=>new AstroDockViewModel(profile));
    Check(workerDock.ImageGeometry.IsFrozen&&workerDock.ImageGeometry.Bounds.Width>0,"worker-composed dock icon can be bound on UI thread");
    Check(ReferenceEquals(dock.Session,SonyCameraService.Shared),"dock uses exactly the standard camera shared session");
