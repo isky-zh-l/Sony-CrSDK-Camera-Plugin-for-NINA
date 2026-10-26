@@ -4,7 +4,7 @@
 
 通过 Sony Camera Remote SDK，让 Sony 相机在 N.I.N.A. 中完成曝光、完整 ARW 接收、Bayer RAW 解码及 FITS/XISF 保存。
 
-**当前正式版：[0.5.4](https://github.com/isky-zh-l/Sony-CrSDK-Camera-Plugin-for-NINA/releases/latest)**，程序集 `0.5.4.0`。GitHub 发布状态为正式版及 Latest。安装包沿用已验证构建，界面版本可能仍显示 `0.5.4-rc.1`。
+**当前版本：[0.5.4](https://github.com/isky-zh-l/Sony-CrSDK-Camera-Plugin-for-NINA/releases/latest)**
 
 作者：[isky](https://github.com/isky-zh-l)。独立社区项目，与 Sony 或 N.I.N.A. 官方无隶属或认证关系。
 
@@ -13,7 +13,7 @@
 - 普通曝光、软件 Bulb、ISO/快门控制、JPEG LiveView 和原始 ARW 可选副本。
 - Sony 控制面板提供相机参数、天文设置与恢复，和 N.I.N.A. 标准相机入口共享连接。
 - 已知可纠正设置问题支持重新检查；取消及错误处理阻止不确定帧和旧帧交付。
-- 已在 Sony A7 V（ILCE-7M5）及另一台 Windows 11 x64 电脑完成独立部署与基本拍摄验证，包括 68 张连续 1 秒 FITS。具体范围见 [兼容性](docs/COMPATIBILITY.md)。
+- 已验证机型：Sony A7 V（ILCE-7M5）。具体支持范围见 [兼容性](docs/COMPATIBILITY.md)。
 
 其他机型需分别验证。镜头对焦器为可选实验功能；不支持多相机并行、硬件 binning、RAW ROI、制冷或科学视频。
 
@@ -25,7 +25,7 @@
 2. 退出 N.I.N.A.，运行包内 `Install.ps1`，指定本地 SDK 的 SimpleCli 目录和 NINA 安装目录。
 3. 机身设置 M、MF、仅 RAW、Single Shooting，在 N.I.N.A. 选择 **Sony CrSDK Camera**。开启保存，先拍一张短曝光。
 
-[完整安装与卸载教程](docs/INSTALL.md) · [参数和保存设置](docs/USAGE.md) · [兼容性与验证范围](docs/COMPATIBILITY.md)
+[完整安装与卸载教程](docs/INSTALL.md) · [参数和保存设置](docs/USAGE.md) · [兼容性](docs/COMPATIBILITY.md)
 
 ## 界面与架构
 
