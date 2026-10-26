@@ -77,7 +77,8 @@ internal static class Program {
    tabs.SelectedIndex=2;await Idle();var defaults=Descendants<ScrollViewer>(tabs).First(x=>x.ScrollableHeight>0&&x.VerticalScrollBarVisibility==ScrollBarVisibility.Auto);var text=Descendants<TextBox>(defaults).First(x=>x.IsVisible);
    var textWheel=new MouseWheelEventArgs(Mouse.PrimaryDevice,Environment.TickCount,-120){RoutedEvent=Mouse.PreviewMouseWheelEvent};text.RaiseEvent(textWheel);await Idle();Check(textWheel.Handled&&defaults.VerticalOffset>0,"wheel over text input scrolls containing page");
    defaults.ScrollToTop();tabs.SelectedIndex=0;page.ScrollToTop();window.Height=860;await Idle();
-   for(int i=0;i<3;i++){tabs.SelectedIndex=i;await Idle();Save(view,"tab-"+i+".png");}
+   Check(tabs.Items.Count==4,"SDK configuration tab is available without a camera");
+   for(int i=0;i<4;i++){tabs.SelectedIndex=i;await Idle();Save(view,"tab-"+i+".png");}
    vm.RawCopyFolder="unsaved-dock-preference";window.Content=null;await Idle();Check(fake.Subscribers==0,"temporary undock releases session subscription");
    window.Content=view;await Idle();Check(ReferenceEquals(vm,view.DataContext)&&vm.RawCopyFolder=="unsaved-dock-preference"&&fake.Subscribers==1,"redocking retains unsaved UI preferences and one subscription");
    var resources=new AstroOptionsResources();var manifest=new SonyA7VPlugin(null!,null!,null!,null!);Check(resources[manifest.Name+"_Options"] is DataTemplate,"options key matches actual NINA manifest name");

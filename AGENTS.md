@@ -1,7 +1,7 @@
 # Repository conventions
 
-- Current official release: 0.5.4, assembly 0.5.4.0. The GitHub release is stable/latest.
-- Install from the release ZIP using docs/INSTALL.md. Build from source using docs/BUILD.md and root build.ps1.
+- Current official release: 0.5.5, assembly 0.5.5.0. The GitHub release is stable/latest.
+- Install using docs/INSTALL.md. Keep settings and user SDK caches in the GUID-scoped PluginData folder, outside plugin-manager replacement directories. Build from source using docs/BUILD.md and root build.ps1.
 - Architecture: src/native (C++ C ABI), src/managed (generic C# P/Invoke), src/nina (NINA adapter). Generic client code must not depend on NINA or WPF.
 - Camera, controls and focuser share SonyCameraService.Shared. Never hold the coordinator while waiting for an exposure; cancellation needs access.
 - Keep dependency hashes, source locks, ABI/PE checks and test-backend isolation. Never bypass validation or mix managed/native versions to make a package load.

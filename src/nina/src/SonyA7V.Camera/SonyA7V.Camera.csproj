@@ -5,9 +5,10 @@
     <PlatformTarget>x64</PlatformTarget>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Version>0.5.4</Version>
-    <FileVersion>0.5.4.0</FileVersion>
-    <AssemblyVersion>0.5.4.0</AssemblyVersion>
+    <Version>0.5.5</Version>
+    <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
+    <FileVersion>0.5.5.0</FileVersion>
+    <AssemblyVersion>0.5.5.0</AssemblyVersion>
     <AssemblyTitle>Sony CrSDK Camera Plugin for N.I.N.A.</AssemblyTitle>
     <Company>isky</Company>
     <Description>Sony CrSDK camera driver for N.I.N.A.; verified with Sony ILCE-7M5.</Description>

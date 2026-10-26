@@ -28,9 +28,12 @@
 dotnet run --project .\tests\SettingsPreview\SettingsPreview.csproj -c Release '-p:NinaApp=<NINA目录>'
 dotnet run --project .\tests\SettingsUi\SettingsUi.csproj -c Release '-p:NinaApp=<NINA目录>' -- '<NINA目录>' '<新建输出目录>'
 .\tools\Test-MultiCamera.ps1 -NinaApp '<NINA目录>'
+dotnet run --project .\tests\PluginDeployment\PluginDeployment.csproj -c Release '-p:NinaApp=<NINA目录>' -- '<NINA目录>' '<公开包解压目录>' '<官方SimpleCli目录>' '<新建输出目录>'
 ```
 
 测试覆盖配置、WPF、隔离替身、解码和图像交付；真实样本来源与哈希在 `config/real-raw-corpus.json`，原片不分发。模拟结果不能替代实机兼容性验证。
+
+部署测试只在测试进程目录和指定的新建输出目录中复制依赖，覆盖 SDK 导入、错误依赖拒绝、设置迁移及安装/升级/卸载，不加载 SDK、不操作相机。不要将测试输出作为公开资产。
 
 ## 打包与本地运行
 

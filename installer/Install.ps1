@@ -1,12 +1,14 @@
 ﻿param(
  [string]$SonySdkRoot,
  [string]$NinaApp,
- [string]$PluginDirectory=(Join-Path $env:LOCALAPPDATA 'NINA\Plugins\3.0.0\SonyA7V.Camera'),
+ [string]$PluginDirectory=(Join-Path $env:LOCALAPPDATA 'NINA\Plugins\3.0.0\Sony CrSDK Camera Plugin for N.I.N.A.'),
+ [string]$DataDirectory=(Join-Path $env:LOCALAPPDATA 'NINA/PluginData/9c1f3b7e-5a24-4f0c-9a86-2d1e7c4b6a51'),
  [string]$BackupRoot=(Join-Path $env:LOCALAPPDATA 'SonyCrSDKPlugin\backups'),
  [switch]$ValidateOnly
 )
 $ErrorActionPreference='Stop'
 Set-StrictMode -Version Latest
+foreach($module in @('Microsoft.PowerShell.Management','Microsoft.PowerShell.Utility')){Import-Module (Join-Path $PSHOME ('Modules/'+$module+'/'+$module+'.psd1'))}
 function Hash([string]$Path){(Get-FileHash -LiteralPath $Path -Algorithm SHA256).Hash}
 function Assert-NoReparse([string]$Path){
  $current=[IO.Path]::GetFullPath($Path)
@@ -27,10 +29,14 @@ if(!$NinaApp){$NinaApp=Read-Host '请输入包含 NINA.exe 的安装目录'}
 $SonySdkRoot=(Resolve-Path -LiteralPath $SonySdkRoot).Path
 $NinaApp=(Resolve-Path -LiteralPath $NinaApp).Path
 $PluginDirectory=[IO.Path]::GetFullPath($PluginDirectory)
+$DataDirectory=[IO.Path]::GetFullPath($DataDirectory)
 $BackupRoot=[IO.Path]::GetFullPath($BackupRoot)
-foreach($path in @($SonySdkRoot,$NinaApp,$PluginDirectory,$BackupRoot)){Assert-NoReparse $path}
+foreach($path in @($SonySdkRoot,$NinaApp,$PluginDirectory,$BackupRoot,$DataDirectory)){Assert-NoReparse $path}
+if($DataDirectory -eq $PluginDirectory -or $DataDirectory.StartsWith($PluginDirectory.TrimEnd('\')+'\',[StringComparison]::OrdinalIgnoreCase)){throw 'User data must be outside the plugin directory'}
 if($PluginDirectory -eq [IO.Path]::GetPathRoot($PluginDirectory) -or $PluginDirectory -eq $NinaApp){throw '插件目标必须是独立子目录'}
 if($BackupRoot.StartsWith($PluginDirectory.TrimEnd('\')+'\',[StringComparison]::OrdinalIgnoreCase)){throw '备份目录不能位于插件目录内'}
+$legacy=Join-Path (Split-Path $PluginDirectory -Parent) 'SonyA7V.Camera/SonyA7V.Camera.dll'
+if((Test-Path -LiteralPath $legacy) -and !([IO.Path]::GetFullPath((Join-Path $PluginDirectory 'SonyA7V.Camera.dll')) -eq [IO.Path]::GetFullPath($legacy))){throw '检测到旧目录中的 Sony 插件。请先保留旧设置，并在 NINA 中卸载旧版、重启后再安装。'}
 $hostCore=Join-Path $NinaApp 'NINA.Core.dll'
 if(!(Test-Path -LiteralPath (Join-Path $NinaApp 'NINA.exe')) -or (Get-Item -LiteralPath $hostCore).VersionInfo.FileVersion -ne '3.2.0.9001'){throw '当前版本适配 NINA 3.2.0.9001；请检查安装目录和版本'}
 $integrity=Get-Content -LiteralPath (Join-Path $PSScriptRoot 'package-integrity.json') -Raw -Encoding utf8|ConvertFrom-Json
@@ -67,7 +73,9 @@ $stage=Join-Path $session 'prepared'
 New-Item -ItemType Directory -Path $stage -Force|Out-Null
 $preparedPlugin=Join-Path $stage 'plugin'
 New-Item -ItemType Directory -Path (Join-Path $preparedPlugin 'native') -Force|Out-Null
-foreach($name in @('SonyA7V.Camera.dll','SonyCamera.Client.dll','settings.json','icon.png')){Copy-Item -LiteralPath (Get-PackagePath $name) -Destination $preparedPlugin}
+foreach($name in @('SonyA7V.Camera.dll','SonyCamera.Client.dll','settings.json','icon.png','Configure-Sdk.ps1','package-integrity.json')){Copy-Item -LiteralPath (Get-PackagePath $name) -Destination $preparedPlugin}
+New-Item -ItemType Directory -Path (Join-Path $preparedPlugin 'config') -Force|Out-Null
+foreach($name in @('sdk-runtime-lock.json','native-manifest.template.json','camera-models.json')){Copy-Item -LiteralPath (Get-PackagePath ('config/'+$name)) -Destination (Join-Path $preparedPlugin 'config')}
 foreach($name in @('sony_wrapper.dll','SonyArw6.dll','libraw.dll','identity.json')){Copy-Item -LiteralPath (Get-PackagePath ('native\'+$name)) -Destination (Join-Path $preparedPlugin 'native')}
 foreach($entry in $sdkLock.sdkFiles){
  if(!$entry.path.StartsWith('CrAdapter/')){Copy-Item -LiteralPath (Join-Path $sdkRuntime $entry.path) -Destination (Join-Path $preparedPlugin 'native')}
@@ -121,6 +129,10 @@ try {
 }
 $receipt=Join-Path $session 'install-receipt.json'
 [ordered]@{schemaVersion=1;version=$integrity.version;pluginDirectory=$PluginDirectory;hostDirectory=$NinaApp;backupDirectory=$session;files=$records}|ConvertTo-Json -Depth 10|Set-Content -LiteralPath $receipt -Encoding utf8
+& (Join-Path $PSScriptRoot 'Preserve-Settings.ps1') -LegacyPluginDirectory $PluginDirectory -DataDirectory $DataDirectory
+$global:LASTEXITCODE=0
+& (Join-Path $PSScriptRoot 'Configure-Sdk.ps1') -SonySdkRoot $SonySdkRoot -NinaApp $NinaApp -DataDirectory $DataDirectory
+if($LASTEXITCODE -ne 0){throw 'SDK 配置未完成，请保留安装回执并检查 SDK 和目录权限。'}
 Write-Output "安装完成：$PluginDirectory"
 Write-Output "备份与卸载记录：$receipt"
 Write-Output '可以打开 NINA，选择 Sony CrSDK Camera。默认不另存 ARW 副本；请在 NINA 开启保存并选 FITS/XISF。'

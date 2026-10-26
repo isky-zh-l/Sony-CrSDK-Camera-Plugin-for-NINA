@@ -1,5 +1,6 @@
 ﻿param([Parameter(Mandatory=$true)][string]$ReceiptPath)
 $ErrorActionPreference='Stop'
+foreach($module in @('Microsoft.PowerShell.Management','Microsoft.PowerShell.Utility')){Import-Module (Join-Path $PSHOME ('Modules/'+$module+'/'+$module+'.psd1'))}
 $receipt=Get-Content -LiteralPath $ReceiptPath -Raw -Encoding utf8|ConvertFrom-Json
 if($receipt.schemaVersion -ne 1){throw '未知安装记录版本'}
 $plugin=[IO.Path]::GetFullPath($receipt.pluginDirectory).TrimEnd('\')+'\'

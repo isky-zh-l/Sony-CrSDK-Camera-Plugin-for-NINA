@@ -6,7 +6,7 @@ public partial class AstroSettingsView : UserControl {
     private readonly IAstroSettingsSession session;
     private readonly PluginSettingsStore store;
     private AstroSettingsViewModel? model;
-    public AstroSettingsView():this(SonyCameraService.Shared,new PluginSettingsStore(Path.GetDirectoryName(typeof(AstroSettingsView).Assembly.Location)!)){}
+    public AstroSettingsView():this(SonyCameraService.Shared,new PluginSettingsStore(PluginStorage.Current.SettingsDirectory())){}
     public AstroSettingsView(IAstroSettingsSession session,PluginSettingsStore store) {
         this.session=session;this.store=store;DataContext=null;InitializeComponent();SettingsWheelRouting.Attach(this);
         Loaded+=(_,_)=>{if(model is null){model=new(session,store,Dispatcher);DataContext=model;}else model.Resume();};
@@ -23,7 +23,7 @@ public static class AstroSettingsWindow {
             if(ReferenceEquals(session,SonyCameraService.Shared)&&host is not null&&
                AstroDockViewModel.RegisteredContentId is {} contentId&&SonyDockNavigation.TryActivate(host,contentId))return;
             if(current is not null){current.Activate();return;}
-            current=new Window{Title="Sony CrSDK · 天文参数与状态",Width=980,Height=Math.Min(820,SystemParameters.WorkArea.Height-40),MinWidth=740,MinHeight=500,Content=new AstroSettingsView(session,new PluginSettingsStore(Path.GetDirectoryName(typeof(AstroSettingsView).Assembly.Location)!)),WindowStartupLocation=WindowStartupLocation.CenterOwner};
+            current=new Window{Title="Sony CrSDK · 天文参数与状态",Width=980,Height=Math.Min(820,SystemParameters.WorkArea.Height-40),MinWidth=740,MinHeight=500,Content=new AstroSettingsView(session,new PluginSettingsStore(PluginStorage.Current.SettingsDirectory())),WindowStartupLocation=WindowStartupLocation.CenterOwner};
             if(Application.Current?.MainWindow is {} owner&&owner.IsVisible)current.Owner=owner;
             current.Closed+=(_,_)=>current=null;current.Show();
         });

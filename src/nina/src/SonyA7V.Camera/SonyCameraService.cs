@@ -91,14 +91,15 @@ public sealed partial class SonyCameraService
 
     public async Task ConnectAsync(IImageDataFactory factory, CancellationToken token)
     {
+        await SdkStartup.WaitAsync().WaitAsync(token).ConfigureAwait(false);
         using var connectionLifetime=CancellationTokenSource.CreateLinkedTokenSource(token,lifetime.Token);
         token=connectionLifetime.Token;
         await EnterOperationAsync("连接相机", token).ConfigureAwait(false);
         try
         {
             if (Connected) return;
-            deployment = CameraDeployment.Load(PluginDirectory);
-            Settings = PluginSettings.Load(PluginDirectory);
+            deployment = PluginStorage.Current.LoadDeployment();
+            Settings = PluginSettings.Load(PluginStorage.Current.SettingsDirectory());
             Settings.ValidateCameraSettings();
             Geometry = null;
             loader ??= new ArwImageLoader(factory);

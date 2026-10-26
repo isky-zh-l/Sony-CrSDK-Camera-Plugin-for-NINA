@@ -7,8 +7,7 @@ using SonyCamera.Client;
 namespace SonyA7V.Camera;
 
 /// <summary>
-/// User-facing plugin settings, read from settings.json next to the plugin assembly.
-/// Separate from sony-a7v.json, which pins deployment identity and is not meant for end users.
+/// User-facing settings in the per-user plugin data directory, outside replaceable assemblies.
 /// </summary>
 public sealed record PluginSettings
 {

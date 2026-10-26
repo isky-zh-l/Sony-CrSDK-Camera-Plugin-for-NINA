@@ -23,8 +23,9 @@ Copy-Item -LiteralPath (Join-Path $root 'config/sdk-runtime-lock.json'),(Join-Pa
 $files=@([ordered]@{role='wrapper';base='native';path='sony_wrapper.dll';sha256=(Get-FileHash -LiteralPath $wrapper).Hash})
 foreach($item in $sdkLock.sdkFiles){$adapter=$item.path.StartsWith('CrAdapter/');$files+=[ordered]@{role=$item.role;base=$(if($adapter){'host'}else{'native'});path=$(if($adapter){$item.path}else{[IO.Path]::GetFileName($item.path)});sha256=$item.sha256}}
 $models=(Get-Content -LiteralPath (Join-Path $root 'config/camera-models.json') -Raw|ConvertFrom-Json).models
-[ordered]@{schemaVersion=1;packageId='sony-crsdk-0.5.4';backend='production';abiVersion=2;supportedModels=$models;structureSizes=[ordered]@{SwError=184;SwCameraInfo=168;SwParameters=32;SwCaptureResult=2304;SwExposureRequest=40;SwExposureCapabilities=56;SwExposureInfo=464};files=$files}|ConvertTo-Json -Depth 10|Set-Content -LiteralPath (Join-Path $output 'config/native-manifest.template.json') -Encoding utf8
-foreach($name in @('Install.ps1','Uninstall.ps1')){Copy-Item -LiteralPath (Join-Path $root ('installer/'+$name)) -Destination $output}
+$version=(Get-Item -LiteralPath (Join-Path $built 'SonyA7V.Camera.dll')).VersionInfo.FileVersion
+[ordered]@{schemaVersion=1;packageId=('sony-crsdk-'+$version);backend='production';abiVersion=2;supportedModels=$models;structureSizes=[ordered]@{SwError=184;SwCameraInfo=168;SwParameters=32;SwCaptureResult=2304;SwExposureRequest=40;SwExposureCapabilities=56;SwExposureInfo=464};files=$files}|ConvertTo-Json -Depth 10|Set-Content -LiteralPath (Join-Path $output 'config/native-manifest.template.json') -Encoding utf8
+foreach($name in @('Install.ps1','Uninstall.ps1','Configure-Sdk.ps1','Preserve-Settings.ps1')){Copy-Item -LiteralPath (Join-Path $root ('installer/'+$name)) -Destination $output}
 New-Item -ItemType Directory -Path (Join-Path $output 'docs'),(Join-Path $output 'assets/images') -Force|Out-Null
 foreach($name in @('INSTALL.md','USAGE.md','COMPATIBILITY.md')){Copy-Item -LiteralPath (Join-Path $root ('docs/'+$name)) -Destination (Join-Path $output 'docs')}
 foreach($name in @('sony-shared-architecture.png','sony-controls.png')){Copy-Item -LiteralPath (Join-Path $root ('assets/images/'+$name)) -Destination (Join-Path $output 'assets/images')}
@@ -39,7 +40,7 @@ $entries=@(Get-ChildItem -LiteralPath $output -File -Recurse|Sort-Object FullNam
  if($_.Extension -in @('.dll','.lib','.exe') -and $relative -notin $allowed){throw "Forbidden package binary: $relative"}
  [ordered]@{path=$relative;sha256=(Get-FileHash -LiteralPath $_.FullName).Hash}
 })
-[ordered]@{schemaVersion=1;version='0.5.4.0';files=$entries}|ConvertTo-Json -Depth 8|Set-Content -LiteralPath (Join-Path $output 'package-integrity.json') -Encoding utf8
+[ordered]@{schemaVersion=1;version=$version;files=$entries}|ConvertTo-Json -Depth 8|Set-Content -LiteralPath (Join-Path $output 'package-integrity.json') -Encoding utf8
 Compress-Archive -Path (Join-Path $output '*') -DestinationPath ($output+'.zip') -CompressionLevel Optimal
 Get-FileHash -LiteralPath ($output+'.zip')
 Write-Output 'Release package built without SDK binaries. No deployment, hardware action or existing approval changed.'

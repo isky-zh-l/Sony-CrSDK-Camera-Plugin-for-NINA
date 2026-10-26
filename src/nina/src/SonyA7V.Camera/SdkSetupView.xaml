@@ -1,0 +1,15 @@
+<UserControl x:Class="SonyA7V.Camera.SdkSetupView"
+ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Foreground="#E5EDF6">
+ <UserControl.Resources><Style TargetType="Button"><Setter Property="Background" Value="#285E8B"/><Setter Property="Foreground" Value="White"/><Setter Property="Padding" Value="10,6"/><Setter Property="Margin" Value="4"/></Style></UserControl.Resources>
+ <StackPanel Margin="18">
+  <TextBlock Text="Sony SDK 配置" FontSize="17" FontWeight="SemiBold" Foreground="#E5EDF6"/>
+  <TextBlock Margin="0,8,0,12" TextWrapping="Wrap" Foreground="#AABBCD" Text="自行下载并解压 Sony Camera Remote SDK 2.02.00 Windows x64。启动时会自动查找并配置；未找到时请选择 SDK、SimpleCli 或 crsdk 目录。公开包不含 SDK，配置不会连接相机。"/>
+  <TextBlock Text="SDK 目录" Foreground="#E5EDF6"/>
+  <DockPanel><Button Content="浏览…" DockPanel.Dock="Right" Click="Browse"/><TextBox x:Name="SdkPath" MinWidth="200" Foreground="Black" Background="White"/></DockPanel>
+  <CheckBox x:Name="Elevate" Content="使用管理员权限（NINA 安装目录受保护时需要）"/>
+  <TextBlock Margin="0,6,0,8" TextWrapping="Wrap" Foreground="#AABBCD" Text="SDK 适配器需放入 NINA 目录的 CrAdapter 文件夹。已有不同版本时会停止，不会覆盖。请先断开相机；导入完成后重新启动 NINA。"/>
+  <WrapPanel><Button x:Name="ImportButton" Content="导入 SDK" Click="Import"/><Button x:Name="AutoButton" Content="自动查找并配置" Click="AutoConfigure"/><Button x:Name="VerifyButton" Content="检查配置" Click="Verify"/></WrapPanel>
+  <TextBlock x:Name="Status" Margin="0,10,0,8" TextWrapping="Wrap" Foreground="#96CCF6"/>
+ </StackPanel>
+</UserControl>

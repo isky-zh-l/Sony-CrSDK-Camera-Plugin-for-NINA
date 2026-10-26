@@ -1,6 +1,7 @@
 <UserControl x:Class="SonyA7V.Camera.AstroSettingsView"
  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+ xmlns:local="clr-namespace:SonyA7V.Camera"
  MinWidth="650" FontFamily="Segoe UI, Microsoft YaHei UI" FontSize="13" Foreground="#E5EDF6" Background="#151B24">
  <UserControl.Resources>
   <Style TargetType="Button"><Setter Property="Padding" Value="13,7"/><Setter Property="Margin" Value="4"/><Setter Property="Background" Value="#285E8B"/><Setter Property="Foreground" Value="White"/><Setter Property="Cursor" Value="Hand"/>
@@ -73,6 +74,7 @@
      <ComboBox ItemsSource="{Binding BayerPatterns}" SelectedItem="{Binding BayerPattern}"><ComboBox.ItemTemplate><DataTemplate><TextBlock Foreground="#162030" Text="{Binding}"/></DataTemplate></ComboBox.ItemTemplate></ComboBox>
     </StackPanel></Expander>
    </StackPanel></ScrollViewer></TabItem>
+   <TabItem Header="SDK 配置"><ScrollViewer VerticalScrollBarVisibility="Auto"><local:SdkSetupView/></ScrollViewer></TabItem>
   </TabControl>
   <StackPanel Grid.Row="3" Margin="0,10,0,0">
    <TextBlock Text="{Binding Message}" TextWrapping="Wrap" MaxHeight="70" ToolTip="{Binding Message}"><TextBlock.Style><Style TargetType="TextBlock"><Setter Property="Foreground" Value="#9AD9B7"/><Style.Triggers><DataTrigger Binding="{Binding IsError}" Value="True"><Setter Property="Foreground" Value="#FFB3A8"/></DataTrigger></Style.Triggers></Style></TextBlock.Style></TextBlock>
